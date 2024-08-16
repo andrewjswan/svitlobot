@@ -35,7 +35,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            release-files/*.*
+            release-files/*/*.*
 
   ci-status:
     name: Status
