@@ -13,3 +13,6 @@
 
 > [!TIP]
 > [Стаття](https://telegra.ph/Proshivka-m%D1%96krokontrolera-esp32-dlya-mon%D1%96toringu-sv%D1%96tla-proektom-svitlobotinua-08-15): Прошивка мікроконтролера **ESP32** для моніторингу світла проектом **svitlobot.in.ua**
+
+> [!TIP]
+> [Календарі](https://github.com/andrewjswan/dtek-blackout-schedule-calendars) відключення ДТЕК 
