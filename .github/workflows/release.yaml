@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build
-    uses: ./.github/workflows/vuild.yaml
+    uses: ./.github/workflows/build.yaml
   
   release:
     name: Release
