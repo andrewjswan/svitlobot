@@ -4,6 +4,8 @@
 [![svitlobot_badge](https://img.shields.io/badge/Svitlo-Bot-orange.svg)](https://svitlobot.in.ua/)
 [![Build](https://github.com/andrewjswan/svitlobot/actions/workflows/build.yaml/badge.svg)](https://github.com/andrewjswan/svitlobot/actions/workflows/build.yaml)
 [![GitHub](https://img.shields.io/github/license/andrewjswan/svitlobot?color=blue)](https://github.com/andrewjswan/svitlobot/blob/main/LICENSE)
+[![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/andrewjswan/svitlobot?include_prereleases)](https://github.com/andrewjswan/svitlobot/releases)
+[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/downloads-pre/andrewjswan/svitlobot/latest/total?label=release@downloads)](https://github.com/andrewjswan/svitlobot/releases)
 [![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
 
 > [!NOTE]
