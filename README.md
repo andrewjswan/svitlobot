@@ -8,6 +8,8 @@
 [![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/downloads-pre/andrewjswan/svitlobot/latest/total?label=release@downloads)](https://github.com/andrewjswan/svitlobot/releases)
 [![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
 
+Ідея SvitloBot полягає у створенні простого та зручного рішення для інтеграції з системою [СвітлоБот](https://svitlobot.in.ua/), що дозволяє автоматично повідомляти про наявність світла.
+
 > [!NOTE]
 > [СвітлоБот](https://svitlobot.in.ua/) - проект ентузіастів для моніторингу статусу світла у вашому будинку, який створила група учнів із ліцею [«Наукова&#160;Зміна»](https://naukova-zmina.org.ua/) - Чигарьови Дмитро і Артем. Суть проекту полягає в тому, аби підключивши вдома або в офісі бота на базі ESP8266 або ESP32 або підключивши в розетку на зарядку старенький або непотрібний смартфон/планшет (android) та налаштувавши його згідно інструкції, ви зможете отримувати сповіщення у свій створений телеграм-канал повідомлення про наявність/відсутність світла на підставі того, йде зарядка цього смартфону чи ні. 
 
