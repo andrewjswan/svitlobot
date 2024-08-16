@@ -42,7 +42,7 @@ jobs:
           if [ -n "${{ inputs.release-version }}" ]; then
             version=${{ inputs.release-version }}
           else
-            version=dev-$(date + '%Y%m%d-%H%M')
+            version=dev-$(date +'%Y%m%d-%H%M')
           fi
           echo version=$version >> $GITHUB_OUTPUT
 
