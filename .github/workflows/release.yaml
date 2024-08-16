@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  push:
+    # On Tag / Release by Mask
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    name: Build
+    uses: ./.github/workflows/vuild.yaml
+  
+  release:
+    name: Release
+    needs: build
+    permissions:
+      contents: write
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-files
+
+      - name: Check artifacts
+        run: |
+          ls -l
+        working-directory: release-files
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            release-files/*.*
+
+  ci-status:
+    name: Status
+    runs-on: ubuntu-latest
+    needs:
+      - build
+      - release
+    if: always()
+    steps:
+      - name: Success
+        if: ${{ !(contains(needs.*.result, 'failure')) }}
+        run: exit 0
+      - name: Failure
+        if: ${{ contains(needs.*.result, 'failure') }}
+        run: exit 1
