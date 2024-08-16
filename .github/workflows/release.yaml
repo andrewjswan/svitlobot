@@ -6,6 +6,9 @@ on:
     tags:
       - "v*"
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build
@@ -13,7 +16,8 @@ jobs:
   
   release:
     name: Release
-    needs: build
+    needs:
+      - build
     permissions:
       contents: write
     
@@ -37,12 +41,45 @@ jobs:
           files: |
             release-files/*/*.*
 
+  publish:
+    name: Publish new firmware and website to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: 
+      - build
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: SvitloBot
+          path: release-files
+
+      - name: Copy artifacts files
+        run: |
+          mkdir output
+          cp -R release-files/*/* output/
+
+      - name: Copy website files
+        run: cp -R static/* output/
+
+      - name: Check output
+        run: |
+          ls -l
+        working-directory: output
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: svitlobot
+          folder: output
+          clean: true
+
   ci-status:
     name: Status
     runs-on: ubuntu-latest
     needs:
       - build
       - release
+      - publish
     if: always()
     steps:
       - name: Success
