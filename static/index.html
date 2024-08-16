@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESP Web Tools</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    ol {
+      margin-left: 20px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>ESP Web Tools</h1>
+  <p>
+    User friendly tools to manage ESP8266 and ESP32 devices in the browser:
+  </p>
+  <ul>
+    <li>Install &amp; update firmware</li>
+    <li>Connect device to the Wi-Fi network</li>
+    <li>Visit the device's hosted web interface</li>
+  </ul>
+  
+  <h1>Install SvitloBot</h1>
+  <esp-web-install-button manifest="manifest.json"></esp-web-install-button>
+  <script type="module" src="https://unpkg.com/esp-web-tools@5.2.0/dist/web/install-button.js?module"></script>
+</body>
+</html>
