@@ -3,7 +3,7 @@ substitutions:
   friendly_name: "Svitlo Bot"
   project_name: "ajs.svitlobot"
   project_version: "3.5.7"
-  comment: "ESPHome Svitlo Bot (8266)"
+  comment: "ESPHome Svitlo Bot (ESP 8266)"
 
 esphome:
   name: "${name}"
