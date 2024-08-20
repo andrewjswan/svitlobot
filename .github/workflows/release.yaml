@@ -6,8 +6,11 @@ on:
     tags:
       - "v*"
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
@@ -41,11 +44,37 @@ jobs:
           files: |
             release-files/*/*.*
 
+  cleanup:
+    name: GitHub Pages / Delete deployment
+    runs-on: ubuntu-latest
+    permissions: write-all
+    needs:
+      - build
+
+    steps:
+      - name: Delete deployment
+        uses: strumwolf/delete-deployment-environment@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: svitlobot
+          onlyRemoveDeployments: true
+
   publish:
     name: Publish new firmware and website to GitHub Pages
     runs-on: ubuntu-latest
     needs: 
-      - build
+      - cleanup
+
+    environment:
+      name: svitlobot
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+    # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+    concurrency:
+      group: "pages"
+      cancel-in-progress: true
+
     steps:
       - name: Checkout website files
         uses: actions/checkout@v4
@@ -69,25 +98,20 @@ jobs:
           ls -l
         working-directory: output
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: svitlobot
-          folder: output
-          clean: true
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
-  ci-status:
-    name: Status
-    runs-on: ubuntu-latest
-    needs:
-      - build
-      - release
-      - publish
-    if: always()
-    steps:
-      - name: Success
-        if: ${{ !(contains(needs.*.result, 'failure')) }}
-        run: exit 0
-      - name: Failure
-        if: ${{ contains(needs.*.result, 'failure') }}
-        run: exit 1
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ github.workspace }}/output/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Delete Artifacts / Github Pages
+        uses: geekyeggo/delete-artifact@v5
+        with:
+            name: github-pages
+            failOnError: false
