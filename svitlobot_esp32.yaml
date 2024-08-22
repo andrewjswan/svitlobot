@@ -237,5 +237,4 @@ update:
     name: "${friendly_name} Firmware Update"
     source: https://andrewjswan.github.io/svitlobot/manifest.json
     icon: mdi:update
-    update_interval: 5min
     web_server_sorting_weight: 15
