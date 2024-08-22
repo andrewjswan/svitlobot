@@ -2,7 +2,7 @@ substitutions:
   name: "esp-svitlobot"
   friendly_name: "Svitlo Bot"
   project_name: "ajs.svitlobot"
-  project_version: "3.5.9"
+  project_version: "3.5.11"
   comment: "ESPHome Svitlo Bot (ESP 8266)"
 
 esphome:
@@ -45,6 +45,8 @@ wifi:
   ap: {} # This spawns an AP with the device name and mac address with no password.
 
 captive_portal:
+
+improv_serial:
 
 http_request:
   useragent: "esphome/${name} (${project_version})"
