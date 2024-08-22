@@ -2,7 +2,7 @@ substitutions:
   name: "esp-svitlobot"
   friendly_name: "Svitlo Bot"
   project_name: "ajs.svitlobot"
-  project_version: "3.5.7"
+  project_version: "3.5.9"
   comment: "ESPHome Svitlo Bot (ESP 8266)"
 
 esphome:
@@ -28,6 +28,7 @@ api:
 
 ota:
   - platform: esphome
+  - platform: http_request
 
 logger:
   level: INFO
@@ -133,12 +134,14 @@ text:
     icon: mdi:key-chain-variant
     entity_category: config
     disabled_by_default: true
+    web_server_sorting_weight: 5
 
 binary_sensor:
   - platform: template
     name: "${friendly_name} Status"
     id: send_status
     icon: mdi:lan-connect
+    web_server_sorting_weight: 3
 
 sensor:
   - platform: template
@@ -154,6 +157,7 @@ sensor:
     unit_of_measurement: "%"
     icon: mdi:wan
     state_class: measurement
+    web_server_sorting_weight: 5
     on_value_range:
       - below: 90.0
         then:
@@ -181,6 +185,15 @@ button:
     entity_category: diagnostic
     disabled_by_default: true
 
+  - platform: template
+    name: "${friendly_name} Firmware Update"
+    icon: mdi:progress-upload
+    disabled_by_default: true
+    entity_category: config
+    on_press:
+      - update.perform:
+          id: new_firmware
+
 text_sensor:
   - platform: version
     name: ${friendly_name} ESPHome Version
@@ -203,3 +216,11 @@ text_sensor:
       disabled_by_default: true
       entity_category: diagnostic
       icon: mdi:console-network
+
+update:
+  - platform: http_request
+    id: new_firmware
+    name: "${friendly_name} Firmware Update"
+    source: https://andrewjswan.github.io/svitlobot/manifest.json
+    icon: mdi:update
+    web_server_sorting_weight: 15
