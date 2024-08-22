@@ -23,10 +23,10 @@ external_components:
     refresh: 60s
 
 dashboard_import:
-  package_import_url: github://andrewjswan/esphome-config/svitlobot_esp32.yaml@main
+  package_import_url: github://andrewjswan/esphome-config/svitlobot_esp32c3.yaml@main
 
 esp32:
-  board: nodemcu-32s
+  board: esp32-c3-devkitm-1
 
 api:
   reboot_timeout: 0s
