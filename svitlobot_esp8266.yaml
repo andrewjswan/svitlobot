@@ -18,9 +18,9 @@ dashboard_import:
   package_import_url: github://andrewjswan/esphome-config/svitlobot_esp8266.yaml@main
 
 esp8266:
-#  board: esp01_1m
-#  board: d1_mini
-  board: nodemcuv2
+  # board: esp01_1m
+  board: d1_mini
+  # board: nodemcuv2
   restore_from_flash: true
 
 api:
@@ -42,7 +42,7 @@ web_server:
   version: 3
 
 wifi:
-  ap: {} # This spawns an AP with the device name and mac address with no password.
+  ap: {}
 
 captive_portal:
 
@@ -76,7 +76,7 @@ script:
             - globals.set:
                 id: session
                 value: 'true'
-            - http_request.get: 
+            - http_request.get:
                 url: !lambda |-
                   return ((std::string) "http://api.svitlobot.in.ua/channelPing?channel_key=" + id(my_key).state).c_str();
                 on_response:
