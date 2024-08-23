@@ -10,6 +10,7 @@ on:
     paths:
       - "**.yaml"
       - "**.yml"
+  workflow_dispatch:
 
 jobs:
   yamllint:
