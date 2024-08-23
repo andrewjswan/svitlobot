@@ -1,4 +1,4 @@
-name: YAML lint
+name: Workflow / YAML lint
 
 on:
   push:
