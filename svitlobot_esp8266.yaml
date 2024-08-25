@@ -18,6 +18,7 @@ dashboard_import:
   package_import_url: github://andrewjswan/esphome-config/svitlobot_esp8266.yaml@main
 
 esp8266:
+  # https://github.com/esphome/firmware/blob/main/esp-web-tools/esp8266.yaml
   # board: esp01_1m
   # board: d1_mini
   board: nodemcuv2
