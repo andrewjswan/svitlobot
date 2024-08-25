@@ -1,4 +1,4 @@
-﻿name: Workflow / Milestone
+name: Workflow / Milestone
 
 on:
   pull_request_target:
