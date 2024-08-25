@@ -14,7 +14,7 @@ on:
 
 jobs:
   yamllint:
-    name: 🧹 yamllint
+    name: 🧹 Yaml Lint
     runs-on: ubuntu-latest
     steps:
       - name: ⤵️ Check out configuration from GitHub
