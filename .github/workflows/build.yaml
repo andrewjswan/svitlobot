@@ -6,8 +6,12 @@ on:
       - main
     tags-ignore:
       - '**'
+    paths-ignore:
+      - 'devices/**'
 
   pull_request:
+    paths-ignore:
+      - 'devices/**'
 
   workflow_call:
     inputs:
