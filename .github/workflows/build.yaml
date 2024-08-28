@@ -63,8 +63,8 @@ jobs:
   build:
     name: Build ${{ matrix.config-file }}
     needs:
-      - prepare
       - configuration
+      - prepare
     runs-on: ubuntu-latest
     strategy:
       matrix:
