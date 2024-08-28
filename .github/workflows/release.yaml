@@ -13,13 +13,37 @@ permissions:
   id-token: write
 
 jobs:
+  prepare:
+    name: Prepare Release
+    runs-on: ubuntu-latest
+    outputs:
+      name: ${{ steps.current_release.outputs.name }}
+      version: ${{ steps.current_release.outputs.tag_name }}
+      url: ${{ steps.current_release.outputs.html_url }}
+    steps:
+      - name: Get Current Release
+        id: current_release
+        uses: joutvhu/get-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
   build:
     name: Build
+    needs:
+      - prepare
     uses: ./.github/workflows/build.yaml
+    with:
+       release-summary: ${{ needs.prepare.outputs.name }}
+       release-url: ${{ needs.prepare.outputs.url }}
 
   build-devices:
     name: Build / Devices
+    needs:
+      - prepare
     uses: ./.github/workflows/build_devices.yaml
+    with:
+       release-summary: ${{ needs.prepare.outputs.name }}
+       release-url: ${{ needs.prepare.outputs.url }}
 
   release:
     name: Release
