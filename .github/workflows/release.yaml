@@ -17,10 +17,15 @@ jobs:
     name: Build
     uses: ./.github/workflows/build.yaml
 
+  build-devices:
+    name: Build / Devices
+    uses: ./.github/workflows/build_devices.yaml
+
   release:
     name: Release
     needs:
       - build
+      - build-devices
     permissions:
       contents: write
 
@@ -33,16 +38,29 @@ jobs:
           name: SvitloBot
           path: release-files
 
+      - name: Download Devices Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: Devices-*
+          path: release-devices-files
+          merge-multiple: true
+
       - name: Check artifacts
         run: |
           ls -l
         working-directory: release-files
+
+      - name: Check Devices artifacts
+        run: |
+          ls -l
+        working-directory: release-devices-files
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
             release-files/*/*.*
+            release-devices-files/*.*
 
   cleanup:
     name: GitHub Pages / Delete deployment
