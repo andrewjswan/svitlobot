@@ -40,6 +40,12 @@ ota:
         - lambda: |-
             id(svitlobot)->stop();
 
+  - platform: http_request
+    on_begin:
+      then:
+        - lambda: |-
+            id(svitlobot)->stop();
+
 logger:
   level: INFO
 
