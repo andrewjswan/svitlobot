@@ -198,13 +198,14 @@ text:
     icon: mdi:key-chain-variant
     entity_category: config
     disabled_by_default: true
+    web_server_sorting_weight: 5
 
 binary_sensor:
   - platform: template
     name: "${friendly_name} Status"
     id: send_status
     icon: mdi:lan-connect
-    web_server_sorting_weight: 1
+    web_server_sorting_weight: 3
 
 sensor:
   - platform: template
@@ -220,11 +221,11 @@ sensor:
     unit_of_measurement: "%"
     icon: mdi:wan
     state_class: measurement
-    web_server_sorting_weight: 3
-    # on_value_range:
-    #   - below: 90.0
-    #     then:
-    #       - button.press: Restart
+    web_server_sorting_weight: 5
+    on_value_range:
+      - below: 90.0
+        then:
+          - button.press: Restart
 
   - platform: uptime
     name: "${friendly_name} Uptime"
@@ -248,6 +249,15 @@ button:
     entity_category: diagnostic
     disabled_by_default: true
 
+  - platform: template
+    name: "${friendly_name} Firmware Update"
+    icon: mdi:progress-upload
+    disabled_by_default: true
+    entity_category: config
+    on_press:
+      - update.perform:
+          id: new_firmware
+
 text_sensor:
   - platform: version
     name: ${friendly_name} ESPHome Version
@@ -270,3 +280,11 @@ text_sensor:
       disabled_by_default: true
       entity_category: diagnostic
       icon: mdi:console-network
+
+update:
+  - platform: http_request
+    id: new_firmware
+    name: "${friendly_name} Firmware Update"
+    source: https://github.com/andrewjswan/svitlobot/releases/latest/download/esp-svitlobot-atom-esp32-manifest.json
+    icon: mdi:update
+    web_server_sorting_weight: 15
