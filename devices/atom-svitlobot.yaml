@@ -81,7 +81,7 @@ script:
               - wifi.connected:
               - lambda: 'return id(my_key).has_state();'
           then:
-            - light.turn_on: 
+            - light.turn_on:
                 id: status_led
                 brightness: 50%
                 red: 0%
@@ -103,7 +103,7 @@ script:
                           # lambda: 'return (response->status_code == 200 && body.find("Accepted request") != std::string::npos);'
                           lambda: 'return (response->status_code == 200);'
                         then:
-                          - light.turn_on: 
+                          - light.turn_on:
                               id: status_led
                               brightness: 50%
                               red: 0%
@@ -111,7 +111,7 @@ script:
                               blue: 0%
                               transition_length: 1s
                         else:
-                          - light.turn_on: 
+                          - light.turn_on:
                               id: status_led
                               brightness: 50%
                               red: 100%
@@ -126,7 +126,7 @@ script:
                 condition:
                   lambda: 'return id(session);'
                 then:
-                  - light.turn_on: 
+                  - light.turn_on:
                       id: status_led
                       brightness: 50%
                       red: 100%
@@ -138,7 +138,7 @@ script:
                       code: -1
                       response: ""
             - lambda: delay(3000);
-            - light.turn_off: 
+            - light.turn_off:
                 id: status_led
                 transition_length: 1s
             - component.update: quality
