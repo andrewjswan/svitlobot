@@ -26,15 +26,15 @@ jobs:
         uses: joutvhu/get-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
+
   build:
     name: Build
     needs:
       - prepare
     uses: ./.github/workflows/build.yaml
     with:
-       release-summary: ${{ needs.prepare.outputs.name }}
-       release-url: ${{ needs.prepare.outputs.url }}
+      release-summary: ${{ needs.prepare.outputs.name }}
+      release-url: ${{ needs.prepare.outputs.url }}
 
   build-devices:
     name: Build / Devices
@@ -42,8 +42,8 @@ jobs:
       - prepare
     uses: ./.github/workflows/build_devices.yaml
     with:
-       release-summary: ${{ needs.prepare.outputs.name }}
-       release-url: ${{ needs.prepare.outputs.url }}
+      release-summary: ${{ needs.prepare.outputs.name }}
+      release-url: ${{ needs.prepare.outputs.url }}
 
   release:
     name: Release
