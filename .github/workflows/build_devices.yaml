@@ -72,6 +72,10 @@ jobs:
         run: |
           mkdir -p output
           mv ${{ steps.esphome-build.outputs.name }}/* output/
+      - name: Rename manifest
+        run: |
+          mv manifest.json ${{ steps.esphome-build.outputs.name }}-manifest.json
+        working-directory: output
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
