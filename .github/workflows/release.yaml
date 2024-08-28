@@ -41,7 +41,7 @@ jobs:
       - name: Download Devices Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: Devices-*
+          pattern: Devices-*
           path: release-devices-files
           merge-multiple: true
 
