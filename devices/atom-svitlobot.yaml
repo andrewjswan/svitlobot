@@ -2,7 +2,7 @@ substitutions:
   name: "esp-svitlobot-atom"
   friendly_name: "Svitlo Bot"
   project_name: "ajs.svitlobot"
-  project_version: "3.5.11"
+  project_version: "3.5.13"
   comment: "ESPHome Svitlo Bot (Shadow)"
 
 esphome:
@@ -229,7 +229,8 @@ sensor:
     state_class: measurement
     web_server_sorting_weight: 5
     on_value_range:
-      - below: 90.0
+      - above: 1.0
+        below: 90.0
         then:
           - button.press: Restart
 
@@ -291,6 +292,6 @@ update:
   - platform: http_request
     id: new_firmware
     name: "${friendly_name} Firmware Update"
-    source: https://andrewjswan.github.io/svitlobot/devices/esp-svitlobot-atom-esp32-manifest.json
+    source: https://andrewjswan.github.io/svitlobot/devices/${name}-manifest.json
     icon: mdi:update
     web_server_sorting_weight: 15
