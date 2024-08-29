@@ -83,8 +83,8 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            release-files/*/*.bin
-            release-devices-files/*.bin
+            release-files/*/*.factory.bin
+            release-devices-files/*.factory.bin
 
   cleanup:
     name: GitHub Pages / Delete deployment
