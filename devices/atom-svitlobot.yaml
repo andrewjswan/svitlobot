@@ -291,6 +291,6 @@ update:
   - platform: http_request
     id: new_firmware
     name: "${friendly_name} Firmware Update"
-    source: https://github.com/andrewjswan/svitlobot/releases/latest/download/esp-svitlobot-atom-esp32-manifest.json
+    source: https://andrewjswan.github.io/svitlobot/devices/esp-svitlobot-atom-esp32-manifest.json
     icon: mdi:update
     web_server_sorting_weight: 15
