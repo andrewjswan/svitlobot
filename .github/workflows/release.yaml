@@ -92,6 +92,7 @@ jobs:
     permissions: write-all
     needs:
       - build
+      - build-devices
 
     steps:
       - name: Delete deployment
