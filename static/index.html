@@ -95,6 +95,7 @@
     }
   </style>
   <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
   <div class="content">
@@ -110,7 +111,7 @@
       <li>Add devices to <a href="https://www.home-assistant.io">Home Assistant</a></li>
     </ul>
   
-    <h1>Install SvitloBot</h1>
+    <h1>Install SvitloBot <span id="version"></span></h1>
     <p class="button-row">
       <esp-web-install-button manifest="manifest.json"></esp-web-install-button>
     </p>
@@ -119,5 +120,16 @@
          Installer powered by <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a>.
     </div>
   </div>
+  <script>
+    $( document ).ready(function() {
+      var url = "https://andrewjswan.github.io/svitlobot/manifest.json";
+        $.getJSON( url, {
+        format: "json"
+    	})
+      .done(function( data ) {
+         $("#version").text(data.version);
+      });
+    });
+  </script>
 </body>
 </html>

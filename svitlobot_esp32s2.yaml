@@ -2,7 +2,7 @@ substitutions:
   name: "esp-svitlobot"
   friendly_name: "Svitlo Bot"
   project_name: "ajs.svitlobot"
-  project_version: "3.5.13"
+  project_version: "3.5.15"
   comment: "ESPHome Svitlo Bot (Shadow)"
 
 esphome:
@@ -188,6 +188,13 @@ sensor:
     name: "${friendly_name} WiFi Signal"
     entity_category: diagnostic
     icon: mdi:signal
+
+  - platform: internal_temperature
+    name: ${friendly_name} Device Temperature
+    entity_category: diagnostic
+    icon: mdi:coolant-temperature
+    device_class: temperature
+    disabled_by_default: true
 
 button:
   - platform: restart
