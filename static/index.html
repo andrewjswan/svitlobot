@@ -80,9 +80,39 @@
       padding: 8px;
       border-bottom: 1px solid #ccc;
     }
-    .radios li {
-      list-style: none;
-      line-height: 2em;
+    .radios {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .radios label {
+      padding: 4px;
+      cursor: pointer;
+      width: calc(33.3% - 16px);
+      display: block;
+      position: relative;
+    }
+    .radios input {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+    }
+    .radios img {
+      display: block;
+      width: calc(100% - 20px);
+      border: 4px solid rgba(0, 0, 0, 0);
+      border-radius: 10px;
+      aspect-ratio: 1;
+    }
+    .radios input:checked + img {
+      border-color: #58a6ff;
+    }
+    @media only screen and (max-width: 450px) {
+      .radios label {
+        width: calc(50% - 16px);
+        max-width: initial;
+      }
     }
     @media (prefers-color-scheme: dark) {
       body {
@@ -112,6 +142,29 @@
     </ul>
   
     <h1>Install SvitloBot <span id="version"></span></h1>
+
+    <div class="radios">
+      <label>
+        <input
+          type="radio"
+          name="svitlobot-device"
+          class="device"
+          value=""
+          checked
+        />
+        <img src="espressif.png" alt="ESP8266/ESP32 Generic" />
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="svitlobot-device"
+          class="device"
+          value="esp-svitlobot-atom"
+        />
+        <img src="m5stack_atom_lite.png" alt="M5Stack Atom Lite" />
+      </label>
+    </div>
+
     <p class="button-row">
       <esp-web-install-button manifest="manifest.json"></esp-web-install-button>
     </p>
@@ -130,6 +183,19 @@
          $("#version").text(data.version);
       });
     });
+  </script>
+  <script>
+    // Handle selecting a device
+    document.querySelectorAll("input.device").forEach((radio) =>
+      radio.addEventListener("change", () => {
+        const button = document.querySelector('esp-web-install-button');
+        let device = radio.value;
+        if (device) {
+          device = `devices/${device}-`;
+        }
+        button.manifest = `${device}manifest.json`;
+      })
+    );
   </script>
 </body>
 </html>
