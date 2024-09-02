@@ -95,18 +95,21 @@
     }
     .radios input {
       position: absolute;
-      top: 12px;
+      top: 15px;
       left: 12px;
     }
     .radios img {
       display: block;
       width: calc(100% - 20px);
       border: 4px solid rgba(0, 0, 0, 0);
-      border-radius: 10px;
+      border-radius: 15px;
       aspect-ratio: 1;
     }
     .radios input:checked + img {
       border-color: #58a6ff;
+    }
+    .button-row {
+      margin: 10px 10px 10px 5px;
     }
     @media only screen and (max-width: 450px) {
       .radios label {
@@ -140,7 +143,9 @@
       <li>Access logs and send terminal commands</li>
       <li>Add devices to <a href="https://www.home-assistant.io">Home Assistant</a></li>
     </ul>
-  
+
+    <div><a href="https://esphome.io/guides/made_for_esphome.html" target="_blank" rel="noreferrer"><img src="made-for-esphome.svg" width="300px" alt="Made for ESPHome Logo"></a></div>  
+
     <h1>Install SvitloBot <span id="version"></span></h1>
 
     <div class="radios">
