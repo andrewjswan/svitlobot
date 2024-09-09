@@ -71,7 +71,7 @@ script:
             id(send_status).publish_state(false);
             id(send_quality) = id(send_quality) < 0 ? 0 : std::max(0, --id(send_quality));
           }
-    mode: queued
+    mode: single
 
 text:
   - platform: template
