@@ -1,6 +1,4 @@
 substitutions:
-  name: "esp-svitlobot"
-  friendly_name: "Svitlo Bot"
   comment: "ESPHome Svitlo Bot (ESP 8266)"
 
 interval:
