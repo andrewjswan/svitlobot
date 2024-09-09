@@ -1,0 +1,33 @@
+external_components:
+  - source:
+      type: git
+      url: https://github.com/andrewjswan/esphome-components
+      ref: main
+    components: [shadow]
+    refresh: 60s
+
+ota:
+  - platform: esphome
+    on_begin:
+      then:
+        - lambda: |-
+            id(svitlobot)->stop();
+
+  - platform: http_request
+    on_begin:
+      then:
+        - lambda: |-
+            id(svitlobot)->stop();
+
+shadow:
+  id: svitlobot
+  script_id: send_state
+  interval: 60
+
+sensor:
+  - platform: internal_temperature
+    name: ${friendly_name} Device Temperature
+    entity_category: diagnostic
+    icon: mdi:coolant-temperature
+    device_class: temperature
+    disabled_by_default: true
