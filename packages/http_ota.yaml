@@ -1,0 +1,17 @@
+button:
+  - platform: template
+    name: "${friendly_name} Firmware Update"
+    icon: mdi:progress-upload
+    disabled_by_default: true
+    entity_category: config
+    on_press:
+      - update.perform:
+          id: new_firmware
+
+update:
+  - platform: http_request
+    id: new_firmware
+    name: "${friendly_name} Firmware Update"
+    source: https://andrewjswan.github.io/svitlobot/manifest.json
+    icon: mdi:update
+    web_server_sorting_weight: 15
