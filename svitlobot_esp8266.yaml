@@ -2,11 +2,12 @@ substitutions:
   name: "esp-svitlobot"
   friendly_name: "Svitlo Bot"
 
-esp32:
-  board: esp32-s3-devkitc-1
-  framework:
-    type: arduino
-    version: latest
+esp8266:
+  # https://github.com/esphome/firmware/blob/main/esp-web-tools/esp8266.yaml
+  # board: esp01_1m
+  # board: d1_mini
+  board: nodemcuv2
+  restore_from_flash: true
 
 dashboard_import:
   package_import_url: github://andrewjswan/esphome-config/svitlobot_esp8266.yaml@main
