@@ -1,3 +1,6 @@
+substitutions:
+  comment: "ESPHome Svitlo Bot (Shadow)"
+
 external_components:
   - source:
       type: git
