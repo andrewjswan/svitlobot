@@ -148,6 +148,14 @@ script:
                 id: status_led
                 transition_length: 1s
             - component.update: quality
+          else:
+            - light.turn_on:
+                id: status_led
+                brightness: 50%
+                red: 100%
+                green: 100%
+                blue: 0%
+                transition_length: 1s
     mode: queued
 
   - id: set_state
