@@ -1,0 +1,7 @@
+substitutions:
+  comment: "ESPHome Svitlo Bot (ESP 8266)"
+
+interval:
+  - interval: 1min
+    then:
+      - script.execute: send_state
