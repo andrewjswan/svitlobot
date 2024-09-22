@@ -1,5 +1,5 @@
 substitutions:
-  project_name: "ajs.svitlobot"
+  project_name: "ajs.SvitloBot"
   project_version: "3.5.17"
 
 http_request:
