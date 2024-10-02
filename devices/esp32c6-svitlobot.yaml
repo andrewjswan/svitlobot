@@ -7,7 +7,7 @@ substitutions:
 
 esphome:
   name: "${name}"
-  name_add_mac_suffix: true
+  # name_add_mac_suffix: true
   comment: $comment
   build_path: ./.build/$name
   project:
