@@ -27,14 +27,11 @@ dashboard_import:
 
 esp32:
   board: esp32-c6-devkitc-1
-  flash_size: 8MB
   variant: esp32c6
   framework:
     type: esp-idf
     version: "5.3.0"
     platform_version: 6.8.1
-    sdkconfig_options:
-      CONFIG_ESPTOOLPY_FLASHSIZE_8MB: y
 
 api:
   reboot_timeout: 0s
