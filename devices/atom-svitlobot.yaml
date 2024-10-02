@@ -2,12 +2,12 @@ substitutions:
   name: "esp-svitlobot-atom"
   friendly_name: "Svitlo Bot"
   project_name: "ajs.SvitloBot"
-  project_version: "3.5.17"
+  project_version: "3.5.19"
   comment: "ESPHome Svitlo Bot (Shadow)"
 
 esphome:
   name: "${name}"
-  name_add_mac_suffix: true
+  # name_add_mac_suffix: true
   comment: $comment
   build_path: ./.build/$name
   project:

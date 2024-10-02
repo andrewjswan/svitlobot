@@ -1,6 +1,6 @@
 substitutions:
   project_name: "ajs.SvitloBot"
-  project_version: "3.5.17"
+  project_version: "3.5.19"
 
 http_request:
   useragent: "esphome/${name} (${project_version})"
