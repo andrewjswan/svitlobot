@@ -85,14 +85,16 @@ text:
     icon: mdi:key-chain-variant
     entity_category: config
     disabled_by_default: true
-    web_server_sorting_weight: 5
+    web_server:
+      sorting_weight: 5
 
 binary_sensor:
   - platform: template
     name: "${friendly_name} Status"
     id: send_status
     icon: mdi:lan-connect
-    web_server_sorting_weight: 3
+    web_server:
+      sorting_weight: 3
 
 sensor:
   - platform: template
@@ -108,7 +110,8 @@ sensor:
     unit_of_measurement: "%"
     icon: mdi:wan
     state_class: measurement
-    web_server_sorting_weight: 5
+    web_server:
+      sorting_weight: 5
     on_value_range:
       - above: 1.0
         below: 90.0
