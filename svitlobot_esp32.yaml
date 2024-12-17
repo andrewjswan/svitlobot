@@ -6,7 +6,7 @@ esp32:
   board: nodemcu-32s
 
 dashboard_import:
-  package_import_url: github://andrewjswan/esphome-config/svitlobot_esp32.yaml@main
+  package_import_url: github://andrewjswan/svitlobot/svitlobot_esp32.yaml@main
 
 packages:
   common: !include packages/common.yaml
