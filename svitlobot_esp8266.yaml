@@ -10,7 +10,7 @@ esp8266:
   restore_from_flash: true
 
 dashboard_import:
-  package_import_url: github://andrewjswan/esphome-config/svitlobot_esp8266.yaml@main
+  package_import_url: github://andrewjswan/svitlobot/svitlobot_esp8266.yaml@main
 
 packages:
   common: !include packages/common.yaml
