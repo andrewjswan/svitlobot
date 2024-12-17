@@ -6,7 +6,7 @@ esp32:
   board: esp32-c3-devkitm-1
 
 dashboard_import:
-  package_import_url: github://andrewjswan/esphome-config/svitlobot_esp32c3.yaml@main
+  package_import_url: github://andrewjswan/svitlobot/svitlobot_esp32c3.yaml@main
 
 packages:
   common: !include packages/common.yaml
