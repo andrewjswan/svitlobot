@@ -74,7 +74,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
       - name: Build firmware
-        uses: esphome/build-action@v4
+        uses: esphome/build-action@v6
         id: esphome-build
         with:
           yaml-file: ${{ matrix.config-file }}
