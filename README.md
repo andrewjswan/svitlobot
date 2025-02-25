@@ -1,6 +1,6 @@
 # ESPHome SvitloBot
 
-[![esphome_badge](https://img.shields.io/badge/ESPHome-Config-blue.svg)](https://esphome.io/)
+[![esphome_badge](https://img.shields.io/static/v1?label=ESPHome&message=Config&color=blue&logo=esphome)](https://esphome.io/)
 [![svitlobot_badge](https://img.shields.io/badge/Svitlo-Bot-orange.svg)](https://svitlobot.in.ua/)
 [![Build](https://github.com/andrewjswan/svitlobot/actions/workflows/build.yaml/badge.svg)](https://github.com/andrewjswan/svitlobot/actions/workflows/build.yaml)
 [![GitHub](https://img.shields.io/github/license/andrewjswan/svitlobot?color=blue)](https://github.com/andrewjswan/svitlobot/blob/main/LICENSE)
