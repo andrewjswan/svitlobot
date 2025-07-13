@@ -1,6 +1,6 @@
 button:
   - platform: template
-    name: "${friendly_name} Firmware Update"
+    name: "Firmware Update"
     icon: mdi:progress-upload
     disabled_by_default: true
     entity_category: config
@@ -11,7 +11,7 @@ button:
 update:
   - platform: http_request
     id: new_firmware
-    name: "${friendly_name} Firmware Update"
+    name: "Firmware Update"
     source: https://andrewjswan.github.io/svitlobot/manifest.json
     icon: mdi:update
     web_server:

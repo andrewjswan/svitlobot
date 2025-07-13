@@ -75,7 +75,7 @@ script:
 
 text:
   - platform: template
-    name: "${friendly_name} Key"
+    name: "Key"
     id: my_key
     optimistic: true
     min_length: 0
@@ -90,7 +90,7 @@ text:
 
 binary_sensor:
   - platform: template
-    name: "${friendly_name} Status"
+    name: "Status"
     id: send_status
     icon: mdi:lan-connect
     web_server:
@@ -98,7 +98,7 @@ binary_sensor:
 
 sensor:
   - platform: template
-    name: "${friendly_name} Delivery Quality"
+    name: "Delivery Quality"
     id: quality
     lambda: |-
       if (!id(my_key).has_state() || id(send_quality) < 0)

@@ -1,15 +1,17 @@
 substitutions:
-  name: "esp-svitlobot-atom"
+  device: "esp_svitlobot_atom"
+  name: "svitlobot-atom"
   friendly_name: "Svitlo Bot"
   project_name: "ajs.SvitloBot"
   project_version: "3.5.19"
-  comment: "ESPHome Svitlo Bot (Shadow)"
+  comment: "ESPHome Svitlo Bot | Shadow"
 
 esphome:
   name: "${name}"
-  # name_add_mac_suffix: true
+  friendly_name: "${friendly_name}"
+  name_add_mac_suffix: true
   comment: $comment
-  build_path: ./.build/$name
+  build_path: ./.build/$device
   project:
     name: "${project_name}"
     version: "${project_version}"
@@ -59,13 +61,15 @@ web_server:
 
 wifi:
   ap: {}  # This spawns an AP with the device name and mac address with no password.
+  enable_btm: true
+  enable_rrm: true
 
 captive_portal:
 
 http_request:
   useragent: "esphome/${name} (${project_version})"
   verify_ssl: false
-  timeout: 10s
+  timeout: 15s
 
 globals:
   - id: send_quality
@@ -101,7 +105,7 @@ script:
             - http_request.get:
                 url: !lambda |-
                   return ((std::string) "https://api.svitlobot.in.ua/channelPing?channel_key=" + id(my_key).state).c_str();
-                capture_response: true
+                capture_response: false
                 on_response:
                   then:
                     - if:
@@ -188,14 +192,14 @@ shadow:
   interval: 90
 
 light:
-  - name: ${friendly_name} LED
+  - name: "LED"
     id: status_led
     icon: mdi:lighthouse
     platform: esp32_rmt_led_strip
     rgb_order: GRB
     pin: 27
     num_leds: 1
-    rmt_channel: 0
+    # rmt_channel: 0
     chipset: SK6812
     restore_mode: ALWAYS_OFF
     web_server:
@@ -203,7 +207,7 @@ light:
 
 text:
   - platform: template
-    name: "${friendly_name} Key"
+    name: "Key"
     id: my_key
     optimistic: true
     min_length: 0
@@ -218,7 +222,7 @@ text:
 
 binary_sensor:
   - platform: template
-    name: "${friendly_name} Status"
+    name: "Status"
     id: send_status
     icon: mdi:lan-connect
     web_server:
@@ -226,7 +230,7 @@ binary_sensor:
 
 sensor:
   - platform: template
-    name: "${friendly_name} Delivery Quality"
+    name: "Delivery Quality"
     id: quality
     lambda: |-
       if (!id(my_key).has_state() || id(send_quality) < 0)
@@ -247,16 +251,16 @@ sensor:
           - button.press: Restart
 
   - platform: uptime
-    name: "${friendly_name} Uptime"
+    name: "Uptime"
     entity_category: diagnostic
 
   - platform: wifi_signal
-    name: "${friendly_name} WiFi Signal"
+    name: "WiFi Signal"
     entity_category: diagnostic
     icon: mdi:signal
 
   - platform: internal_temperature
-    name: ${friendly_name} Device Temperature
+    name: "Device Temperature"
     entity_category: diagnostic
     icon: mdi:coolant-temperature
     device_class: temperature
@@ -264,19 +268,19 @@ sensor:
 
 button:
   - platform: restart
-    name: "${friendly_name} Restart"
+    name: "Restart"
     id: Restart
     entity_category: diagnostic
     icon: mdi:restart
 
   - platform: factory_reset
-    name: "${friendly_name} Restart with Factory Default Settings"
+    name: "Restart with Factory Default Settings"
     id: Reset
     entity_category: diagnostic
     disabled_by_default: true
 
   - platform: template
-    name: "${friendly_name} Firmware Update"
+    name: "Firmware Update"
     icon: mdi:progress-upload
     disabled_by_default: true
     entity_category: config
@@ -286,23 +290,23 @@ button:
 
 text_sensor:
   - platform: version
-    name: ${friendly_name} ESPHome Version
+    name: "ESPHome Version"
     hide_timestamp: true
     entity_category: diagnostic
 
   - platform: wifi_info
     ip_address:
-      name: "${friendly_name} IP Address"
+      name: "IP Address"
       disabled_by_default: true
       entity_category: diagnostic
       icon: mdi:ip
     ssid:
-      name: "${friendly_name} Connected SSID"
+      name: "Connected SSID"
       disabled_by_default: true
       entity_category: diagnostic
       icon: mdi:access-point-network
     mac_address:
-      name: "${friendly_name} Mac Address"
+      name: "Mac Address"
       disabled_by_default: true
       entity_category: diagnostic
       icon: mdi:console-network
@@ -310,7 +314,7 @@ text_sensor:
 update:
   - platform: http_request
     id: new_firmware
-    name: "${friendly_name} Firmware Update"
+    name: "Firmware Update"
     source: https://andrewjswan.github.io/svitlobot/devices/${name}-manifest.json
     icon: mdi:update
     web_server:

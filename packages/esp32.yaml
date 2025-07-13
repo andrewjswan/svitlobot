@@ -29,7 +29,7 @@ shadow:
 
 sensor:
   - platform: internal_temperature
-    name: ${friendly_name} Device Temperature
+    name: Device Temperature
     entity_category: diagnostic
     icon: mdi:coolant-temperature
     device_class: temperature

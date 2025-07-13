@@ -1,5 +1,6 @@
 substitutions:
-  name: "esp-svitlobot"
+  device: "esp_svitlobot"
+  name: "svitlobot"
   friendly_name: "Svitlo Bot"
 
 esp8266:

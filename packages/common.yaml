@@ -1,8 +1,9 @@
 esphome:
   name: "${name}"
+  friendly_name: "${friendly_name}"
   # name_add_mac_suffix: true
   comment: $comment
-  build_path: ./.build/$name
+  build_path: ./.build/$device
   project:
     name: "${project_name}"
     version: "${project_version}"
@@ -33,46 +34,46 @@ improv_serial:
 
 sensor:
   - platform: uptime
-    name: "${friendly_name} Uptime"
+    name: "Uptime"
     entity_category: diagnostic
 
   - platform: wifi_signal
-    name: "${friendly_name} WiFi Signal"
+    name: "WiFi Signal"
     entity_category: diagnostic
     icon: mdi:signal
 
 button:
   - platform: restart
-    name: "${friendly_name} Restart"
+    name: "Restart"
     id: Restart
     entity_category: diagnostic
     icon: mdi:restart
 
   - platform: factory_reset
-    name: "${friendly_name} Restart with Factory Default Settings"
+    name: "Restart with Factory Default Settings"
     id: Reset
     entity_category: diagnostic
     disabled_by_default: true
 
 text_sensor:
   - platform: version
-    name: ${friendly_name} ESPHome Version
+    name: ESPHome Version
     hide_timestamp: true
     entity_category: diagnostic
 
   - platform: wifi_info
     ip_address:
-      name: "${friendly_name} IP Address"
+      name: "IP Address"
       disabled_by_default: true
       entity_category: diagnostic
       icon: mdi:ip
     ssid:
-      name: "${friendly_name} Connected SSID"
+      name: "Connected SSID"
       disabled_by_default: true
       entity_category: diagnostic
       icon: mdi:access-point-network
     mac_address:
-      name: "${friendly_name} Mac Address"
+      name: "Mac Address"
       disabled_by_default: true
       entity_category: diagnostic
       icon: mdi:console-network
