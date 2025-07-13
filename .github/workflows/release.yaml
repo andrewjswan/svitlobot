@@ -52,6 +52,7 @@ jobs:
       - build-devices
     permissions:
       contents: write
+      discussions: write
 
     runs-on: ubuntu-latest
 
@@ -85,6 +86,7 @@ jobs:
           files: |
             release-files/*/*.factory.bin
             release-devices-files/*.factory.bin
+          discussion_category_name: Announcements
 
   cleanup:
     name: GitHub Pages / Delete deployment
