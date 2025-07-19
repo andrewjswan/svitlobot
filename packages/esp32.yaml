@@ -9,19 +9,6 @@ external_components:
     components: [shadow]
     refresh: 60s
 
-ota:
-  - platform: esphome
-    on_begin:
-      then:
-        - lambda: |-
-            id(svitlobot)->stop();
-
-  - platform: http_request
-    on_begin:
-      then:
-        - lambda: |-
-            id(svitlobot)->stop();
-
 shadow:
   id: svitlobot
   script_id: send_state
