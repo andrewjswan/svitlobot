@@ -8,6 +8,9 @@ button:
       - update.perform:
           id: new_firmware
 
+ota:
+  - platform: http_request
+
 update:
   - platform: http_request
     id: new_firmware
