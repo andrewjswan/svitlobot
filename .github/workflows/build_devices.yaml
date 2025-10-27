@@ -77,7 +77,7 @@ jobs:
           mv manifest.json ${{ steps.esphome-build.outputs.original-name }}-manifest.json
         working-directory: output
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ format('Devices-{0}', steps.esphome-build.outputs.name) }}
           path: output
