@@ -58,13 +58,13 @@ jobs:
 
     steps:
       - name: Download Artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: SvitloBot
           path: release-files
 
       - name: Download Devices Artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           pattern: Devices-*
           path: release-devices-files
@@ -125,13 +125,13 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Download Artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: SvitloBot
           path: release-files
 
       - name: Download Devices Artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           pattern: Devices-*
           path: release-devices-files
