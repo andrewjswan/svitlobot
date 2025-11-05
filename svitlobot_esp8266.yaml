@@ -14,6 +14,10 @@ dashboard_import:
   package_import_url: github://andrewjswan/svitlobot/svitlobot_esp8266.yaml@main
 
 packages:
-  common: !include packages/common.yaml
-  svitlobot: !include packages/svitlobot.yaml
-  esp8266: !include packages/esp8266.yaml
+  remote_package:
+    url: https://github.com/andrewjswan/svitlobot
+    files:
+      - packages/common.yaml
+      - packages/svitlobot.yaml
+      - packages/esp8266.yaml
+    refresh: 1s
