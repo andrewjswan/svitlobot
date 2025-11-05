@@ -13,7 +13,11 @@ dashboard_import:
   package_import_url: github://andrewjswan/svitlobot/svitlobot_esp32s3.yaml@main
 
 packages:
-  common: !include packages/common.yaml
-  svitlobot: !include packages/svitlobot.yaml
-  esp32: !include packages/esp32.yaml
-  http_ota: !include packages/http_ota.yaml
+  remote_package:
+    url: https://github.com/andrewjswan/svitlobot
+    files:
+      - packages/common.yaml
+      - packages/svitlobot.yaml
+      - packages/esp32.yaml
+      - packages/http_ota.yaml
+    refresh: 1s
