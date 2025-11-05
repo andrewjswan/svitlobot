@@ -5,6 +5,8 @@ substitutions:
 
 esp32:
   board: esp32-s2-saola-1
+  framework:
+    type: esp-idf
 
 dashboard_import:
   package_import_url: github://andrewjswan/svitlobot/svitlobot_esp32s2.yaml@main

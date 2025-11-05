@@ -5,6 +5,8 @@ substitutions:
 
 esp32:
   board: esp32-c3-devkitm-1
+  framework:
+    type: esp-idf
 
 dashboard_import:
   package_import_url: github://andrewjswan/svitlobot/svitlobot_esp32c3.yaml@main
