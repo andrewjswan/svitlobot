@@ -5,6 +5,8 @@ substitutions:
 
 esp32:
   board: nodemcu-32s
+  framework:
+    type: esp-idf
 
 dashboard_import:
   package_import_url: github://andrewjswan/svitlobot/svitlobot_esp32.yaml@main
