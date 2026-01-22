@@ -4,7 +4,7 @@ substitutions:
   friendly_name: "Svitlo Bot"
 
 esp32:
-  board: nodemcu-32s
+  variant: esp32
   framework:
     type: esp-idf
 
