@@ -121,7 +121,8 @@ script:
                               green: 0%
                               blue: 0%
                               transition_length: 1s
-                    - lambda: id(set_state)->execute(response->status_code, body);
+                    # - lambda: id(set_state)->execute(response->status_code, body);
+                    - lambda: id(set_state)->execute(response->status_code);
                     - globals.set:
                         id: session
                         value: 'false'
@@ -139,7 +140,7 @@ script:
                   - script.execute:
                       id: set_state
                       code: -1
-                      response: ""
+                      # response: ""
             - lambda: delay(3000);
             - light.turn_off:
                 id: status_led
@@ -158,7 +159,7 @@ script:
   - id: set_state
     parameters:
       code: int
-      response: string
+      # response: string
     then:
       - lambda: |-
           // if (code == 200 && response.find("Accepted request") != std::string::npos)
