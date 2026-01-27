@@ -1,9 +1,9 @@
 substitutions:
   device: "esp_svitlobot_c3_oled"
-  name: "svitlobot-c3_oled"
+  name: "svitlobot-c3-oled"
   friendly_name: "Svitlo Bot"
   project_name: "ajs.SvitloBot"
-  project_version: "3.5.29"
+  project_version: "3.5.31"
   comment: "ESPHome Svitlo Bot | Shadow"
 
 esphome:
