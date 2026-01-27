@@ -1,0 +1,51 @@
+name: Report an issue with Svitlobot
+description: Report an issue with Svitlobot.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue form is for reporting bugs only!
+
+        If you have a feature or enhancement request, please use the [feature request][fr] section of our [Discussions][fr].
+
+        [fr]: https://github.com/andrewjswan/svitlobot/discussions/categories/feature-request
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: The problem
+      description: >-
+        Describe the issue you are experiencing here, to communicate to the
+        maintainers. Tell us what you were trying to do and what happened.
+
+        Provide a clear and concise description of what the problem is.
+  - type: dropdown
+    validations:
+      required: true
+    attributes:
+      label: What part of the Matrix Lamp is the problem??
+      description: >
+        Part of the Matrix Lamp is the problem.
+      options:
+        - SvitloBot
+        - SvitloBot Device Configuration
+  - type: markdown
+    attributes:
+      value: |
+        # Details
+  - type: textarea
+    attributes:
+      label: Example YAML snippet
+      description: |
+        If applicable, please provide an example piece of YAML that can help reproduce this problem.
+      render: yaml
+  - type: textarea
+    attributes:
+      label: Anything in the logs that might be useful for us?
+      description: For example, error message, or stack traces.
+      render: txt
+  - type: textarea
+    attributes:
+      label: Additional information
+      description: >
+        If you have any additional information for us, use the field below.
