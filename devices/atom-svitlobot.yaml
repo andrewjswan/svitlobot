@@ -3,7 +3,7 @@ substitutions:
   name: "svitlobot-atom"
   friendly_name: "Svitlo Bot"
   project_name: "ajs.SvitloBot"
-  project_version: "3.5.29"
+  project_version: "3.5.31"
   comment: "ESPHome Svitlo Bot | Shadow"
 
 esphome:
@@ -70,11 +70,6 @@ globals:
     restore_value: no
     initial_value: '-1'
 
-  - id: session
-    type: bool
-    restore_value: no
-    initial_value: 'false'
-
 script:
   - id: send_state
     then:
@@ -92,59 +87,20 @@ script:
                 blue: 100%
                 transition_length: 1s
             - lambda: delay(1000);
-            - globals.set:
-                id: session
-                value: 'true'
             - http_request.get:
                 url: !lambda |-
                   return ((std::string) "https://api.svitlobot.in.ua/channelPing?channel_key=" + id(my_key).state).c_str();
                 capture_response: false
                 on_response:
                   then:
-                    - if:
-                        condition:
-                          # lambda: 'return (response->status_code == 200 && body.find("Accepted request") != std::string::npos);'
-                          lambda: 'return (response->status_code == 200);'
-                        then:
-                          - light.turn_on:
-                              id: status_led
-                              brightness: 50%
-                              red: 0%
-                              green: 100%
-                              blue: 0%
-                              transition_length: 1s
-                        else:
-                          - light.turn_on:
-                              id: status_led
-                              brightness: 50%
-                              red: 100%
-                              green: 0%
-                              blue: 0%
-                              transition_length: 1s
                     # - lambda: id(set_state)->execute(response->status_code, body);
                     - lambda: id(set_state)->execute(response->status_code);
-                    - globals.set:
-                        id: session
-                        value: 'false'
-            - if:
-                condition:
-                  lambda: 'return id(session);'
-                then:
-                  - light.turn_on:
-                      id: status_led
-                      brightness: 50%
-                      red: 100%
-                      green: 0%
-                      blue: 0%
-                      transition_length: 1s
-                  - script.execute:
-                      id: set_state
-                      code: -1
-                      # response: ""
-            - lambda: delay(3000);
-            - light.turn_off:
-                id: status_led
-                transition_length: 1s
+                on_error:
+                  then:
+                    - script.execute:
+                        id: set_state
+                        code: -1
+                        # response: ""
             - component.update: quality
           else:
             - light.turn_on:
@@ -168,15 +124,35 @@ script:
             ESP_LOGD("SvitloBot", "Send status - success");
             id(send_status).publish_state(true);
             id(send_quality) = id(send_quality) < 0 ? 100 : std::min(100, ++id(send_quality));
+
+            auto turn_on = id(status_led).turn_on();
+            turn_on.set_brightness(0.5);
+            turn_on.set_rgb(0.0, 0.5, 0.0);
+            turn_on.set_transition_length(1000);
+            turn_on.perform();
+
+            delay_microseconds_safe(1000000);  // 1s
+
+            auto turn_off = id(status_led).turn_off();
+            turn_off.set_transition_length(1000);
+            turn_off.perform();
           }
           else
           {
             if (code > 0)
             {
               ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
+            } else {
+              ESP_LOGE("SvitloBot", "Request failed!");
             }
             id(send_status).publish_state(false);
             id(send_quality) = id(send_quality) < 0 ? 0 : std::max(0, --id(send_quality));
+
+            auto turn_on = id(status_led).turn_on();
+            turn_on.set_brightness(0.5);
+            turn_on.set_rgb(0.5, 0.0, 0.0);
+            turn_on.set_transition_length(1000);
+            turn_on.perform();
           }
     mode: single
 
