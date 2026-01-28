@@ -1,6 +1,6 @@
 substitutions:
   project_name: "ajs.SvitloBot"
-  project_version: "3.5.29"
+  project_version: "3.5.31"
 
 http_request:
   useragent: "esphome/${name} (${project_version})"
@@ -13,11 +13,6 @@ globals:
     restore_value: no
     initial_value: '-1'
 
-  - id: session
-    type: bool
-    restore_value: no
-    initial_value: 'false'
-
 script:
   - id: send_state
     then:
@@ -27,46 +22,35 @@ script:
               - wifi.connected:
               - lambda: 'return id(my_key).has_state();'
           then:
-            - globals.set:
-                id: session
-                value: 'true'
             - http_request.get:
                 url: !lambda |-
                   return ((std::string) "https://api.svitlobot.in.ua/channelPing?channel_key=" + id(my_key).state).c_str();
+                capture_response: false
                 on_response:
                   then:
-                    - lambda: id(set_state)->execute(response->status_code, "");
-                    - globals.set:
-                        id: session
-                        value: 'false'
-            - if:
-                condition:
-                  lambda: 'return id(session);'
-                then:
-                  - script.execute:
-                      id: set_state
-                      code: -1
-                      response: ""
+                    - lambda: id(set_state)->execute(response->status_code);
+                on_error:
+                  then:
+                    - script.execute:
+                        id: set_state
+                        code: -1
             - component.update: quality
     mode: queued
 
   - id: set_state
     parameters:
       code: int
-      response: string
     then:
       - lambda: |-
-          if (code == 200)
-          {
+          if (code == 200) {
             ESP_LOGD("SvitloBot", "Send status - success");
             id(send_status).publish_state(true);
             id(send_quality) = id(send_quality) < 0 ? 100 : std::min(100, ++id(send_quality));
-          }
-          else
-          {
-            if (code > 0)
-            {
+          } else {
+            if (code > 0) {
               ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
+            } else {
+              ESP_LOGE("SvitloBot", "Request failed!");
             }
             id(send_status).publish_state(false);
             id(send_quality) = id(send_quality) < 0 ? 0 : std::max(0, --id(send_quality));
@@ -101,8 +85,7 @@ sensor:
     name: "Delivery Quality"
     id: quality
     lambda: |-
-      if (!id(my_key).has_state() || id(send_quality) < 0)
-      {
+      if (!id(my_key).has_state() || id(send_quality) < 0) {
         return NAN;
       }
       return id(send_quality);
