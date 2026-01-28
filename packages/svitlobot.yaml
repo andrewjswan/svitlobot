@@ -42,14 +42,11 @@ script:
       code: int
     then:
       - lambda: |-
-          if (code == 200)
-          {
+          if (code == 200) {
             ESP_LOGD("SvitloBot", "Send status - success");
             id(send_status).publish_state(true);
             id(send_quality) = id(send_quality) < 0 ? 100 : std::min(100, ++id(send_quality));
-          }
-          else
-          {
+          } else {
             if (code > 0) {
               ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
             } else {
