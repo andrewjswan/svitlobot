@@ -118,9 +118,8 @@ script:
       # response: string
     then:
       - lambda: |-
-          // if (code == 200 && response.find("Accepted request") != std::string::npos)
-          if (code == 200)
-          {
+          // if (code == 200 && response.find("Accepted request") != std::string::npos) {
+          if (code == 200) {
             ESP_LOGD("SvitloBot", "Send status - success");
             id(send_status).publish_state(true);
             id(send_quality) = id(send_quality) < 0 ? 100 : std::min(100, ++id(send_quality));
@@ -136,11 +135,8 @@ script:
             auto turn_off = id(status_led).turn_off();
             turn_off.set_transition_length(1000);
             turn_off.perform();
-          }
-          else
-          {
-            if (code > 0)
-            {
+          } else {
+            if (code > 0) {
               ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
             } else {
               ESP_LOGE("SvitloBot", "Request failed!");
@@ -203,8 +199,7 @@ sensor:
     name: "Delivery Quality"
     id: quality
     lambda: |-
-      if (!id(my_key).has_state() || id(send_quality) < 0)
-      {
+      if (!id(my_key).has_state() || id(send_quality) < 0) {
         return NAN;
       }
       return id(send_quality);
