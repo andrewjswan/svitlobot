@@ -98,8 +98,6 @@ script:
                     - lambda: id(set_state)->execute(response->status_code);
                 on_error:
                   then:
-                    - lambda: |-
-                        ESP_LOGE("SvitloBot", "Request failed!");
                     - script.execute:
                         id: set_state
                         code: -1
@@ -112,17 +110,15 @@ script:
     then:
       - lambda: |-
           id(state) = code;
-          if (code == 200)
-          {
+          if (code == 200) {
             ESP_LOGD("SvitloBot", "Send status - success");
             id(send_status).publish_state(true);
             id(send_quality) = id(send_quality) < 0 ? 100 : std::min(100, ++id(send_quality));
-          }
-          else
-          {
-            if (code > 0)
-            {
+          } else {
+            if (code > 0) {
               ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
+            } else {
+              ESP_LOGE("SvitloBot", "Request failed!");
             }
             id(send_status).publish_state(false);
             id(send_quality) = id(send_quality) < 0 ? 0 : std::max(0, --id(send_quality));
@@ -198,8 +194,7 @@ sensor:
     name: "Delivery Quality"
     id: quality
     lambda: |-
-      if (!id(my_key).has_state() || id(send_quality) < 0)
-      {
+      if (!id(my_key).has_state() || id(send_quality) < 0) {
         return NAN;
       }
       return id(send_quality);
