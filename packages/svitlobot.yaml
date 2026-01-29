@@ -5,7 +5,7 @@ substitutions:
 http_request:
   useragent: "esphome/${name} (${project_version})"
   verify_ssl: false
-  timeout: 10s
+  timeout: 15s
 
 globals:
   - id: send_quality
