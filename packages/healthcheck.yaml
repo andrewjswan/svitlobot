@@ -17,7 +17,7 @@ web_server:
   version: 3
   sorting_groups:
     - id: healthcheck_group
-      name: "💡 HealthCheck"
+      name: "❤️ HealthCheck"
       sorting_weight: 0
 
 script:
