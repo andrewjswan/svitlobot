@@ -11,8 +11,8 @@ external_components:
 
 shadow:
   id: svitlobot
-  script_id: send_state
-  interval: 60
+  script_id: svitlobot_ping
+  interval: 90
 
 sensor:
   - platform: internal_temperature
