@@ -4,4 +4,4 @@ substitutions:
 interval:
   - interval: 1min
     then:
-      - script.execute: send_state
+      - script.execute: svitlobot_ping
