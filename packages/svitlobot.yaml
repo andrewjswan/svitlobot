@@ -49,6 +49,13 @@ script:
       code: int
     then:
       - lambda: |-
+          if (code > 0) {
+            id(response_code).publish_state(code);
+          } else {
+            ESP_LOGE("SvitloBot", "Request failed!");
+            id(response_code).publish_state(NAN);
+          }
+
           if (code == 200) {
             ESP_LOGD("SvitloBot", "Send status - success");
             id(send_status).publish_state(true);
@@ -56,10 +63,6 @@ script:
           } else {
             if (code > 0) {
               ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
-              id(response_code).publish_state(code);
-            } else {
-              ESP_LOGE("SvitloBot", "Request failed!");
-              id(response_code).publish_state(NAN);
             }
             id(send_status).publish_state(false);
             id(send_quality) = id(send_quality) < 0 ? 0 : std::max(0, --id(send_quality));
