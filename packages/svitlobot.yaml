@@ -29,6 +29,7 @@ script:
               - wifi.connected:
               - lambda: 'return id(my_key).has_state();'
           then:
+            - lambda: id(response_code).publish_state(0);
             - http_request.get:
                 url: !lambda |-
                   return ((std::string) "https://api.svitlobot.in.ua/channelPing?channel_key=" + id(my_key).state).c_str();
