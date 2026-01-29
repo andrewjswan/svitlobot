@@ -1,0 +1,143 @@
+substitutions:
+  project_name: "ajs.HealthCheck"
+  project_version: "3.5.31"
+
+http_request:
+  useragent: "esphome/${name} (${project_version})"
+  verify_ssl: false
+  timeout: 15s
+
+globals:
+  - id: healthcheck_send_quality
+    type: int
+    restore_value: no
+    initial_value: '-1'
+
+web_server:
+  version: 3
+  sorting_groups:
+    - id: healthcheck_group
+      name: "💡 HealthCheck"
+      sorting_weight: 0
+
+script:
+  - id: healthcheck_ping
+    then:
+      - if:
+          condition:
+            and:
+              - wifi.connected:
+              - lambda: 'return id(healthcheck_key).has_state();'
+          then:
+            - lambda: id(healthcheck_response_code).publish_state(0);
+            - http_request.get:
+                url: !lambda |-
+                  return ((std::string) "http://hc-ping.com/" + id(healthcheck_key).state).c_str();
+                capture_response: false
+                on_response:
+                  then:
+                    - lambda: id(healthcheck_set_state)->execute(response->status_code);
+                on_error:
+                  then:
+                    - script.execute:
+                        id: healthcheck_set_state
+                        code: -1
+            - component.update: healthcheck_quality
+    mode: queued
+
+  - id: healthcheck_set_state
+    parameters:
+      code: int
+    then:
+      - lambda: |-
+          if (code > 0) {
+            id(healthcheck_response_code).publish_state(code);
+          } else {
+            ESP_LOGE("HealthCheck", "Request failed!");
+            id(healthcheck_response_code).publish_state(NAN);
+          }
+
+          if (code == 200) {
+            ESP_LOGD("HealthCheck", "Send status - success");
+            id(healthcheck_status).publish_state(true);
+            id(healthcheck_send_quality) = id(healthcheck_send_quality) < 0 ? 100 : std::min(100, ++id(healthcheck_send_quality));
+          } else {
+            if (code > 0) {
+              ESP_LOGE("HealthCheck", "Send status - not success with response code: %d", code);
+            }
+            id(healthcheck_status).publish_state(false);
+            id(healthcheck_send_quality) = id(healthcheck_send_quality) < 0 ? 0 : std::max(0, --id(healthcheck_send_quality));
+          }
+    mode: single
+
+text:
+  - platform: template
+    name: "Key"
+    id: healthcheck_key
+    optimistic: true
+    min_length: 0
+    max_length: 15
+    mode: text
+    restore_value: true
+    icon: mdi:key-chain-variant
+    entity_category: config
+    disabled_by_default: true
+    web_server:
+      sorting_group_id: healthcheck_group
+      sorting_weight: 5
+
+binary_sensor:
+  - platform: template
+    name: "Status"
+    id: healthcheck_status
+    icon: mdi:lan-connect
+    web_server:
+      sorting_group_id: healthcheck_group
+      sorting_weight: 1
+
+sensor:
+  - platform: template
+    name: "Delivery Quality"
+    id: healthcheck_quality
+    lambda: |-
+      if (!id(healthcheck_key).has_state() || id(healthcheck_send_quality) < 0) {
+        return NAN;
+      }
+      return id(healthcheck_send_quality);
+    accuracy_decimals: 0
+    unit_of_measurement: "%"
+    icon: mdi:wan
+    state_class: measurement
+    web_server:
+      sorting_group_id: healthcheck_group
+      sorting_weight: 3
+    on_value_range:
+      - above: 1.0
+        below: 90.0
+        then:
+          - button.press: Restart
+
+  - platform: template
+    name: "Response Code"
+    id: healthcheck_response_code
+    accuracy_decimals: 0
+    icon: mdi:web
+    entity_category: diagnostic
+    disabled_by_default: true
+    web_server:
+      sorting_group_id: healthcheck_group
+      sorting_weight: 10
+    on_value:
+      then:
+        - lambda: |-
+            if (std::isnan(x)) {
+              id(healthcheck_response_code).set_icon("mdi:web-cancel");
+            } else if (x == 0) {
+              id(healthcheck_response_code).set_icon("mdi:web-sync");
+            } else if (x == 200) {
+              id(healthcheck_response_code).set_icon("mdi:web-check");
+            } else if (x >= 400) {
+              id(healthcheck_response_code).set_icon("mdi:web-remove");
+            } else {
+              id(healthcheck_response_code).set_icon("mdi:web-clock");
+            }
