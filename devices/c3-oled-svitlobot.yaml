@@ -75,11 +75,6 @@ globals:
     restore_value: no
     initial_value: '-1'
 
-  - id: state
-    type: int
-    restore_value: no
-    initial_value: '0'
-
 script:
   - id: send_state
     then:
@@ -89,10 +84,7 @@ script:
               - wifi.connected:
               - lambda: 'return id(my_key).has_state();'
           then:
-            - globals.set:
-                id: state
-                value: '0'
-            - lambda: delay(1000);
+            - lambda: id(response_code).publish_state(0);
             - http_request.get:
                 url: !lambda |-
                   return ((std::string) "https://api.svitlobot.in.ua/channelPing?channel_key=" + id(my_key).state).c_str();
@@ -113,7 +105,13 @@ script:
       code: int
     then:
       - lambda: |-
-          id(state) = code;
+          if (code > 0) {
+            id(response_code).publish_state(code);
+          } else {
+            ESP_LOGE("SvitloBot", "Request failed!");
+            id(response_code).publish_state(NAN);
+          }
+          
           if (code == 200) {
             ESP_LOGD("SvitloBot", "Send status - success");
             id(send_status).publish_state(true);
@@ -121,8 +119,6 @@ script:
           } else {
             if (code > 0) {
               ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
-            } else {
-              ESP_LOGE("SvitloBot", "Request failed!");
             }
             id(send_status).publish_state(false);
             id(send_quality) = id(send_quality) < 0 ? 0 : std::max(0, --id(send_quality));
@@ -160,7 +156,7 @@ display:
       }
       if (id(my_key).has_state()) {
         it.printf(0, 10, id(oled_font), "State: %s", ONOFF(id(send_status).state));
-        it.printf(0, 20, id(oled_font), "Code: %d", id(state));
+        it.printf(0, 20, id(oled_font), "Code: %d", id(response_code).state);
       } else {
         it.printf(0, 10, id(oled_font), "NO KEY");
       }
@@ -216,6 +212,31 @@ sensor:
         below: 90.0
         then:
           - button.press: Restart
+
+  - platform: template
+    name: "Response Code"
+    id: response_code
+    accuracy_decimals: 0
+    icon: mdi:web
+    entity_category: diagnostic
+    disabled_by_default: true
+    web_server:
+      sorting_group_id: svitlobot_group
+      sorting_weight: 10
+    on_value:
+      then:
+        - lambda: |-
+            if (std::isnan(x)) {
+              id(response_code).set_icon("mdi:web-cancel");
+            } else if (x == 0) {
+              id(response_code).set_icon("mdi:web-sync");
+            } else if (x == 200) {
+              id(response_code).set_icon("mdi:web-check");
+            } else if (x >= 400) {
+              id(response_code).set_icon("mdi:web-remove");
+            } else {
+              id(response_code).set_icon("mdi:web-clock");
+            }
 
   - platform: uptime
     name: "Uptime"
