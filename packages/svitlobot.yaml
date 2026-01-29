@@ -56,8 +56,10 @@ script:
           } else {
             if (code > 0) {
               ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
+              id(response_code).publish_state(code);
             } else {
               ESP_LOGE("SvitloBot", "Request failed!");
+              id(response_code).publish_state(NaN);
             }
             id(send_status).publish_state(false);
             id(send_quality) = id(send_quality) < 0 ? 0 : std::max(0, --id(send_quality));
@@ -110,3 +112,28 @@ sensor:
         below: 90.0
         then:
           - button.press: Restart
+
+  - platform: template
+    name: "Response Code"
+    id: response_code
+    accuracy_decimals: 0
+    icon: mdi:web
+    entity_category: diagnostic
+    disabled_by_default: true
+    web_server:
+      sorting_group_id: svitlobot_group
+      sorting_weight: 10
+    on_value:
+      then:
+        - lambda: |-
+            if (std::isnan(x)) {
+              id(response_code).set_icon("mdi:web-cancel");
+            } else if (x == 0) {
+              id(response_code).set_icon("mdi:web-sync");
+            } else if (x == 200) {
+              id(response_code).set_icon("mdi:web-check");
+            } else if (x >= 400) {
+              id(response_code).set_icon("mdi:web-remove");
+            } else {
+              id(response_code).set_icon("mdi:web-clock");
+            }
