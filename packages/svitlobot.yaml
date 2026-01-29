@@ -103,7 +103,7 @@ sensor:
       if (!id(svitlobot_key).has_state() || id(svitlobot_send_quality) < 0) {
         return NAN;
       }
-      return id(send_quality);
+      return id(svitlobot_send_quality);
     accuracy_decimals: 0
     unit_of_measurement: "%"
     icon: mdi:wan
