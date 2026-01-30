@@ -113,8 +113,8 @@ script:
                 then:
                   - lambda: delay(3000);
                   - light.turn_off:
-                    id: status_led
-                    transition_length: 1s
+                      id: status_led
+                      transition_length: 1s
           else:
             - light.turn_on:
                 id: status_led
