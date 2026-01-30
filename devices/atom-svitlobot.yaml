@@ -107,6 +107,14 @@ script:
                         code: -1
                         # response: ""
             - component.update: quality
+            - if:
+                condition:
+                  lambda: 'return id(send_status).state;'
+                then:
+                  - lambda: delay(3000);
+                  - light.turn_off:
+                    id: status_led
+                    transition_length: 1s
           else:
             - light.turn_on:
                 id: status_led
@@ -130,23 +138,16 @@ script:
             id(response_code).publish_state(NAN);
           }
 
+          auto turn_on = id(status_led).turn_on();
+          turn_on.set_brightness(0.5);
+
           // if (code == 200 && response.find("Accepted request") != std::string::npos) {
           if (code == 200) {
             ESP_LOGD("SvitloBot", "Send status - success");
             id(send_status).publish_state(true);
             id(send_quality) = id(send_quality) < 0 ? 100 : std::min(100, ++id(send_quality));
 
-            auto turn_on = id(status_led).turn_on();
-            turn_on.set_brightness(0.5);
             turn_on.set_rgb(0.0, 0.5, 0.0);
-            turn_on.set_transition_length(1000);
-            turn_on.perform();
-
-            delay_microseconds_safe(1000000);  // 1s
-
-            auto turn_off = id(status_led).turn_off();
-            turn_off.set_transition_length(1000);
-            turn_off.perform();
           } else {
             if (code > 0) {
               ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
@@ -154,12 +155,11 @@ script:
             id(send_status).publish_state(false);
             id(send_quality) = id(send_quality) < 0 ? 0 : std::max(0, --id(send_quality));
 
-            auto turn_on = id(status_led).turn_on();
-            turn_on.set_brightness(0.5);
             turn_on.set_rgb(0.5, 0.0, 0.0);
-            turn_on.set_transition_length(1000);
-            turn_on.perform();
           }
+
+          turn_on.set_transition_length(1000);
+          turn_on.perform();
     mode: single
 
 shadow:
