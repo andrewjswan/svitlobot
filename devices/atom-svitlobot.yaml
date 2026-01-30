@@ -292,10 +292,12 @@ button:
           id: new_firmware
 
 text_sensor:
-  - platform: version
-    name: "ESPHome Version"
-    hide_timestamp: true
+  - platform: template
+    name: ESPHome Version
+    icon: mdi:new-box
     entity_category: diagnostic
+    lambda: |-
+      return std::string(ESPHOME_VERSION);
 
   - platform: wifi_info
     ip_address:
