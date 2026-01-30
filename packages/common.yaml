@@ -58,10 +58,12 @@ button:
     disabled_by_default: true
 
 text_sensor:
-  - platform: version
+  - platform: template
     name: ESPHome Version
-    hide_timestamp: true
+    icon: mdi:new-box
     entity_category: diagnostic
+    lambda: |-
+      return std::string(ESPHOME_VERSION);
 
   - platform: wifi_info
     ip_address:
