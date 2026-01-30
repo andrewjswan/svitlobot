@@ -63,6 +63,11 @@ wifi:
 
 captive_portal:
 
+improv_serial:
+
+debug:
+  update_interval: never
+
 http_request:
   useragent: "esphome/${name} (${project_version})"
   verify_ssl: false
@@ -298,6 +303,12 @@ text_sensor:
     entity_category: diagnostic
     lambda: |-
       return std::string(ESPHOME_VERSION);
+
+  - platform: debug
+    reset_reason:
+      name: "Reset Reason"
+      disabled_by_default: true
+      entity_category: diagnostic
 
   - platform: wifi_info
     ip_address:
