@@ -163,7 +163,7 @@ jobs:
       - name: 👀 Check output
         run: |
           ls -l
-        working-directory: output
+        working-directory: site
 
       - name: 🎭 Setup Pages
         uses: actions/configure-pages@v5
