@@ -75,53 +75,64 @@ jobs:
       cancel-in-progress: true
 
     steps:
-      - name: Checkout website files
+      - name: ⬇️ Checkout website files
         uses: actions/checkout@v6
 
-      - name: Download Artifacts
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: 3.x
+
+      - name: 📦 Install mkDocs
+        run: pip install mkdocs-material
+
+      - name: 💅 Build the docs site
+        run: mkdocs build --config-file .mkdocs.yml
+
+      - name: 📦 Download SvitloBot Artifacts
         uses: actions/download-artifact@v7
         with:
           name: SvitloBot
           path: release-files
 
-      - name: Download Devices Artifacts
+      - name: 📦 Download SvitloBot Devices Artifacts
         uses: actions/download-artifact@v7
         with:
           pattern: Devices-*
           path: release-devices-files
           merge-multiple: true
 
-      - name: Copy artifacts files
+      - name: 💅 Copy SvitloBot Artifacts files
         run: |
           mkdir output
           cp -R release-files/*/* output/
 
-      - name: Copy Devices artifacts files
+      - name: 💅 Copy SvitloBot Devices Artifacts files
         run: |
           mkdir output/devices
           cp -R release-devices-files/* output/devices/
 
-      - name: Copy website files
+      - name: 💅 Copy website files
         run: cp -R static/* output/
 
-      - name: Check output
+      - name: 👀 Check output
         run: |
           ls -l
         working-directory: output
 
-      - name: Setup Pages
+      - name: 🎭 Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload artifact
+      - name: 🚀 Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
           path: ${{ github.workspace }}/output/
 
-      - name: Deploy to GitHub Pages
+      - name: 💅 Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Delete Artifacts / Github Pages
+      - name: 🧹 Delete Artifacts / Github Pages
         uses: geekyeggo/delete-artifact@v5
         with:
           name: github-pages

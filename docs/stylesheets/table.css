@@ -1,0 +1,22 @@
+﻿/* Header: Material Design Indigo */
+.md-typeset__table th {
+    background-color: #3f51b5;
+    color: white;
+    font-weight: bold;
+}
+
+/* Alternating row colors for light mode */
+.md-typeset__table tr:nth-child(2n) {
+    background-color: #f8f8f8; /* Light gray for even rows */
+}
+
+/* Alternating row colors for dark mode */
+[data-md-color-scheme="slate"] .md-typeset__table tr:nth-child(2n) {
+    background-color: hsla(var(--md-hue),25%,25%,1);
+}
+
+/* Paddings */
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td {
+    padding: 4px 10px;
+}
