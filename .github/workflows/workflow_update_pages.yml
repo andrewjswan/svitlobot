@@ -104,7 +104,6 @@ jobs:
 
       - name: 💅 Copy SvitloBot Artifacts files
         run: |
-          mkdir output
           cp -R release-files/*/* site/
 
       - name: 💅 Copy SvitloBot Devices Artifacts files
