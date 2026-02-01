@@ -105,15 +105,15 @@ jobs:
       - name: 💅 Copy SvitloBot Artifacts files
         run: |
           mkdir output
-          cp -R release-files/*/* output/
+          cp -R release-files/*/* site/
 
       - name: 💅 Copy SvitloBot Devices Artifacts files
         run: |
-          mkdir output/devices
-          cp -R release-devices-files/* output/devices/
+          mkdir site/devices
+          cp -R release-devices-files/* site/devices/
 
       - name: 💅 Copy website files
-        run: cp -R static/* output/
+        run: cp -R static/* site/
 
       - name: 👀 Check output
         run: |
@@ -126,7 +126,7 @@ jobs:
       - name: 🚀 Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ${{ github.workspace }}/output/
+          path: ${{ github.workspace }}/site/
 
       - name: 💅 Deploy to GitHub Pages
         id: deployment
