@@ -29,7 +29,6 @@ script:
               - wifi.connected:
               - lambda: 'return id(svitlobot_key).has_state();'
           then:
-            - lambda: id(svitlobot_response_code).publish_state(0);
             - http_request.get:
                 url: !lambda |-
                   return ((std::string) "https://api.svitlobot.in.ua/channelPing?channel_key=" + id(svitlobot_key).state).c_str();
@@ -51,10 +50,10 @@ script:
     then:
       - lambda: |-
           if (code > 0) {
-            id(svitlobot_response_code).publish_state(code);
+            id(svitlobot_response_code).publish_state(std::to_string(code));
           } else {
             ESP_LOGE("SvitloBot", "Request failed!");
-            id(svitlobot_response_code).publish_state(NAN);
+            id(svitlobot_response_code).publish_state("---");
           }
 
           if (code == 200) {
@@ -117,10 +116,10 @@ sensor:
         then:
           - button.press: Restart
 
+text_sensor:
   - platform: template
     name: "Response Code"
-    id: svitlobot_response_code
-    accuracy_decimals: 0
+    id: response_code
     icon: mdi:web
     entity_category: diagnostic
     disabled_by_default: true
@@ -130,14 +129,17 @@ sensor:
     on_value:
       then:
         - lambda: |-
-            if (std::isnan(x)) {
-              id(svitlobot_response_code).set_icon("mdi:web-cancel");
-            } else if (x == 0) {
-              id(svitlobot_response_code).set_icon("mdi:web-sync");
-            } else if (x == 200) {
-              id(svitlobot_response_code).set_icon("mdi:web-check");
-            } else if (x >= 400) {
-              id(svitlobot_response_code).set_icon("mdi:web-remove");
+            if (x.empty()) {
+              id(response_code).set_icon("mdi:web-sync");
+            } else if (x == "---") {
+              id(response_code).set_icon("mdi:web-cancel");
             } else {
-              id(svitlobot_response_code).set_icon("mdi:web-clock");
+              int code = atoi(x.c_str());
+              if (code == 200) {
+                id(response_code).set_icon("mdi:web-check");
+              } else if (code >= 400) {
+                id(response_code).set_icon("mdi:web-remove");
+              } else {
+                id(response_code).set_icon("mdi:web-clock");
+              }
             }

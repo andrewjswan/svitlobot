@@ -88,7 +88,6 @@ script:
               - wifi.connected:
               - lambda: 'return id(my_key).has_state();'
           then:
-            - lambda: id(response_code).publish_state(0);
             - light.turn_on:
                 id: status_led
                 brightness: 50%
@@ -152,10 +151,10 @@ script:
     then:
       - lambda: |-
           if (code > 0) {
-            id(response_code).publish_state(code);
+            id(response_code).publish_state(std::to_string(code));
           } else {
             ESP_LOGE("SvitloBot", "Request failed!");
-            id(response_code).publish_state(NAN);
+            id(response_code).publish_state("---");
           }
 
           // if (code == 200 && response.find("Accepted request") != std::string::npos) {
@@ -237,31 +236,6 @@ sensor:
         then:
           - button.press: Restart
 
-  - platform: template
-    name: "Response Code"
-    id: response_code
-    accuracy_decimals: 0
-    icon: mdi:web
-    entity_category: diagnostic
-    disabled_by_default: true
-    web_server:
-      sorting_group_id: svitlobot_group
-      sorting_weight: 10
-    on_value:
-      then:
-        - lambda: |-
-            if (std::isnan(x)) {
-              id(response_code).set_icon("mdi:web-cancel");
-            } else if (x == 0) {
-              id(response_code).set_icon("mdi:web-sync");
-            } else if (x == 200) {
-              id(response_code).set_icon("mdi:web-check");
-            } else if (x >= 400) {
-              id(response_code).set_icon("mdi:web-remove");
-            } else {
-              id(response_code).set_icon("mdi:web-clock");
-            }
-
   - platform: uptime
     name: "Uptime"
     entity_category: diagnostic
@@ -301,6 +275,33 @@ button:
           id: new_firmware
 
 text_sensor:
+  - platform: template
+    name: "Response Code"
+    id: response_code
+    icon: mdi:web
+    entity_category: diagnostic
+    disabled_by_default: true
+    web_server:
+      sorting_group_id: svitlobot_group
+      sorting_weight: 10
+    on_value:
+      then:
+        - lambda: |-
+            if (x.empty()) {
+              id(response_code).set_icon("mdi:web-sync");
+            } else if (x == "---") {
+              id(response_code).set_icon("mdi:web-cancel");
+            } else {
+              int code = atoi(x.c_str());
+              if (code == 200) {
+                id(response_code).set_icon("mdi:web-check");
+              } else if (code >= 400) {
+                id(response_code).set_icon("mdi:web-remove");
+              } else {
+                id(response_code).set_icon("mdi:web-clock");
+              }
+            }
+
   - platform: template
     name: ESPHome Version
     icon: mdi:new-box
