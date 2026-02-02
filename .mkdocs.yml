@@ -76,10 +76,11 @@ markdown_extensions:
   - md_in_html
 
 nav:
-  - Home: index.md
-  - Devices: svitlobot-devices.md
-  - Additionals: additionals.md
-  - Firmware:
+  - Головна: index.md
+  - Пристрої: svitlobot-devices.md
+  - Альтернативні прошивки: alternative.md
+  - Корисні посилання: additionals.md
+  - Прошивка:
       - SvitloBot - ESP Web Tools: firmware.html
 
 extra:
