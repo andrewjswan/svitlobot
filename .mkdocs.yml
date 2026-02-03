@@ -16,6 +16,7 @@ copyright: Copyright &copy; Andrew J.Swan
 # Configuration
 theme:
   name: material
+  favicon: img/favicon.png
   icon:
     logo: material/lightbulb-on-outline
   features:
