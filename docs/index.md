@@ -19,3 +19,10 @@
 
 !!! tip "ESP Web Tools"
     [Документація та приклади використання](https://esphome.github.io/esp-web-tools/)
+
+
+## Скріншоти
+
+Темна                        |  Світла
+:---------------------------:|:-------------------------:
+![](img/screenshot/dark.jpg) |  ![](img/screenshot/light.jpg)
