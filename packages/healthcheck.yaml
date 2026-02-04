@@ -1,5 +1,5 @@
 substitutions:
-  project_name: "ajs.SvitloBot"
+  project_name: "ajs.HealthCheck"
   project_version: "3.5.35"
 
 http_request:
@@ -8,7 +8,7 @@ http_request:
   timeout: 15s
 
 globals:
-  - id: svitlobot_send_quality
+  - id: healthcheck_send_quality
     type: int
     restore_value: no
     initial_value: '-1'
@@ -16,69 +16,69 @@ globals:
 web_server:
   version: 3
   sorting_groups:
-    - id: svitlobot_group
-      name: "💡 SvitloBot"
+    - id: healthcheck_group
+      name: "❤️ HealthCheck"
       sorting_weight: 0
 
 script:
   - id: !extend site_ping
     then:
-      - logger.log: "SvitloBot..."
-      - script.execute: svitlobot_ping
-      - script.wait: svitlobot_ping
+      - logger.log: "HealthCheck..."
+      - script.execute: healthcheck_ping
+      - script.wait: healthcheck_ping
 
-  - id: svitlobot_ping
+  - id: healthcheck_ping
     then:
       - if:
           condition:
             and:
               - wifi.connected:
-              - lambda: 'return id(svitlobot_key).has_state();'
+              - lambda: 'return id(healthcheck_key).has_state();'
           then:
             - http_request.get:
                 url: !lambda |-
-                  return ((std::string) "https://api.svitlobot.in.ua/channelPing?channel_key=" + id(svitlobot_key).state).c_str();
+                  return ((std::string) "http://hc-ping.com/" + id(healthcheck_key).state).c_str();
                 capture_response: false
                 on_response:
                   then:
-                    - lambda: id(svitlobot_set_state)->execute(response->status_code);
+                    - lambda: id(healthcheck_set_state)->execute(response->status_code);
                 on_error:
                   then:
                     - script.execute:
-                        id: svitlobot_set_state
+                        id: healthcheck_set_state
                         code: -1
-            - component.update: svitlobot_quality
-    mode: single
+            - component.update: healthcheck_quality
+    mode: queued
 
-  - id: svitlobot_set_state
+  - id: healthcheck_set_state
     parameters:
       code: int
     then:
       - lambda: |-
           if (code > 0) {
-            id(svitlobot_response_code).publish_state(std::to_string(code));
+            id(healthcheck_response_code).publish_state(std::to_string(code));
           } else {
-            ESP_LOGE("SvitloBot", "Request failed!");
-            id(svitlobot_response_code).publish_state("---");
+            ESP_LOGE("HealthCheck", "Request failed!");
+            id(healthcheck_response_code).publish_state("---");
           }
 
           if (code == 200) {
-            ESP_LOGD("SvitloBot", "Send status - success");
-            id(svitlobot_status).publish_state(true);
-            id(svitlobot_send_quality) = id(svitlobot_send_quality) < 0 ? 100 : std::min(100, ++id(svitlobot_send_quality));
+            ESP_LOGD("HealthCheck", "Send status - success");
+            id(healthcheck_status).publish_state(true);
+            id(healthcheck_send_quality) = id(healthcheck_send_quality) < 0 ? 100 : std::min(100, ++id(healthcheck_send_quality));
           } else {
             if (code > 0) {
-              ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
+              ESP_LOGE("HealthCheck", "Send status - not success with response code: %d", code);
             }
-            id(svitlobot_status).publish_state(false);
-            id(svitlobot_send_quality) = id(svitlobot_send_quality) < 0 ? 0 : std::max(0, --id(svitlobot_send_quality));
+            id(healthcheck_status).publish_state(false);
+            id(healthcheck_send_quality) = id(healthcheck_send_quality) < 0 ? 0 : std::max(0, --id(healthcheck_send_quality));
           }
     mode: single
 
 text:
   - platform: template
     name: "Key"
-    id: svitlobot_key
+    id: healthcheck_key
     optimistic: true
     min_length: 0
     max_length: 15
@@ -88,33 +88,33 @@ text:
     entity_category: config
     disabled_by_default: true
     web_server:
-      sorting_group_id: svitlobot_group
+      sorting_group_id: healthcheck_group
       sorting_weight: 5
 
 binary_sensor:
   - platform: template
     name: "Status"
-    id: svitlobot_status
+    id: healthcheck_status
     icon: mdi:lan-connect
     web_server:
-      sorting_group_id: svitlobot_group
+      sorting_group_id: healthcheck_group
       sorting_weight: 1
 
 sensor:
   - platform: template
     name: "Delivery Quality"
-    id: svitlobot_quality
+    id: healthcheck_quality
     lambda: |-
-      if (!id(svitlobot_key).has_state() || id(svitlobot_send_quality) < 0) {
+      if (!id(healthcheck_key).has_state() || id(healthcheck_send_quality) < 0) {
         return NAN;
       }
-      return id(svitlobot_send_quality);
+      return id(healthcheck_send_quality);
     accuracy_decimals: 0
     unit_of_measurement: "%"
     icon: mdi:wan
     state_class: measurement
     web_server:
-      sorting_group_id: svitlobot_group
+      sorting_group_id: healthcheck_group
       sorting_weight: 3
     on_value_range:
       - above: 1.0
@@ -125,27 +125,27 @@ sensor:
 text_sensor:
   - platform: template
     name: "Response Code"
-    id: svitlobot_response_code
+    id: healthcheck_response_code
     icon: mdi:web
     entity_category: diagnostic
     disabled_by_default: true
     web_server:
-      sorting_group_id: svitlobot_group
+      sorting_group_id: healthcheck_group
       sorting_weight: 10
     on_value:
       then:
         - lambda: |-
             if (x.empty()) {
-              id(svitlobot_response_code).set_icon("mdi:web-sync");
+              id(healthcheck_response_code).set_icon("mdi:web-sync");
             } else if (x == "---") {
-              id(svitlobot_response_code).set_icon("mdi:web-cancel");
+              id(healthcheck_response_code).set_icon("mdi:web-cancel");
             } else {
               int code = atoi(x.c_str());
               if (code == 200) {
-                id(svitlobot_response_code).set_icon("mdi:web-check");
+                id(healthcheck_response_code).set_icon("mdi:web-check");
               } else if (code >= 400) {
-                id(svitlobot_response_code).set_icon("mdi:web-remove");
+                id(healthcheck_response_code).set_icon("mdi:web-remove");
               } else {
-                id(svitlobot_response_code).set_icon("mdi:web-clock");
+                id(healthcheck_response_code).set_icon("mdi:web-clock");
               }
             }

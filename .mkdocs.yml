@@ -81,6 +81,7 @@ nav:
   - Пристрої: svitlobot-devices.md
   - Альтернативні прошивки: alternative.md
   - Мапи: maps.md
+  - Моніторинг доступності (HealthCheck): healthcheck.md
   - Корисні посилання: additionals.md
   - Прошивка:
       - SvitloBot - ESP Web Tools: firmware.html

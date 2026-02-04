@@ -37,6 +37,11 @@ improv_serial:
 debug:
   update_interval: never
 
+script:
+  - id: site_ping
+    then:
+      - logger.log: "Pinging..."
+
 sensor:
   - platform: uptime
     name: "Uptime"
