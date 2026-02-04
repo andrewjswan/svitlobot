@@ -130,7 +130,7 @@ text_sensor:
     entity_category: diagnostic
     disabled_by_default: true
     web_server:
-      sorting_group_id: svitlobot_group
+      sorting_group_id: healthcheck_group
       sorting_weight: 10
     on_value:
       then:
