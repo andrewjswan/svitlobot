@@ -80,6 +80,7 @@ nav:
   - Головна: index.md
   - Пристрої: svitlobot-devices.md
   - Альтернативні прошивки: alternative.md
+  - Мапи: maps.md
   - Корисні посилання: additionals.md
   - Прошивка:
       - SvitloBot - ESP Web Tools: firmware.html
