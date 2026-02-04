@@ -4,4 +4,4 @@ substitutions:
 interval:
   - interval: 90s
     then:
-      - script.execute: svitlobot_ping
+      - script.execute: site_ping

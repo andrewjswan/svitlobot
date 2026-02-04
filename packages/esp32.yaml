@@ -11,7 +11,7 @@ external_components:
 
 shadow:
   id: svitlobot
-  script_id: svitlobot_ping
+  script_id: site_ping
   interval: 90
 
 sensor:
