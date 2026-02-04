@@ -5,10 +5,8 @@ esphome:
   devices:
     - id: svitlobot_device
       name: "SvitloBot"
-      area_id: entrance_area
     - id: healthcheck_device
       name: "HealthCheck"
-      area_id: kitchen_area
 
 text:
   - id: !extend svitlobot_key
@@ -27,10 +25,13 @@ binary_sensor:
 sensor:
   - id: !extend svitlobot_quality
     device_id: svitlobot_device
-  - id: !extend svitlobot_response_code
-    device_id: svitlobot_device
 
   - id: !extend healthcheck_quality
     device_id: healthcheck_device
+
+text_sensor:
+  - id: !extend svitlobot_response_code
+    device_id: svitlobot_device
+
   - id: !extend healthcheck_response_code
     device_id: healthcheck_device

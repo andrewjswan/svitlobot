@@ -34,6 +34,14 @@ captive_portal:
 
 improv_serial:
 
+debug:
+  update_interval: never
+
+script:
+  - id: site_ping
+    then:
+      - logger.log: "Pinging..."
+
 sensor:
   - platform: uptime
     name: "Uptime"
@@ -58,10 +66,18 @@ button:
     disabled_by_default: true
 
 text_sensor:
-  - platform: version
+  - platform: template
     name: ESPHome Version
-    hide_timestamp: true
+    icon: mdi:new-box
     entity_category: diagnostic
+    lambda: |-
+      return std::string(ESPHOME_VERSION);
+
+  - platform: debug
+    reset_reason:
+      name: "Reset Reason"
+      disabled_by_default: true
+      entity_category: diagnostic
 
   - platform: wifi_info
     ip_address:

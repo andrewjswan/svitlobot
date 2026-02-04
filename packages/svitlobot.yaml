@@ -1,6 +1,6 @@
 substitutions:
   project_name: "ajs.SvitloBot"
-  project_version: "3.5.31"
+  project_version: "3.5.35"
 
 http_request:
   useragent: "esphome/${name} (${project_version})"
@@ -8,7 +8,7 @@ http_request:
   timeout: 15s
 
 globals:
-  - id: send_quality
+  - id: svitlobot_send_quality
     type: int
     restore_value: no
     initial_value: '-1'
@@ -21,59 +21,64 @@ web_server:
       sorting_weight: 0
 
 script:
-  - id: send_state
+  - id: !extend site_ping
+    then:
+      - logger.log: "SvitloBot..."
+      - script.execute: svitlobot_ping
+      - script.wait: svitlobot_ping
+
+  - id: svitlobot_ping
     then:
       - if:
           condition:
             and:
               - wifi.connected:
-              - lambda: 'return id(my_key).has_state();'
+              - lambda: 'return id(svitlobot_key).has_state();'
           then:
-            - lambda: id(response_code).publish_state(0);
             - http_request.get:
                 url: !lambda |-
-                  return ((std::string) "https://api.svitlobot.in.ua/channelPing?channel_key=" + id(my_key).state).c_str();
+                  return ((std::string) "https://api.svitlobot.in.ua/channelPing?channel_key=" + id(svitlobot_key).state).c_str();
                 capture_response: false
                 on_response:
                   then:
-                    - lambda: id(set_state)->execute(response->status_code);
+                    - lambda: id(svitlobot_set_state)->execute(response->status_code);
                 on_error:
                   then:
                     - script.execute:
-                        id: set_state
+                        id: svitlobot_set_state
                         code: -1
-            - component.update: quality
-    mode: queued
+            - component.update: svitlobot_quality
+    mode: single
 
-  - id: set_state
+  - id: svitlobot_set_state
     parameters:
       code: int
     then:
       - lambda: |-
           if (code > 0) {
-            id(response_code).publish_state(code);
+            id(svitlobot_response_code).publish_state(std::to_string(code));
           } else {
             ESP_LOGE("SvitloBot", "Request failed!");
-            id(response_code).publish_state(NAN);
+            id(svitlobot_response_code).publish_state("---");
           }
 
           if (code == 200) {
             ESP_LOGD("SvitloBot", "Send status - success");
-            id(send_status).publish_state(true);
-            id(send_quality) = id(send_quality) < 0 ? 100 : std::min(100, ++id(send_quality));
+            id(svitlobot_status).publish_state(true);
+            id(svitlobot_send_quality) = id(svitlobot_send_quality) < 0 ? 100 : std::min(100, ++id(svitlobot_send_quality));
           } else {
             if (code > 0) {
               ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
             }
-            id(send_status).publish_state(false);
-            id(send_quality) = id(send_quality) < 0 ? 0 : std::max(0, --id(send_quality));
+            id(svitlobot_status).publish_state(false);
+            id(svitlobot_send_quality) = id(svitlobot_send_quality) < 0 ? 0 : std::max(0, --id(svitlobot_send_quality));
           }
     mode: single
 
 text:
   - platform: template
     name: "Key"
-    id: my_key
+    id: svitlobot_key
     optimistic: true
     min_length: 0
     max_length: 15
@@ -89,7 +94,7 @@ text:
 binary_sensor:
   - platform: template
     name: "Status"
-    id: send_status
+    id: svitlobot_status
     icon: mdi:lan-connect
     web_server:
       sorting_group_id: svitlobot_group
@@ -98,12 +103,12 @@ binary_sensor:
 sensor:
   - platform: template
     name: "Delivery Quality"
-    id: quality
+    id: svitlobot_quality
     lambda: |-
-      if (!id(my_key).has_state() || id(send_quality) < 0) {
+      if (!id(svitlobot_key).has_state() || id(svitlobot_send_quality) < 0) {
         return NAN;
       }
-      return id(send_quality);
+      return id(svitlobot_send_quality);
     accuracy_decimals: 0
     unit_of_measurement: "%"
     icon: mdi:wan
@@ -117,10 +122,10 @@ sensor:
         then:
           - button.press: Restart
 
+text_sensor:
   - platform: template
     name: "Response Code"
-    id: response_code
-    accuracy_decimals: 0
+    id: svitlobot_response_code
     icon: mdi:web
     entity_category: diagnostic
     disabled_by_default: true
@@ -130,14 +135,17 @@ sensor:
     on_value:
       then:
         - lambda: |-
-            if (std::isnan(x)) {
-              id(response_code).set_icon("mdi:web-cancel");
-            } else if (x == 0) {
-              id(response_code).set_icon("mdi:web-sync");
-            } else if (x == 200) {
-              id(response_code).set_icon("mdi:web-check");
-            } else if (x >= 400) {
-              id(response_code).set_icon("mdi:web-remove");
+            if (x.empty()) {
+              id(svitlobot_response_code).set_icon("mdi:web-sync");
+            } else if (x == "---") {
+              id(svitlobot_response_code).set_icon("mdi:web-cancel");
             } else {
-              id(response_code).set_icon("mdi:web-clock");
+              int code = atoi(x.c_str());
+              if (code == 200) {
+                id(svitlobot_response_code).set_icon("mdi:web-check");
+              } else if (code >= 400) {
+                id(svitlobot_response_code).set_icon("mdi:web-remove");
+              } else {
+                id(svitlobot_response_code).set_icon("mdi:web-clock");
+              }
             }
