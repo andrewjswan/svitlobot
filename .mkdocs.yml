@@ -1,0 +1,94 @@
+# Project information
+site_name: ESPHome SvitloBot | svitlobot.in.ua by Andrew J.Swan
+site_url: https://andrewjswan.github.io/svitlobot
+site_author: Andrew J.Swan
+site_description: >-
+  ESPHome firmware for SvitloBot | svitlobot.in.ua.
+
+# Repository
+repo_name: andrewjswan/svitlobot
+repo_url: https://github.com/andrewjswan/svitlobot
+remote_branch: documentation
+
+# Copyright
+copyright: Copyright &copy; Andrew J.Swan
+
+# Configuration
+theme:
+  name: material
+  favicon: img/favicon.png
+  icon:
+    logo: material/lightbulb-on-outline
+  features:
+    - navigation.tabs
+    - navigation.features
+    - navigation.path
+    - navigation.top
+    - toc.integrate
+    - search.suggest
+    - search.hightlight
+    - content.tabs.link
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+  language: en
+  font:
+    text: Roboto
+    code: Roboto Mono
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+      primary: indigo
+      accent: indigo
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+      primary: indigo
+      accent: indigo
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+      primary: indigo
+      accent: indigo
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.details
+  - pymdownx.superfences
+  - admonition
+  - attr_list
+  - codehilite
+  - md_in_html
+
+nav:
+  - Головна: index.md
+  - Пристрої: svitlobot-devices.md
+  - Альтернативні прошивки: alternative.md
+  - Мапи: maps.md
+  - Корисні посилання: additionals.md
+  - Прошивка:
+      - SvitloBot - ESP Web Tools: firmware.html
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/andrewjswan
+
+extra_css:
+  - stylesheets/table.css
