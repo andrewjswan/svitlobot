@@ -1,0 +1,24 @@
+substitutions:
+  device: "esp_all_in_one"
+  name: "all-in-one"
+  friendly_name: "Svitlo Bot (AIO)"
+
+esp32:
+  variant: esp32c6
+  framework:
+    type: esp-idf
+
+dashboard_import:
+  package_import_url: github://andrewjswan/svitlobot/all-in-one/aio_esp32с6.yaml@main
+
+packages:
+  remote_package:
+    url: https://github.com/andrewjswan/svitlobot
+    files:
+      - packages/common.yaml
+      - packages/svitlobot.yaml
+      - packages/healthcheck.yaml
+      - packages/sub_devices.yaml
+      - packages/esp32.yaml
+      - packages/http_ota.yaml
+    refresh: 1s
