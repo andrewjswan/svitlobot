@@ -47,4 +47,4 @@
 ![](img/screenshot/dark.jpg) |  ![](img/screenshot/light.jpg)
 
 !!! info "Скріншоти"
-    Приклад скріншотів для пристрою на базі [M5Stack Atom Lite](svitlobot-devices/#m5stack-atom-lite)
+    Приклад скріншотів для пристрою на базі [M5Stack Atom Lite](svitlobot-devices.md#m5stack-atom-lite)

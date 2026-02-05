@@ -75,6 +75,7 @@ markdown_extensions:
   - attr_list
   - codehilite
   - md_in_html
+  - sane_lists
 
 nav:
   - Головна: index.md
