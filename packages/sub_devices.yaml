@@ -25,8 +25,12 @@ binary_sensor:
 sensor:
   - id: !extend svitlobot_quality
     device_id: svitlobot_device
+  - id: !extend svitlobot_response_duration
+    device_id: svitlobot_device
 
   - id: !extend healthcheck_quality
+    device_id: healthcheck_device
+  - id: !extend healthcheck_response_duration
     device_id: healthcheck_device
 
 text_sensor:
