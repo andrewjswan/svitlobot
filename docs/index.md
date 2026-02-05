@@ -1,4 +1,4 @@
-# 💡 ESPHome SvitloBot
+# ESPHome SvitloBot
 
 [![esphome_badge](https://img.shields.io/static/v1?label=ESPHome&message=Config&color=blue&logo=esphome)](https://esphome.io/)
 [![svitlobot_badge](https://img.shields.io/badge/Svitlo-Bot-orange.svg)](https://svitlobot.in.ua/)
