@@ -1,4 +1,4 @@
-!!! example "ESP32 Based"
+!!! example "Варіанти прошивки"
     | Версія | Опис | Посилання |
     | :--- | :--- | :--- |
     | **SvitloBot** | Базова версія **(Рекомендовано)** | [SvitloBot - ESP Web Tools](/svitlobot/svitlobot-firmware.html) |
