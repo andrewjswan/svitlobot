@@ -1,4 +1,4 @@
-name: Build
+name: Build / Healthcheck
 
 on:
   push:
@@ -6,13 +6,11 @@ on:
       - main
     tags-ignore:
       - '**'
-    paths-ignore:
-      - 'devices/**'
+    paths:
       - 'healthcheck/**'
 
   pull_request:
-    paths-ignore:
-      - 'devices/**'
+    paths:
       - 'healthcheck/**'
 
   workflow_call:
@@ -40,9 +38,12 @@ jobs:
     name: Build configuration list
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - id: set-matrix
+      - name: Checkout source code
+        uses: actions/checkout@v6
+      - name: Get Healthcheck matrix
+        id: set-matrix
         run: echo "matrix=$(ls *.yaml | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+        working-directory: healthcheck
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
 
@@ -72,6 +73,8 @@ jobs:
       matrix:
         config-file: ${{ fromJson(needs.configuration.outputs.matrix) }}
       fail-fast: false
+    outputs:
+      original-name: ${{ steps.esphome-build.outputs.original-name }}
     steps:
       - name: Checkout source code
         uses: actions/checkout@v6
@@ -79,7 +82,7 @@ jobs:
         uses: esphome/build-action@v7
         id: esphome-build
         with:
-          yaml-file: ${{ matrix.config-file }}
+          yaml-file: healthcheck/${{ matrix.config-file }}
           version: latest
           complete-manifest: true
           release-summary: ${{ inputs.release-summary }}
@@ -91,7 +94,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v6
         with:
-          name: ${{ format('SvitloBot-{0}', steps.esphome-build.outputs.name) }}
+          name: ${{ format('HealthCheck-{0}', steps.esphome-build.outputs.name) }}
           path: output
 
   combine:
@@ -105,7 +108,7 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           path: files
-          pattern: SvitloBot-*
+          pattern: HealthCheck-*
 
       - name: Get artifact names
         id: artifacts
@@ -133,12 +136,12 @@ jobs:
             popd
           done
           popd
-          jq -s '(.[0] | del(.builds)) + {"builds": (reduce .[].builds as $b ([]; . + $b))}' files/*/$version/manifest.json > output/$version/manifest.json
+          jq -s '(.[0] | del(.builds)) + {"builds": (reduce .[].builds as $b ([]; . + $b))}' files/*/$version/manifest.json > output/$version/healthcheck-manifest.json
 
       - name: Upload artifact
         uses: actions/upload-artifact@v6
         with:
-          name: SvitloBot
+          name: HealthCheck
           path: output
 
   ci-status:
