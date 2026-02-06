@@ -8,10 +8,12 @@ on:
       - '**'
     paths-ignore:
       - 'devices/**'
+      - 'all-in-one/**'
 
   pull_request:
     paths-ignore:
       - 'devices/**'
+      - 'all-in-one/**'
 
   workflow_call:
     inputs:
