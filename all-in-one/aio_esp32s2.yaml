@@ -20,5 +20,5 @@ packages:
       - packages/healthcheck.yaml
       - packages/sub_devices.yaml
       - packages/esp32.yaml
-      - packages/http_ota.yaml
+      - packages/http_ota_all_in_one.yaml
     refresh: 1s
