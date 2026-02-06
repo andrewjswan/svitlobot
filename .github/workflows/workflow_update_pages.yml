@@ -11,16 +11,18 @@ permissions:
 
 jobs:
   prepare:
-    name: Prepare Release
+    name: Latest Release
     runs-on: ubuntu-latest
     outputs:
       name: ${{ steps.current_release.outputs.name }}
       version: ${{ steps.current_release.outputs.tag_name }}
       url: ${{ steps.current_release.outputs.html_url }}
     steps:
-      - name: Get Current Release
+      - name: Get Latest Release
         id: current_release
         uses: joutvhu/get-release@v1
+        with:
+          latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
