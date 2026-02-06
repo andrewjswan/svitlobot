@@ -42,6 +42,15 @@ jobs:
       release-summary: ${{ needs.prepare.outputs.name }}
       release-url: ${{ needs.prepare.outputs.url }}
 
+  build-healthcheck:
+    name: Build / HealthCheck
+    needs:
+      - prepare
+    uses: ./.github/workflows/build_healthcheck.yaml
+    with:
+      release-summary: ${{ needs.prepare.outputs.name }}
+      release-url: ${{ needs.prepare.outputs.url }}
+
   cleanup:
     name: GitHub Pages / Delete deployment
     runs-on: ubuntu-latest
@@ -49,6 +58,7 @@ jobs:
     needs:
       - build
       - build-devices
+      - build-healthcheck
 
     steps:
       - name: Delete deployment
@@ -102,6 +112,12 @@ jobs:
           path: release-devices-files
           merge-multiple: true
 
+      - name: 📦 Download HealthCheck Artifacts
+        uses: actions/download-artifact@v7
+        with:
+          name: HealthCheck
+          path: release-healthcheck-files
+
       - name: 💅 Copy SvitloBot Artifacts files
         run: |
           cp -R release-files/*/* site/
@@ -111,13 +127,23 @@ jobs:
           mkdir site/devices
           cp -R release-devices-files/* site/devices/
 
+      - name: 💅 Copy HealthCheck Artifacts files
+        run: |
+          mkdir site/devices
+          cp -R release-healthcheck-files/* site/
+
       - name: 💅 Copy website files
         run: cp -R static/* site/
 
-      - name: 👀 Check output
+      - name: 👀 Check Artifacts
         run: |
           ls -l
         working-directory: site
+
+      - name: 👀 Check Device Artifacts
+        run: |
+          ls -l
+        working-directory: site/devices
 
       - name: 🎭 Setup Pages
         uses: actions/configure-pages@v5
