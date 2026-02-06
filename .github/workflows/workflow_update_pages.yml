@@ -130,7 +130,7 @@ jobs:
       - name: 💅 Copy HealthCheck Artifacts files
         run: |
           mkdir site/devices
-          cp -R release-healthcheck-files/* site/
+          cp -R release-healthcheck-files/*/* site/
 
       - name: 💅 Copy website files
         run: cp -R static/* site/
