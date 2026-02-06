@@ -141,7 +141,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v6
         with:
-          name: SvitloBot
+          name: HealthCheck
           path: output
 
   ci-status:
