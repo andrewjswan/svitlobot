@@ -81,17 +81,3 @@ jobs:
         with:
           name: ${{ format('Devices-{0}', steps.esphome-build.outputs.name) }}
           path: output
-
-  ci-status:
-    name: Status
-    runs-on: ubuntu-latest
-    needs:
-      - build
-    if: always()
-    steps:
-      - name: Success
-        if: ${{ !(contains(needs.*.result, 'failure')) }}
-        run: exit 0
-      - name: Failure
-        if: ${{ contains(needs.*.result, 'failure') }}
-        run: exit 1
