@@ -18,5 +18,5 @@ packages:
       - packages/common.yaml
       - packages/healthcheck.yaml
       - packages/esp32.yaml
-      - packages/http_ota.yaml
+      - packages/http_ota_healthcheck.yaml
     refresh: 1s
