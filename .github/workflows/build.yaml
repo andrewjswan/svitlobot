@@ -8,10 +8,12 @@ on:
       - '**'
     paths-ignore:
       - 'devices/**'
+      - 'healthcheck/**'
 
   pull_request:
     paths-ignore:
       - 'devices/**'
+      - 'healthcheck/**'
 
   workflow_call:
     inputs:
