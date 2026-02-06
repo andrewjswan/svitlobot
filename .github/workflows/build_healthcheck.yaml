@@ -47,15 +47,34 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
 
+  prepare:
+    name: Prepare
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Generate version
+        id: version
+        run: |
+          if [ -n "${{ inputs.release-version }}" ]; then
+            version=${{ inputs.release-version }}
+          else
+            version=dev-$(date +'%Y%m%d-%H%M')
+          fi
+          echo version=$version >> $GITHUB_OUTPUT
+
   build:
     name: Build ${{ matrix.config-file }}
     needs:
       - configuration
+      - prepare
     runs-on: ubuntu-latest
     strategy:
       matrix:
         config-file: ${{ fromJson(needs.configuration.outputs.matrix) }}
       fail-fast: false
+    outputs:
+      original-name: ${{ steps.esphome-build.outputs.original-name }}
     steps:
       - name: Checkout source code
         uses: actions/checkout@v6
@@ -70,16 +89,59 @@ jobs:
           release-url: ${{ inputs.release-url }}
       - name: Move files for versioning
         run: |
-          mkdir -p output
-          mv ${{ steps.esphome-build.outputs.name }}/* output/
-      - name: Rename manifest
-        run: |
-          mv manifest.json ${{ steps.esphome-build.outputs.original-name }}-manifest.json
-        working-directory: output
+          mkdir -p output/${{ needs.prepare.outputs.version }}
+          mv ${{ steps.esphome-build.outputs.name }}/* output/${{ needs.prepare.outputs.version }}/
       - name: Upload artifact
         uses: actions/upload-artifact@v6
         with:
-          name: ${{ format('Healthcheck-{0}', steps.esphome-build.outputs.name) }}
+          name: ${{ format('HealthCheck-{0}', steps.esphome-build.outputs.name) }}
+          path: output
+
+  combine:
+    name: Combine manifests
+    needs:
+      - prepare
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v7
+        with:
+          path: files
+          pattern: HealthCheck-*
+
+      - name: Get artifact names
+        id: artifacts
+        run: |
+          artifacts=$(ls --format=single-column files)
+          echo "artifacts<<EOF" >> $GITHUB_OUTPUT
+          echo "$artifacts" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Delete artifacts
+        uses: geekyeggo/delete-artifact@v5.0.0
+        with:
+          name: ${{ steps.artifacts.outputs.artifacts }}
+
+      - name: Combine all parts into a single manifest
+        run: |
+          version="${{ needs.prepare.outputs.version }}"
+          mkdir -p "output/$version"
+          pushd files
+          for device in *; do
+            pushd $device
+            pushd $version
+            cp * "../../../output/$version/"
+            popd
+            popd
+          done
+          popd
+          jq -s '(.[0] | del(.builds)) + {"builds": (reduce .[].builds as $b ([]; . + $b))}' files/*/$version/manifest.json > output/$version/healthcheck-manifest.json
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: SvitloBot
           path: output
 
   ci-status:
