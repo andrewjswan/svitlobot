@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ESP Web Tools - All-In-One (SvitloBot | HealthCheck)</title>
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <meta charset="utf-8" />
+  <meta name="description" content="Easily allow users to install All-In-One (SvitloBot | HealthCheck) firmware on the WEB." />
+  <meta name="copyright" content="Copyright (c) Andrew J.Swan">
+  <meta itemprop="name" content="ESP Web Tools - HealthCheck" />
+  <meta itemprop="description" content="Easily allow users to install All-In-One (SvitloBot | HealthCheck) firmware on the WEB." />
+  <meta itemprop="image" content="logo.png" />
+  <meta name="twitter:title" content="Easily allow users to install All-In-One (SvitloBot | HealthCheck) firmware on the WEB." />
+  <meta name="twitter:image:src" content="logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:description" content="Easily allow users to install All-In-One (SvitloBot | HealthCheck) firmware on the WEB." />
+  <meta property="og:title" content="ESP Web Tools - All-In-One (SvitloBot | HealthCheck)" />
+  <meta property="og:image" content="logo.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="Easily allow users to install All-In-One (SvitloBot | HealthCheck) firmware on the WEB." />
+  <meta property="og:site_name" content="ESP Web Tools - All-In-One (SvitloBot | HealthCheck)" />
+  <meta name="apple-mobile-web-app-title" content="ESP Web Tools - All-In-One (SvitloBot | HealthCheck)" />
+  <meta name="application-name" content="ESP Web Tools - All-In-One (SvitloBot | HealthCheck)" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <style>
+    body {
+      font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Ubuntu, sans-serif;
+      padding: 0;
+      margin: 0;
+      line-height: 1.4;
+      --esp-tools-button-border-radius: 5px;
+    }
+    .content {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 12px;
+    }
+    h2 {
+      margin-top: 2em;
+    }
+    h3 {
+      margin-top: 1.5em;
+    }
+    ol {
+      margin-left: 20px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    a {
+      color: #03a9f4;
+    }
+    .invisible {
+      visibility: hidden;
+    }
+    .hidden {
+      display: none;
+    }
+    esp-web-install-button[install-unsupported] {
+      visibility: inherit;
+    }
+    .content pre {
+      max-width: 100%;
+      overflow-y: scroll;
+    }
+    .footer {
+      margin-top: 24px;
+      border-top: 1px solid #ccc;
+      padding-top: 24px;
+    }
+    .footer .initiative {
+      font-style: italic;
+      margin-top: 16px;
+    }
+    table {
+      border-spacing: 0;
+    }
+    td {
+      padding: 8px;
+      border-bottom: 1px solid #ccc;
+    }
+    .radios {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .radios label {
+      padding: 4px;
+      cursor: pointer;
+      width: calc(33.3% - 16px);
+      display: block;
+      position: relative;
+    }
+    .radios input {
+      position: absolute;
+      top: 15px;
+      left: 12px;
+    }
+    .radios img {
+      display: block;
+      width: calc(100% - 20px);
+      border: 4px solid rgba(0, 0, 0, 0);
+      border-radius: 15px;
+      aspect-ratio: 1;
+    }
+    .radios input:checked + img {
+      border-color: #58a6ff;
+    }
+    .button-row {
+      margin: 10px 10px 10px 5px;
+    }
+    @media only screen and (max-width: 450px) {
+      .radios label {
+        width: calc(50% - 16px);
+        max-width: initial;
+      }
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #333;
+        color: #fff;
+      }
+      a {
+        color: #58a6ff;
+      }
+    }
+  </style>
+  <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+  <div class="content">
+    <h1>ESP Web Tools</h1>
+    <p>
+      User friendly tools to manage ESP8266 and ESP32 devices in the browser:
+    </p>
+    <ul>
+      <li>Install &amp; update firmware</li>
+      <li>Connect device to the Wi-Fi network</li>
+      <li>Visit the device's hosted web interface</li>
+      <li>Access logs and send terminal commands</li>
+      <li>Add devices to <a href="https://www.home-assistant.io">Home Assistant</a></li>
+    </ul>
+
+    <div><a href="https://esphome.io/guides/made_for_esphome.html" target="_blank" rel="noreferrer"><img src="made-for-esphome.svg" width="300px" alt="Made for ESPHome Logo"></a></div>
+
+    <h1>Install All-In-One (SvitloBot | HealthCheck) <span id="version"></span></h1>
+
+    <div class="radios">
+      <label>
+        <input
+          type="radio"
+          name="all-in-one-device"
+          class="device"
+          value=""
+          checked
+        />
+        <img src="espressif.png" alt="ESP8266/ESP32" />
+      </label>
+    </div>
+
+    <p class="button-row">
+      <esp-web-install-button manifest="manifest.json"></esp-web-install-button>
+    </p>
+    <div class="footer">
+      <a href="https://github.com/andrewjswan/svitlobot">All-In-One (SvitloBot | HealthCheck)</a> &mdash;
+         Installer powered by <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a>.
+    </div>
+  </div>
+  <script>
+    $( document ).ready(function() {
+      var url = "https://andrewjswan.github.io/svitlobot/all-in-one-manifest.json";
+        $.getJSON( url, {
+        format: "json"
+    	})
+      .done(function( data ) {
+         $("#version").text(data.version);
+      });
+    });
+  </script>
+  <script>
+    // Handle selecting a device
+    document.querySelectorAll("input.device").forEach((radio) =>
+      radio.addEventListener("change", () => {
+        const button = document.querySelector('esp-web-install-button');
+        let device = radio.value;
+        if (device) {
+          device = `devices/${device}-`;
+        }
+        button.manifest = `${device}all-in-one-manifest.json`;
+      })
+    );
+  </script>
+</body>
+</html>
