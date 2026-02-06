@@ -11,16 +11,18 @@ permissions:
 
 jobs:
   prepare:
-    name: Prepare Release
+    name: Latest Release
     runs-on: ubuntu-latest
     outputs:
       name: ${{ steps.current_release.outputs.name }}
       version: ${{ steps.current_release.outputs.tag_name }}
       url: ${{ steps.current_release.outputs.html_url }}
     steps:
-      - name: Get Current Release
+      - name: Get Latest Release
         id: current_release
         uses: joutvhu/get-release@v1
+        with:
+          latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -42,6 +44,24 @@ jobs:
       release-summary: ${{ needs.prepare.outputs.name }}
       release-url: ${{ needs.prepare.outputs.url }}
 
+  build-healthcheck:
+    name: Build / HealthCheck
+    needs:
+      - prepare
+    uses: ./.github/workflows/build_healthcheck.yaml
+    with:
+      release-summary: ${{ needs.prepare.outputs.name }}
+      release-url: ${{ needs.prepare.outputs.url }}
+
+  build-all-in-one:
+    name: Build / All-In-One
+    needs:
+      - prepare
+    uses: ./.github/workflows/build_all_in_one.yaml
+    with:
+      release-summary: ${{ needs.prepare.outputs.name }}
+      release-url: ${{ needs.prepare.outputs.url }}
+
   cleanup:
     name: GitHub Pages / Delete deployment
     runs-on: ubuntu-latest
@@ -49,6 +69,8 @@ jobs:
     needs:
       - build
       - build-devices
+      - build-healthcheck
+      - build-all-in-one
 
     steps:
       - name: Delete deployment
@@ -102,6 +124,18 @@ jobs:
           path: release-devices-files
           merge-multiple: true
 
+      - name: 📦 Download HealthCheck Artifacts
+        uses: actions/download-artifact@v7
+        with:
+          name: HealthCheck
+          path: release-healthcheck-files
+
+      - name: 📦 Download All-In-One Artifacts
+        uses: actions/download-artifact@v7
+        with:
+          name: All-In-One
+          path: release-all-in-one-files
+
       - name: 💅 Copy SvitloBot Artifacts files
         run: |
           cp -R release-files/*/* site/
@@ -111,13 +145,26 @@ jobs:
           mkdir site/devices
           cp -R release-devices-files/* site/devices/
 
+      - name: 💅 Copy HealthCheck Artifacts files
+        run: |
+          cp -R release-healthcheck-files/*/* site/
+
+      - name: 💅 Copy All-In-One Artifacts files
+        run: |
+          cp -R release-all-in-one-files/*/* site/
+
       - name: 💅 Copy website files
         run: cp -R static/* site/
 
-      - name: 👀 Check output
+      - name: 👀 Check Artifacts
         run: |
           ls -l
         working-directory: site
+
+      - name: 👀 Check Device Artifacts
+        run: |
+          ls -l
+        working-directory: site/devices
 
       - name: 🎭 Setup Pages
         uses: actions/configure-pages@v5
