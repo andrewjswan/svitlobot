@@ -84,8 +84,7 @@ nav:
   - Мапи: maps.md
   - Моніторинг доступності (HealthCheck): healthcheck.md
   - Корисні посилання: additionals.md
-  - Прошивка:
-      - SvitloBot - ESP Web Tools: firmware.html
+  - Прошивка: firmware.md
 
 extra:
   social:
