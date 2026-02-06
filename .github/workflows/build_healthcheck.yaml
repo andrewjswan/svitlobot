@@ -148,7 +148,7 @@ jobs:
     name: Status
     runs-on: ubuntu-latest
     needs:
-      - build
+      - combine
     if: always()
     steps:
       - name: Success
