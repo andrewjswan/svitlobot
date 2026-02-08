@@ -147,10 +147,12 @@ jobs:
 
       - name: 💅 Copy HealthCheck Artifacts files
         run: |
+          find . -name "manifest.json" -type f -delete
           cp -R release-healthcheck-files/*/* site/
 
       - name: 💅 Copy All-In-One Artifacts files
         run: |
+          find . -name "manifest.json" -type f -delete
           cp -R release-all-in-one-files/*/* site/
 
       - name: 💅 Copy website files
