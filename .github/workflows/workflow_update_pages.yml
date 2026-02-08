@@ -168,7 +168,7 @@ jobs:
 
       - name: 👀 Check Artifacts
         run: |
-          ls -l
+          ls -lR
         working-directory: release-all-in-one-files
 
       - name: 🎭 Setup Pages
