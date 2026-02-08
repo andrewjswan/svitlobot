@@ -166,6 +166,11 @@ jobs:
           ls -l
         working-directory: site/devices
 
+      - name: 👀 Check Artifacts
+        run: |
+          ls -l
+        working-directory: release-all-in-one-files
+
       - name: 🎭 Setup Pages
         uses: actions/configure-pages@v5
 
