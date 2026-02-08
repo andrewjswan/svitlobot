@@ -15,7 +15,7 @@ update:
   - platform: http_request
     id: new_firmware
     name: "Firmware Update"
-    source: https://andrewjswan.github.io/svitlobot/manifest.json
+    source: https://andrewjswan.github.io/svitlobot/svitlobot-manifest.json
     icon: mdi:update
     web_server:
       sorting_weight: 15
