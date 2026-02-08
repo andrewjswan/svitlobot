@@ -135,7 +135,7 @@ jobs:
             popd
           done
           popd
-          jq -s '(.[0] | del(.builds)) + {"builds": (reduce .[].builds as $b ([]; . + $b))}' files/*/$version/manifest.json > output/$version/manifest.json
+          jq -s '(.[0] | del(.builds)) + {"builds": (reduce .[].builds as $b ([]; . + $b))}' files/*/$version/manifest.json > output/$version/svitlobot-manifest.json
 
       - name: Upload artifact
         uses: actions/upload-artifact@v6

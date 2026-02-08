@@ -147,12 +147,10 @@ jobs:
 
       - name: 💅 Copy HealthCheck Artifacts files
         run: |
-          find . -name "manifest.json" -type f -delete
           cp -R release-healthcheck-files/*/* site/
 
       - name: 💅 Copy All-In-One Artifacts files
         run: |
-          find . -name "manifest.json" -type f -delete
           cp -R release-all-in-one-files/*/* site/
 
       - name: 💅 Copy website files
@@ -167,11 +165,6 @@ jobs:
         run: |
           ls -l
         working-directory: site/devices
-
-      - name: 👀 Check Artifacts
-        run: |
-          ls -lR
-        working-directory: release-all-in-one-files
 
       - name: 🎭 Setup Pages
         uses: actions/configure-pages@v5
