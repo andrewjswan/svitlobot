@@ -89,7 +89,7 @@ text:
     id: healthcheck_key
     optimistic: true
     min_length: 0
-    max_length: 15
+    max_length: 36
     mode: text
     restore_value: true
     icon: mdi:key-chain-variant
