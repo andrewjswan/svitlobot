@@ -93,3 +93,6 @@ extra:
 
 extra_css:
   - stylesheets/table.css
+
+plugins:
+  - mkdocs-video
