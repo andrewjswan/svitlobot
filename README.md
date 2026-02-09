@@ -37,7 +37,7 @@
 
 Встановити прошивку можна двома способами:
 
-1.  **Web Installer (Рекомендовано):** Скористайтеся [**SvitloBot - ESP Web Tools**](https://andrewjswan.github.io/svitlobot/firmware.html). Це найпростіший шлях — просто підключіть `ESP` до `USB` та натисніть `Connect` у браузері.
+1.  **Web Installer (Рекомендовано):** Скористайтеся [**SvitloBot - ESP Web Tools**](https://andrewjswan.github.io/svitlobot/firmware/). Це найпростіший шлях — просто підключіть `ESP` до `USB` та натисніть `Connect` у браузері.
 2.  **ESPHome:** Використовуйте готові `.yaml` конфігурації з цього репозиторію для самостійної збірки.
 
 > [!TIP]
