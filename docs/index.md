@@ -75,7 +75,7 @@
 
 ### Відео інструкція
 
-[type:video](https://www.youtube.com/embed/qwtNtQ2xhjc)
+![type:video](https://www.youtube.com/embed/qwtNtQ2xhjc)
 
 ## 🖼️ Скріншоти
 
