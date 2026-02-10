@@ -146,7 +146,7 @@ jobs:
       - name: 📦 Download Custom URL Artifacts
         uses: actions/download-artifact@v7
         with:
-          name: HealthCheck
+          name: CustomURL
           path: release-custom-url-files
 
       - name: 📦 Download All-In-One Artifacts
