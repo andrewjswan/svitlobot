@@ -12,6 +12,7 @@
 
 !!! example "Конфігурація"
     * [Файл конфігурації](https://github.com/andrewjswan/svitlobot/tree/main/devices/atom-svitlobot.yaml)
+    * [Прошивка](/svitlobot/svitlobot-firmware.html)
 
 <div style="clear: both;"></div>
 
@@ -29,6 +30,7 @@
 
 !!! example "Конфігурація"
     * [Файл конфігурації](https://github.com/andrewjswan/svitlobot/tree/main/devices/zero-svitlobot.yaml)
+    * [Прошивка](/svitlobot/svitlobot-firmware.html)
 
 <div style="clear: both;"></div>
 
@@ -47,6 +49,7 @@
 
 !!! example "Конфігурація"
     * [Файл конфігурації](https://github.com/andrewjswan/svitlobot/tree/main/devices/s3-geek-svitlobot.yaml)
+    * [Прошивка](/svitlobot/svitlobot-firmware.html)
 
 <div style="clear: both;"></div>
 
