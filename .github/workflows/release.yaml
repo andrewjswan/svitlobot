@@ -47,6 +47,12 @@ jobs:
           name: HealthCheck
           path: release-healthcheck-files
 
+      - name: Download Custom URL Artifacts
+        uses: actions/download-artifact@v7
+        with:
+          name: CustomURL
+          path: release-custom-url-files
+
       - name: Download All-In-One Artifacts
         uses: actions/download-artifact@v7
         with:
@@ -68,6 +74,11 @@ jobs:
           ls -l
         working-directory: release-healthcheck-files
 
+      - name: Check Custom URL artifacts
+        run: |
+          ls -l
+        working-directory: release-custom-url-files
+
       - name: Check All-In-One artifacts
         run: |
           ls -l
@@ -80,5 +91,6 @@ jobs:
             release-files/*/*.factory.bin
             release-devices-files/*.factory.bin
             release-healthcheck-files/*.factory.bin
+            release-custom-url-files/*.factory.bin
             release-all-in-one-files/*.factory.bin
           discussion_category_name: Announcements
