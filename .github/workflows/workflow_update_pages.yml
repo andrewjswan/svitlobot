@@ -108,6 +108,9 @@ jobs:
       - name: 📦 Install mkDocs
         run: pip install mkdocs-material
 
+      - name: 📦 Install mkDocs Plug-ins
+        run: pip install mkdocs-video
+
       - name: 💅 Build the docs site
         run: mkdocs build --config-file .mkdocs.yml
 
