@@ -91,7 +91,7 @@ jobs:
           files: |
             release-files/*/*.factory.bin
             release-devices-files/*.factory.bin
-            release-healthcheck-files/*.factory.bin
-            release-custom-url-files/*.factory.bin
-            release-all-in-one-files/*.factory.bin
+            release-healthcheck-files/*/*.factory.bin
+            release-custom-url-files/*/*.factory.bin
+            release-all-in-one-files/*/*.factory.bin
           discussion_category_name: Announcements
