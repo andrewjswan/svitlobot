@@ -111,7 +111,7 @@ sensor:
     name: "Delivery Quality"
     id: custom_url_quality
     lambda: |-
-      if (!id(custom_url_key).has_state() || id(custom_url_send_quality) < 0) {
+      if (!id(custom_url).has_state() || id(custom_url_send_quality) < 0) {
         return NAN;
       }
       return id(custom_url_send_quality);
