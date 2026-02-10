@@ -1,0 +1,22 @@
+substitutions:
+  device: "esp_custom_url"
+  name: "custom_url"
+  friendly_name: "Health Check"
+
+esp32:
+  variant: esp32c6
+  framework:
+    type: esp-idf
+
+dashboard_import:
+  package_import_url: github://andrewjswan/svitlobot/custom_url/custom_url_esp32c6.yaml@main
+
+packages:
+  remote_package:
+    url: https://github.com/andrewjswan/svitlobot
+    files:
+      - packages/common.yaml
+      - packages/custom_url.yaml
+      - packages/esp32.yaml
+      - packages/http_ota_custom_url.yaml
+    refresh: 1s
