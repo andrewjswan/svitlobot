@@ -16,6 +16,7 @@ jobs:
   build-and-deploy:
     name: Build and Deploy
     uses: ./.github/workflows/workflow_update_pages.yml
+    permissions: write-all
 
   release:
     name: Release
