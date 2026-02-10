@@ -22,6 +22,9 @@ svitlobot:
 healthcheck:
   - '/(\s|^)(healthcheck)(:|\s|$)/i'
 
+custom_url:
+  - '/(\s|^)(custom(-|\s|_)url)(:|\s|$)/i'
+
 all-in-one:
   - '/(\s|^)(all-in-one|aio)(:|\s|$)/i'
 
