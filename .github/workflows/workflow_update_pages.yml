@@ -53,6 +53,15 @@ jobs:
       release-summary: ${{ needs.prepare.outputs.name }}
       release-url: ${{ needs.prepare.outputs.url }}
 
+  build-custom-url:
+    name: Build / Custom URL
+    needs:
+      - prepare
+    uses: ./.github/workflows/build_custom_url.yaml
+    with:
+      release-summary: ${{ needs.prepare.outputs.name }}
+      release-url: ${{ needs.prepare.outputs.url }}
+
   build-all-in-one:
     name: Build / All-In-One
     needs:
@@ -70,6 +79,7 @@ jobs:
       - build
       - build-devices
       - build-healthcheck
+      - build-custom-url
       - build-all-in-one
 
     steps:
@@ -133,6 +143,12 @@ jobs:
           name: HealthCheck
           path: release-healthcheck-files
 
+      - name: 📦 Download Custom URL Artifacts
+        uses: actions/download-artifact@v7
+        with:
+          name: HealthCheck
+          path: release-custom-url-files
+
       - name: 📦 Download All-In-One Artifacts
         uses: actions/download-artifact@v7
         with:
@@ -151,6 +167,10 @@ jobs:
       - name: 💅 Copy HealthCheck Artifacts files
         run: |
           cp -R release-healthcheck-files/*/* site/
+
+      - name: 💅 Copy Custom URL Artifacts files
+        run: |
+          cp -R release-custom-url-files/*/* site/
 
       - name: 💅 Copy All-In-One Artifacts files
         run: |
