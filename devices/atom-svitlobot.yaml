@@ -241,6 +241,10 @@ sensor:
         then:
           - button.press: Restart
 
+  - platform: uptime
+    name: "Uptime"
+    entity_category: diagnostic
+
   - platform: wifi_signal
     name: "WiFi Signal"
     entity_category: diagnostic
