@@ -48,6 +48,8 @@
 !!! example "Конфігурація"
     * [Файл конфігурації](https://github.com/andrewjswan/svitlobot/tree/main/devices/s3-geek-svitlobot.yaml)
 
+<div style="clear: both;"></div>
+
 | Потрібно ввести ключ               | Світло є, статус передано            | Помилка передачі статусу             | Годинник                             |
 :-----------------------------------:|:------------------------------------:|:------------------------------------:|:------------------------------------:|
 ![](img/devices/esp32-s3-geek-1.jpg) | ![](img/devices/esp32-s3-geek-2.jpg) | ![](img/devices/esp32-s3-geek-3.jpg) | ![](img/devices/esp32-s3-geek-4.jpg) |
