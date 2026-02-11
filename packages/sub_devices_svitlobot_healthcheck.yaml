@@ -1,0 +1,41 @@
+substitutions:
+  project_name: "ajs.SvitloBot|HealthCheck"
+
+esphome:
+  devices:
+    - id: svitlobot_device
+      name: "SvitloBot"
+    - id: healthcheck_device
+      name: "HealthCheck"
+
+text:
+  - id: !extend svitlobot_key
+    device_id: svitlobot_device
+
+  - id: !extend healthcheck_key
+    device_id: healthcheck_device
+
+binary_sensor:
+  - id: !extend svitlobot_status
+    device_id: svitlobot_device
+
+  - id: !extend healthcheck_status
+    device_id: healthcheck_device
+
+sensor:
+  - id: !extend svitlobot_quality
+    device_id: svitlobot_device
+  - id: !extend svitlobot_response_duration
+    device_id: svitlobot_device
+
+  - id: !extend healthcheck_quality
+    device_id: healthcheck_device
+  - id: !extend healthcheck_response_duration
+    device_id: healthcheck_device
+
+text_sensor:
+  - id: !extend svitlobot_response_code
+    device_id: svitlobot_device
+
+  - id: !extend healthcheck_response_code
+    device_id: healthcheck_device
