@@ -1,0 +1,67 @@
+name: Build / Tests
+
+on:
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - '**'
+
+  pull_request:
+
+  workflow_dispatch:
+
+jobs:
+  configuration:
+    name: Build configuration list
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v6
+      - name: Get Tests matrix
+        id: set-matrix
+        run: echo "matrix=$(ls *.yaml | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+        working-directory: tests
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+
+  build:
+    name: Tests ${{ matrix.config-file }}
+    needs:
+      - configuration
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        config-file: ${{ fromJson(needs.configuration.outputs.matrix) }}
+      fail-fast: false
+    outputs:
+      original-name: ${{ steps.esphome-build.outputs.original-name }}
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v6
+      - name: Build firmware
+        uses: esphome/build-action@v7
+        id: esphome-build
+        with:
+          yaml-file: tests/${{ matrix.config-file }}
+          version: latest
+
+  build-dev:
+    name: Test (DEV) ${{ matrix.config-file }}
+    needs: configuration
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        config-file: ${{ fromJson(needs.configuration.outputs.matrix) }}
+      fail-fast: false
+    outputs:
+      original-name: ${{ steps.esphome-build.outputs.original-name }}
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v6
+      - name: Build firmware
+        uses: esphome/build-action@v7
+        id: esphome-build
+        with:
+          yaml-file: tests/${{ matrix.config-file }}
+          version: dev
