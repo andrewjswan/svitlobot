@@ -148,7 +148,7 @@
     
     ``` { .json .copy .annotate }
     {
-    "chat_id": "1330182460",
+    "chat_id": "-888888888",
     "text": "🔴 <b>Світло зникло</b>",
     "parse_mode": "HTML"
     }
