@@ -1,5 +1,5 @@
 substitutions:
-  lets_ping: "id(ping_packet_loss).state == 100"
+  lets_ping: "id(ping_host).has_state() && id(ping_packet_loss).state < 100"
 
 external_components:
   - source:
