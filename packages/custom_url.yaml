@@ -85,7 +85,7 @@ script:
 
 text:
   - platform: template
-    name: "Key"
+    name: "Custom URL"
     id: custom_url
     optimistic: true
     mode: text
