@@ -5,3 +5,6 @@
     | **HealthСheck** | Моніторинг зв'язку | [HealthСheck - ESP Web Tools](/svitlobot/healthcheck-firmware.html) |
     | **Custom URL** | Індивідуальний моніторинг  | [Custom URL - ESP Web Tools](/svitlobot/custom-url-firmware.html) |
     | **All-in-One** | Комбінована прошивка | [All-in-One - ESP Web Tools](/svitlobot/all-in-one-firmware.html) |
+
+!!! note "Опис прошивок"
+    [**🛠 Варіанти прошивки**](index.md#_6)
