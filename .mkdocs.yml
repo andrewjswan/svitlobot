@@ -76,6 +76,10 @@ markdown_extensions:
   - codehilite
   - md_in_html
   - sane_lists
+  - toc:
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
 
 nav:
   - Головна: index.md
