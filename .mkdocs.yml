@@ -20,17 +20,18 @@ theme:
   icon:
     logo: material/lightbulb-on-outline
   features:
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+    - content.tabs.link
+    - content.tooltips
     - navigation.tabs
     - navigation.features
     - navigation.path
     - navigation.top
-    - toc.integrate
     - search.suggest
     - search.hightlight
-    - content.tabs.link
-    - content.code.annotate
-    - content.code.copy
-    - content.code.select
+    - toc.integrate
   language: en
   font:
     text: Roboto
