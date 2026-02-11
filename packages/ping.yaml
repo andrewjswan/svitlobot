@@ -1,0 +1,19 @@
+external_components:
+  - source:
+      type: git
+      url: https://github.com/trombik/esphome-component-ping
+      ref: main
+    components: [ping]
+    refresh: 60s
+
+sensor:
+  - platform: ping
+    ip_address: 8.8.8.8
+    num_attempts: 3
+    timeout: 1sec
+    loss:
+      name: Packet loss
+    latency:
+      name: Latency
+      accuracy_decimals: 3
+    update_interval: 30s
