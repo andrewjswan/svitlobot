@@ -48,12 +48,13 @@ text:
     restore_value: true
     icon: mdi:ip-network
     entity_category: config
-    then:
-      - lambda: |-
-          if (!x.empty()) {
-            id(pinging).set_target(x);
-            id(pinging).call_setup();
-          }
+    on_value:
+      then:
+        - lambda: |-
+            if (!x.empty()) {
+              id(pinging).set_target(x);
+              id(pinging).call_setup();
+            }
     web_server:
       sorting_group_id: ping_group
       sorting_weight: 5
