@@ -1,5 +1,5 @@
 substitutions:
-  project_name: "ajs.SvitloBot|HealthCheck"
+  project_name: "ajs.SvitloBot|HealthCheck|Custom_URL"
 
 esphome:
   devices:
