@@ -141,11 +141,11 @@
 !!! example annotate "Telegram Bot"
 
     URL:
-    
+
     **POST** | https://api.telegram.org/bot88888888888:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/sendMessage
-    
+
     Request Body:
-    
+
     ``` { .json .copy .annotate }
     {
     "chat_id": "-888888888",
@@ -159,4 +159,4 @@
     ``` { .copy .annotate }
     Content-Type: application/json
     ```
-    
+
