@@ -1,0 +1,57 @@
+substitutions:
+  project_name: "ajs.SvitloBot|HealthCheck|Custom_URL"
+
+esphome:
+  devices:
+    - id: svitlobot_device
+      name: "SvitloBot"
+    - id: healthcheck_device
+      name: "HealthCheck"
+    - id: custom_url_device
+      name: "Custom URL"
+
+text:
+  - id: !extend svitlobot_key
+    device_id: svitlobot_device
+
+  - id: !extend healthcheck_key
+    device_id: healthcheck_device
+
+  - id: !extend custom_url
+    device_id: custom_url_device
+
+binary_sensor:
+  - id: !extend svitlobot_status
+    device_id: svitlobot_device
+
+  - id: !extend healthcheck_status
+    device_id: healthcheck_device
+
+  - id: !extend custom_url_status
+    device_id: custom_url_device
+
+sensor:
+  - id: !extend svitlobot_quality
+    device_id: svitlobot_device
+  - id: !extend svitlobot_response_duration
+    device_id: svitlobot_device
+
+  - id: !extend healthcheck_quality
+    device_id: healthcheck_device
+  - id: !extend healthcheck_response_duration
+    device_id: healthcheck_device
+
+  - id: !extend custom_url_quality
+    device_id: custom_url_device
+  - id: !extend custom_url_response_duration
+    device_id: custom_url_device
+
+text_sensor:
+  - id: !extend svitlobot_response_code
+    device_id: svitlobot_device
+
+  - id: !extend healthcheck_response_code
+    device_id: healthcheck_device
+
+  - id: !extend custom_url_response_code
+    device_id: custom_url_device

@@ -1,0 +1,22 @@
+substitutions:
+  device: "test"
+  name: "test"
+  friendly_name: "Svitlo Bot - Test"
+
+esp8266:
+  # https://github.com/esphome/firmware/blob/main/esp-web-tools/esp8266.yaml
+  # board: esp01_1m
+  # board: d1_mini
+  board: nodemcuv2
+  restore_from_flash: true
+
+dashboard_import:
+  package_import_url: github://andrewjswan/svitlobot/tests/test_esp8266.yaml@main
+
+packages:
+  common: !include ../packages/common.yaml
+  svitlobot: !include ../packages/svitlobot.yaml
+  healthcheck: !include ../packages/healthcheck.yaml
+  custom_url: !include ../packages/custom_url.yaml
+  sub_devices: !include ../packages/sub_devices_all_in_one.yaml
+  esp8266: !include ../packages/esp8266.yaml

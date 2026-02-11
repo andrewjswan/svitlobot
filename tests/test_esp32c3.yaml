@@ -1,0 +1,21 @@
+substitutions:
+  device: "test"
+  name: "test"
+  friendly_name: "Svitlo Bot - Test"
+
+esp32:
+  variant: esp32c3
+  framework:
+    type: esp-idf
+
+dashboard_import:
+  package_import_url: github://andrewjswan/svitlobot/tests/test_esp32c3.yaml@main
+
+packages:
+  common: !include ../packages/common.yaml
+  svitlobot: !include ../packages/svitlobot.yaml
+  healthcheck: !include ../packages/healthcheck.yaml
+  custom_url: !include ../packages/custom_url.yaml
+  sub_devices: !include ../packages/sub_devices_all_in_one.yaml
+  esp32: !include ../packages/esp32.yaml
+  http_ota: !include ../packages/http_ota_all_in_one.yaml

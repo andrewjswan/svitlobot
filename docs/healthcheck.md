@@ -17,7 +17,31 @@
 
 Завдяки модульній структурі, ви можете гнучко налаштувати конфігурацію у секції `packages`:
 
-#### Варіант 1: Повний набір **Svitlo**Bot і **Health**Checks
+#### Варіант 1: Повний набір **Svitlo**Bot, **Health**Checks і **Custom**URL
+
+!!! example annotate "SvitloBot | HealthChecks | Custom URL"
+
+    ``` { .yaml .copy .annotate }
+    packages:
+      remote_package:
+        url: https://github.com/andrewjswan/svitlobot
+        files:
+          - packages/common.yaml (1)
+          - packages/svitlobot.yaml (2)
+          - packages/healthcheck.yaml (3)
+          - packages/custom_url.yaml (4)
+          - packages/sub_devices_svitlobot_all_in_one.yaml (5)
+          - packages/esp32.yaml (6)
+        refresh: 1s
+    ```
+1. Базові налаштування
+2. Ядро Світлобота
+3. Моніторинг доступності (HealthChecks)
+4. Моніторинг доступності (Custom URL)
+5. Окремі пристрої для SvitloBot і HealthChecks
+6. Специфічні параметри платформи `ESP32` для `8266` використовуйте **esp8266.yaml**
+
+#### Варіант 1: Набір **Svitlo**Bot і **Health**Checks
 
 !!! example annotate "SvitloBot | HealthChecks"
 
@@ -29,7 +53,7 @@
           - packages/common.yaml (1)
           - packages/svitlobot.yaml (2)
           - packages/healthcheck.yaml (3)
-          - packages/sub_devices.yaml (4)
+          - packages/sub_devices_svitlobot_healthcheck.yaml (4)
           - packages/esp32.yaml (5)
         refresh: 1s
     ```
@@ -39,9 +63,31 @@
 4. Окремі пристрої для SvitloBot і HealthChecks
 5. Специфічні параметри платформи `ESP32` для `8266` використовуйте **esp8266.yaml**
 
-#### Варіант 2: Тільки моніторинг
+#### Варіант 2: Набір **Health**Checks і **Custom**URL
 
-!!! example annotate "SvitloBot | HealthChecks"
+!!! example annotate "HealthChecks | Custom URL"
+
+    ``` { .yaml .copy .annotate }
+    packages:
+      remote_package:
+        url: https://github.com/andrewjswan/svitlobot
+        files:
+          - packages/common.yaml (1)
+          - packages/healthcheck.yaml (2)
+          - packages/custom_url.yaml (3)
+          - packages/sub_devices_svitlobot_healthcheck.yaml (4)
+          - packages/esp32.yaml (5)
+        refresh: 1s
+    ```
+1. Базові налаштування
+2. Моніторинг доступності (HealthChecks)
+3. Моніторинг доступності (Custom URL)
+4. Окремі пристрої для HealthChecks і Custom URL
+5. Специфічні параметри платформи `ESP32` для `8266` використовуйте **esp8266.yaml**
+
+#### Варіант 3: Тільки моніторинг
+
+!!! example annotate "HealthChecks"
 
     ``` { .yaml .copy .annotate }
     packages:
