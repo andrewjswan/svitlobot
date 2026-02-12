@@ -1,0 +1,74 @@
+substitutions:
+  lets_ping: "id(ping_host).has_state() && id(ping_packet_loss).state < 100"
+
+external_components:
+  - source:
+      type: git
+      url: https://github.com/andrewjswan/esphome-ping
+      ref: stable
+    components: [ping]
+    refresh: 60s
+
+web_server:
+  version: 3
+  sorting_groups:
+    - id: ping_group
+      name: "🕵️ Ping"
+      sorting_weight: 50
+
+sensor:
+  - platform: ping
+    id: pinging
+    ip_address: 8.8.8.8
+    num_attempts: 3
+    timeout: 1sec
+    loss:
+      name: Packet loss
+      id: ping_packet_loss
+      icon: mdi:alert-circle-outline
+      web_server:
+        sorting_group_id: ping_group
+        sorting_weight: 1
+    latency:
+      name: Latency
+      id: ping_latency
+      icon: mdi:wan
+      accuracy_decimals: 3
+      device_class: duration
+      web_server:
+        sorting_group_id: ping_group
+        sorting_weight: 3
+    update_interval: never
+
+text:
+  - platform: template
+    name: "Host"
+    id: ping_host
+    optimistic: true
+    min_length: 0
+    max_length: 15
+    mode: text
+    restore_value: true
+    icon: mdi:ip-network
+    entity_category: config
+    on_value:
+      then:
+        - lambda: |-
+            if (!x.empty()) {
+              id(pinging).set_target(x);
+              id(pinging).call_setup();
+            }
+    web_server:
+      sorting_group_id: ping_group
+      sorting_weight: 5
+
+interval:
+  - interval: 30sec
+    then:
+      - if:
+          condition:
+            and:
+              - wifi.connected:
+              - lambda: 'return id(ping_host).has_state();'
+          then:
+            - component.update: pinging
