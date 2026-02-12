@@ -1,3 +1,6 @@
+substitutions:
+  lets_ping: "true"
+
 esphome:
   name: "${name}"
   friendly_name: "${friendly_name}"
