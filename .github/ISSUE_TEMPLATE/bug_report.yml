@@ -23,12 +23,15 @@ body:
     validations:
       required: true
     attributes:
-      label: What part of the Matrix Lamp is the problem??
+      label: What part of the SvitloBot is the problem??
       description: >
-        Part of the Matrix Lamp is the problem.
+        Part of the SvitloBot is the problem.
       options:
         - SvitloBot
         - SvitloBot Device Configuration
+        - HealthCheck
+        - All In One
+        - Ping
   - type: markdown
     attributes:
       value: |
