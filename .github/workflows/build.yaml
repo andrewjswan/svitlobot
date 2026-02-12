@@ -12,13 +12,6 @@ on:
       - 'custom_url/**'
       - 'all-in-one/**'
 
-  pull_request:
-    paths-ignore:
-      - 'devices/**'
-      - 'healthcheck/**'
-      - 'custom_url/**'
-      - 'all-in-one/**'
-
   workflow_call:
     inputs:
       release-summary:
