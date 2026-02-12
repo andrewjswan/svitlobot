@@ -162,4 +162,3 @@
     ``` { .copy .annotate }
     Content-Type: application/json
     ```
-
