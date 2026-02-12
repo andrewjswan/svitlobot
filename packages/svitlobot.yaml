@@ -18,7 +18,7 @@ web_server:
   sorting_groups:
     - id: svitlobot_group
       name: "💡 SvitloBot"
-      sorting_weight: 0
+      sorting_weight: -5
 
 script:
   - id: !extend site_ping
