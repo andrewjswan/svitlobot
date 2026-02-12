@@ -18,7 +18,7 @@ web_server:
   sorting_groups:
     - id: custom_url_group
       name: "🤖 Custom URL"
-      sorting_weight: 3
+      sorting_weight: -1
 
 script:
   - id: !extend site_ping
