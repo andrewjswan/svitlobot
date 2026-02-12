@@ -17,5 +17,6 @@ packages:
   healthcheck: !include ../packages/healthcheck.yaml
   custom_url: !include ../packages/custom_url.yaml
   sub_devices: !include ../packages/sub_devices_all_in_one.yaml
+  ping:  !include ../packages/ping.yaml
   esp32: !include ../packages/esp32.yaml
   http_ota: !include ../packages/http_ota_all_in_one.yaml
