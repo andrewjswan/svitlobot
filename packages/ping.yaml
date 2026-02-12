@@ -25,13 +25,16 @@ sensor:
     loss:
       name: Packet loss
       id: ping_packet_loss
+      icon: mdi:alert-circle-outline
       web_server:
         sorting_group_id: ping_group
         sorting_weight: 1
     latency:
       name: Latency
       id: ping_latency
+      icon: mdi:wan
       accuracy_decimals: 3
+      device_class: duration
       web_server:
         sorting_group_id: ping_group
         sorting_weight: 3
