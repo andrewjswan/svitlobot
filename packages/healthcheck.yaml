@@ -18,7 +18,7 @@ web_server:
   sorting_groups:
     - id: healthcheck_group
       name: "❤️ HealthCheck"
-      sorting_weight: 0
+      sorting_weight: 1
 
 script:
   - id: !extend site_ping
