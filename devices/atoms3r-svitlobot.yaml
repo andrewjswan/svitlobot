@@ -290,7 +290,7 @@ display:
 
           auto color_off = COLOR_WHITE;
           auto color_on = COLOR_BLACK;
-          
+
           if (id(dark_mode).state) {
             color_off = COLOR_BLACK;
             color_on = COLOR_WHITE;
