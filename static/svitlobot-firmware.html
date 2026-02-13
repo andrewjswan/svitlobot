@@ -108,6 +108,11 @@
     .radios input:checked + img {
       border-color: #58a6ff;
     }
+    .radios name {
+      display: block;
+      font-size: 15px;
+      text-align: center;
+    }
     .button-row {
       margin: 10px 10px 10px 5px;
     }
@@ -158,6 +163,7 @@
           checked
         />
         <img src="espressif.png" alt="ESP8266/ESP32" />
+        <name></name>
       </label>
       <label>
         <input
@@ -167,6 +173,7 @@
           value="svitlobot-atom"
         />
         <img src="m5stack_atom_lite.png" alt="M5Stack Atom Lite" />
+        <name>M5Stack Atom Lite</name>
       </label>
       <label>
         <input
@@ -176,6 +183,7 @@
           value="svitlobot-zero"
         />
         <img src="img/devices/esp32_s3_zero_with_rgb.png" alt="ESP32 S3 with RGB" />
+        <name>ESP32 S3 with RGB</name>
       </label>
       <label>
         <input
@@ -184,7 +192,8 @@
           class="device"
           value="svitlobot-s3-geek"
         />
-        <img src="img/devices/esp32-s3-geek.png" alt="WaveShare ESP32-S3-GEEK" />
+        <img src="img/devices/esp32-s3-geek.png" alt="WaveShare ESP32 S3 GEEK" />
+        <name>WaveShare ESP32 S3 GEEK</name>
       </label>
     </div>
 
