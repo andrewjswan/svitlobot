@@ -90,10 +90,12 @@ markdown_extensions:
 nav:
   - Головна: index.md
   - Пристрої: svitlobot-devices.md
-  - Альтернативні прошивки: alternative.md
+  - Пакети:
+    - packages.md
+    - Моніторинг доступності (HealthCheck): healthcheck.md
+    - Пінг (Ping Monitor): ping.md
   - Мапи: maps.md
-  - Моніторинг доступності (HealthCheck): healthcheck.md
-  - Пінг (Ping Monitor): ping.md
+  - Альтернативні прошивки: alternative.md
   - Корисні посилання: additionals.md
   - Прошивка: firmware.md
 
