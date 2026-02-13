@@ -1,6 +1,6 @@
 ## M5Stack Atom Lite
 
-![M5Stack Atom Lite](img/devices/m5stack_atom_lite.png){ align=left width=300 }
+![M5Stack Atom Lite](img/devices/m5stack_atom_lite.png){ align=left loading=lazy style="width:30%" }
 
 Індикація стану за допомогою вбудованого світлодіода.
 
@@ -18,7 +18,7 @@
 
 ## ESP32 S3 Zero with RGB
 
-![ESP32 S3 Zero with RGB](img/devices/esp32_s3_zero_with_rgb.png){ align=left width=300 }
+![ESP32 S3 Zero with RGB](img/devices/esp32_s3_zero_with_rgb.png){ align=left loading=lazy style="width:30%" }
 
 Індикація стану за допомогою вбудованого світлодіода.
 
@@ -34,7 +34,7 @@
 
 <div style="clear: both;"></div>
 
-![ESP32 S3 Zero with RGB Case](img/devices/esp32_s3_zero_with_rgb_case.jpg){ align=left width=300 }
+![ESP32 S3 Zero with RGB Case](img/devices/esp32_s3_zero_with_rgb_case.jpg){ align=left loading=lazy style="width:30%" }
 
 !!! tip "Корпус"
     * [Посилання на проект корпусу](https://www.thingiverse.com/thing:7208746)
@@ -43,7 +43,7 @@
 
 ## WaveShare ESP32-S3-GEEK
 
-![WaveShare ESP32-S3-GEEK](img/devices/esp32-s3-geek.png){ align=left width=300 }
+![WaveShare ESP32-S3-GEEK](img/devices/esp32-s3-geek.png){ align=left loading=lazy style="width:30%" }
 
 Індикація стану за допомогою вбудованого дісплея.
 
