@@ -1,0 +1,661 @@
+substitutions:
+  device: "esp_svitlobot_atoms3r"
+  name: "svitlobot-atoms3r"
+  friendly_name: "Svitlo Bot"
+  project_name: "ajs.SvitloBot"
+  project_version: "3.5.39"
+  comment: "ESPHome Svitlo Bot | Shadow"
+
+esphome:
+  name: "${name}"
+  friendly_name: "${friendly_name}"
+  name_add_mac_suffix: true
+  comment: $comment
+  build_path: ./.build/$device
+  project:
+    name: "${project_name}"
+    version: "${project_version}"
+
+external_components:
+  - source:
+      type: git
+      url: https://github.com/andrewjswan/esphome-components
+      ref: main
+    components: [shadow]
+    refresh: 60s
+  - source: github://m5stack/esphome-yaml/components@main
+    components: [lp5562, es8311]
+    refresh: 1d
+
+dashboard_import:
+  package_import_url: github://andrewjswan/svitlobot/devices/s3-geek-svitlobot.yaml@main
+
+esp32:
+  variant: esp32s3
+  flash_size: 8MB
+  cpu_frequency: 240MHz
+  framework:
+    type: esp-idf
+    sdkconfig_options:
+      CONFIG_ESP32S3_DEFAULT_CPU_FREQ_240: "y"
+      CONFIG_ESP32S3_DATA_CACHE_64KB: "y"
+      CONFIG_ESP32S3_DATA_CACHE_LINE_64B: "y"
+
+psram:
+  mode: octal
+  speed: 80MHz
+
+api:
+  reboot_timeout: 0s
+
+ota:
+  - platform: esphome
+  - platform: web_server
+  - platform: http_request
+
+logger:
+  level: INFO
+
+mdns:
+  disabled: false
+
+web_server:
+  port: 80
+  ota: false
+  log: false
+  version: 3
+  sorting_groups:
+    - id: svitlobot_group
+      name: "💡 SvitloBot"
+      sorting_weight: 0
+
+wifi:
+  ap: {}  # This spawns an AP with the device name and mac address with no password.
+  id: oled_wifi
+  enable_btm: true
+  enable_rrm: true
+
+captive_portal:
+
+improv_serial:
+
+debug:
+  update_interval: never
+
+http_request:
+  useragent: "esphome/${name} (${project_version})"
+  verify_ssl: false
+  timeout: 15s
+
+time:
+  - platform: sntp
+    id: esp_time
+    timezone: "Europe/Kiev"
+    update_interval: 1h
+    on_time_sync:
+      then:
+        if:
+          condition:
+            time.has_time:
+          then:
+            - logger.log: Time has been set and is valid!
+
+globals:
+  - id: send_quality
+    type: int
+    restore_value: no
+    initial_value: '-1'
+
+  - id: state_last_event
+    type: time_t
+    restore_value: no
+    initial_value: '0'
+
+script:
+  - id: send_state
+    then:
+      - if:
+          condition:
+            and:
+              - wifi.connected:
+              - lambda: 'return id(my_key).has_state();'
+          then:
+            - http_request.get:
+                url: !lambda |-
+                  return ((std::string) "https://api.svitlobot.in.ua/channelPing?channel_key=" + id(my_key).state).c_str();
+                capture_response: false
+                on_response:
+                  then:
+                    - lambda: id(set_state)->execute(response->status_code, response->duration_ms);
+                on_error:
+                  then:
+                    - script.execute:
+                        id: set_state
+                        code: -1
+                        duration: 0
+            - component.update: quality
+    mode: queued
+
+  - id: set_state
+    parameters:
+      code: int
+      duration: int
+    then:
+      - lambda: |-
+          if (code > 0) {
+            id(response_code).publish_state(std::to_string(code));
+          } else {
+            ESP_LOGE("SvitloBot", "Request failed!");
+            id(response_code).publish_state("---");
+          }
+
+          if (duration > 0) {
+            id(response_duration).publish_state(duration);
+          } else {
+            id(response_duration).publish_state(NAN);
+          }
+
+          if (code == 200) {
+            ESP_LOGD("SvitloBot", "Send status - success");
+            id(send_status).publish_state(true);
+            id(send_quality) = id(send_quality) < 0 ? 100 : std::min(100, ++id(send_quality));
+          } else {
+            if (code > 0) {
+              ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
+            }
+            id(send_status).publish_state(false);
+            id(send_quality) = id(send_quality) < 0 ? 0 : std::max(0, --id(send_quality));
+          }
+    mode: single
+
+font:
+  - file:
+      type: gfonts
+      family: Roboto
+      weight: 900
+    id: font_text_small
+    size: 15
+
+  - file:
+      type: gfonts
+      family: Roboto
+      weight: 900
+    id: font_text_big
+    size: 20
+
+  - file:
+      type: gfonts
+      family: Roboto
+      weight: 900
+    id: font_time_small
+    size: 16
+
+  - file:
+      type: gfonts
+      family: Roboto
+      weight: 900
+    id: font_time_big
+    size: 55
+
+  - file: "https://github.com/Templarian/MaterialDesign-Webfont/raw/refs/heads/master/fonts/materialdesignicons-webfont.ttf"
+    id: font_mdi_small
+    size: 30
+    glyphs:
+      - "\U000F092B"
+      - "\U000F0928"
+      - "\U000F0925"
+      - "\U000F0922"
+      - "\U000F091F"
+      - "\U000F1792"
+      - "\U000F1790"
+      - "\U000F0789"
+      - "\U000F0551"
+      - "\U000F124A"
+
+  - file: "https://github.com/Templarian/MaterialDesign-Webfont/raw/refs/heads/master/fonts/materialdesignicons-webfont.ttf"
+    id: font_mdi_big
+    size: 100
+    glyphs:
+      - "\U000F06E9"
+      - "\U000F0ECD"
+      - "\U000F1984"
+
+i2c:
+  - id: bsp_bus
+    sda:
+      number: GPIO45
+      ignore_strapping_warning: true
+    scl:
+      number: GPIO0
+      ignore_strapping_warning: true
+    scan: true
+
+spi:
+  clk_pin: GPIO15
+  mosi_pin: GPIO21
+  # miso_pin is not used
+
+lp5562:
+  id: lp5562_led
+  i2c_id: bsp_bus
+  use_internal_clk: true
+  # power_save_mode: true
+  # high_pwm_freq: true
+  # logarithmic_dimming: true
+  white_current: 17.5
+
+output:
+  - platform: lp5562
+    id: lp5562_white_channel
+    lp5562_id: lp5562_led
+    channel: white
+
+light:
+  - platform: monochromatic
+    output: lp5562_white_channel
+    name: "Display Backlight"
+    icon: mdi:tablet-dashboard
+    id: display_light
+    restore_mode: RESTORE_DEFAULT_ON
+    entity_category: config
+    disabled_by_default: true
+
+display:
+  - platform: mipi_spi
+    id: svitlobot_display
+    model: ST7789V
+    dc_pin: GPIO42
+    reset_pin: GPIO48
+    cs_pin: GPIO14
+    data_rate: 40MHz
+    dimensions:
+      height: 128
+      width: 128
+      offset_width: 2
+      offset_height: 1
+    invert_colors: true
+    rotation: 180°
+    update_interval: 1s
+    pages:
+      - id: state_page
+        lambda: |-
+          // Base
+          const auto COLOR_WHITE = Color(255, 255, 255);
+          const auto COLOR_BLACK = Color(0, 0, 0);
+          const auto COLOR_RED = Color(255, 0, 0);
+          const auto COLOR_GREEN = Color(0, 255, 0);
+          const auto COLOR_BLUE = Color(0, 0, 255);
+          const auto COLOR_YELLOW = Color(255, 255, 0);
+          const auto COLOR_ORANGE = Color(255, 165, 0);
+
+          auto color_off = COLOR_WHITE;
+          auto color_on = COLOR_BLACK;
+          
+          if (id(dark_mode).state) {
+            color_off = COLOR_BLACK;
+            color_on = COLOR_WHITE;
+          }
+
+          if (!id(my_key).has_state()) {
+            color_off = COLOR_ORANGE;
+          } else if (!id(send_status).state) {
+            color_off = COLOR_RED;
+          }
+
+          // Fill
+          it.fill(color_off);
+
+          // WiFi Icon
+          const char* wifi_icon = "\U000F092B";
+          if (id(wifi_signal_dbm).has_state()) {
+            float signal = id(wifi_signal_dbm).state;
+            if (std::isnan(signal)) signal = -100;
+            if (signal >= -50) wifi_icon = "\U000F0928";
+            else if (signal >= -60) wifi_icon = "\U000F0925";
+            else if (signal >= -75) wifi_icon = "\U000F0922";
+            else if (signal >= -100) wifi_icon = "\U000F091F";
+            else wifi_icon = "\U000F092B";
+          }
+          it.printf(15, 15, id(font_mdi_small), color_on, TextAlign::CENTER, "%s", wifi_icon);
+
+          // Top Center text
+          // WiFi
+          if (id(oled_wifi).is_ap_active()) {
+            it.printf(64, 15, id(font_text_big), COLOR_RED, TextAlign::CENTER, "AP");
+          } else if (!id(oled_wifi).is_connected()) {
+            it.printf(64, 15, id(font_text_big), color_on, TextAlign::CENTER, "OFF");
+          } else {
+            // Code
+            if (id(my_key).has_state()) {
+              auto x = id(response_code).state;
+              if (x.empty()) {
+                it.printf(113, 15, id(font_mdi_small), color_on, TextAlign::CENTER, "%s", "\U000F1792");
+              } else if (x == "---") {
+                it.printf(113, 15, id(font_mdi_small), color_on, TextAlign::CENTER, "%s", "\U000F1790");
+              } else {
+                int code = atoi(x.c_str());
+                if (code == 200) {
+                  it.printf(113, 15, id(font_mdi_small), color_on, TextAlign::CENTER, "%s", "\U000F0789");
+                } else if (code >= 400) {
+                  it.printf(113, 15, id(font_mdi_small), color_on, TextAlign::CENTER, "%s", "\U000F0551");
+                } else {
+                  it.printf(113, 15, id(font_mdi_small), color_on, TextAlign::CENTER, "%s", "\U000F124A");
+                }
+              }
+              it.printf(64, 15, id(font_text_big), color_on, TextAlign::CENTER, "%s", id(response_code).state.c_str());
+            } else {
+              // WiFi
+              it.printf(64, 15, id(font_text_big), color_on, TextAlign::CENTER, "ON");
+            }
+          }
+
+          // Big Icon
+          if (id(my_key).has_state()) {
+            if (id(send_status).state) {
+              it.printf(64, 69, id(font_mdi_big), COLOR_GREEN, TextAlign::CENTER, "%s", "\U000F06E9");
+            } else {
+              it.printf(64, 69, id(font_mdi_big), COLOR_RED, TextAlign::CENTER, "%s", "\U000F0ECD");
+            }
+          } else {
+            it.printf(64, 69, id(font_mdi_big), COLOR_RED, TextAlign::CENTER, "%s", "\U000F1984");
+          }
+
+          // IP Adress
+          if (millis() < 300000) {
+            if (id(ip_adress).has_state()) {
+              it.printf(64, 118, id(font_text_small), color_on, TextAlign::CENTER, "%s", id(ip_adress).state.c_str());
+            }
+          }
+
+      - id: time_page
+        lambda: |-
+          // Base
+          const auto COLOR_WHITE = Color(255, 255, 255);
+          const auto COLOR_BLACK = Color(0, 0, 0);
+
+          auto color_off = COLOR_WHITE;
+          auto color_on = COLOR_BLACK;
+
+          if (id(dark_mode).state) {
+            color_off = COLOR_BLACK;
+            color_on = COLOR_WHITE;
+          }
+
+          // Fill
+          it.fill(color_off);
+
+          auto time = id(esp_time).now();
+          if (time.is_valid()) {
+            std::string day = time.strftime("%A");
+            std::transform(day.begin(), day.end(), day.begin(), ::toupper);
+            it.printf(64, 10, id(font_time_small), color_on, TextAlign::CENTER, day.c_str());
+            it.strftime(64, 40, id(font_time_big), color_on, TextAlign::CENTER, "%H", time);
+            it.strftime(64, 84, id(font_time_big), color_on, TextAlign::CENTER, "%M", time);
+            it.strftime(64, 116, id(font_time_small), color_on, TextAlign::CENTER, "%d-%m-%Y", time);
+          }
+
+interval:
+  - interval: 30s
+    then:
+      - if:
+          condition:
+            lambda: |-
+              return !id(send_status).state;
+          then:
+            - light.turn_on: display_light
+            - display.page.show: state_page
+          else:
+            - display.page.show: !lambda |-
+                auto time = id(esp_time).now();
+                if (!time.is_valid()) {
+                  return id(state_page);
+                }
+                if ((time_t)time.timestamp - id(state_last_event) > 300) {
+                  return id(time_page);
+                }
+                return id(state_page);
+            - lambda: |-
+                auto time = id(esp_time).now();
+                if (time.is_valid()) {
+                  if (id(night_mode).state) {
+                    if (time.hour = 23 || time.hour < 8) {
+                      if ((time_t)time.timestamp - id(state_last_event) > 300) {
+                        id(display_light).turn_off().perform();
+                        return;
+                      }
+                    }
+                  }
+                }
+                id(display_light).turn_on().perform();
+
+switch:
+  - platform: template
+    name: "Dark Mode"
+    id: dark_mode
+    icon: mdi:monitor-shimmer
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_ON
+    entity_category: config
+    disabled_by_default: true
+
+  - platform: template
+    name: "Night Mode"
+    id: night_mode
+    icon: mdi:weather-night
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_OFF
+    entity_category: config
+    disabled_by_default: true
+
+shadow:
+  id: svitlobot
+  script_id: send_state
+  interval: 90
+
+text:
+  - platform: template
+    name: "Key"
+    id: my_key
+    optimistic: true
+    min_length: 0
+    max_length: 15
+    mode: text
+    restore_value: true
+    icon: mdi:key-chain-variant
+    entity_category: config
+    disabled_by_default: true
+    web_server:
+      sorting_group_id: svitlobot_group
+      sorting_weight: 5
+
+binary_sensor:
+  - platform: template
+    name: "Status"
+    id: send_status
+    icon: mdi:lan-connect
+    web_server:
+      sorting_group_id: svitlobot_group
+      sorting_weight: 1
+    on_state:
+      then:
+        - globals.set:
+            id: state_last_event
+            value: !lambda |-
+              auto time = id(esp_time).now();
+              if (!time.is_valid()) {
+                return (time_t)0;
+              }
+              return (time_t)time.timestamp;
+    on_release:
+      then:
+        - display.page.show: state_page
+        - light.turn_on: display_light
+
+  - platform: gpio
+    name: "Button"
+    pin:
+      number: GPIO41
+      mode: INPUT_PULLUP
+      inverted: true
+    icon: mdi:gesture-tap-box
+    id: display_button
+    entity_category: config
+    disabled_by_default: true
+    on_press:
+      then:
+        - light.toggle: display_light
+        - if:
+            condition:
+              light.is_on: display_light
+            then:
+              - globals.set:
+                  id: state_last_event
+                  value: !lambda |-
+                    auto time = id(esp_time).now();
+                    if (!time.is_valid()) {
+                      return (time_t)0;
+                    }
+                    return (time_t)time.timestamp;
+              - display.page.show: state_page
+
+sensor:
+  - platform: template
+    name: "Delivery Quality"
+    id: quality
+    lambda: |-
+      if (!id(my_key).has_state() || id(send_quality) < 0) {
+        return NAN;
+      }
+      return id(send_quality);
+    accuracy_decimals: 0
+    unit_of_measurement: "%"
+    icon: mdi:wan
+    state_class: measurement
+    web_server:
+      sorting_group_id: svitlobot_group
+      sorting_weight: 3
+    on_value_range:
+      - above: 1.0
+        below: 90.0
+        then:
+          - button.press: Restart
+
+  - platform: uptime
+    name: "Uptime"
+    entity_category: diagnostic
+
+  - platform: wifi_signal
+    name: "WiFi Signal"
+    id: wifi_signal_dbm
+    entity_category: diagnostic
+    icon: mdi:signal
+
+  - platform: internal_temperature
+    name: "Device Temperature"
+    entity_category: diagnostic
+    icon: mdi:coolant-temperature
+    device_class: temperature
+    disabled_by_default: true
+
+  - platform: template
+    name: "Response Duration"
+    id: response_duration
+    icon: mdi:timer-outline
+    entity_category: diagnostic
+    disabled_by_default: true
+    device_class: duration
+    unit_of_measurement: "ms"
+    accuracy_decimals: 0
+    web_server:
+      sorting_group_id: svitlobot_group
+      sorting_weight: 11
+
+button:
+  - platform: restart
+    name: "Restart"
+    id: Restart
+    entity_category: diagnostic
+    icon: mdi:restart
+
+  - platform: factory_reset
+    name: "Restart with Factory Default Settings"
+    id: Reset
+    entity_category: diagnostic
+    disabled_by_default: true
+
+  - platform: template
+    name: "Firmware Update"
+    icon: mdi:progress-upload
+    disabled_by_default: true
+    entity_category: config
+    on_press:
+      - update.perform:
+          id: new_firmware
+
+text_sensor:
+  - platform: template
+    name: "Response Code"
+    id: response_code
+    icon: mdi:web
+    entity_category: diagnostic
+    disabled_by_default: true
+    web_server:
+      sorting_group_id: svitlobot_group
+      sorting_weight: 10
+    on_value:
+      then:
+        - lambda: |-
+            if (x.empty()) {
+              id(response_code).set_icon("mdi:web-sync");
+            } else if (x == "---") {
+              id(response_code).set_icon("mdi:web-cancel");
+            } else {
+              int code = atoi(x.c_str());
+              if (code == 200) {
+                id(response_code).set_icon("mdi:web-check");
+              } else if (code >= 400) {
+                id(response_code).set_icon("mdi:web-remove");
+              } else {
+                id(response_code).set_icon("mdi:web-clock");
+              }
+            }
+
+  - platform: template
+    name: ESPHome Version
+    icon: mdi:new-box
+    entity_category: diagnostic
+    lambda: |-
+      return std::string(ESPHOME_VERSION);
+
+  - platform: debug
+    reset_reason:
+      name: "Reset Reason"
+      disabled_by_default: true
+      entity_category: diagnostic
+
+  - platform: wifi_info
+    ip_address:
+      name: "IP Address"
+      id: ip_adress
+      disabled_by_default: true
+      entity_category: diagnostic
+      icon: mdi:ip
+    ssid:
+      name: "Connected SSID"
+      disabled_by_default: true
+      entity_category: diagnostic
+      icon: mdi:access-point-network
+    mac_address:
+      name: "Mac Address"
+      disabled_by_default: true
+      entity_category: diagnostic
+      icon: mdi:console-network
+
+update:
+  - platform: http_request
+    id: new_firmware
+    name: "Firmware Update"
+    source: https://andrewjswan.github.io/svitlobot/devices/${name}-svitlobot-manifest.json
+    icon: mdi:update
+    web_server:
+      sorting_weight: 15
