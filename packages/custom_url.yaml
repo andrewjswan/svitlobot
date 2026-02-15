@@ -8,7 +8,7 @@ http_request:
   timeout: 15s
 
 globals:
-  - id: custom_url_send_quality
+  - id: custom_url_send_errors
     type: int
     restore_value: no
     initial_value: '-1'
@@ -49,7 +49,7 @@ script:
                         id: custom_url_set_state
                         code: -1
                         duration: 0
-            - component.update: custom_url_quality
+            - component.update: custom_url_errors
     mode: queued
 
   - id: custom_url_set_state
@@ -74,13 +74,13 @@ script:
           if (code == 200) {
             ESP_LOGD("Custom URL", "Send status - success");
             id(custom_url_status).publish_state(true);
-            id(custom_url_send_quality) = id(custom_url_send_quality) < 0 ? 100 : std::min(100, ++id(custom_url_send_quality));
+            id(custom_url_send_errors) = 0;
           } else {
             if (code > 0) {
               ESP_LOGE("Custom URL", "Send status - not success with response code: %d", code);
             }
             id(custom_url_status).publish_state(false);
-            id(custom_url_send_quality) = id(custom_url_send_quality) < 0 ? -1 : std::max(0, --id(custom_url_send_quality));
+            id(custom_url_send_errors) = id(custom_url_send_errors) < 0 ? 1 : std::max(1, ++id(custom_url_send_errors));
           }
     mode: single
 
@@ -109,23 +109,20 @@ binary_sensor:
 
 sensor:
   - platform: template
-    name: "Delivery Quality"
-    id: custom_url_quality
+    name: "Delivery Errors"
+    id: custom_url_errors
     lambda: |-
-      if (!id(custom_url).has_state() || id(custom_url_send_quality) < 0) {
+      if (!id(custom_url).has_state() || id(custom_url_send_errors) < 0) {
         return NAN;
       }
-      return id(custom_url_send_quality);
+      return id(custom_url_send_errors);
     accuracy_decimals: 0
-    unit_of_measurement: "%"
-    icon: mdi:wan
-    state_class: measurement
+    icon: mdi:space-invaders
     web_server:
       sorting_group_id: custom_url_group
       sorting_weight: 3
     on_value_range:
-      - above: 1.0
-        below: 90.0
+      - above: 10.0
         then:
           - button.press: Restart
 

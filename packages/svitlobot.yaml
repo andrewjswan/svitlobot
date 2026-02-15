@@ -8,7 +8,7 @@ http_request:
   timeout: 15s
 
 globals:
-  - id: svitlobot_send_quality
+  - id: svitlobot_send_errors
     type: int
     restore_value: no
     initial_value: '-1'
@@ -49,7 +49,7 @@ script:
                         id: svitlobot_set_state
                         code: -1
                         duration: 0
-            - component.update: svitlobot_quality
+            - component.update: svitlobot_errors
     mode: single
 
   - id: svitlobot_set_state
@@ -74,13 +74,13 @@ script:
           if (code == 200) {
             ESP_LOGD("SvitloBot", "Send status - success");
             id(svitlobot_status).publish_state(true);
-            id(svitlobot_send_quality) = id(svitlobot_send_quality) < 0 ? 100 : std::min(100, ++id(svitlobot_send_quality));
+            id(svitlobot_send_errors) = 0;
           } else {
             if (code > 0) {
               ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
             }
             id(svitlobot_status).publish_state(false);
-            id(svitlobot_send_quality) = id(svitlobot_send_quality) < 0 ? -1 : std::max(0, --id(svitlobot_send_quality));
+            id(svitlobot_send_errors) = id(svitlobot_send_errors) < 0 ? 1 : std::max(1, ++id(svitlobot_send_errors));
           }
     mode: single
 
@@ -111,23 +111,20 @@ binary_sensor:
 
 sensor:
   - platform: template
-    name: "Delivery Quality"
-    id: svitlobot_quality
+    name: "Delivery Errors"
+    id: svitlobot_errors
     lambda: |-
-      if (!id(svitlobot_key).has_state() || id(svitlobot_send_quality) < 0) {
+      if (!id(svitlobot_key).has_state() || id(svitlobot_send_errors) < 0) {
         return NAN;
       }
-      return id(svitlobot_send_quality);
+      return id(svitlobot_send_errors);
     accuracy_decimals: 0
-    unit_of_measurement: "%"
-    icon: mdi:wan
-    state_class: measurement
+    icon: mdi:space-invaders
     web_server:
       sorting_group_id: svitlobot_group
       sorting_weight: 3
     on_value_range:
-      - above: 1.0
-        below: 90.0
+      - above: 10.0
         then:
           - button.press: Restart
 
