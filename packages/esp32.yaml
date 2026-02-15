@@ -12,7 +12,8 @@ external_components:
 shadow:
   id: svitlobot
   script_id: site_ping
-  interval: 90
+  startup_delay: 5s
+  interval: 1.5min
 
 sensor:
   - platform: internal_temperature

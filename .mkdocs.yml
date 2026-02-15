@@ -91,9 +91,9 @@ nav:
   - Головна: index.md
   - Пристрої: svitlobot-devices.md
   - Пакети:
-    - packages.md
-    - Моніторинг доступності (HealthCheck): healthcheck.md
-    - Пінг (Ping Monitor): ping.md
+      - packages.md
+      - Моніторинг доступності (HealthCheck): healthcheck.md
+      - Пінг (Ping Monitor): ping.md
   - Мапи: maps.md
   - Альтернативні прошивки: alternative.md
   - Корисні посилання: additionals.md
