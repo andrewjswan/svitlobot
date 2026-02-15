@@ -80,7 +80,7 @@ script:
               ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
             }
             id(svitlobot_status).publish_state(false);
-            id(svitlobot_send_quality) = id(svitlobot_send_quality) < 0 ? 0 : std::max(0, --id(svitlobot_send_quality));
+            id(svitlobot_send_quality) = id(svitlobot_send_quality) < 0 ? -1 : std::max(0, --id(svitlobot_send_quality));
           }
     mode: single
 
