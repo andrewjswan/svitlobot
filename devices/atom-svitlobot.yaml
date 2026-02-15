@@ -74,7 +74,7 @@ http_request:
   timeout: 15s
 
 globals:
-  - id: send_quality
+  - id: send_errors
     type: int
     restore_value: no
     initial_value: '-1'
@@ -109,7 +109,7 @@ script:
                         id: set_state
                         code: -1
                         duration: 0
-            - component.update: quality
+            - component.update: errors
             - if:
                 condition:
                   lambda: 'return id(send_status).state;'
@@ -165,13 +165,13 @@ script:
           if (code == 200) {
             ESP_LOGD("SvitloBot", "Send status - success");
             id(send_status).publish_state(true);
-            id(send_quality) = id(send_quality) < 0 ? 100 : std::min(100, ++id(send_quality));
+            id(send_errors) = 0;
           } else {
             if (code > 0) {
               ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
             }
             id(send_status).publish_state(false);
-            id(send_quality) = id(send_quality) < 0 ? -1 : std::max(0, --id(send_quality));
+            id(send_errors) = id(send_errors) < 0 ? 1 : std::max(1, ++id(send_errors));
           }
     mode: single
 
@@ -222,23 +222,20 @@ binary_sensor:
 
 sensor:
   - platform: template
-    name: "Delivery Quality"
-    id: quality
+    name: "Delivery Errors"
+    id: errors
     lambda: |-
-      if (!id(my_key).has_state() || id(send_quality) < 0) {
+      if (!id(my_key).has_state() || id(send_errors) < 0) {
         return NAN;
       }
-      return id(send_quality);
+      return id(send_errors);
     accuracy_decimals: 0
-    unit_of_measurement: "%"
-    icon: mdi:wan
-    state_class: measurement
+    icon: mdi:space-invaders
     web_server:
       sorting_group_id: svitlobot_group
       sorting_weight: 3
     on_value_range:
-      - above: 1.0
-        below: 90.0
+      - above: 10.0
         then:
           - button.press: Restart
 

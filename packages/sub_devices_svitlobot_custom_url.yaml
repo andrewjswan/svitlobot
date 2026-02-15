@@ -23,12 +23,12 @@ binary_sensor:
     device_id: custom_url_device
 
 sensor:
-  - id: !extend svitlobot_quality
+  - id: !extend svitlobot_errors
     device_id: svitlobot_device
   - id: !extend svitlobot_response_duration
     device_id: svitlobot_device
 
-  - id: !extend custom_url_quality
+  - id: !extend custom_url_errors
     device_id: custom_url_device
   - id: !extend custom_url_response_duration
     device_id: custom_url_device
