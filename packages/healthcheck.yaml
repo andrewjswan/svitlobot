@@ -80,7 +80,7 @@ script:
               ESP_LOGE("HealthCheck", "Send status - not success with response code: %d", code);
             }
             id(healthcheck_status).publish_state(false);
-            id(healthcheck_send_quality) = id(healthcheck_send_quality) < 0 ? 0 : std::max(0, --id(healthcheck_send_quality));
+            id(healthcheck_send_quality) = id(healthcheck_send_quality) < 0 ? -1 : std::max(0, --id(healthcheck_send_quality));
           }
     mode: single
 

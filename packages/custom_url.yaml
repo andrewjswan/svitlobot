@@ -80,7 +80,7 @@ script:
               ESP_LOGE("Custom URL", "Send status - not success with response code: %d", code);
             }
             id(custom_url_status).publish_state(false);
-            id(custom_url_send_quality) = id(custom_url_send_quality) < 0 ? 0 : std::max(0, --id(custom_url_send_quality));
+            id(custom_url_send_quality) = id(custom_url_send_quality) < 0 ? -1 : std::max(0, --id(custom_url_send_quality));
           }
     mode: single
 
