@@ -450,7 +450,8 @@ switch:
 shadow:
   id: svitlobot
   script_id: send_state
-  interval: 90
+  startup_delay: 5s
+  interval: 1.5min
 
 text:
   - platform: template
