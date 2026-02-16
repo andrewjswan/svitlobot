@@ -1,0 +1,87 @@
+web_server:
+  version: 3
+  sorting_groups:
+    - id: telegram_group
+      name: "📱 Telegram"
+      sorting_weight: 50
+
+binary_sensor:
+  - platform: template
+    name: "Host Online"
+    device_class: connectivity
+    internal: true
+    lambda: |-
+      if (!id(ping_host).has_state() || !id(chat_id).has_state() || !id(bot_id).has_state()) {
+        return {};
+      }
+      return id(ping_packet_loss).state < 100;
+    filters:
+      - delayed_off: 60s
+    on_press:
+      then:
+        - script.execute:
+            id: send_telegram_message
+            message: !lambda |-
+              return "ℹ️ *" + id(ping_host).state + ":*\n" +
+                     "⚡ Online";
+            silent: false
+    on_release:
+      then:
+        - script.execute:
+            id: send_telegram_message
+            message: !lambda |-
+              return "🚨 *" + id(ping_host).state + ":*\n" +
+                     "⚡ Offline";
+            silent: false
+    web_server:
+      sorting_group_id: telegram_group
+      sorting_weight: 5
+
+text:
+  - platform: template
+    name: "Chat ID"
+    id: chat_id
+    optimistic: true
+    min_length: 0
+    max_length: 15
+    mode: text
+    restore_value: true
+    icon: mdi:chat-outline
+    entity_category: config
+    web_server:
+      sorting_group_id: telegram_group
+      sorting_weight: 1
+
+  - platform: template
+    name: "Bot ID"
+    id: bot_id
+    optimistic: true
+    mode: text
+    restore_value: true
+    icon: mdi:robot
+    entity_category: config
+    web_server:
+      sorting_group_id: telegram_group
+      sorting_weight: 3
+
+http_request:
+  useragent: esphome/telegram_bot
+  timeout: 15s
+  verify_ssl: false
+
+script:
+  - id: send_telegram_message
+    parameters:
+      message: string
+      silent: bool
+    then:
+      - http_request.post:
+          url: "https://api.telegram.org/bot" + id(bot_id).state + "/sendMessage"
+          request_headers:
+            Content-Type: application/json
+          json: |-
+            root["chat_id"] = id(chat_id).state;
+            root["text"] = message;
+            root["disable_notification"] = silent;
+            root["parse_mode"] = "markdown";
+    mode: queued
