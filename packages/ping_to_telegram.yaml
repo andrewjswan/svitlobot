@@ -76,7 +76,8 @@ script:
       silent: bool
     then:
       - http_request.post:
-          url: "https://api.telegram.org/bot" + id(bot_id).state + "/sendMessage"
+          url: !lambda |-
+            return "https://api.telegram.org/bot" + id(bot_id).state + "/sendMessage";
           request_headers:
             Content-Type: application/json
           json: |-
