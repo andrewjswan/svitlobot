@@ -14,6 +14,9 @@
     * [Файл конфігурації](https://github.com/andrewjswan/svitlobot/tree/main/devices/zero-svitlobot.yaml)
     * [Прошивка](/svitlobot/svitlobot-firmware.html)
 
+!!! tip "Корисне"
+    * [Документація](https://www.waveshare.com/wiki/ESP32-S3-Zero)
+
 <div style="clear: both;"></div>
 
 ![ESP32 S3 Zero with RGB Case](img/devices/esp32_s3_zero_with_rgb_case.jpg){ align=left loading=lazy style="width:30%" }
