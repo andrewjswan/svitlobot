@@ -14,4 +14,7 @@
     * [Файл конфігурації](https://github.com/andrewjswan/svitlobot/tree/main/devices/atom-svitlobot.yaml)
     * [Прошивка](/svitlobot/svitlobot-firmware.html)
 
+!!! tip "Корисне"
+    * [Документація](https://docs.m5stack.com/en/core/ATOM%20Lite)
+
 <div style="clear: both;"></div>
