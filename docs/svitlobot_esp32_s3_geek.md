@@ -8,6 +8,9 @@
     * [Файл конфігурації](https://github.com/andrewjswan/svitlobot/tree/main/devices/s3-geek-svitlobot.yaml)
     * [Прошивка](/svitlobot/svitlobot-firmware.html)
 
+!!! tip "Корисне"
+    * [Документація](https://www.waveshare.com/wiki/ESP32-S3-GEEK)
+
 <div style="clear: both;"></div>
 
 | Потрібно ввести ключ               | Світло є, статус передано            | Помилка передачі статусу             | Годинник                             |
