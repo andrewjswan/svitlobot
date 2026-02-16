@@ -24,7 +24,7 @@ binary_sensor:
             message: !lambda |-
               return "ℹ️ *" + id(ping_host).state + ":*\n" +
                      "⚡ Online";
-            silent: false        
+            silent: false
     on_release:
       then:
         - script.execute:
@@ -32,7 +32,7 @@ binary_sensor:
             message: !lambda |-
               return "🚨 *" + id(ping_host).state + ":*\n" +
                      "⚡ Offline";
-            silent: false        
+            silent: false
     web_server:
       sorting_group_id: telegram_group
       sorting_weight: 5
