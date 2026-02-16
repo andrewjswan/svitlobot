@@ -1,4 +1,4 @@
-## M5Stack Atom Lite
+# M5Stack Atom Lite
 
 ![M5Stack Atom Lite](img/devices/m5stack_atom_lite.png){ align=left loading=lazy style="width:30%" }
 
@@ -13,5 +13,8 @@
 !!! example "Конфігурація"
     * [Файл конфігурації](https://github.com/andrewjswan/svitlobot/tree/main/devices/atom-svitlobot.yaml)
     * [Прошивка](/svitlobot/svitlobot-firmware.html)
+
+!!! tip "Корисне"
+    * [Документація](https://docs.m5stack.com/en/core/ATOM%20Lite)
 
 <div style="clear: both;"></div>

@@ -1,4 +1,4 @@
-## WaveShare ESP32-S3 GEEK
+# WaveShare ESP32-S3 GEEK
 
 ![WaveShare ESP32-S3 GEEK](img/devices/esp32-s3-geek.png){ align=left loading=lazy style="width:30%" }
 
@@ -7,6 +7,9 @@
 !!! example "Конфігурація"
     * [Файл конфігурації](https://github.com/andrewjswan/svitlobot/tree/main/devices/s3-geek-svitlobot.yaml)
     * [Прошивка](/svitlobot/svitlobot-firmware.html)
+
+!!! tip "Корисне"
+    * [Документація](https://www.waveshare.com/wiki/ESP32-S3-GEEK)
 
 <div style="clear: both;"></div>
 
