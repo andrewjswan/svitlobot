@@ -68,7 +68,7 @@
 </div>
 
 <div class="button-row">
-  <esp-web-install-button manifest="svitlobot-manifest.json"></esp-web-install-button>
+  <esp-web-install-button manifest="../svitlobot-manifest.json"></esp-web-install-button>
 </div>
 
 </div>

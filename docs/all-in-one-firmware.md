@@ -35,7 +35,7 @@
 </div>
 
 <div class="button-row">
-  <esp-web-install-button manifest="all-in-one-manifest.json"></esp-web-install-button>
+  <esp-web-install-button manifest="../all-in-one-manifest.json"></esp-web-install-button>
 </div>
 
 </div>

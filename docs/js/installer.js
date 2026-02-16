@@ -12,7 +12,7 @@
             let device = radio.value;
             let family = radio.id;
             device = device ? `devices/${device}-` : "";
-            button.manifest = `${device}${family}-manifest.json`;
+            button.manifest = `../${device}${family}-manifest.json`;
         });
     });
 });
