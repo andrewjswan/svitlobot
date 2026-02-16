@@ -1,4 +1,4 @@
-name: Build
+name: Build / SvitloBot
 
 on:
   push:
@@ -6,11 +6,12 @@ on:
       - main
     tags-ignore:
       - '**'
-    paths-ignore:
-      - 'devices/**'
-      - 'healthcheck/**'
-      - 'custom_url/**'
-      - 'all-in-one/**'
+    paths:
+      - 'svitlobot/**'
+
+  pull_request:
+    paths:
+      - 'svitlobot/**'
 
   workflow_call:
     inputs:
@@ -37,9 +38,12 @@ jobs:
     name: Build configuration list
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - id: set-matrix
+      - name: Checkout source code
+        uses: actions/checkout@v6
+      - name: Get SvitloBot matrix
+        id: set-matrix
         run: echo "matrix=$(ls *.yaml | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+        working-directory: svitlobot
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
 
@@ -76,7 +80,7 @@ jobs:
         uses: esphome/build-action@v7
         id: esphome-build
         with:
-          yaml-file: ${{ matrix.config-file }}
+          yaml-file: svitlobot/${{ matrix.config-file }}
           version: latest
           complete-manifest: true
           release-summary: ${{ inputs.release-summary }}

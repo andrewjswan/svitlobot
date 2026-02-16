@@ -12,7 +12,7 @@
 
 !!! example "Конфігурація"
     * [Файл конфігурації](https://github.com/andrewjswan/svitlobot/tree/main/devices/atom-svitlobot.yaml)
-    * [Прошивка](/svitlobot/svitlobot-firmware.html)
+    * [Прошивка](svitlobot-firmware.md)
 
 !!! tip "Корисне"
     * [Документація](https://docs.m5stack.com/en/core/ATOM%20Lite)

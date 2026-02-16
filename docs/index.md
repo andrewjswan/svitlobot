@@ -1,4 +1,4 @@
-# ESPHome SvitloBot
+![Logo](img/logo.png)
 
 [![esphome_badge](https://img.shields.io/static/v1?label=ESPHome&message=Config&color=blue&logo=esphome)](https://esphome.io/)
 [![svitlobot_badge](https://img.shields.io/badge/Svitlo-Bot-orange.svg)](https://svitlobot.in.ua/)
@@ -57,7 +57,7 @@
 
 ## 🚀 Швидкий старт
 
-### Прошивка:
+### Прошивка
 
 Встановити прошивку можна двома способами:
 
@@ -85,4 +85,4 @@
 ![](img/screenshot/dark.jpg) |  ![](img/screenshot/light.jpg)
 
 !!! info "Скріншоти"
-    Приклад скріншотів для пристрою на базі [M5Stack Atom Lite](svitlobot-devices.md#m5stack-atom-lite)
+    Приклад скріншотів для пристрою на базі [M5Stack Atom Lite](svitlobot_m5stack_atom_lite.md)

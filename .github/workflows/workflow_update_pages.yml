@@ -28,7 +28,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build:
-    name: Build
+    name: Build / SvitloBot
     needs:
       - prepare
     uses: ./.github/workflows/build.yaml
@@ -37,7 +37,7 @@ jobs:
       release-url: ${{ needs.prepare.outputs.url }}
 
   build-devices:
-    name: Build / Devices
+    name: Build / SvitloBot / Devices
     needs:
       - prepare
     uses: ./.github/workflows/build_devices.yaml
@@ -176,9 +176,6 @@ jobs:
       - name: 💅 Copy All-In-One Artifacts files
         run: |
           cp -R release-all-in-one-files/*/* site/
-
-      - name: 💅 Copy website files
-        run: cp -R static/* site/
 
       - name: 👀 Check Artifacts
         run: |

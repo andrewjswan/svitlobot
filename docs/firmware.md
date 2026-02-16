@@ -8,13 +8,15 @@
 }
 </style>
 
+# Прошивка
+
 !!! example "Варіанти прошивки"
     | Версія | Опис | Посилання |
     | :--- | :--- | :--- |
-    | **SvitloBot** | Базова версія **(Рекомендовано)** | [SvitloBot - ESP Web Tools](/svitlobot/svitlobot-firmware.html) |
-    | **HealthСheck** | Моніторинг зв'язку | [HealthСheck - ESP Web Tools](/svitlobot/healthcheck-firmware.html) |
-    | **Custom URL** | Індивідуальний моніторинг  | [Custom URL - ESP Web Tools](/svitlobot/custom-url-firmware.html) |
-    | **All-in-One** | Комбінована прошивка | [All-in-One - ESP Web Tools](/svitlobot/all-in-one-firmware.html) |
+    | **SvitloBot** | Базова версія **(Рекомендовано)** | [SvitloBot - ESP Web Tools](svitlobot-firmware.md) |
+    | **HealthСheck** | Моніторинг зв'язку | [HealthСheck - ESP Web Tools](healthcheck-firmware.md) |
+    | **Custom URL** | Індивідуальний моніторинг  | [Custom URL - ESP Web Tools](custom-url-firmware.md) |
+    | **All-in-One** | Комбінована прошивка | [All-in-One - ESP Web Tools](all-in-one-firmware.md) |
 
 !!! note "Опис прошивок"
     [**🛠 Варіанти прошивки**](index.md#-варіанти-прошивки)
