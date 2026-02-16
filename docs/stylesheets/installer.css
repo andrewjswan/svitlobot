@@ -31,7 +31,7 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.esp-installer-page .radios input:checked + img + span, 
+.esp-installer-page .radios input:checked + img + span,
 .esp-installer-page .radios input:checked + img {
 }
 
