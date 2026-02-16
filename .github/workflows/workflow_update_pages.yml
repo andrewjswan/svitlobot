@@ -177,9 +177,6 @@ jobs:
         run: |
           cp -R release-all-in-one-files/*/* site/
 
-      - name: 💅 Copy website files
-        run: cp -R static/* site/
-
       - name: 👀 Check Artifacts
         run: |
           ls -l

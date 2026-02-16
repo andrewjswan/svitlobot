@@ -12,7 +12,7 @@
 
 !!! example "Конфігурація"
     * [Файл конфігурації](https://github.com/andrewjswan/svitlobot/tree/main/devices/zero-svitlobot.yaml)
-    * [Прошивка](/svitlobot/svitlobot-firmware.html)
+    * [Прошивка](svitlobot-firmware.md)
 
 !!! tip "Корисне"
     * [Документація](https://www.waveshare.com/wiki/ESP32-S3-Zero)
