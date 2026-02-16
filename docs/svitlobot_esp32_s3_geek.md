@@ -1,4 +1,4 @@
-## WaveShare ESP32-S3 GEEK
+# WaveShare ESP32-S3 GEEK
 
 ![WaveShare ESP32-S3 GEEK](img/devices/esp32-s3-geek.png){ align=left loading=lazy style="width:30%" }
 
