@@ -101,7 +101,12 @@ nav:
   - Мапи: maps.md
   - Альтернативні прошивки: alternative.md
   - Корисні посилання: additionals.md
-  - Прошивка: firmware.md
+  - Прошивка:
+      - Варіанти прошивки: firmware.md
+      - SvitloBot: svitlobot-firmware.md
+      - HealthCheck: healthcheck-firmware.md
+      - Custom URL: custom-url-firmware.md
+      - All-in-One: all-in-one-firmware.md
 
 extra:
   social:
@@ -110,6 +115,7 @@ extra:
 
 extra_css:
   - stylesheets/table.css
+  - stylesheets/installer.css
 
 plugins:
   - mkdocs-video
