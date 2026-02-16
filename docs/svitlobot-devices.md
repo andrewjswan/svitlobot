@@ -16,5 +16,6 @@
 | Пристрій | Тип індикації | Документація | Перехід |
 | :--- | :--- | :--- | :--- |
 | **M5Stack Atom Lite** | Світлодіод SK6812 RGB | [Відкрити](https://docs.m5stack.com/en/core/ATOM%20Lite) | [Відкрити](svitlobot_m5stack_atom_lite.md) |
+| **M5Stack Atom S3R** | Екран 0.85" 128x128 | [Відкрити](https://docs.m5stack.com/en/core/AtomS3R) | [Відкрити](svitlobot_m5stack_atom_s3r.md) |
 | **WaveShare ESP32-S3 Zero** | Світлодіод WS2812B RGB | [Відкрити](https://www.waveshare.com/wiki/ESP32-S3-Zero) | [Відкрити](svitlobot_esp32_s3_zero_with_rgb.md) |
 | **WaveShare ESP32-S3 GEEK** | Екран 1.14" 135x240 | [Відкрити](https://www.waveshare.com/wiki/ESP32-S3-GEEK) | [Відкрити](svitlobot_esp32_s3_geek.yaml) |
