@@ -1,4 +1,4 @@
-## WaveShare ESP32-S3 Zero with RGB
+# WaveShare ESP32-S3 Zero with RGB
 
 ![ESP32 S3 Zero with RGB](img/devices/esp32_s3_zero_with_rgb.png){ align=left loading=lazy style="width:30%" }
 
