@@ -13,3 +13,5 @@
 !!! example "Конфігурація"
     * [Файл конфігурації](https://github.com/andrewjswan/svitlobot/tree/main/devices/atom-svitlobot.yaml)
     * [Прошивка](/svitlobot/svitlobot-firmware.html)
+
+<div style="clear: both;"></div>
