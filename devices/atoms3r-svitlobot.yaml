@@ -214,7 +214,7 @@ font:
 
   - file: "https://github.com/Templarian/MaterialDesign-Webfont/raw/refs/heads/master/fonts/materialdesignicons-webfont.ttf"
     id: font_mdi_big
-    size: 100
+    size: 90
     glyphs:
       - "\U000F06E9"
       - "\U000F0ECD"
