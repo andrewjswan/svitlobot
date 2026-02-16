@@ -4,12 +4,12 @@ substitutions:
   friendly_name: "Svitlo Bot"
 
 esp32:
-  variant: esp32s2
+  variant: esp32s3
   framework:
     type: esp-idf
 
 dashboard_import:
-  package_import_url: github://andrewjswan/svitlobot/svitlobot_esp32s2.yaml@main
+  package_import_url: github://andrewjswan/svitlobot/svitlobot/svitlobot_esp32s3.yaml@main
 
 packages:
   remote_package:
