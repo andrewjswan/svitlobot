@@ -1,4 +1,4 @@
-## M5Stack Atom Lite
+# M5Stack Atom Lite
 
 ![M5Stack Atom Lite](img/devices/m5stack_atom_lite.png){ align=left loading=lazy style="width:30%" }
 
