@@ -357,27 +357,27 @@ display:
                 const uint32_t duration_ms = ${http_request_interval} * 1000;
 
                 uint32_t elapsed = millis() - id(border_timer_start);
-                elapsed = std::min(elapsed, (uint32_t)duration_ms);
+                elapsed = std::min(elapsed, duration_ms);
                 uint16_t progress = (elapsed * perimeter) / duration_ms;
                 uint16_t p = progress;
 
                 if (p > 0) {
-                  int len = std::min(p, $display_width);
+                  int len = std::min(p, (uint16_t)$display_width);
                   it.filled_rectangle(0, 0, len, thickness, color_progress);
                   p -= len;
                 }
                 if (p > 0) {
-                  int len = std::min(p, $display_height);
+                  int len = std::min(p, (uint16_t)$display_height);
                   it.filled_rectangle($display_width - thickness, 0, thickness, len, color_progress);
                   p -= len;
                 }
                 if (p > 0) {
-                  int len = std::min(p, $display_width);
+                  int len = std::min(p, (uint16_t)$display_width);
                   it.filled_rectangle($display_width - len, $display_height - thickness, len, thickness, color_progress);
                   p -= len;
                 }
                 if (p > 0) {
-                  int len = std::min(p, $display_height);
+                  int len = std::min(p, (uint16_t)$display_height);
                   it.filled_rectangle(0, $display_height - len, thickness, len, color_progress);
                   p -= len;
                 }
