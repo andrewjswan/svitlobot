@@ -78,29 +78,12 @@
 }
 
 .esp-installer-page esp-web-install-button {
-    display: block !important; 
+    display: flex !important;
     width: 320px !important;
     margin: 0 auto;
-    --esp-tools-button-border-radius: 4px !important;
-}
-
-.esp-installer-page esp-web-install-button::part(button) {
-    width: 100% !important;
-    min-height: 48px !important;
-    
-    display: flex !important;
     justify-content: center;
     align-items: center;
-
-    padding: 12px 24px !important;
-    font-size: 0.9rem !important;
-    font-weight: 700 !important;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    --esp-tools-button-border-radius: 4px !important;
 }
 
 .esp-installer-page esp-web-install-button::part(button):hover {
