@@ -16,5 +16,6 @@
 
 !!! tip "Корисне"
     * [Документація](https://docs.m5stack.com/en/core/ATOM%20Lite)
+    * [ESPHome Devices](https://devices.esphome.io/devices/m5stack-atoms3-lite/)
 
 <div style="clear: both;"></div>
