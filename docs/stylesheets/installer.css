@@ -3,12 +3,12 @@
     grid-template-columns: repeat(auto-fit, minmax(150px, 200px));
     gap: 16px;
     margin: 20px 0;
-    
+
     padding: 24px;
     background: var(--md-code-bg-color);
     border-radius: 4px;
     border: 1px dashed var(--md-typeset-table-color);
-    
+
     justify-content: center;
     justify-items: center;
 }
@@ -68,7 +68,7 @@
 
 .esp-installer-page .button-row {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     padding: 12px 24px;
     background: var(--md-code-bg-color);
