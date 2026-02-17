@@ -1,9 +1,16 @@
-﻿.esp-installer-page .radios {
+.esp-installer-page .radios {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 200px));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 200px));
     gap: 16px;
     margin: 20px 0;
-    justify-content: flex-start;
+    
+    padding: 24px;
+    background: var(--md-code-bg-color);
+    border-radius: 4px;
+    border: 1px dashed var(--md-typeset-table-color);
+    
+    justify-content: center;
+    justify-items: center;
 }
 
 .esp-installer-page .radios input[type="radio"] {
@@ -34,10 +41,6 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.esp-installer-page .radios input:checked + img + span,
-.esp-installer-page .radios input:checked + img {
-}
-
 .esp-installer-page .radios input:checked + img {
     filter: drop-shadow(0 0 5px var(--md-accent-fg-color));
 }
@@ -65,10 +68,23 @@
 
 .esp-installer-page .button-row {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     padding: 20px;
     background: var(--md-code-bg-color);
     border-radius: 4px;
     border: 1px dashed var(--md-typeset-table-color);
-    --esp-tools-button-border-radius: 2px;
+    margin: 20px 0;
+}
+
+.esp-installer-page esp-web-install-button {
+    display: inline-block;
+    width: 280px;
+    --esp-tools-button-border-radius: 4px;
+}
+
+.esp-installer-page esp-web-install-button::part(button) {
+    width: 100%;
+    padding: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
 }
