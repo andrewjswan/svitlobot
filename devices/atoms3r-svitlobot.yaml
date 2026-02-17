@@ -88,8 +88,8 @@ web_server:
       sorting_weight: 0
 
 wifi:
-  id: oled_wifi
-  ap: {} # This spawns an AP with the device name and mac address with no password.
+  id: atom_wifi
+  ap: {}  # This spawns an AP with the device name and mac address with no password.
   enable_btm: true
   enable_rrm: true
 
@@ -306,8 +306,8 @@ display:
           const auto COLOR_YELLOW = Color(255, 255, 0);
           const auto COLOR_ORANGE = Color(255, 165, 0);
 
-          bool wifi_connected   = id(oled_wifi).is_connected();
-          bool wifi_ap_mode     = id(oled_wifi).is_ap_active();
+          bool wifi_connected   = id(atom_wifi).is_connected();
+          bool wifi_ap_mode     = id(atom_wifi).is_ap_active();
           bool key_valid        = id(my_key).has_state() && id(my_key).state.length() > 0;
           bool is_loading_stage = millis() < $timeout_for_display_loading;
           bool is_before_first_request = !id(first_request_sent);
@@ -428,7 +428,7 @@ display:
 
           uint8_t y = 1;
           it.printf(2, y, id(font_text_small), COLOR_WHITE, "WiFi:");
-          if (id(oled_wifi).is_connected()) {
+          if (id(atom_wifi).is_connected()) {
             it.printf($text_status_value_x_position, y, id(font_text_small), COLOR_GREEN, "OK");
           } else {
             it.printf($text_status_value_x_position, y, id(font_text_small), COLOR_RED, "ERR");
