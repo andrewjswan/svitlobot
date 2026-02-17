@@ -1,49 +1,52 @@
 substitutions:
-    device: "esp_svitlobot_atoms3r"
-    name: "svitlobot-atoms3r"
-    friendly_name: "Svitlo Bot Atom S3R"
-    project_name: "ajs.SvitloBot"
-    project_version: "3.5.40h"
-    comment: "ESPHome Svitlo Bot | Shadow"
-    icon_x_position: "it.get_width() / 2"
-    icon_y_position: "it.get_height() / 2 - 14"
-    text_bottom_x_position: "1"
-    text_bottom_y_position: "105"
-    text_status_value_x_position: "96"
-    text_status_value_y_position: "24"
-    timeout_for_display_loading: 200000
-    text_center_x_position: "it.get_width() / 2"
-    display_width: "it.get_width()"
-    display_height: "it.get_height()"
-    http_request_interval: "90"  # in seconds
+  device: "esp_svitlobot_atoms3r"
+  name: "svitlobot-atoms3r"
+  friendly_name: "Svitlo Bot Atom S3R"
+  project_name: "ajs.SvitloBot"
+  project_version: "3.5.40h"
+  comment: "ESPHome Svitlo Bot | Shadow"
+  icon_x_position: "it.get_width() / 2"
+  icon_y_position: "it.get_height() / 2 - 14"
+  text_bottom_x_position: "1"
+  text_bottom_y_position: "105"
+  text_status_value_x_position: "96"
+  text_status_value_y_position: "24"
+  timeout_for_display_loading: 200000
+  text_center_x_position: "it.get_width() / 2"
+  display_width: "it.get_width()"
+  display_height: "it.get_height()"
+  http_request_interval: "90"  # in seconds
 
 esphome:
-    name: "${name}"
-    friendly_name: "${friendly_name}"
-    name_add_mac_suffix: true
-    comment: $comment
-    build_path: ./.build/$device
-    project:
-      name: "${project_name}"
-      version: "${project_version}"
+  name: "${name}"
+  friendly_name: "${friendly_name}"
+  name_add_mac_suffix: true
+  comment: $comment
+  build_path: ./.build/$device
+  project:
+    name: "${project_name}"
+    version: "${project_version}"
 
-    on_boot:
-      priority: 600
-      then:
-        - light.turn_on:
-            id: display_light
-            brightness: 70%
+  on_boot:
+    priority: 600
+    then:
+      - light.turn_on:
+          id: display_light
+          brightness: 70%
 
 external_components:
   - source:
       type: git
-        url: https://github.com/andrewjswan/esphome-components
-        ref: main
+      url: https://github.com/andrewjswan/esphome-components
+      ref: main
     components: [shadow]
     refresh: 60s
-  - source: github://m5stack/esphome-yaml/components@main
+  - source:
+      type: git
+      url: github://m5stack/esphome-yaml/components
+      ref: main
     components: [lp5562, es8311]
-    refresh: 1d
+    refresh: 60s
 
 esp32:
   variant: esp32s3
