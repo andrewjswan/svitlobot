@@ -70,7 +70,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px;
+    padding: 24px;
     background: var(--md-code-bg-color);
     border-radius: 4px;
     border: 1px dashed var(--md-typeset-table-color);
@@ -78,29 +78,30 @@
 }
 
 .esp-installer-page esp-web-install-button {
-    display: inline-block;
-    width: 320px;
-    --esp-tools-button-border-radius: 4px;
+    display: block !important;
+    width: 320px !important;
+    margin: 0 auto;
+    
+    --esp-tools-button-border-radius: 4px !important;
 }
 
 .esp-installer-page esp-web-install-button::part(button) {
-    width: 100%;
-    padding: 18px 30px;
-    font-size: 1.1rem;
-    font-weight: 700;
+    min-width: 320px !important; 
+    min-height: 54px !important; 
+    
+    padding: 16px 32px !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
     text-transform: uppercase;
     letter-spacing: 1px;
-    cursor: pointer;
+    
     border: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .esp-installer-page esp-web-install-button::part(button):hover {
     transform: translateY(-2px);
     filter: brightness(1.1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.esp-installer-page esp-web-install-button::part(button):active {
-    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
