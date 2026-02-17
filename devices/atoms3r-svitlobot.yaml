@@ -41,10 +41,7 @@ external_components:
       ref: main
     components: [shadow]
     refresh: 60s
-  - source:
-      type: git
-      url: github://m5stack/esphome-yaml/components
-      ref: main
+  - source: github://m5stack/esphome-yaml/components@main
     components: [lp5562, es8311]
     refresh: 60s
 
