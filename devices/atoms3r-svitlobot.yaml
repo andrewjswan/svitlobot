@@ -164,10 +164,10 @@ script:
                   then:
                     - lambda: |-
                         id(set_state)->execute(response->status_code, response->duration_ms);
-                  on_error:
-                    then:
-                      - lambda: |-
-                          id(set_state)->execute(-1, 0);
+                on_error:
+                  then:
+                    - lambda: |-
+                        id(set_state)->execute(-1, 0);
             - component.update: errors
     mode: queued
 
