@@ -66,7 +66,7 @@
 .esp-installer-page .button-row {
     display: flex;
     justify-content: flex-start;
-    padding: 24px;
+    padding: 20px;
     background: var(--md-code-bg-color);
     border-radius: 4px;
     border: 1px dashed var(--md-typeset-table-color);
@@ -74,33 +74,37 @@
 }
 
 .esp-installer-page esp-web-install-button {
-    --esp-tools-button-border-radius: 4px;
     display: inline-block;
-    width: 300px;
-    height: 56px;
+    width: 280px;
+    height: 52px;
+    
+    --esp-tools-button-bg-color: var(--md-accent-fg-color, #2096f3) !important;
+    --esp-tools-button-color: #ffffff !important;
+    --esp-tools-button-border-radius: 4px !important;
 }
 
 .esp-installer-page esp-web-install-button::part(button) {
     width: 100%;
     height: 100%;
-    font-size: 1rem;
+    color: #ffffff !important; 
+    background-color: var(--md-accent-fg-color, #2096f3) !important;
+    
+    font-size: 0.9rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    
-    background-color: var(--md-accent-fg-color);
-    color: #ffffff;
-    
     border: none;
     cursor: pointer;
     transition: filter 0.2s ease;
+    
+    box-shadow: none;
 }
 
 .esp-installer-page esp-web-install-button::part(button):hover {
-    filter: brightness(1.1);
+    filter: brightness(0.9);
 }
 
-.esp-installer-page esp-web-install-button {
-    --esp-tools-button-bg-color: var(--md-accent-fg-color);
-    --esp-tools-button-color: #ffffff;
+.esp-installer-page esp-web-install-button::part(log) {
+    color: var(--md-typeset-color);
+    background-color: var(--md-code-bg-color);
 }
