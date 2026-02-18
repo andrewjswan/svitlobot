@@ -3,10 +3,10 @@ substitutions:
   name: "svitlobot-atoms3r"
   friendly_name: "Svitlo Bot Atom S3R"
   project_name: "ajs.SvitloBot"
-  project_version: "3.5.40h"
+  project_version: "3.5.41b2"
   comment: "ESPHome Svitlo Bot | Shadow"
   icon_x_position: "it.get_width() / 2"
-  icon_y_position: "it.get_height() / 2 - 14"
+  icon_y_position: "it.get_height() / 2 - 10"
   text_bottom_x_position: "1"
   text_bottom_y_position: "105"
   text_status_value_x_position: "96"
@@ -15,7 +15,7 @@ substitutions:
   text_center_x_position: "it.get_width() / 2"
   display_width: "it.get_width()"
   display_height: "it.get_height()"
-  http_request_interval: "90"  # in seconds
+  http_request_interval: "90" # in seconds
 
 esphome:
   name: "${name}"
@@ -26,13 +26,21 @@ esphome:
   project:
     name: "${project_name}"
     version: "${project_version}"
-
   on_boot:
     priority: 600
     then:
       - light.turn_on:
           id: display_light
           brightness: 70%
+      - lambda: |-
+          auto page = id(display_page_select).current_option();
+          if (page == "State") {
+            id(svitlobot_display).show_page(id(state_page));
+          } else if (page == "Time") {
+            id(svitlobot_display).show_page(id(time_page));
+          } else if (page == "Status") {
+            id(svitlobot_display).show_page(id(status_page));
+          }
 
 external_components:
   - source:
@@ -43,7 +51,10 @@ external_components:
     refresh: 60s
   - source: github://m5stack/esphome-yaml/components@main
     components: [lp5562, es8311]
-    refresh: 60s
+    refresh: 1d
+
+dashboard_import:
+  package_import_url: github://andrewjswan/svitlobot/devices/atoms3r-svitlobot.yaml@main
 
 esp32:
   variant: esp32s3
@@ -69,7 +80,6 @@ ota:
   - platform: http_request
 
 logger:
-  level: DEBUG
 
 mdns:
   disabled: false
@@ -77,7 +87,7 @@ mdns:
 web_server:
   port: 80
   ota: false
-  log: true
+  log: false
   version: 3
   sorting_groups:
     - id: svitlobot_group
@@ -86,7 +96,7 @@ web_server:
 
 wifi:
   id: atom_wifi
-  ap: {}  # This spawns an AP with the device name and mac address with no password.
+  ap: {} # This spawns an AP with the device name and mac address with no password.
   enable_btm: true
   enable_rrm: true
 
@@ -104,7 +114,7 @@ http_request:
 time:
   - platform: sntp
     id: esp_time
-    timezone: "Europe/Kiev"
+    timezone: "Europe/Kyiv"
     update_interval: 1h
     on_time_sync:
       then:
@@ -115,7 +125,7 @@ time:
             - logger.log: Time has been set and is valid!
 
 globals:
-  - id: send_errors
+  - id: send_quality
     type: int
     restore_value: no
     initial_value: "-1"
@@ -162,13 +172,11 @@ script:
                 capture_response: false
                 on_response:
                   then:
-                    - lambda: |-
-                        id(set_state)->execute(response->status_code, response->duration_ms);
+                    - lambda: id(set_state)->execute(response->status_code, response->duration_ms);
                 on_error:
                   then:
-                    - lambda: |-
-                        id(set_state)->execute(-1, 0);
-            - component.update: errors
+                    - lambda: id(set_state)->execute(-1, 0);
+            - component.update: quality
     mode: queued
 
   - id: set_state
@@ -177,14 +185,13 @@ script:
       duration: int
     then:
       - lambda: |-
-          id(border_timer_start) = millis();
-
-          ESP_LOGD("SvitloBot", "======== Request finished (send_state) ========");
           id(first_request_sent) = true;
           id(request_in_progress) = false;
+          id(border_timer_start) = millis();
 
-          if (code > 0) {
-            ESP_LOGD("SvitloBot", "Send status - Ok");
+          if (code > 0)
+          {
+            ESP_LOGI("SvitloBot", "Send status ok");
             id(response_code).publish_state(std::to_string(code));
           } else {
             ESP_LOGE("SvitloBot", "Request failed!");
@@ -200,14 +207,14 @@ script:
           if (code == 200) {
             ESP_LOGI("SvitloBot", "Send status - success");
             id(send_status).publish_state(true);
-            id(send_errors) = 0;
+            id(send_quality) = id(send_quality) < 0 ? 100 : std::min(100, ++id(send_quality));
           } else {
             if (code > 0) {
               ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
             }
 
             id(send_status).publish_state(false);
-            id(send_errors) = id(send_errors) < 0 ? 1 : std::max(1, ++id(send_errors));
+            id(send_quality) = id(send_quality) < 0 ? -1 : std::max(0, --id(send_quality));
           }
     mode: single
 
@@ -215,31 +222,64 @@ font:
   - file: "gfonts://Roboto"
     id: font_text_small
     size: 18
+    bpp: 4
 
   - file: "gfonts://Roboto"
     id: font_text_big
     size: 20
+    bpp: 4
 
   - file: "gfonts://Roboto"
     id: font_time_small
     size: 18
+    bpp: 4
 
   - file: "gfonts://Roboto"
     id: font_time_big
     size: 42
+    bpp: 4
 
-  - file: "https://github.com/Templarian/MaterialDesign-Webfont/raw/refs/heads/master/fonts/materialdesignicons-webfont.ttf"
+  - file: "https://github.com/Templarian/MaterialDesign-Webfont/raw/v7.4.47/fonts/materialdesignicons-webfont.ttf"
     id: font_mdi_big
-    size: 64
+    size: 56
+    bpp: 2
     glyphs:
-      - "\U000F1575"  # key-chain-variant
-      - "\U000F05AA"  # wifi-off
-      - "\U000F16BE"  # wifi-cog (ap mode)
-      - "\U000F05D6"  # alert-circle-outline
-      - "\U000F01F5"  # emoticon-happy-outline
-      - "\U000F051F"  # taimer-sand
-      - "\U000F069B"  # emoticon-dead-outline
-      - "\U000F01F6"  # emoticon-neutral-outline
+      - "\U000F1575" # key-chain-variant
+      - "\U000F05AA" # wifi-off
+      - "\U000F16BE" # wifi-cog (ap mode)
+      - "\U000F05D6" # alert-circle-outline
+      - "\U000F01F5" # emoticon-happy-outline
+      - "\U000F051F" # taimer-sand
+      - "\U000F069B" # emoticon-dead-outline
+      - "\U000F01F6" # emoticon-neutral-outline
+
+color:
+  - id: c_black
+    hex: "000000"
+  - id: c_red
+    red: 100%
+    green: 0%
+    blue: 0%
+  - id: c_yellow
+    red: 100%
+    green: 100%
+    blue: 0%
+  - id: c_green
+    red: 0%
+    green: 100%
+    blue: 0%
+  - id: c_blue
+    red: 0%
+    green: 0%
+    blue: 100%
+  - id: c_gray
+    red: 50%
+    green: 50%
+    blue: 50%
+  - id: c_white
+    red: 100%
+    green: 100%
+    blue: 100%
 
 i2c:
   - id: bsp_bus
@@ -290,112 +330,100 @@ display:
       offset_width: 2
       offset_height: 1
     invert_colors: true
-    rotation: 180°
+    rotation: 180
     update_interval: 1s
     pages:
       - id: state_page
         lambda: |-
-          const auto COLOR_WHITE  = Color(255, 255, 255);
-          const auto COLOR_BLACK  = Color(0, 0, 0);
-          const auto COLOR_RED    = Color(255, 0, 0);
-          const auto COLOR_GREEN  = Color(0, 255, 0);
-          const auto COLOR_BLUE   = Color(0, 0, 255);
-          const auto COLOR_YELLOW = Color(255, 255, 0);
-          const auto COLOR_ORANGE = Color(255, 165, 0);
-
-          bool wifi_connected   = id(atom_wifi).is_connected();
-          bool wifi_ap_mode     = id(atom_wifi).is_ap_active();
-          bool key_valid        = id(my_key).has_state() && id(my_key).state.length() > 0;
+          bool wifi_connected = id(atom_wifi).is_connected();
+          bool wifi_ap_mode = id(atom_wifi).is_ap_active();
+          bool key_valid = id(my_key).has_state() && id(my_key).state.length() > 0;
           bool is_loading_stage = millis() < $timeout_for_display_loading;
           bool is_before_first_request = !id(first_request_sent);
 
-          it.fill(COLOR_BLACK);
+          it.fill(id(c_black));
 
           if (wifi_ap_mode) {
-            it.printf($icon_x_position, $icon_y_position, id(font_mdi_big), COLOR_YELLOW, TextAlign::CENTER, "%s", "\U000F16BE");
-            it.printf($text_center_x_position, $text_bottom_y_position, id(font_text_small), COLOR_WHITE, TextAlign::CENTER, "%s", "WiFi AP mode");
+            it.print($icon_x_position, $icon_y_position, id(font_mdi_big), id(c_yellow), TextAlign::CENTER, "\U000F16BE", id(c_black));
+            it.print($text_center_x_position, $text_bottom_y_position, id(font_text_small), id(c_white), TextAlign::CENTER, "WiFi AP mode", id(c_black));
           } else if (!wifi_connected) {
             if (is_loading_stage) {
-              it.printf($icon_x_position, $icon_y_position, id(font_mdi_big), COLOR_WHITE, TextAlign::CENTER, "%s", "\U000F051F");
+              it.print($icon_x_position, $icon_y_position, id(font_mdi_big), id(c_white), TextAlign::CENTER, "\U000F051F", id(c_black));
             } else {
-              it.printf($icon_x_position, $icon_y_position, id(font_mdi_big), COLOR_RED, TextAlign::CENTER, "%s", "\U000F05AA");
-               it.printf($text_center_x_position, $text_bottom_y_position, id(font_text_small), COLOR_WHITE, TextAlign::CENTER, "%s", "No WiFi");
+              it.print($icon_x_position, $icon_y_position, id(font_mdi_big), id(c_red), TextAlign::CENTER, "\U000F05AA", id(c_black));
+              it.print($text_center_x_position, $text_bottom_y_position, id(font_text_small), id(c_white), TextAlign::CENTER, "No WiFi", id(c_black));
             }
           } else if (wifi_connected) {
             if (key_valid) {
-              Color color_progress = COLOR_GREEN;
+              Color color_progress = id(c_green);
 
               if (id(send_status).state) {
                 if (id(request_in_progress)) {
-                  it.printf($icon_x_position, $icon_y_position, id(font_mdi_big), COLOR_ORANGE, TextAlign::CENTER, "%s", "\U000F051F");
+                  it.print($icon_x_position, $icon_y_position, id(font_mdi_big), id(c_yellow), TextAlign::CENTER, "\U000F051F", id(c_black));
                 } else {
-                  it.printf($icon_x_position, $icon_y_position + 5, id(font_mdi_big), COLOR_GREEN, TextAlign::CENTER, "%s", "\U000F01F5");
-                  it.printf($text_center_x_position, $text_bottom_y_position, id(font_text_small), COLOR_WHITE, TextAlign::CENTER, "%s", id(response_code).state.c_str());
+                  it.print($icon_x_position, $icon_y_position + 5, id(font_mdi_big), id(c_green), TextAlign::CENTER, "\U000F01F5", id(c_black));
+                  it.print($text_center_x_position, $text_bottom_y_position, id(font_text_small), id(c_white), TextAlign::CENTER, id(response_code).state.c_str(), id(c_black));
                 }
               } else {
                 if (is_before_first_request) {
-                  it.printf($icon_x_position, $icon_y_position, id(font_mdi_big), COLOR_ORANGE, TextAlign::CENTER, "%s", "\U000F01F6");
-                  it.printf($text_center_x_position, $text_bottom_y_position, id(font_text_small), COLOR_WHITE, TextAlign::CENTER, "%s", "Please wait…");
+                  it.print($icon_x_position, $icon_y_position, id(font_mdi_big), id(c_yellow), TextAlign::CENTER, "\U000F01F6", id(c_black));
+                  it.print($text_center_x_position, $text_bottom_y_position, id(font_text_small), id(c_white), TextAlign::CENTER, "Please wait…", id(c_black));
 
-                  color_progress = COLOR_ORANGE;
+                  color_progress = id(c_yellow);
                 } else {
                   if (id(request_in_progress)) {
-                    it.printf($icon_x_position, $icon_y_position, id(font_mdi_big), COLOR_ORANGE, TextAlign::CENTER, "%s", "\U000F051F");
+                    it.print($icon_x_position, $icon_y_position, id(font_mdi_big), id(c_yellow), TextAlign::CENTER, "\U000F051F", id(c_black));
                   } else {
-                    it.printf($icon_x_position, $icon_y_position, id(font_mdi_big), COLOR_RED, TextAlign::CENTER, "%s", "\U000F05D6");
-                    it.printf($text_center_x_position, $text_bottom_y_position, id(font_text_small), COLOR_WHITE, TextAlign::CENTER, "%s", id(response_code).state.c_str());
+                    it.print($icon_x_position, $icon_y_position, id(font_mdi_big), id(c_red), TextAlign::CENTER, "\U000F05D6", id(c_black));
+                    it.print($text_center_x_position, $text_bottom_y_position, id(font_text_small), id(c_white), TextAlign::CENTER, id(response_code).state.c_str(), id(c_black));
 
-                    color_progress = COLOR_RED;
+                    color_progress = id(c_red);
                   }
                 }
               }
 
-              // Progress bar
+              // Progress bar.
               if (!id(request_in_progress)) {
-                const uint8_t thickness   = 2;
-                const uint16_t perimeter   = ($display_width + $display_height) * 2;
-                const uint32_t duration_ms = ${http_request_interval} * 1000;
+                const int thickness = 2;
+                const int perimeter = ($display_width + $display_height) * 2;
+                const int duration_ms = ${http_request_interval} * 1000;
 
                 uint32_t elapsed = millis() - id(border_timer_start);
-                elapsed = std::min(elapsed, duration_ms);
-                uint16_t progress = (elapsed * perimeter) / duration_ms;
-                uint16_t p = progress;
+                elapsed = std::min(elapsed, (uint32_t) duration_ms);
+                int progress = (elapsed * perimeter) / duration_ms;
+                int p = progress;
 
                 if (p > 0) {
-                  int len = std::min(p, (uint16_t)$display_width);
+                  int len = std::min(p, $display_width);
                   it.filled_rectangle(0, 0, len, thickness, color_progress);
                   p -= len;
                 }
                 if (p > 0) {
-                  int len = std::min(p, (uint16_t)$display_height);
+                  int len = std::min(p, $display_height);
                   it.filled_rectangle($display_width - thickness, 0, thickness, len, color_progress);
                   p -= len;
                 }
                 if (p > 0) {
-                  int len = std::min(p, (uint16_t)$display_width);
+                  int len = std::min(p, $display_width);
                   it.filled_rectangle($display_width - len, $display_height - thickness, len, thickness, color_progress);
                   p -= len;
                 }
                 if (p > 0) {
-                  int len = std::min(p, (uint16_t)$display_height);
+                  int len = std::min(p, $display_height);
                   it.filled_rectangle(0, $display_height - len, thickness, len, color_progress);
                   p -= len;
                 }
               }
             } else {
-              ESP_LOGD("SvitloBot", "Display: No key set or empty");
-              it.printf($icon_x_position, $icon_y_position, id(font_mdi_big), COLOR_RED, TextAlign::CENTER, "%s", "\U000F1575");
-              it.printf($text_center_x_position, $text_bottom_y_position, id(font_text_small), COLOR_WHITE, TextAlign::CENTER, "%s", "Key is empty");
+              it.print($icon_x_position, $icon_y_position, id(font_mdi_big), id(c_red), TextAlign::CENTER, "\U000F1575", id(c_black));
+              it.print($text_center_x_position, $text_bottom_y_position, id(font_text_small), id(c_white), TextAlign::CENTER, "Key is empty", id(c_black));
             }
           } else {
-            it.printf($icon_x_position, $icon_y_position, id(font_mdi_big), COLOR_RED, TextAlign::CENTER, "%s", "\U000F069B");
+            it.print($icon_x_position, $icon_y_position, id(font_mdi_big), id(c_red), TextAlign::CENTER, "\U000F069B", id(c_black));
           }
       - id: time_page
         lambda: |-
-          const auto COLOR_WHITE = Color(255, 255, 255);
-          const auto COLOR_BLACK = Color(0, 0, 0);
-
-          it.fill(COLOR_BLACK);
+          it.fill(id(c_black));
 
           auto time = id(esp_time).now();
           if (time.is_valid()) {
@@ -404,62 +432,65 @@ display:
             std::string day = time.strftime("%A");
             std::transform(day.begin(), day.end(), day.begin(), ::toupper);
 
-            it.printf(64, 10, id(font_time_small), COLOR_WHITE, TextAlign::CENTER, day.c_str());
-          it.strftime(64, 116, id(font_time_small), COLOR_WHITE, TextAlign::CENTER, "%d-%m-%Y", time);
+            it.print(64, 10, id(font_time_small), id(c_white), TextAlign::CENTER, day.c_str(), id(c_black));
 
-            it.printf(33, 60, id(font_time_big), COLOR_WHITE, TextAlign::CENTER, "%02d", time.hour);
-            it.printf(93, 60, id(font_time_big), COLOR_WHITE, TextAlign::CENTER, "%02d", time.minute);
-            if (blink) {
-              it.printf(62, 57, id(font_time_big), COLOR_WHITE, TextAlign::CENTER, ":");
-            }
+            char date_buf[11]; // "DD-MM-YYYY" + null
+            snprintf(date_buf, sizeof(date_buf), "%02d-%02d-%04d", time.day_of_month, time.month, time.year);
+            it.print(64, 116, id(font_time_small), id(c_white), TextAlign::CENTER, date_buf, id(c_black));
+
+            char hour_buf[3];
+            snprintf(hour_buf, sizeof(hour_buf), "%02d", time.hour);
+            it.print(33, 60, id(font_time_big), id(c_white), TextAlign::CENTER, hour_buf, id(c_black));
+
+            char minute_buf[3];
+            snprintf(minute_buf, sizeof(minute_buf), "%02d", time.minute);
+            it.print(93, 60, id(font_time_big), id(c_white), TextAlign::CENTER, minute_buf, id(c_black));
+
+            if (blink) it.print(62, 57, id(font_time_big), id(c_white), TextAlign::CENTER, ":", id(c_black));
+          } else {
+            it.print(64, 64, id(font_text_small), id(c_white), TextAlign::CENTER, "No time", id(c_black));
           }
       - id: status_page
         lambda: |-
-          const auto COLOR_WHITE  = Color(255,255,255);
-          const auto COLOR_BLACK  = Color(0, 0, 0);
-          const auto COLOR_GREEN  = Color(0,255,0);
-          const auto COLOR_RED    = Color(255,0,0);
-          const auto COLOR_YELLOW = Color(255,255,0);
+          it.fill(id(c_black));
 
-          it.fill(COLOR_BLACK);
-
-          uint8_t y = 1;
-          it.printf(2, y, id(font_text_small), COLOR_WHITE, "WiFi:");
+          int y = 1;
+          it.print(2, y, id(font_text_small), id(c_white), "WiFi:", id(c_black));
           if (id(atom_wifi).is_connected()) {
-            it.printf($text_status_value_x_position, y, id(font_text_small), COLOR_GREEN, "OK");
+            it.print($text_status_value_x_position, y, id(font_text_small), id(c_green), "OK", id(c_black));
           } else {
-            it.printf($text_status_value_x_position, y, id(font_text_small), COLOR_RED, "ERR");
+            it.print($text_status_value_x_position, y, id(font_text_small), id(c_red), "ERR", id(c_black));
           }
           y += $text_status_value_y_position;
 
-          it.printf(2, y, id(font_text_small), COLOR_WHITE, "RSSI:");
+          it.print(2, y, id(font_text_small), id(c_white), "RSSI:", id(c_black));
           if (id(wifi_signal_dbm).has_state()) {
-            it.printf(($text_status_value_x_position - 6), y, id(font_text_small), COLOR_WHITE, "%.0f", id(wifi_signal_dbm).state);
+            it.printf(($text_status_value_x_position - 6), y, id(font_text_small), id(c_white), "%.0f", id(wifi_signal_dbm).state);
           } else {
-            it.print($text_status_value_x_position, y, id(font_text_small), COLOR_RED, "?");
+            it.print($text_status_value_x_position, y, id(font_text_small), id(c_red), "?", id(c_black));
           }
           y += $text_status_value_y_position;
 
-          it.printf(2, y, id(font_text_small), COLOR_WHITE, "Tmp:");
+          it.print(2, y, id(font_text_small), id(c_white), "Tmp:", id(c_black));
           if (id(esp_temperature).has_state()) {
-            it.printf($text_status_value_x_position, y, id(font_text_small), COLOR_WHITE, "%.0f", id(esp_temperature).state);
+            it.printf($text_status_value_x_position, y, id(font_text_small), id(c_white), "%.0f", id(esp_temperature).state);
           } else {
-            it.print($text_status_value_x_position, y, id(font_text_small), COLOR_YELLOW, "?");
+            it.print($text_status_value_x_position, y, id(font_text_small), id(c_yellow), "?", id(c_black));
           }
           y += $text_status_value_y_position;
 
-          it.printf(2, y, id(font_text_small), COLOR_WHITE, "DE:");
-          if (id(errors).has_state()) {
-            it.printf($text_status_value_x_position, y, id(font_text_small), COLOR_WHITE, "%.0f", id(errors).state);
+          it.print(2, y, id(font_text_small), id(c_white), "DQ:", id(c_black));
+          if (id(quality).has_state()) {
+            it.printf($text_status_value_x_position, y, id(font_text_small), id(c_white), "%.0f", id(quality).state);
           } else {
-            it.print($text_status_value_x_position, y, id(font_text_small), COLOR_YELLOW, "?");
+            it.print($text_status_value_x_position, y, id(font_text_small), id(c_yellow), "?", id(c_black));
           }
           y += $text_status_value_y_position;
 
           if (id(ip_adress).has_state()) {
-            it.printf(2, $text_bottom_y_position, id(font_text_small), COLOR_WHITE, "%s", id(ip_adress).state.c_str());
+            it.print(2, $text_bottom_y_position, id(font_text_small), id(c_white), id(ip_adress).state.c_str(), id(c_black));
           } else {
-            it.printf(2, $text_bottom_y_position, id(font_text_small), COLOR_RED, "IP: ---");
+            it.print(2, $text_bottom_y_position, id(font_text_small), id(c_red), "IP: ---", id(c_black));
           }
 
 shadow:
@@ -498,9 +529,7 @@ binary_sensor:
             id: state_last_event
             value: !lambda |-
               auto time = id(esp_time).now();
-              if (!time.is_valid()) {
-                return (time_t)0;
-              }
+              if (!time.is_valid()) return (time_t)0;
               return (time_t)time.timestamp;
     on_release:
       then:
@@ -521,42 +550,36 @@ binary_sensor:
       then:
         - lambda: |-
             id(display_page_index)++;
-            if (id(display_page_index) > 3) {
-              id(display_page_index) = 0;
-            }
+            if (id(display_page_index) > 2) id(display_page_index) = 0;
         - if:
             condition:
-              lambda: "return id(display_page_index) == 3;"
+              lambda: return id(display_page_index) == 0;
             then:
-              - light.turn_off: display_light
-            else:
-              - light.turn_on: display_light
-              - globals.set:
-                  id: state_last_event
-                  value: !lambda |-
-                    auto time = id(esp_time).now();
-                    if (!time.is_valid()) {
-                      return (time_t)0;
-                    }
-                    return (time_t)time.timestamp;
-              - display.page.show: !lambda |-
-                  if (id(display_page_index) == 0) {
-                    return id(state_page);
-                  }
-                  if (id(display_page_index) == 1) {
-                    return id(time_page);
-                  }
-                  return id(status_page);
+              - select.set:
+                  id: display_page_select
+                  option: "State"
+        - if:
+            condition:
+              lambda: return id(display_page_index) == 1;
+            then:
+              - select.set:
+                  id: display_page_select
+                  option: "Time"
+        - if:
+            condition:
+              lambda: return id(display_page_index) == 2;
+            then:
+              - select.set:
+                  id: display_page_select
+                  option: "Status"
 
 sensor:
   - platform: template
-    name: "Delivery Errors"
-    id: errors
+    name: "Delivery Quality"
+    id: quality
     lambda: |-
-      if (!id(my_key).has_state() || id(send_errors) < 0) {
-        return NAN;
-      }
-      return id(send_errors);
+      if (!id(my_key).has_state() || id(send_quality) < 0) return NAN;
+      return id(send_quality);
     accuracy_decimals: 0
     unit_of_measurement: "%"
     icon: mdi:wan
@@ -565,7 +588,8 @@ sensor:
       sorting_group_id: svitlobot_group
       sorting_weight: 3
     on_value_range:
-      - above: 10.0
+      - above: 1.0
+        below: 90.0
         then:
           - button.press: Restart
 
@@ -638,17 +662,17 @@ text_sensor:
             if (x.empty()) {
               id(response_code).set_icon("mdi:web-sync");
             } else if (x == "---") {
-               id(response_code).set_icon("mdi:web-cancel");
+              id(response_code).set_icon("mdi:web-cancel");
             } else {
-               int code = atoi(x.c_str());
-               if (code == 200) {
-                 id(response_code).set_icon("mdi:web-check");
-               } else if (code >= 400) {
-                 id(response_code).set_icon("mdi:web-remove");
-               } else {
-                 id(response_code).set_icon("mdi:web-clock");
-               }
-             }
+              int code = atoi(x.c_str());
+              if (code == 200) {
+                id(response_code).set_icon("mdi:web-check");
+              } else if (code >= 400) {
+                id(response_code).set_icon("mdi:web-remove");
+              } else {
+                id(response_code).set_icon("mdi:web-clock");
+              }
+            }
 
   - platform: template
     name: ESPHome Version
@@ -680,6 +704,32 @@ text_sensor:
       disabled_by_default: true
       entity_category: diagnostic
       icon: mdi:console-network
+
+select:
+  - platform: template
+    name: "Display Page"
+    id: display_page_select
+    optimistic: true
+    restore_value: true
+    entity_category: config
+    disabled_by_default: true
+    options:
+      - "State"
+      - "Time"
+      - "Status"
+    initial_option: "State"
+    set_action:
+      - lambda: |-
+          if (x == "State") {
+              id(display_page_index) = 0;
+              id(svitlobot_display).show_page(id(state_page));
+          } else if (x == "Time") {
+              id(display_page_index) = 1;
+              id(svitlobot_display).show_page(id(time_page));
+          } else if (x == "Status") {
+              id(display_page_index) = 2;
+              id(svitlobot_display).show_page(id(status_page));
+          }
 
 update:
   - platform: http_request

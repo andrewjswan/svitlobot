@@ -1,3 +1,6 @@
+!!! tip "Packages"
+    * [Packages](https://github.com/andrewjswan/svitlobot/tree/main/packages)
+
 !!! note "Devices"
     * [Pixel Clock](https://github.com/andrewjswan/pixel-clock)
     * [Matrix Lamp](https://github.com/andrewjswan/matrix-lamp)

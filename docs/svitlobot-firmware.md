@@ -2,19 +2,22 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="../js/installer.js"></script>
 
-# ESP Web Tools
+<style>
+  .md-typeset h1 {
+    display: none;
+  }
+</style>
 
-Зручні інструменти для управління пристроями `ESP8266` та `ESP32` в браузері:
+[![Made for ESPHome](img/made-for-esphome.svg){ align=right loading=lazy style="width:30%" }](https://esphome.io/guides/made_for_esphome.html)
 
-* Встановити та оновити прошивку.
-* Підключити пристрій до мережі `WiFi`.
-* Відвідати `WEB-інтерфейс` пристрою.
-* Отримати доступ до журналів та надсилати команди терміналу.
-* Додати пристрої до [Home Assistant](https://www.home-assistant.io).
+!!! info "ESP Web Tools"
+    Зручні інструменти для управління пристроями `ESP8266` та `ESP32` в браузері:
 
-<a href="https://esphome.io/guides/made_for_esphome.html" target="_blank">
-  <img src="../img/made-for-esphome.svg" width="300px" alt="Made for ESPHome"/>
-</a>
+    * Встановити та оновити прошивку.
+    * Підключити пристрій до мережі `WiFi`.
+    * Відвідати `WEB-інтерфейс` пристрою.
+    * Отримати доступ до журналів та надсилати команди терміналу.
+    * Додати пристрої до [Home Assistant](https://www.home-assistant.io).
 
 ## Встановити SvitloBot <b><span id="version"></span></b>
 
