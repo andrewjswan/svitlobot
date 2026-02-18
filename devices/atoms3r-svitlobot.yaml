@@ -1,21 +1,26 @@
 substitutions:
   device: "esp_svitlobot_atoms3r"
   name: "svitlobot-atoms3r"
-  friendly_name: "Svitlo Bot Atom S3R"
+  friendly_name: "Svitlo Bot"
   project_name: "ajs.SvitloBot"
-  project_version: "3.5.41b2"
+  project_version: "3.5.39"
   comment: "ESPHome Svitlo Bot | Shadow"
+
   icon_x_position: "it.get_width() / 2"
   icon_y_position: "it.get_height() / 2 - 10"
+
   text_bottom_x_position: "1"
   text_bottom_y_position: "105"
   text_status_value_x_position: "96"
   text_status_value_y_position: "24"
-  timeout_for_display_loading: 200000
   text_center_x_position: "it.get_width() / 2"
+
+  timeout_for_display_loading: 200000
+
   display_width: "it.get_width()"
   display_height: "it.get_height()"
-  http_request_interval: "90" # in seconds
+
+  http_request_interval: "90"  # in seconds
 
 esphome:
   name: "${name}"
@@ -96,7 +101,7 @@ web_server:
 
 wifi:
   id: atom_wifi
-  ap: {} # This spawns an AP with the device name and mac address with no password.
+  ap: {}  # This spawns an AP with the device name and mac address with no password.
   enable_btm: true
   enable_rrm: true
 
@@ -125,7 +130,7 @@ time:
             - logger.log: Time has been set and is valid!
 
 globals:
-  - id: send_quality
+  - id: send_errors
     type: int
     restore_value: no
     initial_value: "-1"
@@ -176,7 +181,7 @@ script:
                 on_error:
                   then:
                     - lambda: id(set_state)->execute(-1, 0);
-            - component.update: quality
+            - component.update: errors
     mode: queued
 
   - id: set_state
@@ -189,9 +194,8 @@ script:
           id(request_in_progress) = false;
           id(border_timer_start) = millis();
 
-          if (code > 0)
-          {
-            ESP_LOGI("SvitloBot", "Send status ok");
+          if (code > 0) {
+            ESP_LOGD("SvitloBot", "Send status Ok");
             id(response_code).publish_state(std::to_string(code));
           } else {
             ESP_LOGE("SvitloBot", "Request failed!");
@@ -205,16 +209,15 @@ script:
           }
 
           if (code == 200) {
-            ESP_LOGI("SvitloBot", "Send status - success");
+            ESP_LOGD("SvitloBot", "Send status - success");
             id(send_status).publish_state(true);
-            id(send_quality) = id(send_quality) < 0 ? 100 : std::min(100, ++id(send_quality));
+            id(send_errors) = 0;
           } else {
             if (code > 0) {
               ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
             }
-
             id(send_status).publish_state(false);
-            id(send_quality) = id(send_quality) < 0 ? -1 : std::max(0, --id(send_quality));
+            id(send_errors) = id(send_errors) < 0 ? 1 : std::max(1, ++id(send_errors));
           }
     mode: single
 
@@ -244,14 +247,14 @@ font:
     size: 56
     bpp: 2
     glyphs:
-      - "\U000F1575" # key-chain-variant
-      - "\U000F05AA" # wifi-off
-      - "\U000F16BE" # wifi-cog (ap mode)
-      - "\U000F05D6" # alert-circle-outline
-      - "\U000F01F5" # emoticon-happy-outline
-      - "\U000F051F" # taimer-sand
-      - "\U000F069B" # emoticon-dead-outline
-      - "\U000F01F6" # emoticon-neutral-outline
+      - "\U000F1575"  # key-chain-variant
+      - "\U000F05AA"  # wifi-off
+      - "\U000F16BE"  # wifi-cog (ap mode)
+      - "\U000F05D6"  # alert-circle-outline
+      - "\U000F01F5"  # emoticon-happy-outline
+      - "\U000F051F"  # taimer-sand
+      - "\U000F069B"  # emoticon-dead-outline
+      - "\U000F01F6"  # emoticon-neutral-outline
 
 color:
   - id: c_black
@@ -382,7 +385,7 @@ display:
                 }
               }
 
-              // Progress bar.
+              // Progress bar
               if (!id(request_in_progress)) {
                 const int thickness = 2;
                 const int perimeter = ($display_width + $display_height) * 2;
@@ -479,9 +482,9 @@ display:
           }
           y += $text_status_value_y_position;
 
-          it.print(2, y, id(font_text_small), id(c_white), "DQ:", id(c_black));
-          if (id(quality).has_state()) {
-            it.printf($text_status_value_x_position, y, id(font_text_small), id(c_white), "%.0f", id(quality).state);
+          it.print(2, y, id(font_text_small), id(c_white), "DE:", id(c_black));
+          if (id(errors).has_state()) {
+            it.printf($text_status_value_x_position, y, id(font_text_small), id(c_white), "%.0f", id(errors).state);
           } else {
             it.print($text_status_value_x_position, y, id(font_text_small), id(c_yellow), "?", id(c_black));
           }
@@ -529,7 +532,9 @@ binary_sensor:
             id: state_last_event
             value: !lambda |-
               auto time = id(esp_time).now();
-              if (!time.is_valid()) return (time_t)0;
+              if (!time.is_valid()) {
+                return (time_t)0;
+              }
               return (time_t)time.timestamp;
     on_release:
       then:
@@ -550,7 +555,9 @@ binary_sensor:
       then:
         - lambda: |-
             id(display_page_index)++;
-            if (id(display_page_index) > 2) id(display_page_index) = 0;
+            if (id(display_page_index) > 2) {
+              id(display_page_index) = 0;
+            }
         - if:
             condition:
               lambda: return id(display_page_index) == 0;
@@ -575,21 +582,20 @@ binary_sensor:
 
 sensor:
   - platform: template
-    name: "Delivery Quality"
-    id: quality
+    name: "Delivery Errors"
+    id: errors
     lambda: |-
-      if (!id(my_key).has_state() || id(send_quality) < 0) return NAN;
-      return id(send_quality);
+      if (!id(my_key).has_state() || id(send_errors) < 0) {
+        return NAN;
+      }
+      return id(send_errors);
     accuracy_decimals: 0
-    unit_of_measurement: "%"
-    icon: mdi:wan
-    state_class: measurement
+    icon: mdi:space-invaders
     web_server:
       sorting_group_id: svitlobot_group
       sorting_weight: 3
     on_value_range:
-      - above: 1.0
-        below: 90.0
+      - above: 10.0
         then:
           - button.press: Restart
 
@@ -721,14 +727,14 @@ select:
     set_action:
       - lambda: |-
           if (x == "State") {
-              id(display_page_index) = 0;
-              id(svitlobot_display).show_page(id(state_page));
+            id(display_page_index) = 0;
+            id(svitlobot_display).show_page(id(state_page));
           } else if (x == "Time") {
-              id(display_page_index) = 1;
-              id(svitlobot_display).show_page(id(time_page));
+            id(display_page_index) = 1;
+            id(svitlobot_display).show_page(id(time_page));
           } else if (x == "Status") {
-              id(display_page_index) = 2;
-              id(svitlobot_display).show_page(id(status_page));
+            id(display_page_index) = 2;
+            id(svitlobot_display).show_page(id(status_page));
           }
 
 update:
