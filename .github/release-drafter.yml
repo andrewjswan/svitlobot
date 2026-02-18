@@ -16,7 +16,7 @@ categories:
       - enhancement
   - title: 📱 Devices
     labels:
-      - device
+      - devices
   - title: 🐛 Bug Fixes
     labels:
       - fix
