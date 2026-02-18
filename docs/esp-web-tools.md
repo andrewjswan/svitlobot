@@ -32,3 +32,7 @@
 | **Браузер** | Тільки на базі **Chromium** (Chrome, Edge, Opera) |
 | **Безпека** | Тільки **HTTPS** або `localhost` |
 | **ОС** | Windows, macOS, Linux, ChromeOS |
+
+## 🎥 Відео інструкція
+
+![type:video](https://www.youtube.com/embed/qwtNtQ2xhjc)
