@@ -108,6 +108,7 @@ nav:
       - HealthCheck: healthcheck-firmware.md
       - Custom URL: custom-url-firmware.md
       - All-in-One: all-in-one-firmware.md
+      - Прошивка через браузер: esp-web-tools.md
 
 extra:
   social:
