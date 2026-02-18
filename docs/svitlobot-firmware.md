@@ -52,6 +52,17 @@
       name="svitlobot-device"
       class="device"
       id="svitlobot"
+      value="svitlobot-atoms3r"
+    />
+    <img src="../img/devices/m5stack_atom_s3r.png" alt="M5Stack Atom S3R" />
+    <span>M5Stack Atom S3R</span>
+  </label>
+  <label>
+    <input
+      type="radio"
+      name="svitlobot-device"
+      class="device"
+      id="svitlobot"
       value="svitlobot-zero"
     />
     <img src="../img/devices/esp32_s3_zero_with_rgb.png" alt="ESP32 S3 with RGB" />
