@@ -11,7 +11,7 @@
 [![Made for ESPHome](img/made-for-esphome.svg){ align=right loading=lazy style="width:30%" }](https://esphome.io/guides/made_for_esphome.html)
 
 !!! info "ESP Web Tools"
-    Зручні інструменти для управління пристроями `ESP8266` та `ESP32` в браузері:
+    Зручний інструмент для управління пристроями `ESP8266` та `ESP32` в браузері:
 
     * Встановити та оновити прошивку.
     * Підключити пристрій до мережі `WiFi`.
