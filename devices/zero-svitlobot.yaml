@@ -1,6 +1,6 @@
 substitutions:
-  device: "esp_svitlobot_atom"
-  name: "svitlobot-atom"
+  device: "esp_svitlobot_zero"
+  name: "svitlobot-zero"
   friendly_name: "Svitlo Bot"
   project_name: "ajs.SvitloBot"
   project_version: "3.5.41"
@@ -25,10 +25,10 @@ external_components:
     refresh: 60s
 
 dashboard_import:
-  package_import_url: github://andrewjswan/svitlobot/devices/atom-svitlobot.yaml@main
+  package_import_url: github://andrewjswan/svitlobot/devices/zero-svitlobot.yaml@main
 
 esp32:
-  board: m5stack-atom
+  variant: esp32s3
   framework:
     type: esp-idf
 
@@ -187,10 +187,9 @@ light:
     icon: mdi:lighthouse
     platform: esp32_rmt_led_strip
     rgb_order: GRB
-    pin: 27
+    pin: 21
     num_leds: 1
-    # rmt_channel: 0
-    chipset: SK6812
+    chipset: WS2812
     restore_mode: ALWAYS_OFF
     web_server:
       sorting_weight: 5

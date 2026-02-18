@@ -1,7 +1,7 @@
 substitutions:
-  device: "esp_svitlobot"
-  name: "svitlobot"
-  friendly_name: "Svitlo Bot"
+  device: "esp_custom_url"
+  name: "custom_url"
+  friendly_name: "Custom URL"
 
 esp32:
   variant: esp32s2
@@ -9,14 +9,14 @@ esp32:
     type: esp-idf
 
 dashboard_import:
-  package_import_url: github://andrewjswan/svitlobot/svitlobot_esp32s2.yaml@main
+  package_import_url: github://andrewjswan/svitlobot/custom_url/custom_url_esp32s2.yaml@main
 
 packages:
   remote_package:
     url: https://github.com/andrewjswan/svitlobot
     files:
       - packages/common.yaml
-      - packages/svitlobot.yaml
+      - packages/custom_url.yaml
       - packages/esp32.yaml
-      - packages/http_ota.yaml
+      - packages/http_ota_custom_url.yaml
     refresh: 1s

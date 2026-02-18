@@ -1,0 +1,122 @@
+# Project information
+site_name: ESPHome SvitloBot | svitlobot.in.ua by Andrew J.Swan
+site_url: https://andrewjswan.github.io/svitlobot
+site_author: Andrew J.Swan
+site_description: >-
+  ESPHome firmware for SvitloBot | svitlobot.in.ua.
+
+# Repository
+repo_name: andrewjswan/svitlobot
+repo_url: https://github.com/andrewjswan/svitlobot
+remote_branch: documentation
+
+# Copyright
+copyright: Copyright &copy; Andrew J.Swan
+
+# Configuration
+theme:
+  name: material
+  favicon: img/favicon.png
+  icon:
+    logo: material/lightbulb-on-outline
+  features:
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+    - content.tabs.link
+    - content.tooltips
+    - navigation.tabs
+    - navigation.features
+    - navigation.path
+    - navigation.top
+    - search.suggest
+    - search.hightlight
+    - toc.integrate
+  language: en
+  font:
+    text: Roboto
+    code: Roboto Mono
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+      primary: indigo
+      accent: indigo
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+      primary: indigo
+      accent: indigo
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+      primary: indigo
+      accent: indigo
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - codehilite
+  - md_in_html
+  - sane_lists
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+  - toc:
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+
+nav:
+  - Головна: index.md
+  - Пристрої:
+      - Каталог: svitlobot-devices.md
+      - M5Stack Atom Lite: svitlobot_m5stack_atom_lite.md
+      - M5Stack Atom S3R: svitlobot_m5stack_atom_s3r.md
+      - WaveShare ESP32-S3 Zero: svitlobot_esp32_s3_zero_with_rgb.md
+      - WaveShare ESP32-S3 GEEK: svitlobot_esp32_s3_geek.md
+  - Пакети:
+      - Пакети: packages.md
+      - Моніторинг доступності (HealthCheck): healthcheck.md
+      - Пінг (Ping Monitor): ping.md
+  - Мапи: maps.md
+  - Альтернативні прошивки: alternative.md
+  - Корисні посилання: additionals.md
+  - Прошивка:
+      - Варіанти прошивки: firmware.md
+      - SvitloBot: svitlobot-firmware.md
+      - HealthCheck: healthcheck-firmware.md
+      - Custom URL: custom-url-firmware.md
+      - All-in-One: all-in-one-firmware.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/andrewjswan
+
+extra_css:
+  - stylesheets/table.css
+  - stylesheets/installer.css
+
+plugins:
+  - mkdocs-video

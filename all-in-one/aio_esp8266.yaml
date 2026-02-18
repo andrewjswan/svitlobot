@@ -1,0 +1,26 @@
+substitutions:
+  device: "esp_all_in_one"
+  name: "all-in-one"
+  friendly_name: "Svitlo Bot (AIO)"
+
+esp8266:
+  # https://github.com/esphome/firmware/blob/main/esp-web-tools/esp8266.yaml
+  # board: esp01_1m
+  # board: d1_mini
+  board: nodemcuv2
+  restore_from_flash: true
+
+dashboard_import:
+  package_import_url: github://andrewjswan/svitlobot/all-in-one/aio_esp8266.yaml@main
+
+packages:
+  remote_package:
+    url: https://github.com/andrewjswan/svitlobot
+    files:
+      - packages/common.yaml
+      - packages/svitlobot.yaml
+      - packages/healthcheck.yaml
+      - packages/custom_url.yaml
+      - packages/sub_devices_all_in_one.yaml
+      - packages/esp8266.yaml
+    refresh: 1s

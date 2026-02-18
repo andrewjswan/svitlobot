@@ -1,4 +1,4 @@
-name: Build / SvitloBot
+name: Build / All-In-One
 
 on:
   push:
@@ -7,11 +7,11 @@ on:
     tags-ignore:
       - '**'
     paths:
-      - 'svitlobot/**'
+      - 'all-in-one/**'
 
   pull_request:
     paths:
-      - 'svitlobot/**'
+      - 'all-in-one/**'
 
   workflow_call:
     inputs:
@@ -40,10 +40,10 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v6
-      - name: Get SvitloBot matrix
+      - name: Get All-In-One matrix
         id: set-matrix
         run: echo "matrix=$(ls *.yaml | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
-        working-directory: svitlobot
+        working-directory: all-in-one
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
 
@@ -73,6 +73,8 @@ jobs:
       matrix:
         config-file: ${{ fromJson(needs.configuration.outputs.matrix) }}
       fail-fast: false
+    outputs:
+      original-name: ${{ steps.esphome-build.outputs.original-name }}
     steps:
       - name: Checkout source code
         uses: actions/checkout@v6
@@ -80,7 +82,7 @@ jobs:
         uses: esphome/build-action@v7
         id: esphome-build
         with:
-          yaml-file: svitlobot/${{ matrix.config-file }}
+          yaml-file: all-in-one/${{ matrix.config-file }}
           version: latest
           complete-manifest: true
           release-summary: ${{ inputs.release-summary }}
@@ -92,7 +94,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v6
         with:
-          name: ${{ format('SvitloBot-{0}', steps.esphome-build.outputs.name) }}
+          name: ${{ format('All-In-One-{0}', steps.esphome-build.outputs.name) }}
           path: output
 
   combine:
@@ -106,7 +108,7 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           path: files
-          pattern: SvitloBot-*
+          pattern: All-In-One-*
 
       - name: Get artifact names
         id: artifacts
@@ -134,10 +136,10 @@ jobs:
             popd
           done
           popd
-          jq -s '(.[0] | del(.builds)) + {"builds": (reduce .[].builds as $b ([]; . + $b))}' files/*/$version/manifest.json > output/$version/svitlobot-manifest.json
+          jq -s '(.[0] | del(.builds)) + {"builds": (reduce .[].builds as $b ([]; . + $b))}' files/*/$version/manifest.json > output/$version/all-in-one-manifest.json
 
       - name: Upload artifact
         uses: actions/upload-artifact@v6
         with:
-          name: SvitloBot
+          name: All-In-One
           path: output

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: I have a question or need support
+    url: https://github.com/andrewjswan/svitlobot/discussions/categories/q-a
+    about: We use GitHub for tracking bugs, check our Discussions for resources on getting help.
+  - name: Feature Request
+    url: https://github.com/andrewjswan/svitlobot/discussions/categories/feature-request
+    about: Please use our Discussions for making feature requests.

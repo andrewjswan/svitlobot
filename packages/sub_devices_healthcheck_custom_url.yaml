@@ -1,0 +1,41 @@
+substitutions:
+  project_name: "ajs.HealthCheck|Custom_URL"
+
+esphome:
+  devices:
+    - id: healthcheck_device
+      name: "HealthCheck"
+    - id: custom_url_device
+      name: "Custom URL"
+
+text:
+  - id: !extend healthcheck_key
+    device_id: healthcheck_device
+
+  - id: !extend custom_url
+    device_id: custom_url_device
+
+binary_sensor:
+  - id: !extend healthcheck_status
+    device_id: healthcheck_device
+
+  - id: !extend custom_url_status
+    device_id: custom_url_device
+
+sensor:
+  - id: !extend healthcheck_errors
+    device_id: healthcheck_device
+  - id: !extend healthcheck_response_duration
+    device_id: healthcheck_device
+
+  - id: !extend custom_url_errors
+    device_id: custom_url_device
+  - id: !extend custom_url_response_duration
+    device_id: custom_url_device
+
+text_sensor:
+  - id: !extend healthcheck_response_code
+    device_id: healthcheck_device
+
+  - id: !extend custom_url_response_code
+    device_id: custom_url_device

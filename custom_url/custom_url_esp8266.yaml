@@ -1,0 +1,23 @@
+substitutions:
+  device: "esp_custom_url"
+  name: "custom_url"
+  friendly_name: "Custom URL"
+
+esp8266:
+  # https://github.com/esphome/firmware/blob/main/esp-web-tools/esp8266.yaml
+  # board: esp01_1m
+  # board: d1_mini
+  board: nodemcuv2
+  restore_from_flash: true
+
+dashboard_import:
+  package_import_url: github://andrewjswan/svitlobot/custom_url/custom_url_esp8266.yaml@main
+
+packages:
+  remote_package:
+    url: https://github.com/andrewjswan/svitlobot
+    files:
+      - packages/common.yaml
+      - packages/custom_url.yaml
+      - packages/esp8266.yaml
+    refresh: 1s

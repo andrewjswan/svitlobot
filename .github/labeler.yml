@@ -1,0 +1,32 @@
+critical:
+  - '/(\s|^)(critical|urgent)(:|\s|$)/i'
+
+enhancement:
+  - '/(\s|^)(feat|features|request|new|improve|create|build|enhancement|reworks?)(:|\s|$)/i'
+
+bug:
+  - '/(\s|^)(bug|fix|fixes|issue|solve|correct|defect)(:|\s|$)/i'
+
+documentation:
+  - '/(\s|^)(docs|document|documentation|readme)(:|\s|$)/i'
+
+invalid:
+  - '/(\s|^)(invalid)(:|\s|$)/i'
+
+help wanted:
+  - '/(\s|^)(help|need|info)(:|\s|$)/i'
+
+svitlobot:
+  - '/(\s|^)(svitlobot)(:|\s|$)/i'
+
+healthcheck:
+  - '/(\s|^)(healthcheck)(:|\s|$)/i'
+
+custom_url:
+  - '/(\s|^)(custom(-|\s|_)url)(:|\s|$)/i'
+
+all-in-one:
+  - '/(\s|^)(all-in-one|aio)(:|\s|$)/i'
+
+devices:
+  - '/(\s|^)(devices?)(:|\s|$)/i'

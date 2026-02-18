@@ -1,0 +1,22 @@
+substitutions:
+  device: "esp_svitlobot"
+  name: "svitlobot"
+  friendly_name: "Svitlo Bot"
+
+esp32:
+  variant: esp32s3
+  framework:
+    type: esp-idf
+
+dashboard_import:
+  package_import_url: github://andrewjswan/svitlobot/svitlobot/svitlobot_esp32s3.yaml@main
+
+packages:
+  remote_package:
+    url: https://github.com/andrewjswan/svitlobot
+    files:
+      - packages/common.yaml
+      - packages/svitlobot.yaml
+      - packages/esp32.yaml
+      - packages/http_ota.yaml
+    refresh: 1s
