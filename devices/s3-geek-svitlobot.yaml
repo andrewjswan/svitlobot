@@ -15,6 +15,11 @@ esphome:
   project:
     name: "${project_name}"
     version: "${project_version}"
+  on_boot:
+    priority: -100
+    then:
+      - delay: 15s
+      - update.check: new_firmware
 
 external_components:
   - source:
@@ -615,5 +620,6 @@ update:
     name: "Firmware Update"
     source: https://andrewjswan.github.io/svitlobot/devices/${name}-svitlobot-manifest.json
     icon: mdi:update
+    update_interval: 3h
     web_server:
       sorting_weight: 15

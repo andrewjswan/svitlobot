@@ -17,5 +17,13 @@ update:
     name: "Firmware Update"
     source: https://andrewjswan.github.io/svitlobot/svitlobot-manifest.json
     icon: mdi:update
+    update_interval: 3h
     web_server:
       sorting_weight: 15
+
+esphome:
+  on_boot:
+    priority: -100
+    then:
+      - delay: 15s
+      - update.check: new_firmware
