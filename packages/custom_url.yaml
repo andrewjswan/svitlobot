@@ -118,6 +118,7 @@ sensor:
       return id(custom_url_send_errors);
     accuracy_decimals: 0
     icon: mdi:space-invaders
+    unit_of_measurement: "error"
     web_server:
       sorting_group_id: custom_url_group
       sorting_weight: 3
