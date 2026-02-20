@@ -27,7 +27,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  build:
+  build-svitlobot:
     name: Build / SvitloBot
     needs:
       - prepare
@@ -36,10 +36,11 @@ jobs:
       release-summary: ${{ needs.prepare.outputs.name }}
       release-url: ${{ needs.prepare.outputs.url }}
 
-  build-devices:
+  build-svitlobot-devices:
     name: Build / SvitloBot / Devices
     needs:
       - prepare
+      - build-svitlobot
     uses: ./.github/workflows/build_devices.yaml
     with:
       release-summary: ${{ needs.prepare.outputs.name }}
@@ -67,6 +68,9 @@ jobs:
     name: Build / Combo
     needs:
       - prepare
+      - build-svitlobot
+      - build-healthcheck
+      - build-custom-url
     uses: ./.github/workflows/build_combo.yaml
     with:
       release-summary: ${{ needs.prepare.outputs.name }}
@@ -76,6 +80,9 @@ jobs:
     name: Build / All-In-One
     needs:
       - prepare
+      - build-svitlobot
+      - build-healthcheck
+      - build-custom-url
     uses: ./.github/workflows/build_all_in_one.yaml
     with:
       release-summary: ${{ needs.prepare.outputs.name }}
@@ -86,8 +93,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     needs:
-      - build
-      - build-devices
+      - build-svitlobot
+      - build-svitlobot-devices
       - build-healthcheck
       - build-custom-url
       - build-combo
