@@ -34,6 +34,7 @@ script:
             and:
               - wifi.connected:
               - lambda: 'return id(custom_url).has_state();'
+              - lambda: 'return id(custom_url).state.find("http") != std::string::npos;
               - lambda: 'return ${lets_ping};'
           then:
             - http_request.get:
