@@ -69,7 +69,7 @@ jobs:
       - name: Prepare SvitloBot | HealthCheck
         id: prepare
         run: |
-          config-file=${{ matrix.config-file }}
+          config-file="${{ matrix.config-file }}"
           config-file="${config-file/aio_/combo_sh_}"
 
           mkdir svitlobot_healthcheck
@@ -171,7 +171,7 @@ jobs:
       - name: Prepare SvitloBot | Custom URL
         id: prepare
         run: |
-          config-file=${{ matrix.config-file }}
+          config-file="${{ matrix.config-file }}"
           config-file="${config-file/aio_/combo_sc_}"
 
           mkdir svitlobot_custom_url
