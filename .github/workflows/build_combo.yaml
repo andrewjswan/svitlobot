@@ -68,18 +68,19 @@ jobs:
         uses: actions/checkout@v6
       - name: Prepare SvitloBot | HealthCheck
         run:
-          mkdir -p svitlobot_healthcheck
+          mkdir svitlobot_healthcheck
+
           cp all-in-one/${{ matrix.config-file }} svitlobot_healthcheck/
-          
+
           sed -i '/import/d' svitlobot_healthcheck/${{ matrix.config-file }}
           sed -i '/custom_url.yaml/d' svitlobot_healthcheck/${{ matrix.config-file }}
           sed -i '/http_ota.yaml/d' svitlobot_healthcheck/${{ matrix.config-file }}
-          
+
           sed 's/sub_devices_all_in_one/sub_devices_svitlobot_healthcheck/g' svitlobot_healthcheck/${{ matrix.config-file }}
           sed 's/all_in_one/svitlobot_healthcheck/g' svitlobot_healthcheck/${{ matrix.config-file }}
           sed 's/all-in-one/svitlobot-healthcheck/g' svitlobot_healthcheck/${{ matrix.config-file }}
           sed 's/Svitlo Bot (AIO)/SvitloBot | HealthCheck/g' svitlobot_healthcheck/${{ matrix.config-file }}
-          
+
       - name: Build firmware
         uses: esphome/build-action@v7
         id: esphome-build
@@ -163,18 +164,19 @@ jobs:
         uses: actions/checkout@v6
       - name: Prepare SvitloBot | Custom URL
         run:
-          mkdir -p svitlobot_custom_url
+          mkdir svitlobot_custom_url
+
           cp all-in-one/${{ matrix.config-file }} svitlobot_custom_url/
-          
+
           sed -i '/import/d' svitlobot_custom_url/${{ matrix.config-file }}
           sed -i '/custom_url.yaml/d' svitlobot_custom_url/${{ matrix.config-file }}
           sed -i '/http_ota.yaml/d' svitlobot_custom_url/${{ matrix.config-file }}
-          
+
           sed 's/sub_devices_all_in_one/sub_devices_svitlobot_custom_url/g' svitlobot_custom_url/${{ matrix.config-file }}
           sed 's/all_in_one/svitlobot_custom_url/g' svitlobot_custom_url/${{ matrix.config-file }}
           sed 's/all-in-one/svitlobot-custom-url/g' svitlobot_custom_url/${{ matrix.config-file }}
           sed 's/Svitlo Bot (AIO)/SvitloBot | Custom URL/g' svitlobot_custom_url/${{ matrix.config-file }}
-          
+
       - name: Build firmware
         uses: esphome/build-action@v7
         id: esphome-build
