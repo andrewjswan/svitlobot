@@ -19,6 +19,7 @@ theme:
   favicon: img/favicon.png
   icon:
     logo: material/lightbulb-on-outline
+  custom_dir: docs/overrides
   features:
     - content.code.annotate
     - content.code.copy
@@ -81,7 +82,7 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
-
+  - meta
   - toc:
       slugify: !!python/object/apply:pymdownx.slugs.slugify
         kwds:
