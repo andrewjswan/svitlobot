@@ -32,20 +32,24 @@ esphome:
     name: "${project_name}"
     version: "${project_version}"
   on_boot:
-    priority: 600
-    then:
-      - light.turn_on:
-          id: display_light
-          brightness: 70%
-      - lambda: |-
-          auto page = id(display_page_select).current_option();
-          if (page == "State") {
-            id(svitlobot_display).show_page(id(state_page));
-          } else if (page == "Time") {
-            id(svitlobot_display).show_page(id(time_page));
-          } else if (page == "Status") {
-            id(svitlobot_display).show_page(id(status_page));
-          }
+    - priority: 600
+      then:
+        - light.turn_on:
+            id: display_light
+            brightness: 70%
+        - lambda: |-
+            auto page = id(display_page_select).current_option();
+            if (page == "State") {
+              id(svitlobot_display).show_page(id(state_page));
+            } else if (page == "Time") {
+              id(svitlobot_display).show_page(id(time_page));
+            } else if (page == "Status") {
+              id(svitlobot_display).show_page(id(status_page));
+            }
+    - priority: -100
+      then:
+        - delay: 15s
+        - update.check: new_firmware
 
 external_components:
   - source:
