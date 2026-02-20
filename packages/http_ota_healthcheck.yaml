@@ -19,3 +19,10 @@ update:
     icon: mdi:update
     web_server:
       sorting_weight: 15
+
+esphome:
+  on_boot:
+    priority: -100
+    then:
+      - delay: 15s
+      - update.check: new_firmware
