@@ -107,6 +107,7 @@ nav:
       - SvitloBot: svitlobot-firmware.md
       - HealthCheck: healthcheck-firmware.md
       - Custom URL: custom-url-firmware.md
+      - Combo: combo-firmware.md
       - All-in-One: all-in-one-firmware.md
       - Прошивка через браузер: esp-web-tools.md
 
