@@ -69,23 +69,23 @@ jobs:
       - name: Prepare SvitloBot | HealthCheck
         id: prepare
         run: |
-          config-file="${{ matrix.config-file }}"
-          config-file="${config-file/aio_/combo_sh_}"
+          configfile=${{ matrix.config-file }}
+          configfile="${configfile/aio_/combo_sh_}"
 
           mkdir svitlobot_healthcheck
 
-          cp all-in-one/${{ matrix.config-file }} svitlobot_healthcheck/$config-file
+          cp all-in-one/${{ matrix.config-file }} svitlobot_healthcheck/$configfile
 
-          sed -i "/import/d" svitlobot_healthcheck/$config-file
-          sed -i "/custom_url.yaml/d" svitlobot_healthcheck/$config-file
-          sed -i "/http_ota.yaml/d" svitlobot_healthcheck/$config-file
+          sed -i "/import/d" svitlobot_healthcheck/$configfile
+          sed -i "/custom_url.yaml/d" svitlobot_healthcheck/$configfile
+          sed -i "/http_ota.yaml/d" svitlobot_healthcheck/$configfile
 
-          sed -i "s/sub_devices_all_in_one/sub_devices_svitlobot_healthcheck/g" svitlobot_healthcheck/$config-file
-          sed -i "s/all_in_one/svitlobot_healthcheck/g" svitlobot_healthcheck/$config-file
-          sed -i "s/all-in-one/svitlobot-healthcheck/g" svitlobot_healthcheck/$config-file
-          sed -i "s/Svitlo Bot (AIO)/SvitloBot | HealthCheck/g" svitlobot_healthcheck/$config-file
+          sed -i "s/sub_devices_all_in_one/sub_devices_svitlobot_healthcheck/g" svitlobot_healthcheck/$configfile
+          sed -i "s/all_in_one/svitlobot_healthcheck/g" svitlobot_healthcheck/$configfile
+          sed -i "s/all-in-one/svitlobot-healthcheck/g" svitlobot_healthcheck/$configfile
+          sed -i "s/Svitlo Bot (AIO)/SvitloBot | HealthCheck/g" svitlobot_healthcheck/$configfile
 
-          echo config-file=$config-file >> $GITHUB_OUTPUT
+          echo config-file=$configfile >> $GITHUB_OUTPUT
 
       - name: Build firmware
         uses: esphome/build-action@v7
@@ -171,23 +171,23 @@ jobs:
       - name: Prepare SvitloBot | Custom URL
         id: prepare
         run: |
-          config-file="${{ matrix.config-file }}"
-          config-file="${config-file/aio_/combo_sc_}"
+          configfile=${{ matrix.config-file }}
+          configfile="${configfile/aio_/combo_sc_}"
 
           mkdir svitlobot_custom_url
 
-          cp all-in-one/${{ matrix.config-file }} svitlobot_custom_url/$config-file
+          cp all-in-one/${{ matrix.config-file }} svitlobot_custom_url/$configfile
 
-          sed -i "/import/d" svitlobot_custom_url/$config-file
-          sed -i "/custom_url.yaml/d" svitlobot_custom_url/$config-file
-          sed -i "/http_ota.yaml/d" svitlobot_custom_url/$config-file
+          sed -i "/import/d" svitlobot_custom_url/$configfile
+          sed -i "/custom_url.yaml/d" svitlobot_custom_url/$configfile
+          sed -i "/http_ota.yaml/d" svitlobot_custom_url/$configfile
 
-          sed -i "s/sub_devices_all_in_one/sub_devices_svitlobot_custom_url/g" svitlobot_custom_url/$config-file
-          sed -i "s/all_in_one/svitlobot_custom_url/g" svitlobot_custom_url/$config-file
-          sed -i "s/all-in-one/svitlobot-custom-url/g" svitlobot_custom_url/$config-file
-          sed -i "s/Svitlo Bot (AIO)/SvitloBot | Custom URL/g" svitlobot_custom_url/$config-file
+          sed -i "s/sub_devices_all_in_one/sub_devices_svitlobot_custom_url/g" svitlobot_custom_url/$configfile
+          sed -i "s/all_in_one/svitlobot_custom_url/g" svitlobot_custom_url/$configfile
+          sed -i "s/all-in-one/svitlobot-custom-url/g" svitlobot_custom_url/$configfile
+          sed -i "s/Svitlo Bot (AIO)/SvitloBot | Custom URL/g" svitlobot_custom_url/$configfile
 
-          echo config-file=$config-file >> $GITHUB_OUTPUT
+          echo config-file=$configfile >> $GITHUB_OUTPUT
 
       - name: Build firmware
         uses: esphome/build-action@v7
