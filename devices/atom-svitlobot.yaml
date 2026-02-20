@@ -231,6 +231,7 @@ sensor:
       return id(send_errors);
     accuracy_decimals: 0
     icon: mdi:space-invaders
+    unit_of_measurement: "error"
     web_server:
       sorting_group_id: svitlobot_group
       sorting_weight: 3
