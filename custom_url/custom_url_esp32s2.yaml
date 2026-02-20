@@ -18,5 +18,5 @@ packages:
       - packages/common.yaml
       - packages/custom_url.yaml
       - packages/esp32.yaml
-      - packages/http_ota_custom_url.yaml
+      - packages/http_ota.yaml
     refresh: 1s
