@@ -63,6 +63,15 @@ jobs:
       release-summary: ${{ needs.prepare.outputs.name }}
       release-url: ${{ needs.prepare.outputs.url }}
 
+  build-combo:
+    name: Build / Combo
+    needs:
+      - prepare
+    uses: ./.github/workflows/build_combo.yaml
+    with:
+      release-summary: ${{ needs.prepare.outputs.name }}
+      release-url: ${{ needs.prepare.outputs.url }}
+
   build-all-in-one:
     name: Build / All-In-One
     needs:
@@ -81,6 +90,7 @@ jobs:
       - build-devices
       - build-healthcheck
       - build-custom-url
+      - build-combo
       - build-all-in-one
 
     steps:
@@ -150,6 +160,18 @@ jobs:
           name: CustomURL
           path: release-custom-url-files
 
+      - name: 📦 Download Combo (S|H) Artifacts
+        uses: actions/download-artifact@v7
+        with:
+          name: SvitloBot-HealthCheck
+          path: release-combo-sh-files
+
+      - name: 📦 Download Combo (S|C) Artifacts
+        uses: actions/download-artifact@v7
+        with:
+          name: SvitloBot-CustomURL
+          path: release-combo-sc-files
+
       - name: 📦 Download All-In-One Artifacts
         uses: actions/download-artifact@v7
         with:
@@ -172,6 +194,14 @@ jobs:
       - name: 💅 Copy Custom URL Artifacts files
         run: |
           cp -R release-custom-url-files/*/* site/
+
+      - name: 💅 Copy Combo (S|H) Artifacts files
+        run: |
+          cp -R release-combo-sh-files/*/* site/
+
+      - name: 💅 Copy Combo (S|C) Artifacts files
+        run: |
+          cp -R release-combo-sc-files/*/* site/
 
       - name: 💅 Copy All-In-One Artifacts files
         run: |
