@@ -746,6 +746,7 @@ update:
     id: new_firmware
     name: "Firmware Update"
     source: https://andrewjswan.github.io/svitlobot/devices/${name}-svitlobot-manifest.json
+    update_interval: 3h
     icon: mdi:update
     web_server:
       sorting_weight: 15
