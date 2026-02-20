@@ -179,7 +179,7 @@ jobs:
           cp all-in-one/${{ matrix.config-file }} svitlobot_custom_url/$configfile
 
           sed -i "/import/d" svitlobot_custom_url/$configfile
-          sed -i "/custom_url.yaml/d" svitlobot_custom_url/$configfile
+          sed -i "/healthcheck.yaml/d" svitlobot_custom_url/$configfile
           sed -i "/http_ota.yaml/d" svitlobot_custom_url/$configfile
 
           sed -i "s/sub_devices_all_in_one/sub_devices_svitlobot_custom_url/g" svitlobot_custom_url/$configfile
