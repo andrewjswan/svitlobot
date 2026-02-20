@@ -17,6 +17,7 @@ update:
     name: "Firmware Update"
     source: https://andrewjswan.github.io/svitlobot/healthcheck-manifest.json
     icon: mdi:update
+    update_interval: 3h
     web_server:
       sorting_weight: 15
 
