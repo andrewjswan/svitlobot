@@ -1,6 +1,6 @@
 substitutions:
   device: "esp_custom_url"
-  name: "custom_url"
+  name: "custom-url"
   friendly_name: "Custom URL"
 
 esp8266:
