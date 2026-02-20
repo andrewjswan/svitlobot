@@ -67,7 +67,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v6
       - name: Prepare SvitloBot | HealthCheck
-        run:
+        run: |
           mkdir svitlobot_healthcheck
 
           cp all-in-one/${{ matrix.config-file }} svitlobot_healthcheck/
@@ -163,7 +163,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v6
       - name: Prepare SvitloBot | Custom URL
-        run:
+        run: |
           mkdir svitlobot_custom_url
 
           cp all-in-one/${{ matrix.config-file }} svitlobot_custom_url/
