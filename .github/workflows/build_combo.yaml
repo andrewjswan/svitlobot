@@ -1,0 +1,242 @@
+name: Build / Combo
+
+on:
+  workflow_call:
+    inputs:
+      release-summary:
+        description: Summary of the release
+        required: false
+        type: string
+        default: ""
+      release-url:
+        description: URL to the release notes
+        required: false
+        type: string
+        default: ""
+      release-version:
+        description: Version of the release
+        required: false
+        type: string
+        default: ""
+
+  workflow_dispatch:
+
+jobs:
+  configuration:
+    name: Build configuration list
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v6
+      - name: Get All-In-One matrix
+        id: set-matrix
+        run: echo "matrix=$(ls *.yaml | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+        working-directory: all-in-one
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+
+  prepare:
+    name: Prepare
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Generate version
+        id: version
+        run: |
+          if [ -n "${{ inputs.release-version }}" ]; then
+            version=${{ inputs.release-version }}
+          else
+            version=dev-$(date +'%Y%m%d-%H%M')
+          fi
+          echo version=$version >> $GITHUB_OUTPUT
+
+  build-svitlobot-healthcheck:
+    name: Build (S|H) ${{ matrix.config-file }}
+    needs:
+      - configuration
+      - prepare
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        config-file: ${{ fromJson(needs.configuration.outputs.matrix) }}
+      fail-fast: false
+    outputs:
+      original-name: ${{ steps.esphome-build.outputs.original-name }}
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v6
+      - name: Prepare SvitloBot | HealthCheck
+        run:
+          mkdir -p svitlobot_healthcheck
+          cp all-in-one/${{ matrix.config-file }} svitlobot_healthcheck/
+          
+          sed -i '/import/d' svitlobot_healthcheck/${{ matrix.config-file }}
+          sed -i '/custom_url.yaml/d' svitlobot_healthcheck/${{ matrix.config-file }}
+          sed -i '/http_ota.yaml/d' svitlobot_healthcheck/${{ matrix.config-file }}
+          
+          sed 's/sub_devices_all_in_one/sub_devices_svitlobot_healthcheck/g' svitlobot_healthcheck/${{ matrix.config-file }}
+          sed 's/all_in_one/svitlobot_healthcheck/g' svitlobot_healthcheck/${{ matrix.config-file }}
+          sed 's/all-in-one/svitlobot-healthcheck/g' svitlobot_healthcheck/${{ matrix.config-file }}
+          sed 's/Svitlo Bot (AIO)/SvitloBot | HealthCheck/g' svitlobot_healthcheck/${{ matrix.config-file }}
+          
+      - name: Build firmware
+        uses: esphome/build-action@v7
+        id: esphome-build
+        with:
+          yaml-file: svitlobot_healthcheck/${{ matrix.config-file }}
+          version: latest
+          complete-manifest: true
+          release-summary: ${{ inputs.release-summary }}
+          release-url: ${{ inputs.release-url }}
+      - name: Move files for versioning
+        run: |
+          mkdir -p output/${{ needs.prepare.outputs.version }}
+          mv ${{ steps.esphome-build.outputs.name }}/* output/${{ needs.prepare.outputs.version }}/
+      - name: Upload artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: ${{ format('SvitloBot-HealthCheck-{0}', steps.esphome-build.outputs.name) }}
+          path: output
+
+  combine-svitlobot-healthcheck:
+    name: Combine (S|H) manifests
+    needs:
+      - prepare
+      - build-svitlobot-healthcheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v7
+        with:
+          path: files
+          pattern: SvitloBot-HealthCheck-*
+
+      - name: Get artifact names
+        id: artifacts
+        run: |
+          artifacts=$(ls --format=single-column files)
+          echo "artifacts<<EOF" >> $GITHUB_OUTPUT
+          echo "$artifacts" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Delete artifacts
+        uses: geekyeggo/delete-artifact@v5.0.0
+        with:
+          name: ${{ steps.artifacts.outputs.artifacts }}
+
+      - name: Combine all parts into a single manifest
+        run: |
+          version="${{ needs.prepare.outputs.version }}"
+          mkdir -p "output/$version"
+          pushd files
+          for device in *; do
+            pushd $device
+            pushd $version
+            cp * "../../../output/$version/"
+            popd
+            popd
+          done
+          popd
+          jq -s '(.[0] | del(.builds)) + {"builds": (reduce .[].builds as $b ([]; . + $b))}' files/*/$version/manifest.json > output/$version/svitlobot-healthcheck-manifest.json
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: SvitloBot-HealthCheck
+          path: output
+
+  build-svitlobot-custom_url:
+    name: Build (S|C) ${{ matrix.config-file }}
+    needs:
+      - configuration
+      - prepare
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        config-file: ${{ fromJson(needs.configuration.outputs.matrix) }}
+      fail-fast: false
+    outputs:
+      original-name: ${{ steps.esphome-build.outputs.original-name }}
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v6
+      - name: Prepare SvitloBot | Custom URL
+        run:
+          mkdir -p svitlobot_custom_url
+          cp all-in-one/${{ matrix.config-file }} svitlobot_custom_url/
+          
+          sed -i '/import/d' svitlobot_custom_url/${{ matrix.config-file }}
+          sed -i '/custom_url.yaml/d' svitlobot_custom_url/${{ matrix.config-file }}
+          sed -i '/http_ota.yaml/d' svitlobot_custom_url/${{ matrix.config-file }}
+          
+          sed 's/sub_devices_all_in_one/sub_devices_svitlobot_custom_url/g' svitlobot_custom_url/${{ matrix.config-file }}
+          sed 's/all_in_one/svitlobot_custom_url/g' svitlobot_custom_url/${{ matrix.config-file }}
+          sed 's/all-in-one/svitlobot-custom-url/g' svitlobot_custom_url/${{ matrix.config-file }}
+          sed 's/Svitlo Bot (AIO)/SvitloBot | Custom URL/g' svitlobot_custom_url/${{ matrix.config-file }}
+          
+      - name: Build firmware
+        uses: esphome/build-action@v7
+        id: esphome-build
+        with:
+          yaml-file: svitlobot_custom_url/${{ matrix.config-file }}
+          version: latest
+          complete-manifest: true
+          release-summary: ${{ inputs.release-summary }}
+          release-url: ${{ inputs.release-url }}
+      - name: Move files for versioning
+        run: |
+          mkdir -p output/${{ needs.prepare.outputs.version }}
+          mv ${{ steps.esphome-build.outputs.name }}/* output/${{ needs.prepare.outputs.version }}/
+      - name: Upload artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: ${{ format('SvitloBot-CustomURL-{0}', steps.esphome-build.outputs.name) }}
+          path: output
+
+  combine-svitlobot-custom_url:
+    name: Combine (S|C) manifests
+    needs:
+      - prepare
+      - build-svitlobot-custom_url
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v7
+        with:
+          path: files
+          pattern: SvitloBot-CustomURL-*
+
+      - name: Get artifact names
+        id: artifacts
+        run: |
+          artifacts=$(ls --format=single-column files)
+          echo "artifacts<<EOF" >> $GITHUB_OUTPUT
+          echo "$artifacts" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Delete artifacts
+        uses: geekyeggo/delete-artifact@v5.0.0
+        with:
+          name: ${{ steps.artifacts.outputs.artifacts }}
+
+      - name: Combine all parts into a single manifest
+        run: |
+          version="${{ needs.prepare.outputs.version }}"
+          mkdir -p "output/$version"
+          pushd files
+          for device in *; do
+            pushd $device
+            pushd $version
+            cp * "../../../output/$version/"
+            popd
+            popd
+          done
+          popd
+          jq -s '(.[0] | del(.builds)) + {"builds": (reduce .[].builds as $b ([]; . + $b))}' files/*/$version/manifest.json > output/$version/svitlobot-custom-url-manifest.json
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: SvitloBot-CustomURL
+          path: output
