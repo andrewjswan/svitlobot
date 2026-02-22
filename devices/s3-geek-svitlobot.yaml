@@ -3,7 +3,7 @@ substitutions:
   name: "svitlobot-s3-geek"
   friendly_name: "Svitlo Bot"
   project_name: "ajs.SvitloBot"
-  project_version: "3.5.43"
+  project_version: "3.5.45"
   comment: "ESPHome Svitlo Bot | Shadow"
 
 esphome:

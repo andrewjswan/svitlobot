@@ -1,6 +1,6 @@
 substitutions:
   project_name: "ajs.Custom_URL"
-  project_version: "3.5.43"
+  project_version: "3.5.45"
 
 http_request:
   useragent: "esphome/${name} (${project_version})"
