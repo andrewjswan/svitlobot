@@ -1,6 +1,6 @@
 substitutions:
   project_name: "ajs.SvitloBot"
-  project_version: "3.5.41"
+  project_version: "3.5.45"
 
 http_request:
   useragent: "esphome/${name} (${project_version})"
@@ -38,7 +38,11 @@ script:
           then:
             - http_request.get:
                 url: !lambda |-
-                  return ((std::string) "https://api.svitlobot.in.ua/channelPing?channel_key=" + id(svitlobot_key).state).c_str();
+                  #if defined(USE_ESP8266)
+                    return ((std::string) "http://api.svitlobot.in.ua/channelPing?channel_key=" + id(svitlobot_key).state).c_str();
+                  #else
+                    return ((std::string) "https://api.svitlobot.in.ua/channelPing?channel_key=" + id(svitlobot_key).state).c_str();
+                  #endif
                 capture_response: false
                 on_response:
                   then:
@@ -120,6 +124,7 @@ sensor:
       return id(svitlobot_send_errors);
     accuracy_decimals: 0
     icon: mdi:space-invaders
+    unit_of_measurement: "error"
     web_server:
       sorting_group_id: svitlobot_group
       sorting_weight: 3

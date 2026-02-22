@@ -3,7 +3,7 @@ substitutions:
   name: "svitlobot-atoms3r"
   friendly_name: "Svitlo Bot"
   project_name: "ajs.SvitloBot"
-  project_version: "3.5.41"
+  project_version: "3.5.45"
   comment: "ESPHome Svitlo Bot | Shadow"
 
   icon_x_position: "it.get_width() / 2"
@@ -19,33 +19,43 @@ substitutions:
 
   display_width: "it.get_width()"
   display_height: "it.get_height()"
+  display_on_level: "0.70"
+  display_dim_level: "0.40"
+  display_off_level: "0.01"
+  display_dim_timeout: "300000"
+  display_off_timeout: "360000"
 
   http_request_interval: "90"  # in seconds
 
 esphome:
   name: "${name}"
   friendly_name: "${friendly_name}"
-  name_add_mac_suffix: true
+  # name_add_mac_suffix: true
   comment: $comment
   build_path: ./.build/$device
   project:
     name: "${project_name}"
     version: "${project_version}"
   on_boot:
-    priority: 600
-    then:
-      - light.turn_on:
-          id: display_light
-          brightness: 70%
-      - lambda: |-
-          auto page = id(display_page_select).current_option();
-          if (page == "State") {
-            id(svitlobot_display).show_page(id(state_page));
-          } else if (page == "Time") {
-            id(svitlobot_display).show_page(id(time_page));
-          } else if (page == "Status") {
-            id(svitlobot_display).show_page(id(status_page));
-          }
+    - priority: 600
+      then:
+        - light.turn_on:
+            id: display_light
+            brightness: 70%
+        - lambda: |-
+            id(last_activity_ms) = millis();
+            auto page = id(display_page_select).current_option();
+            if (page == "State") {
+              id(svitlobot_display).show_page(id(state_page));
+            } else if (page == "Time") {
+              id(svitlobot_display).show_page(id(time_page));
+            } else if (page == "Status") {
+              id(svitlobot_display).show_page(id(status_page));
+            }
+    - priority: -100
+      then:
+        - delay: 15s
+        - update.check: new_firmware
 
 external_components:
   - source:
@@ -160,6 +170,26 @@ globals:
     restore_value: no
     initial_value: "false"
 
+  - id: last_activity_ms
+    type: uint32_t
+    restore_value: no
+    initial_value: "0"
+
+  - id: display_dimmed
+    type: bool
+    restore_value: no
+    initial_value: "false"
+
+  - id: display_off
+    type: bool
+    restore_value: no
+    initial_value: "false"
+
+  - id: display_waking
+    type: bool
+    restore_value: no
+    initial_value: "false"
+
 script:
   - id: send_state
     then:
@@ -221,11 +251,29 @@ script:
           }
     mode: single
 
+  - id: wake_display
+    then:
+      - lambda: |-
+          if (id(display_waking)) return;
+          id(display_waking) = true;
+
+          if (id(display_dimmed) || id(display_off)) {
+            auto call = id(display_light).turn_on();
+            call.set_brightness($display_on_level);
+            call.set_transition_length(300);
+            call.perform();
+
+            id(last_activity_ms) = millis();
+            id(display_dimmed) = false;
+            id(display_off) = false;
+          }
+          id(display_waking) = false;
+
 font:
   - file: "gfonts://Roboto"
     id: font_text_small
     size: 18
-    bpp: 4
+    bpp: 8
 
   - file: "gfonts://Roboto"
     id: font_text_big
@@ -235,7 +283,7 @@ font:
   - file: "gfonts://Roboto"
     id: font_time_small
     size: 18
-    bpp: 4
+    bpp: 8
 
   - file: "gfonts://Roboto"
     id: font_time_big
@@ -502,6 +550,29 @@ shadow:
   startup_delay: 5s
   interval: ${http_request_interval}s
 
+interval:
+  - interval: 10s
+    then:
+      - lambda: |-
+          uint32_t now = millis();
+          uint32_t inactive = now - id(last_activity_ms);
+
+          if (inactive > $display_dim_timeout && !id(display_dimmed) && !id(display_off)) {
+            id(display_dimmed) = true;
+            auto call = id(display_light).turn_on();
+            call.set_brightness($display_dim_level);
+            call.set_transition_length(300);
+            call.perform();
+          }
+
+          if (inactive > $display_off_timeout && !id(display_off)) {
+            id(display_off) = true;
+            auto call = id(display_light).turn_on();
+            call.set_brightness($display_off_level);
+            call.set_transition_length(300);
+            call.perform();
+          }
+
 text:
   - platform: template
     name: "Key"
@@ -540,6 +611,7 @@ binary_sensor:
       then:
         - display.page.show: state_page
         - light.turn_on: display_light
+        - script.execute: wake_display
 
   - platform: gpio
     name: "Button"
@@ -554,9 +626,15 @@ binary_sensor:
     on_press:
       then:
         - lambda: |-
-            id(display_page_index)++;
-            if (id(display_page_index) > 2) {
-              id(display_page_index) = 0;
+            if (!id(display_dimmed) && !id(display_off)) {
+              id(last_activity_ms) = millis();
+
+              id(display_page_index)++;
+              if (id(display_page_index) > 2) {
+                id(display_page_index) = 0;
+              }
+            } else {
+              id(wake_display).execute();
             }
         - if:
             condition:
@@ -591,6 +669,7 @@ sensor:
       return id(send_errors);
     accuracy_decimals: 0
     icon: mdi:space-invaders
+    unit_of_measurement: "error"
     web_server:
       sorting_group_id: svitlobot_group
       sorting_weight: 3
@@ -742,6 +821,7 @@ update:
     id: new_firmware
     name: "Firmware Update"
     source: https://andrewjswan.github.io/svitlobot/devices/${name}-svitlobot-manifest.json
+    update_interval: 3h
     icon: mdi:update
     web_server:
       sorting_weight: 15

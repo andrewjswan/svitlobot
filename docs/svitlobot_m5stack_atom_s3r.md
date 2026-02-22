@@ -6,7 +6,7 @@
 
 !!! example "Конфігурація"
     * [Файл конфігурації](https://github.com/andrewjswan/svitlobot/tree/main/devices/atoms3r-svitlobot.yaml)
-    * [Прошивка](/svitlobot/svitlobot-firmware.html)
+    * [Прошивка](svitlobot-firmware.md)
 
 !!! tip "Корисне"
     * [Конфігурація від виробника](https://github.com/m5stack/esphome-yaml/blob/main/common/atoms3r-with-echo-base.yaml)

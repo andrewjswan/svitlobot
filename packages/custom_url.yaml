@@ -1,6 +1,6 @@
 substitutions:
   project_name: "ajs.Custom_URL"
-  project_version: "3.5.41"
+  project_version: "3.5.45"
 
 http_request:
   useragent: "esphome/${name} (${project_version})"
@@ -34,6 +34,7 @@ script:
             and:
               - wifi.connected:
               - lambda: 'return id(custom_url).has_state();'
+              - lambda: 'return id(custom_url).state.find("http") != std::string::npos;'
               - lambda: 'return ${lets_ping};'
           then:
             - http_request.get:
@@ -118,6 +119,7 @@ sensor:
       return id(custom_url_send_errors);
     accuracy_decimals: 0
     icon: mdi:space-invaders
+    unit_of_measurement: "error"
     web_server:
       sorting_group_id: custom_url_group
       sorting_weight: 3

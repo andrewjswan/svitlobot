@@ -3,18 +3,23 @@ substitutions:
   name: "svitlobot-atom"
   friendly_name: "Svitlo Bot"
   project_name: "ajs.SvitloBot"
-  project_version: "3.5.41"
+  project_version: "3.5.45"
   comment: "ESPHome Svitlo Bot | Shadow"
 
 esphome:
   name: "${name}"
   friendly_name: "${friendly_name}"
-  name_add_mac_suffix: true
+  # name_add_mac_suffix: true
   comment: $comment
   build_path: ./.build/$device
   project:
     name: "${project_name}"
     version: "${project_version}"
+  on_boot:
+    priority: -100
+    then:
+      - delay: 15s
+      - update.check: new_firmware
 
 external_components:
   - source:
@@ -231,6 +236,7 @@ sensor:
       return id(send_errors);
     accuracy_decimals: 0
     icon: mdi:space-invaders
+    unit_of_measurement: "error"
     web_server:
       sorting_group_id: svitlobot_group
       sorting_weight: 3
@@ -354,5 +360,6 @@ update:
     name: "Firmware Update"
     source: https://andrewjswan.github.io/svitlobot/devices/${name}-svitlobot-manifest.json
     icon: mdi:update
+    update_interval: 3h
     web_server:
       sorting_weight: 15

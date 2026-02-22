@@ -1,6 +1,6 @@
 substitutions:
   project_name: "ajs.HealthCheck"
-  project_version: "3.5.41"
+  project_version: "3.5.45"
 
 http_request:
   useragent: "esphome/${name} (${project_version})"
@@ -120,6 +120,7 @@ sensor:
       return id(healthcheck_send_errors);
     accuracy_decimals: 0
     icon: mdi:space-invaders
+    unit_of_measurement: "error"
     web_server:
       sorting_group_id: healthcheck_group
       sorting_weight: 3
