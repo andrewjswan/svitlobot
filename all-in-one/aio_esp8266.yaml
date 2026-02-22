@@ -23,4 +23,5 @@ packages:
       - packages/custom_url.yaml
       - packages/sub_devices_all_in_one.yaml
       - packages/esp8266.yaml
+      - packages/http_ota.yaml
     refresh: 1s
