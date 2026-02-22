@@ -38,7 +38,11 @@ script:
           then:
             - http_request.get:
                 url: !lambda |-
-                  return ((std::string) "https://api.svitlobot.in.ua/channelPing?channel_key=" + id(svitlobot_key).state).c_str();
+                  #if defined(USE_ESP8266)
+                    return ((std::string) "http://api.svitlobot.in.ua/channelPing?channel_key=" + id(svitlobot_key).state).c_str();
+                  #else
+                    return ((std::string) "https://api.svitlobot.in.ua/channelPing?channel_key=" + id(svitlobot_key).state).c_str();
+                  #endif
                 capture_response: false
                 on_response:
                   then:
