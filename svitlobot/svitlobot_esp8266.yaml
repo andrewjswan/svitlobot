@@ -20,4 +20,5 @@ packages:
       - packages/common.yaml
       - packages/svitlobot.yaml
       - packages/esp8266.yaml
+      - packages/http_ota.yaml
     refresh: 1s
