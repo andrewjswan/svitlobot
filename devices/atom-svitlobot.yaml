@@ -9,7 +9,7 @@ substitutions:
 esphome:
   name: "${name}"
   friendly_name: "${friendly_name}"
-  name_add_mac_suffix: true
+  # name_add_mac_suffix: true
   comment: $comment
   build_path: ./.build/$device
   project:
