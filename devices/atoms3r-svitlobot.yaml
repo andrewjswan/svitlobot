@@ -19,8 +19,13 @@ substitutions:
 
   display_width: "it.get_width()"
   display_height: "it.get_height()"
+  display_on_level: "0.70"
+  display_dim_level: "0.40"
+  display_off_level: "0.01"
+  display_dim_timeout: "300000"
+  display_off_timeout: "360000"
 
-  http_request_interval: "90"  # in seconds
+  http_request_interval: "90" # in seconds
 
 esphome:
   name: "${name}"
@@ -38,6 +43,7 @@ esphome:
             id: display_light
             brightness: 70%
         - lambda: |-
+            id(last_activity_ms) = millis();
             auto page = id(display_page_select).current_option();
             if (page == "State") {
               id(svitlobot_display).show_page(id(state_page));
@@ -105,7 +111,7 @@ web_server:
 
 wifi:
   id: atom_wifi
-  ap: {}  # This spawns an AP with the device name and mac address with no password.
+  ap: {} # This spawns an AP with the device name and mac address with no password.
   enable_btm: true
   enable_rrm: true
 
@@ -160,6 +166,26 @@ globals:
     initial_value: "false"
 
   - id: request_in_progress
+    type: bool
+    restore_value: no
+    initial_value: "false"
+
+  - id: last_activity_ms
+    type: uint32_t
+    restore_value: no
+    initial_value: "0"
+
+  - id: display_dimmed
+    type: bool
+    restore_value: no
+    initial_value: "false"
+
+  - id: display_off
+    type: bool
+    restore_value: no
+    initial_value: "false"
+
+  - id: display_waking
     type: bool
     restore_value: no
     initial_value: "false"
@@ -225,11 +251,29 @@ script:
           }
     mode: single
 
+  - id: wake_display
+    then:
+      - lambda: |-
+          if (id(display_waking)) return;
+          id(display_waking) = true;
+
+          if (id(display_dimmed) || id(display_off)) {
+            auto call = id(display_light).turn_on();
+            call.set_brightness($display_on_level);
+            call.set_transition_length(300);
+            call.perform();
+
+            id(last_activity_ms) = millis();
+            id(display_dimmed) = false;
+            id(display_off) = false;
+          }
+          id(display_waking) = false;
+
 font:
   - file: "gfonts://Roboto"
     id: font_text_small
     size: 18
-    bpp: 4
+    bpp: 8
 
   - file: "gfonts://Roboto"
     id: font_text_big
@@ -239,7 +283,7 @@ font:
   - file: "gfonts://Roboto"
     id: font_time_small
     size: 18
-    bpp: 4
+    bpp: 8
 
   - file: "gfonts://Roboto"
     id: font_time_big
@@ -251,14 +295,14 @@ font:
     size: 56
     bpp: 2
     glyphs:
-      - "\U000F1575"  # key-chain-variant
-      - "\U000F05AA"  # wifi-off
-      - "\U000F16BE"  # wifi-cog (ap mode)
-      - "\U000F05D6"  # alert-circle-outline
-      - "\U000F01F5"  # emoticon-happy-outline
-      - "\U000F051F"  # taimer-sand
-      - "\U000F069B"  # emoticon-dead-outline
-      - "\U000F01F6"  # emoticon-neutral-outline
+      - "\U000F1575" # key-chain-variant
+      - "\U000F05AA" # wifi-off
+      - "\U000F16BE" # wifi-cog (ap mode)
+      - "\U000F05D6" # alert-circle-outline
+      - "\U000F01F5" # emoticon-happy-outline
+      - "\U000F051F" # taimer-sand
+      - "\U000F069B" # emoticon-dead-outline
+      - "\U000F01F6" # emoticon-neutral-outline
 
 color:
   - id: c_black
@@ -506,6 +550,29 @@ shadow:
   startup_delay: 5s
   interval: ${http_request_interval}s
 
+interval:
+  - interval: 10s
+    then:
+      - lambda: |-
+          uint32_t now = millis();
+          uint32_t inactive = now - id(last_activity_ms);
+
+          if (inactive > $display_dim_timeout && !id(display_dimmed) && !id(display_off)) {
+            id(display_dimmed) = true;
+            auto call = id(display_light).turn_on();
+            call.set_brightness($display_dim_level);
+            call.set_transition_length(300);
+            call.perform();
+          }
+
+          if (inactive > $display_off_timeout && !id(display_off)) {
+            id(display_off) = true;
+            auto call = id(display_light).turn_on();
+            call.set_brightness($display_off_level);
+            call.set_transition_length(300);
+            call.perform();
+          }
+
 text:
   - platform: template
     name: "Key"
@@ -544,6 +611,7 @@ binary_sensor:
       then:
         - display.page.show: state_page
         - light.turn_on: display_light
+        - script.execute: wake_display
 
   - platform: gpio
     name: "Button"
@@ -558,9 +626,15 @@ binary_sensor:
     on_press:
       then:
         - lambda: |-
-            id(display_page_index)++;
-            if (id(display_page_index) > 2) {
-              id(display_page_index) = 0;
+            if (!id(display_dimmed) && !id(display_off)) {
+              id(last_activity_ms) = millis();
+
+              id(display_page_index)++;
+              if (id(display_page_index) > 2) {
+                id(display_page_index) = 0;
+              }
+            } else {
+              id(wake_display).execute();
             }
         - if:
             condition:
