@@ -25,7 +25,7 @@ substitutions:
   display_dim_timeout: "300000"
   display_off_timeout: "360000"
 
-  http_request_interval: "90" # in seconds
+  http_request_interval: "90"  # in seconds
 
 esphome:
   name: "${name}"
@@ -111,7 +111,7 @@ web_server:
 
 wifi:
   id: atom_wifi
-  ap: {} # This spawns an AP with the device name and mac address with no password.
+  ap: {}  # This spawns an AP with the device name and mac address with no password.
   enable_btm: true
   enable_rrm: true
 
@@ -295,14 +295,14 @@ font:
     size: 56
     bpp: 2
     glyphs:
-      - "\U000F1575" # key-chain-variant
-      - "\U000F05AA" # wifi-off
-      - "\U000F16BE" # wifi-cog (ap mode)
-      - "\U000F05D6" # alert-circle-outline
-      - "\U000F01F5" # emoticon-happy-outline
-      - "\U000F051F" # taimer-sand
-      - "\U000F069B" # emoticon-dead-outline
-      - "\U000F01F6" # emoticon-neutral-outline
+      - "\U000F1575"  # key-chain-variant
+      - "\U000F05AA"  # wifi-off
+      - "\U000F16BE"  # wifi-cog (ap mode)
+      - "\U000F05D6"  # alert-circle-outline
+      - "\U000F01F5"  # emoticon-happy-outline
+      - "\U000F051F"  # taimer-sand
+      - "\U000F069B"  # emoticon-dead-outline
+      - "\U000F01F6"  # emoticon-neutral-outline
 
 color:
   - id: c_black
