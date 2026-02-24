@@ -1,0 +1,48 @@
+name: Build / SvitloBot (Beta)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  configuration:
+    name: Build configuration list
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v6
+      - name: Get SvitloBot matrix
+        id: set-matrix
+        run: echo "matrix=$(ls *.yaml | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+        working-directory: svitlobot
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+
+  build:
+    name: Build (Beta) ${{ matrix.config-file }}
+    needs:
+      - configuration
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        config-file: ${{ fromJson(needs.configuration.outputs.matrix) }}
+      fail-fast: false
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v6
+      - name: Build firmware
+        uses: esphome/build-action@v7
+        id: esphome-build
+        with:
+          yaml-file: svitlobot/${{ matrix.config-file }}
+          version: latest
+          complete-manifest: true
+          release-summary: "SvitloBot | Beta"
+      - name: Move files for versioning
+        run: |
+          mkdir -p output/
+          mv ${{ steps.esphome-build.outputs.name }}/* output/
+      - name: Upload artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: ${{ format('SvitloBot-Beta-{0}', steps.esphome-build.outputs.name) }}
+          path: output
