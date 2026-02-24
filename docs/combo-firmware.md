@@ -8,7 +8,13 @@
   }
 </style>
 
-[![Made for ESPHome](img/made-for-esphome.svg){ align=right loading=lazy style="width:30%" }](https://esphome.io/guides/made_for_esphome.html)
+<div style="float: right; width: 30%; margin-left: 10px;" markdown="1">
+
+[![Made for ESPHome](img/made-for-esphome.svg){ loading=lazy style="width:100% }](https://esphome.io/guides/made_for_esphome.html)
+
+[![ESPHome](https://www.openhomefoundation.org/badges/esphome.png){ loading=lazy style="width:100% }](https://www.openhomefoundation.org)
+
+</div>
 
 !!! info "ESP Web Tools"
     Зручний інструмент для управління пристроями `ESP8266` та `ESP32` в браузері:
