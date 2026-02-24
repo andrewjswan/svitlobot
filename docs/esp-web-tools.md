@@ -35,4 +35,19 @@
 
 ## 🎥 Відео інструкція
 
+### Прошивка СвітлоБот
+
 ![type:video](https://www.youtube.com/embed/qwtNtQ2xhjc)
+
+### Прошивка ESPHome
+
+![type:video](https://www.youtube.com/embed/E8bdATqXM8c)
+
+## Корисне
+
+!!! tip "Посилання"
+    * [ESP Web Tools](https://esphome.github.io/esp-web-tools/)
+    * [ESPHome WEB](https://web.esphome.io/)
+    * [ESPHome](https://esphome.io/)
+    * [Home Assistant](https://www.home-assistant.io/)
+
