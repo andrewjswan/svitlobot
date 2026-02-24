@@ -10,6 +10,8 @@
 
 [![Made for ESPHome](img/made-for-esphome.svg){ align=right loading=lazy style="width:30%" }](https://esphome.io/guides/made_for_esphome.html)
 
+[![ESPHome - A project from the Open Home Foundation](https://www.openhomefoundation.org/badges/esphome.png){ align=right loading=lazy style="width:30%" }](https://www.openhomefoundation.org/)
+
 !!! info "ESP Web Tools"
     Зручний інструмент для управління пристроями `ESP8266` та `ESP32` в браузері:
 
