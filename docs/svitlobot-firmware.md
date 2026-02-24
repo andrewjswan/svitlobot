@@ -12,7 +12,7 @@
 
 [![Made for ESPHome](img/made-for-esphome.svg){ style="width:100%; margin-bottom:10px" }](https://esphome.io)
 
-[![ESPHome](https://www.openhomefoundation.org){ style="width:100%" }](https://www.openhomefoundation.org)
+[![ESPHome](https://www.openhomefoundation.org/badges/esphome.png){ style="width:100%" }](https://www.openhomefoundation.org)
 
 </div>
 
