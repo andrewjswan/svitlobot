@@ -6,6 +6,13 @@ on:
       - main
     tags-ignore:
       - '**'
+    paths-ignore:
+      - '.github/**'
+      - 'docs/**'
+      - 'devices/**'
+      - 'healthcheck/**'
+      - 'custom_url/**'
+      - 'all-in-one/**'
 
   pull_request:
 
