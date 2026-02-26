@@ -122,3 +122,4 @@ extra_css:
 
 plugins:
   - mkdocs-video
+  - social
