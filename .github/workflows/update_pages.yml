@@ -1,4 +1,4 @@
-name: Workflow / Update Pages
+name: Build and Update Pages
 
 on:
   workflow_call:
