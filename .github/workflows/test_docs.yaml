@@ -1,0 +1,48 @@
+name: Pages / Test
+
+on:
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - '**'
+    paths:
+      - 'docs/**'
+
+  pull_request:
+    paths:
+      - 'docs/**'
+
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout Documentation
+        uses: actions/checkout@v6
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: 3.x
+
+      - name: 📦 Install mkDocs
+        run: pip install mkdocs-material
+
+      - name: 📦 Install mkDocs Plug-ins
+        run: pip install mkdocs-video
+
+      - name: 💅 Build the Documentation
+        run: mkdocs build --config-file .mkdocs.yml
+
+      - name: 🚀 Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          name: Documetation
+          path: ${{ github.workspace }}/site/
