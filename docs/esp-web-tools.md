@@ -50,4 +50,3 @@
     * [ESPHome WEB](https://web.esphome.io/)
     * [ESPHome](https://esphome.io/)
     * [Home Assistant](https://www.home-assistant.io/)
-

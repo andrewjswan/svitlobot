@@ -1,5 +1,5 @@
 # Project information
-site_name: ESPHome SvitloBot | svitlobot.in.ua by Andrew J.Swan
+site_name: ESPHome SvitloBot by Andrew J.Swan
 site_url: https://andrewjswan.github.io/svitlobot
 site_author: Andrew J.Swan
 site_description: >-
@@ -19,7 +19,6 @@ theme:
   favicon: img/favicon.png
   icon:
     logo: material/lightbulb-on-outline
-  custom_dir: docs/overrides
   features:
     - content.code.annotate
     - content.code.copy
@@ -122,3 +121,4 @@ extra_css:
 
 plugins:
   - mkdocs-video
+  - social
