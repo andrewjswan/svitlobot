@@ -19,7 +19,6 @@ theme:
   favicon: img/favicon.png
   icon:
     logo: material/lightbulb-on-outline
-  custom_dir: docs/overrides
   features:
     - content.code.annotate
     - content.code.copy
