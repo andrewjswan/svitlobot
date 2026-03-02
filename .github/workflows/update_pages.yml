@@ -145,44 +145,44 @@ jobs:
         run: mkdocs build --config-file .mkdocs.yml
 
       - name: 📦 Download SvitloBot Artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: SvitloBot
           path: release-files
 
       - name: 📦 Download SvitloBot Devices Artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           pattern: Devices-*
           path: release-devices-files
           merge-multiple: true
 
       - name: 📦 Download HealthCheck Artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: HealthCheck
           path: release-healthcheck-files
 
       - name: 📦 Download Custom URL Artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: CustomURL
           path: release-custom-url-files
 
       - name: 📦 Download Combo (S|H) Artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: SvitloBot-HealthCheck
           path: release-combo-sh-files
 
       - name: 📦 Download Combo (S|C) Artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: SvitloBot-CustomURL
           path: release-combo-sc-files
 
       - name: 📦 Download All-In-One Artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: All-In-One
           path: release-all-in-one-files
