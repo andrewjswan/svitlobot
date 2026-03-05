@@ -151,20 +151,3 @@ text_sensor:
     web_server:
       sorting_group_id: custom_url_group
       sorting_weight: 10
-    on_value:
-      then:
-        - lambda: |-
-            if (x.empty()) {
-              id(custom_url_response_code).set_icon("mdi:web-sync");
-            } else if (x == "---") {
-              id(custom_url_response_code).set_icon("mdi:web-cancel");
-            } else {
-              int code = atoi(x.c_str());
-              if (code == 200) {
-                id(custom_url_response_code).set_icon("mdi:web-check");
-              } else if (code >= 400) {
-                id(custom_url_response_code).set_icon("mdi:web-remove");
-              } else {
-                id(custom_url_response_code).set_icon("mdi:web-clock");
-              }
-            }
