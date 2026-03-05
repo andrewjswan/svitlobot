@@ -741,23 +741,6 @@ text_sensor:
     web_server:
       sorting_group_id: svitlobot_group
       sorting_weight: 10
-    on_value:
-      then:
-        - lambda: |-
-            if (x.empty()) {
-              id(response_code).set_icon("mdi:web-sync");
-            } else if (x == "---") {
-              id(response_code).set_icon("mdi:web-cancel");
-            } else {
-              int code = atoi(x.c_str());
-              if (code == 200) {
-                id(response_code).set_icon("mdi:web-check");
-              } else if (code >= 400) {
-                id(response_code).set_icon("mdi:web-remove");
-              } else {
-                id(response_code).set_icon("mdi:web-clock");
-              }
-            }
 
   - platform: template
     name: ESPHome Version
