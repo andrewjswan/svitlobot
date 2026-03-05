@@ -2,6 +2,6 @@ substitutions:
   comment: "ESPHome Svitlo Bot (ESP 8266)"
 
 interval:
-  - interval: 90s
+  - interval: 55s
     then:
       - script.execute: site_ping

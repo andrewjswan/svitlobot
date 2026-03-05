@@ -13,7 +13,7 @@ shadow:
   id: svitlobot
   script_id: site_ping
   startup_delay: 5s
-  interval: 1.5min
+  interval: 55s
 
 sensor:
   - platform: internal_temperature
