@@ -25,7 +25,7 @@ substitutions:
   display_dim_timeout: "300000"
   display_off_timeout: "360000"
 
-  http_request_interval: "90"  # in seconds
+  http_request_interval: "55"  # in seconds
 
 esphome:
   name: "${name}"
