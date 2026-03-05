@@ -5,6 +5,7 @@ substitutions:
   project_name: "ajs.SvitloBot"
   project_version: "3.5.45"
   comment: "ESPHome Svitlo Bot | Shadow"
+  ping_interval: "55s"
 
 esphome:
   name: "${name}"
@@ -184,7 +185,7 @@ shadow:
   id: svitlobot
   script_id: send_state
   startup_delay: 5s
-  interval: 1.5min
+  interval: ${ping_interval}
 
 light:
   - name: "LED"
