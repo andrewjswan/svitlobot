@@ -90,7 +90,7 @@ jobs:
           mkdir -p output/${{ needs.prepare.outputs.version }}
           mv ${{ steps.esphome-build.outputs.name }}/* output/${{ needs.prepare.outputs.version }}/
       - name: Upload artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ format('SvitloBot-{0}', steps.esphome-build.outputs.name) }}
           path: output
@@ -137,7 +137,7 @@ jobs:
           jq -s '(.[0] | del(.builds)) + {"builds": (reduce .[].builds as $b ([]; . + $b))}' files/*/$version/manifest.json > output/$version/svitlobot-manifest.json
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: SvitloBot
           path: output
