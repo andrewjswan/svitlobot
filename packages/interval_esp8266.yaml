@@ -1,0 +1,21 @@
+number:
+  - platform: template
+    name: Interval
+    icon: mdi:speedometer
+    min_value: 30
+    max_value: 600
+    step: 5
+    optimistic: true
+    id: ping_interval
+    initial_value: 55
+    mode: slider
+    unit_of_measurement: "s"
+    entity_category: config
+    device_class: duration
+    restore_value: true
+    disabled_by_default: true
+    on_value:
+      then:
+        - lambda: |-
+            id(svitlobot).set_update_interval(x * 1000);
+            id(svitlobot).call_setup();
