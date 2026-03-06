@@ -128,6 +128,19 @@ jobs:
       - name: ⬇️ Checkout website files
         uses: actions/checkout@v6
 
+      - name:  ⬇️ Checkout Changelog
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          sparse-checkout: |
+            CHANGELOG.md
+          sparse-checkout-cone-mode: false
+          path: changelog
+
+      - name: 💅 Copy Changelog to Docs
+        run: |
+          cp -R changelog/* docs/
+
       - name: 🐍 Set up Python
         uses: actions/setup-python@v6
         with:
