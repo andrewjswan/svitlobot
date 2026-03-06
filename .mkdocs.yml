@@ -109,6 +109,7 @@ nav:
       - Combo: combo-firmware.md
       - All-in-One: all-in-one-firmware.md
       - Прошивка через браузер: esp-web-tools.md
+  - Список змін: CHANGELOG.md
 
 extra:
   social:
