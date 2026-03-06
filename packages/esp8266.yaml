@@ -3,5 +3,6 @@ substitutions:
 
 interval:
   - interval: 55s
+    id: svitlobot
     then:
       - script.execute: site_ping
