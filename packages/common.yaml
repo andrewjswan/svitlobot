@@ -43,6 +43,10 @@ debug:
 script:
   - id: site_ping
     then:
+      - wait_until:
+          condition:
+            wifi.connected:
+          timeout: 15s
       - logger.log: "Pinging..."
 
 sensor:
