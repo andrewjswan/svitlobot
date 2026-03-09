@@ -1,5 +1,35 @@
 # Changelog
 
+## [v3.5.49](https://github.com/andrewjswan/svitlobot/compare/v3.5.47...v3.5.49) - 2026-03-09
+
+### What's Changed
+
+### 🚀 Features
+
+- Increasing the `Ping priority` of a task form 1 to 3 @andrewjswan (#150)
+- Added `WiFi` wait time when starting `Ping` @andrewjswan (#151)
+- Add `Ping interval change` package to tests @andrewjswan (#149)
+- `Ping` interval change package @andrewjswan (#148)
+- Remove `Response code` icon changes due ESPHome 2026.3 @andrewjswan (#147)
+
+### 📱 Devices
+
+- Increasing the `Ping priority` of a task form 1 to 3 @andrewjswan (#150)
+- Added `WiFi` wait time when starting `Ping` @andrewjswan (#151)
+
+### 🧰 Maintenance
+
+- `Ping` interval change package @andrewjswan (#148)
+- Remove `Response code` icon changes due ESPHome 2026.3 @andrewjswan (#147)
+
+### 🤝 Support
+
+If you like the project, you can support it with a star ⭐ on GitHub.
+
+### ✨ Changelog
+
+**Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.47...v3.5.49
+
 ## [v3.5.47](https://github.com/andrewjswan/svitlobot/compare/v3.5.45...v3.5.47) - 2026-03-05
 
 ### What's Changed
@@ -268,10 +298,12 @@ Online updates may not work, so it is better to flash the device to the current 
 ## [v3.5.25](https://github.com/andrewjswan/svitlobot/compare/v3.5.21...v3.5.25) - 2025-11-05
 
 ### What's Changed
+
 * SvitloBot version bump to ESPHome 2025.9.1 by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/23
 * SvitloBot version bump to ESPHome 2025.10 by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/27
 
 ### Dependencies
+
 * ESP: Bump actions/download-artifact from 4 to 5 by @dependabot[bot] in https://github.com/andrewjswan/svitlobot/pull/20
 * ESP: Bump actions/checkout from 4 to 5 by @dependabot[bot] in https://github.com/andrewjswan/svitlobot/pull/21
 * ESP: Bump actions/upload-pages-artifact from 3 to 4 by @dependabot[bot] in https://github.com/andrewjswan/svitlobot/pull/22
