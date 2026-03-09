@@ -88,6 +88,10 @@ globals:
 script:
   - id: send_state
     then:
+      - wait_until:
+          condition:
+            wifi.connected:
+          timeout: 15s
       - if:
           condition:
             and:
