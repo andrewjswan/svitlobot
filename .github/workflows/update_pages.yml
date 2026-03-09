@@ -128,7 +128,7 @@ jobs:
       - name: ⬇️ Checkout website files
         uses: actions/checkout@v6
 
-      - name:  ⬇️ Checkout Changelog
+      - name: ⬇️ Checkout Changelog
         uses: actions/checkout@v6
         with:
           ref: main
