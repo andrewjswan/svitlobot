@@ -21,3 +21,5 @@ packages:
   sub_devices: !include ../packages/sub_devices_all_in_one.yaml
   ping: !include ../packages/ping.yaml
   esp8266: !include ../packages/esp8266.yaml
+  interval: !include ../packages/interval_esp8266.yaml
+  http_ota: !include ../packages/http_ota.yaml
