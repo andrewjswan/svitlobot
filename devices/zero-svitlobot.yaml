@@ -186,6 +186,7 @@ shadow:
   script_id: send_state
   startup_delay: 5s
   interval: ${ping_interval}
+  priority: 3
 
 light:
   - name: "LED"
