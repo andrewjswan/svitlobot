@@ -3,7 +3,8 @@ title: ESPHome SvitloBot | svitlobot.in.ua by Andrew J.Swan
 description: SvitloBot просте та зручне рішення для інтеграції з системою СвітлоБот, що дозволяє автоматично повідомляти про наявність світла.
 ---
 
-![Logo](img/logo.png)
+![Logo](img/logo_light.png#only-dark){ loading=lazy style="width:70%" }
+![Logo](img/logo_dark.png#only-light){ loading=lazy style="width:70%" }
 
 [![esphome_badge](https://img.shields.io/static/v1?label=ESPHome&message=Config&color=blue&logo=esphome)](https://esphome.io/)
 [![svitlobot_badge](https://img.shields.io/badge/Svitlo-Bot-orange.svg)](https://svitlobot.in.ua/)
