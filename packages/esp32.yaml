@@ -14,6 +14,7 @@ shadow:
   script_id: site_ping
   startup_delay: 5s
   interval: 55s
+  prority: 3
 
 sensor:
   - platform: internal_temperature
