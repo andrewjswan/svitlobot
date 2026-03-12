@@ -1,3 +1,8 @@
+---
+title: Debug | Dev
+description: Версії прошивок для відладки та перевірки працездатності в наступних версіях ESPHome
+---
+
 <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="../js/installer.js"></script>
@@ -24,6 +29,10 @@
     * Відвідати `WEB-інтерфейс` пристрою.
     * Отримати доступ до журналів та надсилати команди терміналу.
     * Додати пристрої до [Home Assistant](https://www.home-assistant.io).
+
+!!! bug "Попередження"
+    * У прошивках активовано детальний лог-файл.
+    * Версія `Dev` скомпільована на версії ESPHome для розробників.
 
 ## Встановити SvitloBot | Debug <b><span id="version"></span></b>
 
