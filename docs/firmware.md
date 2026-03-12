@@ -18,5 +18,8 @@
     | **Custom URL** | Індивідуальний моніторинг  | [Custom URL - ESP Web Tools](custom-url-firmware.md) |
     | **All-in-One** | Комбінована прошивка | [All-in-One - ESP Web Tools](all-in-one-firmware.md) |
 
+!!! info "Період надсилання статусу (ping)"
+    Період надсилання статусу в поточній прошивці дорівнює 55с.
+
 !!! note "Опис прошивок"
     [**🛠 Варіанти прошивки**](index.md#-варіанти-прошивки)
