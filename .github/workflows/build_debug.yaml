@@ -77,7 +77,7 @@ jobs:
           cp svitlobot/${{ matrix.config-file }} svitlobot_debug/$configfile
           sed -i "/import/d" svitlobot_debug/$configfile
           sed -i 's/name: "svitlobot"/name: "svitlobot_debug"/g' svitlobot_debug/$configfile
-          
+
           sed -i "s/Svitlo Bot/SvitloBot | Debug/g" packages/esp32.yaml
           sed -i "s/Svitlo Bot/SvitloBot | Debug/g" packages/esp8266.yaml
 
@@ -178,7 +178,7 @@ jobs:
           cp svitlobot/${{ matrix.config-file }} svitlobot_dev/$configfile
           sed -i "/import/d" svitlobot_dev/$configfile
           sed -i 's/name: "svitlobot"/name: "svitlobot_dev"/g' svitlobot_dev/$configfile
-          
+
           sed -i "s/Svitlo Bot/SvitloBot | Debug/g" packages/esp32.yaml
           sed -i "s/Svitlo Bot/SvitloBot | Debug/g" packages/esp8266.yaml
 
