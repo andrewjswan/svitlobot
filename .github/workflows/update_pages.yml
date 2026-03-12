@@ -88,6 +88,16 @@ jobs:
       release-summary: ${{ needs.prepare.outputs.name }}
       release-url: ${{ needs.prepare.outputs.url }}
 
+  build-debug:
+    name: Build / Debug
+    needs:
+      - prepare
+      - build-svitlobot
+    uses: ./.github/workflows/build_debug.yaml
+    with:
+      release-summary: ${{ needs.prepare.outputs.name }}
+      release-url: ${{ needs.prepare.outputs.url }}
+
   cleanup:
     name: GitHub Pages / Delete deployment
     runs-on: ubuntu-latest
@@ -99,6 +109,7 @@ jobs:
       - build-custom-url
       - build-combo
       - build-all-in-one
+      - build-debug
 
     steps:
       - name: Delete deployment
@@ -200,6 +211,18 @@ jobs:
           name: All-In-One
           path: release-all-in-one-files
 
+      - name: 📦 Download Debug Artifacts
+        uses: actions/download-artifact@v8
+        with:
+          name: SvitloBot-Debug
+          path: release-debug-files
+
+      - name: 📦 Download DEV Artifacts
+        uses: actions/download-artifact@v8
+        with:
+          name: SvitloBot-DEV
+          path: release-dev-files
+
       - name: 💅 Copy SvitloBot Artifacts files
         run: |
           cp -R release-files/*/* site/
@@ -228,6 +251,14 @@ jobs:
       - name: 💅 Copy All-In-One Artifacts files
         run: |
           cp -R release-all-in-one-files/*/* site/
+
+      - name: 💅 Copy Debug Artifacts files
+        run: |
+          cp -R release-debug-files/*/* site/
+
+      - name: 💅 Copy DEV Artifacts files
+        run: |
+          cp -R release-dev-files/*/* site/
 
       - name: 👀 Check Artifacts
         run: |
