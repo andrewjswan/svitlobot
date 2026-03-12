@@ -41,10 +41,10 @@ description: Версії прошивок для відладки та пере
   <label>
     <input
       type="radio"
-      name="combo-device"
+      name="debug-device"
       class="device"
-      id="debug"
-      value="svitlobot"
+      id="svitlobot-debug"
+      value=""
       checked
     />
     <img src="../img/debug.png" alt="ESP8266/ESP32 | Debug" />
@@ -53,10 +53,10 @@ description: Версії прошивок для відладки та пере
   <label>
     <input
       type="radio"
-      name="combo-device"
+      name="debug-device"
       class="device"
-      id="dev"
-      value="svitlobot"
+      id="svitlobot-dev"
+      value=""
     />
     <img src="../img/dev.png" alt="ESP8266/ESP32 | Dev" />
     <span>SvitloBot | DEV</span>
