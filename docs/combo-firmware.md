@@ -34,8 +34,8 @@
       type="radio"
       name="combo-device"
       class="device"
-      id="healthcheck"
-      value="svitlobot"
+      id="svitlobot-healthcheck"
+      value=""
       checked
     />
     <img src="../img/espressif.png" alt="ESP8266/ESP32" />
@@ -46,8 +46,8 @@
       type="radio"
       name="combo-device"
       class="device"
-      id="custom-url"
-      value="svitlobot"
+      id="svitlobot-custom-url"
+      value=""
     />
     <img src="../img/espressif.png" alt="ESP8266/ESP32" />
     <span>SvitloBot | Custom URL</span>
