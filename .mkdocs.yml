@@ -108,6 +108,7 @@ nav:
       - Custom URL: custom-url-firmware.md
       - Combo: combo-firmware.md
       - All-in-One: all-in-one-firmware.md
+      - Debug: debug-firmware.md
       - Прошивка через браузер: esp-web-tools.md
   - Список змін: CHANGELOG.md
 
