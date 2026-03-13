@@ -1,3 +1,8 @@
+---
+title: All-In-One | Combo прошивка
+description: Комбінована прошивка | Різні варіанти комбінацій з SvitloBot, HealthСheck, CustomURL
+---
+
 <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="../js/installer.js"></script>
