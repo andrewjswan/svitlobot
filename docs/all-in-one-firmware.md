@@ -1,3 +1,8 @@
+---
+title: All-In-One | Combo прошивка
+description: Комбінована прошивка | Різні варіанти комбінацій з SvitloBot, HealthСheck, CustomURL
+---
+
 <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="../js/installer.js"></script>
@@ -39,7 +44,30 @@
       checked
     />
     <img src="../img/espressif.png" alt="ESP8266/ESP32" />
-    <span></span>
+    <span>All-In-One</span>
+  </label>
+  <label>
+    <input
+      type="radio"
+      name="combo-device"
+      class="device"
+      id="svitlobot-healthcheck"
+      value=""
+      checked
+    />
+    <img src="../img/espressif.png" alt="ESP8266/ESP32" />
+    <span>SvitloBot | HealthCheck</span>
+  </label>
+  <label>
+    <input
+      type="radio"
+      name="combo-device"
+      class="device"
+      id="svitlobot-custom-url"
+      value=""
+    />
+    <img src="../img/espressif.png" alt="ESP8266/ESP32" />
+    <span>SvitloBot | Custom URL</span>
   </label>
 </div>
 
@@ -48,6 +76,11 @@
 </div>
 
 </div>
+
+!!! tip "Склад комбінованих прошивок"
+    * **All-in-One** - **Svitlo**Bot | **Health**Сheck | **Custom** URL
+    * **Combo** - **Svitlo**Bot | **Health**Сheck
+    * **Combo** - **Svitlo**Bot | **Custom** URL
 
 ---
 
