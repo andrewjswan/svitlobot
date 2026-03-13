@@ -100,5 +100,5 @@ description: SvitloBot просте та зручне рішення для ін
 
 - **Підтримка в Telegram**: [@SvitloBotAdmin](https://t.me/SvitloBotAdmin)
 - **Новини спільноти**: [@svitlobot_news](https://t.me/svitlobot_news)
-- **Офіційний сайт**: [SvitloBot](https://svitlobot.in.ua)
+- **Офіційний сайт**: [svitlobot.in.ua](https://svitlobot.in.ua)
 - **SvitloBot**: [GitHub](https://github.com/DimChig/SvitloBot)
