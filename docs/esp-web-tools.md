@@ -50,3 +50,9 @@
     * [ESPHome WEB](https://web.esphome.io/)
     * [ESPHome](https://esphome.io/)
     * [Home Assistant](https://www.home-assistant.io/)
+
+## Прошивка
+
+!!! note "Прошивка"
+    [**Варіанти прошивок**](index.md#-варіанти-прошивки)
+    [**Опис прошивок**](firmware.md)
