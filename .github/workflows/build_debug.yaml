@@ -75,8 +75,16 @@ jobs:
           mkdir svitlobot_debug
 
           cp svitlobot/${{ matrix.config-file }} svitlobot_debug/$configfile
+
           sed -i "/import/d" svitlobot_debug/$configfile
+          sed -i "/remote_package/d" svitlobot_debug/$configfile
+          sed -i "/url:/d" svitlobot_debug/$configfile
+          sed -i "/files:/d" svitlobot_debug/$configfile
+          sed -i "/refresh:/d" svitlobot_debug/$configfile
+          sed -i 's/      - packages\//  - !include ..\/packages\//g' svitlobot_debug/$configfile
+
           sed -i 's/name: "svitlobot"/name: "svitlobot-debug"/g' svitlobot_debug/$configfile
+          sed -i 's/esp_svitlobot/esp_svitlobot_debug/g' svitlobot_debug/$configfile
 
           sed -i "s/Svitlo Bot/SvitloBot | Debug/g" packages/esp32.yaml
           sed -i "s/Svitlo Bot/SvitloBot | Debug/g" packages/esp8266.yaml
@@ -177,7 +185,14 @@ jobs:
 
           cp svitlobot/${{ matrix.config-file }} svitlobot_dev/$configfile
           sed -i "/import/d" svitlobot_dev/$configfile
+          sed -i "/remote_package/d" svitlobot_dev/$configfile
+          sed -i "/url:/d" svitlobot_dev/$configfile
+          sed -i "/files:/d" svitlobot_dev/$configfile
+          sed -i "/refresh:/d" svitlobot_dev/$configfile
+          sed -i 's/      - packages\//  - !include ..\/packages\//g' svitlobot_dev/$configfile
+
           sed -i 's/name: "svitlobot"/name: "svitlobot-dev"/g' svitlobot_dev/$configfile
+          sed -i 's/esp_svitlobot/esp_svitlobot_dev/g' svitlobot_dev/$configfile
 
           sed -i "s/Svitlo Bot/SvitloBot | Debug/g" packages/esp32.yaml
           sed -i "s/Svitlo Bot/SvitloBot | Debug/g" packages/esp8266.yaml
