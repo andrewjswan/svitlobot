@@ -39,7 +39,30 @@
       checked
     />
     <img src="../img/espressif.png" alt="ESP8266/ESP32" />
-    <span></span>
+    <span>All-In-One</span>
+  </label>
+  <label>
+    <input
+      type="radio"
+      name="combo-device"
+      class="device"
+      id="svitlobot-healthcheck"
+      value=""
+      checked
+    />
+    <img src="../img/espressif.png" alt="ESP8266/ESP32" />
+    <span>SvitloBot | HealthCheck</span>
+  </label>
+  <label>
+    <input
+      type="radio"
+      name="combo-device"
+      class="device"
+      id="svitlobot-custom-url"
+      value=""
+    />
+    <img src="../img/espressif.png" alt="ESP8266/ESP32" />
+    <span>SvitloBot | Custom URL</span>
   </label>
 </div>
 
@@ -48,6 +71,11 @@
 </div>
 
 </div>
+
+!!! tip "Склад комбінованих прошивок"
+    * **All-in-One** - **Svitlo**Bot | **Health**Сheck | **Custom** URL
+    * **Combo** - **Svitlo**Bot | **Health**Сheck
+    * **Combo** - **Svitlo**Bot | **Custom** URL
 
 ---
 
