@@ -1,5 +1,5 @@
 ---
-title: ESPHome SvitloBot by Andrew J.Swan
+title: ESPHome SvitloBot | Andrew J.Swan
 description: SvitloBot просте та зручне рішення для інтеграції з системою СвітлоБот, що дозволяє автоматично повідомляти про наявність світла.
 ---
 
