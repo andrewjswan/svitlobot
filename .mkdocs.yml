@@ -1,5 +1,5 @@
 # Project information
-site_name: ESPHome SvitloBot by Andrew J.Swan
+site_name: ESPHome SvitloBot | Andrew J.Swan
 site_url: https://andrewjswan.github.io/svitlobot
 site_author: Andrew J.Swan
 site_description: >-
@@ -106,7 +106,6 @@ nav:
       - SvitloBot: svitlobot-firmware.md
       - HealthCheck: healthcheck-firmware.md
       - Custom URL: custom-url-firmware.md
-      - Combo: combo-firmware.md
       - All-in-One: all-in-one-firmware.md
       - Debug: debug-firmware.md
       - Прошивка через браузер: esp-web-tools.md
