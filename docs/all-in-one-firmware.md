@@ -37,7 +37,7 @@ description: Комбінована прошивка | Різні варіант
   <label>
     <input
       type="radio"
-      name="all-in-one-device"
+      name="combo-device"
       class="device"
       id="all-in-one"
       value=""
