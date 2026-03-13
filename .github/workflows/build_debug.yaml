@@ -194,8 +194,8 @@ jobs:
           sed -i 's/name: "svitlobot"/name: "svitlobot-dev"/g' svitlobot_dev/$configfile
           sed -i 's/esp_svitlobot/esp_svitlobot_dev/g' svitlobot_dev/$configfile
 
-          sed -i "s/Svitlo Bot/SvitloBot | Debug/g" packages/esp32.yaml
-          sed -i "s/Svitlo Bot/SvitloBot | Debug/g" packages/esp8266.yaml
+          sed -i "s/Svitlo Bot/SvitloBot | DEV/g" packages/esp32.yaml
+          sed -i "s/Svitlo Bot/SvitloBot | DEV/g" packages/esp8266.yaml
 
           sed -i "s/level: INFO/level: DEBUG/g" packages/common.yaml
           sed -i "s/log: false/log: true/g" packages/common.yaml
