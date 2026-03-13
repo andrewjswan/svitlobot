@@ -53,7 +53,6 @@ description: Комбінована прошивка | Різні варіант
       class="device"
       id="svitlobot-healthcheck"
       value=""
-      checked
     />
     <img src="../img/espressif.png" alt="ESP8266/ESP32" />
     <span>SvitloBot | HealthCheck</span>
