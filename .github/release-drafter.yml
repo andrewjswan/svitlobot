@@ -6,43 +6,43 @@ exclude-contributors:
   - dependabot[bot]
   - dependabot
 categories:
-  - title: '❗️ Breaking Changes'
+  - title: ❗️ Breaking Changes
     labels:
-      - 'breaking'
-      - 'breaking changes'
-  - title: '🚀 Features'
+      - breaking
+      - breaking changes
+  - title: 🚀 Features
     labels:
-      - 'feature'
-      - 'enhancement'
-  - title: '📱 Devices'
+      - feature
+      - enhancement
+  - title: 📱 Devices
     labels:
-      - 'devices'
-  - title: '🐛 Bug Fixes'
+      - devices
+  - title: 🐛 Bug Fixes
     labels:
-      - 'fix'
-      - 'bug'
-      - 'bugfix'
-  - title: '🧰 Maintenance'
-    label:
-      - 'chore'
-      - 'cosmetic'
-      - 'dependencies'
-      - 'documentation'
-      - 'workflow'
+      - fix
+      - bug
+      - bugfix
+  - title: 🧰 Maintenance
+    labels:
+      - chore
+      - cosmetic
+      - dependencies
+      - documentation
+      - workflow
 change-template: "- $TITLE @$AUTHOR (#$NUMBER)"
 change-title-escapes: '\<*_&'  # You can add # and @ to disable mentions, and add ` to disable code blocks.
 version-resolver:
   major:
     labels:
-      - 'major'
-      - 'breaking'
+      - major
+      - breaking
   minor:
     labels:
-      - 'minor'
+      - minor
   patch:
     labels:
-      - 'patch'
-      - 'dependencies'
+      - patch
+      - dependencies
   default: patch
 template: |
   ## What's Changed
