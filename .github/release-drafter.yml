@@ -6,23 +6,23 @@ exclude-contributors:
   - dependabot[bot]
   - dependabot
 categories:
-  - title: ❗️ Breaking Changes
+  - title: '❗️ Breaking Changes'
     labels:
       - 'breaking'
       - 'breaking changes'
-  - title: 🚀 Features
+  - title: '🚀 Features'
     labels:
       - 'feature'
       - 'enhancement'
-  - title: 📱 Devices
+  - title: '📱 Devices'
     labels:
       - 'devices'
-  - title: 🐛 Bug Fixes
+  - title: '🐛 Bug Fixes'
     labels:
       - 'fix'
       - 'bug'
       - 'bugfix'
-  - title: 🧰 Maintenance
+  - title: '🧰 Maintenance'
     label:
       - 'chore'
       - 'cosmetic'
