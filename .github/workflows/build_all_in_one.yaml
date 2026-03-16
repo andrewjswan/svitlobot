@@ -119,7 +119,7 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Delete artifacts
-        uses: geekyeggo/delete-artifact@v5.0.0
+        uses: geekyeggo/delete-artifact@v6
         with:
           name: ${{ steps.artifacts.outputs.artifacts }}
 
