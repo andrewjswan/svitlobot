@@ -283,7 +283,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
       - name: 🧹 Delete Artifacts / Github Pages
-        uses: geekyeggo/delete-artifact@v5
+        uses: geekyeggo/delete-artifact@v6
         with:
           name: github-pages
           failOnError: false
