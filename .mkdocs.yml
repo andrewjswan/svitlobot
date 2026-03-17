@@ -82,6 +82,7 @@ markdown_extensions:
   - pymdownx.magiclink:
       hide_protocol: true
       repo_url_shortener: true
+      repo_url_shorthand: true
   - pymdownx.smartsymbols
   - pymdownx.snippets
   - pymdownx.superfences
