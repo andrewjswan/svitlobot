@@ -6,23 +6,23 @@
 
 ### 🚀 Features
 
-- Bump version to `3.5.49` @andrewjswan (#152)
-- Increasing the `Ping priority` of a task form 1 to 3 @andrewjswan (#150)
-- Added `WiFi` wait time when starting `Ping` @andrewjswan (#151)
-- Add `Ping interval change` package to tests @andrewjswan (#149)
-- `Ping` interval change package @andrewjswan (#148)
-- Remove `Response code` icon changes due ESPHome 2026.3 @andrewjswan (#147)
+- Bump version to `3.5.49` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/152)
+- Increasing the `Ping priority` of a task form 1 to 3 @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/150)
+- Added `WiFi` wait time when starting `Ping` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/151)
+- Add `Ping interval change` package to tests @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/149)
+- `Ping` interval change package @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/148)
+- Remove `Response code` icon changes due ESPHome 2026.3 @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/147)
 
 ### 📱 Devices
 
-- Bump version to `3.5.49` @andrewjswan (#152)
-- Increasing the `Ping priority` of a task form 1 to 3 @andrewjswan (#150)
-- Added `WiFi` wait time when starting `Ping` @andrewjswan (#151)
+- Bump version to `3.5.49` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/152)
+- Increasing the `Ping priority` of a task form 1 to 3 @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/150)
+- Added `WiFi` wait time when starting `Ping` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/151)
 
 ### 🧰 Maintenance
 
-- `Ping` interval change package @andrewjswan (#148)
-- Remove `Response code` icon changes due ESPHome 2026.3 @andrewjswan (#147)
+- `Ping` interval change package @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/148)
+- Remove `Response code` icon changes due ESPHome 2026.3 @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/147)
 
 ### 🤝 Support
 
@@ -38,22 +38,22 @@ If you like the project, you can support it with a star ⭐ on GitHub.
 
 ### ❗️ Breaking Changes
 
-- Change `ping` interval to 55s @andrewjswan (#144)
+- Change `ping` interval to 55s @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/144)
 
 ### 🚀 Features
 
-- Bump version to `3.5.47` @andrewjswan (#145)
+- Bump version to `3.5.47` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/145)
 
 ### 📱 Devices
 
-- Change `ping` interval to 55s @andrewjswan (#144)
+- Change `ping` interval to 55s @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/144)
 
 ### 🧰 Maintenance
 
-- ESP: Bump actions/download-artifact from 7 to 8 @[dependabot[bot]](https://github.com/apps/dependabot) (#143)
-- ESP: Bump actions/upload-artifact from 6 to 7 @[dependabot[bot]](https://github.com/apps/dependabot) (#142)
-- Add `social` cards to documentation @andrewjswan (#141)
-- Screenshots update @andrewjswan (#140)
+- ESP: Bump actions/download-artifact from 7 to 8 @[dependabot[bot]](https://github.com/apps/dependabot) (https://github.com/andrewjswan/svitlobot/pull/143)
+- ESP: Bump actions/upload-artifact from 6 to 7 @[dependabot[bot]](https://github.com/apps/dependabot) (https://github.com/andrewjswan/svitlobot/pull/142)
+- Add `social` cards to documentation @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/141)
+- Screenshots update @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/140)
 
 ### 🤝 Support
 
@@ -69,14 +69,14 @@ If you like the project, you can support it with a star ⭐ on GitHub.
 
 ### 🚀 Features
 
-- Added screen dimming feature @dimkalinux (#134)
-- Force http for 8266 @dimkalinux (#135)
-- Enabled `HTTP OTA` for `8266`-based devices @andrewjswan (#136)
+- Added screen dimming feature @dimkalinux (https://github.com/andrewjswan/svitlobot/pull/134)
+- Force http for 8266 @dimkalinux (https://github.com/andrewjswan/svitlobot/pull/135)
+- Enabled `HTTP OTA` for `8266`-based devices @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/136)
 
 ### 📱 Devices
 
-- Remove `mac_suffix` from `name` @andrewjswan (#137)
-- Added screen dimming feature @dimkalinux (#134)
+- Remove `mac_suffix` from `name` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/137)
+- Added screen dimming feature @dimkalinux (https://github.com/andrewjswan/svitlobot/pull/134)
 
 ### 🤝 Support
 
@@ -92,20 +92,20 @@ If you like the project, you can support it with a star ⭐ on GitHub.
 
 ### 🚀 Features
 
-- Bump version to `3.5.43` @andrewjswan (#128)
-- Unification of `HTTP OTA` package @andrewjswan (#130)
-- Change `Custom URL` name @andrewjswan (#129)
-- Check for `Update` on `Boot` @andrewjswan (#127)
-- Custom URL: Added check, `URL` contains `http` @andrewjswan (#126)
+- Bump version to `3.5.43` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/128)
+- Unification of `HTTP OTA` package @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/130)
+- Change `Custom URL` name @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/129)
+- Check for `Update` on `Boot` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/127)
+- Custom URL: Added check, `URL` contains `http` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/126)
 
 ### 📱 Devices
 
-- Check for `Update` on `Boot` @andrewjswan (#127)
-- Add `unit_of_measurement` to `Delivery Errors` sensor @andrewjswan (#125)
+- Check for `Update` on `Boot` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/127)
+- Add `unit_of_measurement` to `Delivery Errors` sensor @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/125)
 
 ### 🧰 Maintenance
 
-- Add `Combo` Firmware @andrewjswan (#131)
+- Add `Combo` Firmware @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/131)
 
 ### 🤝 Support
 
@@ -121,33 +121,33 @@ If you like the project, you can support it with a star ⭐ on GitHub.
 
 ### ❗️ Breaking Changes
 
-- Move `SvitloBot` to own folder @andrewjswan (#118)
-- The `Delivery Quality` sensor has been changed to `Delivery Errors` sensor. @andrewjswan (#115)
+- Move `SvitloBot` to own folder @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/118)
+- The `Delivery Quality` sensor has been changed to `Delivery Errors` sensor. @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/115)
 
 ### 🚀 Features
 
-- Move `SvitloBot` to own folder @andrewjswan (#118)
-- Add `Ping to Telegram` package @andrewjswan (#116)
-- If the first request returned an error, we assume that the `quality sensor` has an unknown state. @andrewjswan (#114)
-- Update `shadow` to `2026.2.1` @andrewjswan (#113)
+- Move `SvitloBot` to own folder @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/118)
+- Add `Ping to Telegram` package @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/116)
+- If the first request returned an error, we assume that the `quality sensor` has an unknown state. @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/114)
+- Update `shadow` to `2026.2.1` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/113)
 - ESPHome 2026.2.0
 
 ### 📱 Devices
 
-- Bump version to `3.5.41` @andrewjswan (#121)
-- Device: Svitlobot based on `M5Stack Atom S3R` @andrewjswan (#110)
-- Atom S3R @dimkalinux (#120)
-- The `Delivery Quality` sensor has been changed to `Delivery Errors` sensor. @andrewjswan (#115)
-- If the first request returned an error, we assume that the `quality sensor` has an unknown state. @andrewjswan (#114)
+- Bump version to `3.5.41` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/121)
+- Device: Svitlobot based on `M5Stack Atom S3R` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/110)
+- Atom S3R @dimkalinux (https://github.com/andrewjswan/svitlobot/pull/120)
+- The `Delivery Quality` sensor has been changed to `Delivery Errors` sensor. @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/115)
+- If the first request returned an error, we assume that the `quality sensor` has an unknown state. @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/114)
 
 ### 🧰 Maintenance
 
-- Add `Release drafter` @andrewjswan (#123)
-- Reorg `firmware` pages @andrewjswan (#119)
-- Documentation: Split Devices to separate pages @andrewjswan (#117)
-- Update `shadow` to `2026.2.1` @andrewjswan (#113)
-- Add `Packages` documentation @andrewjswan (#112)
-- Add `names` to `firmware` pages @andrewjswan (#109)
+- Add `Release drafter` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/123)
+- Reorg `firmware` pages @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/119)
+- Documentation: Split Devices to separate pages @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/117)
+- Update `shadow` to `2026.2.1` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/113)
+- Add `Packages` documentation @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/112)
+- Add `names` to `firmware` pages @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/109)
 
 ### 🤝 Support
 
@@ -161,11 +161,11 @@ If you like the project, you can support it with a star ⭐ on GitHub.
 
 ### What's Changed
 
-* Add local `Tests` - Extend `All-In-One` by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/100
-* Add `Web Server Authentication` as Package by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/102
-* Add `Ping` as Package by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/103
-* Add `Ping` documentation by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/104
-* Bump version to `3.5.39` by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/105
+* Add local `Tests` - Extend `All-In-One` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/100)
+* Add `Web Server Authentication` as Package @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/102)
+* Add `Ping` as Package @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/103)
+* Add `Ping` documentation @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/104)
+* Bump version to `3.5.39` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/105)
 
 **Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.37...v3.5.39
 
@@ -178,31 +178,31 @@ Online updates may not work, so it is better to flash the device to the current 
 
 ### What's Changed
 
-* Update Documentations by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/78
-* Update HealthCheck documentation by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/79
-* Added `Response Duration` sensor to `SvitloBot` by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/82
-* Update Update Pages workflow by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/85
-* Documentation rework by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/86
-* Fix Documentation by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/87
-* Add `HealthCheck` device configuration by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/80
-* Add `All-In-One` device configuration by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/84
-* Add `Labeler` workflow by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/88
-* Remove `Status` step from Workflows by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/89
-* Fix `HTTP OTA` URL for `Healthcheck` and `All-In-One` by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/90
-* HealthCheck: Fix UUID length by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/91
-* Update `Svitlobot` manifest by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/92
-* Add `Custom URL` as Package by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/93
-* Add Video instruction by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/94
-* Add `Custom URL` support by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/95
-* Bump version to `3.5.37` by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/96
+* Update Documentations @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/78)
+* Update HealthCheck documentation @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/79)
+* Added `Response Duration` sensor to `SvitloBot` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/82)
+* Update Update Pages workflow @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/85)
+* Documentation rework @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/86)
+* Fix Documentation @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/87)
+* Add `HealthCheck` device configuration @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/80)
+* Add `All-In-One` device configuration @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/84)
+* Add `Labeler` workflow @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/88)
+* Remove `Status` step from Workflows @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/89)
+* Fix `HTTP OTA` URL for `Healthcheck` and `All-In-One` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/90)
+* HealthCheck: Fix UUID length @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/91)
+* Update `Svitlobot` manifest @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/92)
+* Add `Custom URL` as Package @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/93)
+* Add Video instruction @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/94)
+* Add `Custom URL` support @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/95)
+* Bump version to `3.5.37` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/96)
 
 ### Devices
 
-* Device: Added `Response Duration` sensor to `M5Stack Atom Lite` by @dimkalinux in https://github.com/andrewjswan/svitlobot/pull/77
-* Device: Added `Response Duration` sensor to `ESP32 S3 Zero with RGB` by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/81
-* Device: Added `Response Duration` sensor to `HealthCheck` by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/83
-* Device: `Svitlobot` based on `WaveShare ESP32-S3-GEEK` by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/44
-* Devices: Add `Uptime` sensor to `M5Stack Atom Lite` by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/97
+* Device: Added `Response Duration` sensor to `M5Stack Atom Lite` @dimkalinux (https://github.com/andrewjswan/svitlobot/pull/77)
+* Device: Added `Response Duration` sensor to `ESP32 S3 Zero with RGB` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/81)
+* Device: Added `Response Duration` sensor to `HealthCheck` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/83)
+* Device: `Svitlobot` based on `WaveShare ESP32-S3-GEEK` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/44)
+* Devices: Add `Uptime` sensor to `M5Stack Atom Lite` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/97)
 
 ### New Contributors
 
@@ -214,16 +214,16 @@ Online updates may not work, so it is better to flash the device to the current 
 
 ### What's Changed
 
-* Add ESP32 S3 to ESP Web Tools by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/67
-* Rework documentation by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/68
-* Add description to Devices by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/69
-* Add links to User profile by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/71
-* Screenshot by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/70
-* Add Screenshots descriptions by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/72
-* Add image and link to ESP32 S3 Case by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/73
-* `SvitloBot` maps added to documentation by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/74
-* Add `HealthCheck` package by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/58
-* Bump SvitloBot version to 3.5.35 (ESPHome 2026.1.4) by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/75
+* Add ESP32 S3 to ESP Web Tools @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/67)
+* Rework documentation @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/68)
+* Add description to Devices @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/69)
+* Add links to User profile @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/71)
+* Screenshot @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/70)
+* Add Screenshots descriptions @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/72)
+* Add image and link to ESP32 S3 Case @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/73)
+* `SvitloBot` maps added to documentation @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/74)
+* Add `HealthCheck` package @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/58)
+* Bump SvitloBot version to 3.5.35 (ESPHome 2026.1.4) @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/75)
 
 **Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.33...v3.5.35
 
@@ -231,13 +231,13 @@ Online updates may not work, so it is better to flash the device to the current 
 
 ### What's Changed
 
-* Add Documentation by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/63
-* Rework `Response Code` sensor by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/64
-* Bump SvitloBot version to 3.5.33 by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/65
+* Add Documentation @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/63)
+* Rework `Response Code` sensor @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/64)
+* Bump SvitloBot version to 3.5.33 @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/65)
 
 ### Devices
 
-* Device: Svitlobot based on ESP32-S3 Zero (with RGB) by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/62
+* Device: Svitlobot based on ESP32-S3 Zero (with RGB) @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/62)
 
 **Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.31...v3.5.33
 
@@ -245,27 +245,27 @@ Online updates may not work, so it is better to flash the device to the current 
 
 ### What's Changed
 
-* Rework `send` script by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/48
-* Web cosmetic by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/49
-* Update README.md by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/50
-* Increase `http_request` timeout to 15s by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/51
-* `M5Stack Atom Lite` Manifest URL fix by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/52
-* Add `Response code` sensor by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/54
-* Fix `Response code` sensor `NAN` value by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/55
-* Change `Response code` sensor update behaviour by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/56
-* Deanonymizing `SvitloBot` by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/57
-* `ESPHome Version` sensor by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/59
-* Add `Reset reason` sensor by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/60
+* Rework `send` script @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/48)
+* Web cosmetic @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/49)
+* Update README.md @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/50)
+* Increase `http_request` timeout to 15s @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/51)
+* `M5Stack Atom Lite` Manifest URL fix @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/52)
+* Add `Response code` sensor @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/54)
+* Fix `Response code` sensor `NAN` value @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/55)
+* Change `Response code` sensor update behaviour @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/56)
+* Deanonymizing `SvitloBot` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/57)
+* `ESPHome Version` sensor @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/59)
+* Add `Reset reason` sensor @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/60)
 
 ### Devices
 
-* Svitlobot based on `M5Stack Atom Lite` Rework by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/47
+* Svitlobot based on `M5Stack Atom Lite` Rework @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/47)
 
 ### Dependencies
 
-* Add ISSUE / PULL REQUEST Template by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/45
-* Add Greetings Workflow by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/46
-* Add Workflow / Update Pages by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/53
+* Add ISSUE / PULL REQUEST Template @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/45)
+* Add Greetings Workflow @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/46)
+* Add Workflow / Update Pages @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/53)
 
 **Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.29...v3.5.31
 
@@ -273,17 +273,17 @@ Online updates may not work, so it is better to flash the device to the current 
 
 ### What's Changed
 
-* 3.5.29: Fix for `capture_response` and `body` by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/39
-* 3.5.29: Remove ESP32 Board dependencie by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/38
-* 3.5.29: SvitloBot version bump to ESPHome 2026.1 by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/40
+* 3.5.29: Fix for `capture_response` and `body` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/39)
+* 3.5.29: Remove ESP32 Board dependencie @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/38)
+* 3.5.29: SvitloBot version bump to ESPHome 2026.1 @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/40)
 
 ### Dependencies
 
 * ESP: Bump actions/checkout from 5 to 6 by @dependabot[bot] in https://github.com/andrewjswan/svitlobot/pull/33
 * ESP: Bump actions/download-artifact from 6 to 7 by @dependabot[bot] in https://github.com/andrewjswan/svitlobot/pull/34
 * ESP: Bump actions/upload-artifact from 5 to 6 by @dependabot[bot] in https://github.com/andrewjswan/svitlobot/pull/35
-* Add `permissions` for validate workflow by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/36
-* Create .pre-commit-config.yaml by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/41
+* Add `permissions` for validate workflow @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/36)
+* Create .pre-commit-config.yaml @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/41)
 
 **Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.27...v3.5.29
 
@@ -291,9 +291,9 @@ Online updates may not work, so it is better to flash the device to the current 
 
 ### What's Changed
 
-* Fix packages for Adopt support by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/29
-* Switch SvitloBot to ESP-IDF by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/30
-* Bump version to 3.5.27 by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/31
+* Fix packages for Adopt support @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/29)
+* Switch SvitloBot to ESP-IDF @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/30)
+* Bump version to 3.5.27 @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/31)
 
 **Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.25...v3.5.27
 
@@ -301,8 +301,8 @@ Online updates may not work, so it is better to flash the device to the current 
 
 ### What's Changed
 
-* SvitloBot version bump to ESPHome 2025.9.1 by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/23
-* SvitloBot version bump to ESPHome 2025.10 by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/27
+* SvitloBot version bump to ESPHome 2025.9.1 @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/23)
+* SvitloBot version bump to ESPHome 2025.10 @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/27)
 
 ### Dependencies
 
@@ -318,8 +318,8 @@ Online updates may not work, so it is better to flash the device to the current 
 
 ### What's Changed
 
-* SvitloBot version bump to 2025.7.1 by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/18
-* Fix dashboard import url for Svitlobot by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/14
+* SvitloBot version bump to 2025.7.1 @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/18)
+* Fix dashboard import url for Svitlobot @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/14)
 * ESP: Bump esphome/build-action from 4 to 6 by @dependabot[bot] in https://github.com/andrewjswan/svitlobot/pull/15
 * ESP: Bump esphome/build-action from 6 to 7 by @dependabot[bot] in https://github.com/andrewjswan/svitlobot/pull/16
 * Switch to: `friendly_name: "${friendly_name}"`
@@ -330,8 +330,8 @@ Online updates may not work, so it is better to flash the device to the current 
 
 ## What's Changed
 
-* Bump `shadow` component to the latest version by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/13
-* Turn `name_add_mac_suffix` off by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/13
+* Bump `shadow` component to the latest version @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/13)
+* Turn `name_add_mac_suffix` off @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/13)
 * Add to devices: **ESPHome Svitlo Bot (Shadow)** - **ESP32-C6**
 
 **Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.17...v3.5.19
@@ -340,8 +340,8 @@ Online updates may not work, so it is better to flash the device to the current 
 
 ### What's Changed
 
-* Migrate to Packages by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/12
-* Improvement of ESP Web Tools page by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/11
+* Migrate to Packages @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/12)
+* Improvement of ESP Web Tools page @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/11)
 
 **Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.15...v3.5.17
 
@@ -349,7 +349,7 @@ Online updates may not work, so it is better to flash the device to the current 
 
 ### What's Changed
 
-* Add internal temperature sensor for Esp32 by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/10
+* Add internal temperature sensor for Esp32 @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/10)
 
 **Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.13...v3.5.15
 
@@ -357,12 +357,12 @@ Online updates may not work, so it is better to flash the device to the current 
 
 ### What's Changed
 
-* Change Quality Reboot Behavior by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/9
-* ESPHome Svitlo Bot (Shadow) - v3.5.11.7 - M5Stack Atom Lite by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/8
-* ESPHome Svitlo Bot (Shadow) - v3.5.11.5 - Esp32-S2 by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/7
-* ESPHome Svitlo Bot (Shadow) - v3.5.11.5 - Esp32-S3 by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/6
-* Revert OTA Update via HTTP Request for Esp8266 by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/5
-* ESPHome Svitlo Bot (Shadow) - v3.5.11.1 - Esp32-C3 by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/4
+* Change Quality Reboot Behavior @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/9)
+* ESPHome Svitlo Bot (Shadow) - v3.5.11.7 - M5Stack Atom Lite @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/8)
+* ESPHome Svitlo Bot (Shadow) - v3.5.11.5 - Esp32-S2 @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/7)
+* ESPHome Svitlo Bot (Shadow) - v3.5.11.5 - Esp32-S3 @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/6)
+* Revert OTA Update via HTTP Request for Esp8266 @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/5)
+* ESPHome Svitlo Bot (Shadow) - v3.5.11.1 - Esp32-C3 @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/4)
 
 **Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.11...v3.5.13
 
@@ -370,7 +370,7 @@ Online updates may not work, so it is better to flash the device to the current 
 
 ### What's Changed
 
-* Improv via Serial by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/3
+* Improv via Serial @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/3)
 
 **Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.9...v3.5.11
 
@@ -378,8 +378,8 @@ Online updates may not work, so it is better to flash the device to the current 
 
 ### What's Changed
 
-* OTA Update via HTTP Request by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/2
-* Add GitHub Pages Deploy Action by @andrewjswan in https://github.com/andrewjswan/svitlobot/pull/1
+* OTA Update via HTTP Request @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/2)
+* Add GitHub Pages Deploy Action @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/1)
 
 ### New Contributors
 

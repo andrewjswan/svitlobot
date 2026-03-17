@@ -128,6 +128,10 @@ extra:
 extra_css:
   - stylesheets/table.css
   - stylesheets/installer.css
+  - stylesheets/github.css
+
+extra_javascript:
+  - https://cdnjs.cloudflare.com
 
 plugins:
   - mkdocs-video
