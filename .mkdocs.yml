@@ -83,6 +83,7 @@ markdown_extensions:
       hide_protocol: true
       repo_url_shortener: true
       repo_url_shorthand: true
+      normalize_issue_symbols: true
       user: andrewjswan
       repo: svitlobot
   - pymdownx.smartsymbols
