@@ -1,5 +1,5 @@
 substitutions:
-  comment: "ESPHome Svitlo Bot (Shadow)"
+  comment: "ESPHome Svitlo Bot | Shadow"
 
 external_components:
   - source:
