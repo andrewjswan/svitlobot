@@ -1,5 +1,5 @@
 substitutions:
-  comment: "ESPHome Svitlo Bot (ESP 8266)"
+  comment: "ESPHome Svitlo Bot | ESP 8266"
 
 interval:
   - interval: 55s
