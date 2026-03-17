@@ -119,6 +119,13 @@ nav:
       - Debug: debug-firmware.md
       - Прошивка через браузер: esp-web-tools.md
   - Список змін: CHANGELOG.md
+  - Співпраця:
+    - contributing.md
+    - Повідомлення про помилку: https://github.com/andrewjswan/svitlobot/issues
+    - Повідомлення про проблему в документації: https://github.com/andrewjswan/svitlobot/issues
+    - Запит на зміну: https://github.com/andrewjswan/svitlobot/issues
+    - Створення pull request: https://github.com/andrewjswan/svitlobot/pulls
+    - Запитання: https://github.com/squidfunk/mkdocs-material/discussions
 
 extra:
   social:
