@@ -111,7 +111,7 @@ nav:
       - Пакети: packages.md
       - Моніторинг доступності (HealthCheck): healthcheck.md
       - Пінг (Ping Monitor): ping.md
-  - Мапи: maps.md
+  - Мапи та сервіси: maps-services.md
   - Альтернативні прошивки: alternative.md
   - Корисні посилання: additionals.md
   - Прошивка:
