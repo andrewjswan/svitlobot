@@ -2,6 +2,56 @@
 
 Наша спільнота складається з активних користувачів, які створюють нові запити та обговорення, перетворюючи наш [трекер проблем][issue tracker] та [дошку обговорень][discussion board] на базу знань — важливе доповнення до нашої [документації][documentation] — що приносить користь як новим, так і досвідченим користувачам.
 
+## Офіційні ресурси СвітлоБот
+
+<div class="grid cards" markdown>
+
+-   :material-account-group: &nbsp;
+    __Маєте запитання або потрібна допомога?__
+
+    ---
+
+    Форум спільноти проєкту СвітлоБот.
+
+    ---
+
+    [:octicons-arrow-right-24: Перейти][svitlobot_forum]
+
+-   :material-newspaper: &nbsp;
+    __Новини спільноти__
+
+    ---
+
+    Новини спільноти та проєкту СвітлоБот.
+
+    ---
+
+    [:octicons-arrow-right-24: Перейти][svitlobot_news]
+
+-   :material-account-question-outline: &nbsp;
+    __FAQ (поширені питання)__
+
+    ---
+
+    Тут зібрані відповіді на найпоширеніші запитання по проєкту СвітлоБот.
+
+    ---
+
+    [:octicons-arrow-right-24: Перейти][svitlobot_faq]
+
+-   :material-send: &nbsp;
+    __Підтримка в Telegram__
+
+    ---
+
+    Адміністрування та підтримка.
+
+    ---
+
+    [:octicons-arrow-right-24: Перейти][svitlobot_admin]
+
+</div>
+
 ## Як ви можете допомогти
 
 Наша мета — забезпечити, щоб наша документація, а також система відстеження проблем і дошка обговорень були __добре структурованими__, __зручними для навігації__ та __зручними для пошуку__, щоб ви могли швидко та ефективно знаходити те, що вам потрібно. Таким чином, коли ви дотримуєтеся наших рекомендацій, ми можемо допомогти вам набагато швидше.
@@ -50,7 +100,7 @@
 
     ---
 
-    Задайте питання на нашому [форумі][request a change] та приєднайтеся до нашої спільноти
+    Задайте питання в нашої [дошки обговорень][discussion board] та приєднайтеся до нашої спільноти
 
     ---
 
@@ -111,11 +161,20 @@
 Ця роль вимагає від нас активної участі у підтримці цілісності та позитивної атмосфери в нашій спільноті. Рішуче дотримання цих стандартів забезпечує поважне та інклюзивне середовище для всіх членів.
 
 [documentation]: https://andrewjswan.github.io/svitlobot/
+
 [discussion board]: https://github.com/andrewjswan/svitlobot/discussions
 [request a change]: https://github.com/andrewjswan/svitlobot/discussions/categories/ideas
+
 [issue tracker]: https://github.com/andrewjswan/svitlobot/issues
 [report a bug]: https://github.com/andrewjswan/svitlobot/issues
 [report a docs issue]: https://github.com/andrewjswan/svitlobot/issues
 [create a pull request]: https://github.com/andrewjswan/svitlobot/pulls
+
 [Code of Conduct]: https://github.com/andrewjswan/svitlobot/blob/main/CODE_OF_CONDUCT.md
+
 [reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/
+
+[svitlobot_admin]: https://t.me/SvitloBotAdmin
+[svitlobot_forum]: https://t.me/svitlobot_api
+[svitlobot_faq]: https://t.me/Svitlobot_FAQ
+[svitlobot_news]: https://t.me/svitlobot_news
