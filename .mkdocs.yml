@@ -123,7 +123,7 @@ nav:
       - Debug: debug-firmware.md
       - Прошивка через браузер: esp-web-tools.md
   - Співпраця:
-    - contributing.md
+    - Співпраця: contributing.md
     - Повідомлення про помилку: https://github.com/andrewjswan/svitlobot/issues
     - Повідомлення про проблему в документації: https://github.com/andrewjswan/svitlobot/issues
     - Запит на зміну: https://github.com/andrewjswan/svitlobot/discussions/categories/ideas
