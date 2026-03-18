@@ -29,6 +29,10 @@ theme:
     - navigation.features
     - navigation.path
     - navigation.top
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.preview
+    - navigation.instant.progress
     - search.suggest
     - search.hightlight
     - toc.integrate
