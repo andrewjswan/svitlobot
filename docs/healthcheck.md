@@ -41,7 +41,7 @@
 5. Окремі пристрої для **Svitlo**Bot і **Health**Checks i **Custom**URL
 6. Специфічні параметри платформи `ESP32` для `ESP8266` використовуйте **esp8266.yaml**
 
-#### Варіант 1: Набір **Svitlo**Bot і **Health**Checks
+#### Варіант 2: Набір **Svitlo**Bot і **Health**Checks
 
 !!! example annotate "SvitloBot | HealthChecks"
 
@@ -63,7 +63,7 @@
 4. Окремі пристрої для **Svitlo**Bot і **Health**Checks
 5. Специфічні параметри платформи `ESP32` для `ESP8266` використовуйте **esp8266.yaml**
 
-#### Варіант 2: Набір **Health**Checks і **Custom**URL
+#### Варіант 3: Набір **Health**Checks і **Custom**URL
 
 !!! example annotate "HealthChecks | Custom URL"
 
@@ -85,7 +85,7 @@
 4. Окремі пристрої для **Health**Checks і **Custom**URL
 5. Специфічні параметри платформи `ESP32` для `ESP8266` використовуйте **esp8266.yaml**
 
-#### Варіант 3: Тільки моніторинг
+#### Варіант 4: Тільки моніторинг
 
 !!! example annotate "HealthChecks"
 
