@@ -1,6 +1,6 @@
 ﻿/* Header: Material Design Indigo */
 .md-typeset__table th {
-    background-color: #3f51b5;
+    background-color: var(--md-primary-fg-color);
     color: white;
     font-weight: bold;
 }
