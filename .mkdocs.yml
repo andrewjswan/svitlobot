@@ -122,7 +122,6 @@ nav:
       - All-in-One: all-in-one-firmware.md
       - Debug: debug-firmware.md
       - Прошивка через браузер: esp-web-tools.md
-  - Список змін: CHANGELOG.md
   - Співпраця:
     - contributing.md
     - Повідомлення про помилку: https://github.com/andrewjswan/svitlobot/issues
@@ -130,6 +129,7 @@ nav:
     - Запит на зміну: https://github.com/andrewjswan/svitlobot/discussions/categories/ideas
     - Створення pull request: https://github.com/andrewjswan/svitlobot/pulls
     - Запитання: https://github.com/squidfunk/mkdocs-material/discussions
+  - Список змін: CHANGELOG.md
 
 extra:
   social:
