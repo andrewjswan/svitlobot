@@ -1,7 +1,7 @@
-!!! tip "Packages"
-    * [Packages](https://github.com/andrewjswan/svitlobot/tree/main/packages)
+!!! tip "SvitloBot Packages"
+    * [Packages](https://github.com/andrewjswan/svitlobot/tree/main/packages) | [Опис](packages.md)
 
-!!! note "Devices"
+!!! note "ESPHome based Devices"
     * [Pixel Clock](https://github.com/andrewjswan/pixel-clock)
     * [Matrix Lamp](https://github.com/andrewjswan/matrix-lamp)
 
