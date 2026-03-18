@@ -98,6 +98,7 @@ description: SvitloBot просте та зручне рішення для ін
 
 ## 💬 Спільнота та підтримка
 
+- **Співпраця**: Знайшли помилку? Маєте нові ідеї? Хочете допомогти? Перейдіть до розділу [підтримки](contributing.md)
 - **Підтримка в Telegram**: [@SvitloBotAdmin](https://t.me/SvitloBotAdmin)
 - **Новини спільноти**: [@svitlobot_news](https://t.me/svitlobot_news)
 - **Офіційний сайт**: [svitlobot.in.ua](https://svitlobot.in.ua)
