@@ -23,11 +23,11 @@
 ### Моніторинг та сервіси
 
 * **[svitlobot.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/svitlobot.yaml)** — Сповіщення в телеграм-канал від системи **Світло**Бот при зміні стану живлення. [Детальніше](index.md).
-* **[healthcheck.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/healthcheck.yaml)** — "Сигнали життя" (pings) на [**Health**сhecks.io](https://healthchecks.io). Сповістить, якщо пристрій офлайн. [Детальніше](healthcheck.md).
-* **[custom_url.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/custom_url.yaml)** — "Сигнали життя" (pings) на будь-який сервіс, URL вказується в налаштуваннях.
+* **[healthcheck.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/healthcheck.yaml)** — "Сигнали життя" (heartbeat) на [**Health**сhecks.io](https://healthchecks.io). Сповістить, якщо пристрій офлайн. [Детальніше](healthcheck.md).
+* **[custom_url.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/custom_url.yaml)** — "Сигнали життя" (heartbeat) на будь-який сервіс, URL вказується в налаштуваннях.
 * **[ping.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/ping.yaml)** — Пакет дозволяє **Світло**Бот визначати наявність світла опосередковано — через доступність будь-якого пристрою в локальній мережі, який не підключений до UPS.  [Детальніше](ping.md).
 
-### Настройка частоты опроса (Ping Interval)
+### Настройка частоты опроса (HeartBeat Interval)
 
 * **[interval_esp32.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/interval_esp32.yaml)** — Пакет підтримує налаштування частоти опитування сервісів у діапазоні від **30 секунд** до **5 хвилин**.
 * **[interval_esp8266.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/interval_esp8266.yaml)** — Пакет підтримує налаштування частоти опитування сервісів у діапазоні від **30 секунд** до **5 хвилин**.
@@ -84,3 +84,4 @@
 
 *[ESP32]: Серія мікроконтролерів типу «система на кристалі» китайського виробника Espressif, що мають інтегровані контролери Wi-Fi і Bluetooth, низьке енергоспоживання і невисоку ціну.
 *[ESP8266]: Мікроконтролер китайського виробника Espressif з інтерфейсом Wi-Fi. Наприклад, NodeMCU або Wemos D1 Mini. Наприклад, NodeMCU або Wemos D1 Mini.
+*[heartbeat]: "Сигнал життя" - Регулярний запит від вашої системи, що підтверджує її коректну роботу, або сповіщає про збій у разі відсутності сигналу.
