@@ -31,10 +31,10 @@
 
 | Версія | Опис | Функціонал |
 | :--- | :--- | :--- |
-| [**SvitloBot**](https://github.com/andrewjswan/svitlobot/tree/main/svitlobot) | Базова версія | Сповіщення в телеграм-канал від системи [**Світло**Бот](https://svitlobot.in.ua/) при зміні стану живлення. |
-| [**HealthСheck**](https://github.com/andrewjswan/svitlobot/tree/main/healthcheck) | Моніторинг зв'язку | "Сигнали життя" (pings) на [**Health**сhecks.io](https://healthchecks.io). Сповістить, якщо пристрій офлайн. |
-| [**Custom URL**](https://github.com/andrewjswan/svitlobot/tree/main/custom_url) | Індивідуальний моніторинг | "Сигнали життя" (pings) на будь-який сервіс, URL вказується в налаштуваннях. |
-| [**All-in-One**](https://github.com/andrewjswan/svitlobot/tree/main/all-in-one) | **Максимальний захист** | **Svitlo**Bot + **Health**Сheck. Поєднує прямі звіти в Telegram та зовнішній моніторинг доступності. |
+| [**Svitlo**Bot](https://github.com/andrewjswan/svitlobot/tree/main/svitlobot) | Базова версія | Сповіщення в телеграм-канал від системи [**Світло**Бот](https://svitlobot.in.ua/) при зміні стану живлення. |
+| [**Health**Сheck](https://github.com/andrewjswan/svitlobot/tree/main/healthcheck) | Моніторинг зв'язку | "Сигнали життя" (pings) на [**Health**сhecks.io](https://healthchecks.io). Сповістить, якщо пристрій офлайн. |
+| [**Custom**URL](https://github.com/andrewjswan/svitlobot/tree/main/custom_url) | Індивідуальний моніторинг | "Сигнали життя" (pings) на будь-який сервіс, URL вказується в налаштуваннях. |
+| [**All**-in-**One**](https://github.com/andrewjswan/svitlobot/tree/main/all-in-one) | **Максимальний захист** | **Svitlo**Bot + **Health**Сheck + **Custom**URL. Поєднує прямі звіти в Telegram та зовнішній моніторинг доступності. |
 
 ## Швидкий старт (Прошивка)
 
