@@ -17,8 +17,17 @@
 Виберіть базові пакети залежно від вашої платформи та потреб:
 
 * **[common.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/common.yaml)** — Загальні налаштування системи (Wi-Fi, API, Logger).
-* **[esp32.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/esp32.yaml)** / **[esp8266.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/esp8266.yaml)** — Конфігурація для відповідного типу мікроконтролера.
+* **[esp32.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/esp32.yaml)** — Конфігурація для мікроконтролера **ESP32**.
+* **[esp8266.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/esp8266.yaml)** — Конфігурація для мікроконтролера **ESP8266**.
 * **[web_server_auth.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/web_server_auth.yaml)** — Веб-інтерфейс із авторизацією.
+
+!!! danger "Важливо: Оберіть правильний пакет!"
+    Конфігурація містить два окремих пакети залежно від вашого заліза. Використовуйте лише той, що відповідає вашому контролеру:
+
+    * **`esp32.yaml`** — якщо у вас плата на базі **ESP32**.
+    * **`esp8266.yaml`** — якщо у вас плата на базі **ESP8266**.
+
+    **Не підключайте обидва пакети одночасно!** Це призведе до помилок при компіляції.
 
 ### Моніторинг та сервіси
 
@@ -55,7 +64,7 @@
 * **[sub_devices_all_in_one.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/sub_devices_all_in_one.yaml)** — **Svitlo**Bot + **Health**Сheck + **Custom**URL
 
 !!! tip "Коли використовувати?"
-    При додаванні декількох пакетів моніторингу, для успішної збірки прошивки необхідно додати відповідний пакет під-пристроїв (Sub Devices).
+    При додаванні декількох пакетів моніторингу, для успішної збірки прошивки необхідно додати відповідний пакет під-пристроїв ([Sub Devices](https://esphome.io/components/esphome/#sub-devices)).
 
 ## Як підключити
 
@@ -80,7 +89,7 @@
 # Прошивки
 
 !!! note "Опис прошивок"
-    [**Варіанти прошивки**](index.md#варіанти-прошивки)
+    [Варіанти прошивки](index.md#варіанти-прошивки)
 
 *[ESP32]: Серія мікроконтролерів типу «система на кристалі» китайського виробника Espressif, що мають інтегровані контролери Wi-Fi і Bluetooth, низьке енергоспоживання і невисоку ціну.
 *[ESP8266]: Мікроконтролер китайського виробника Espressif з інтерфейсом Wi-Fi. Наприклад, NodeMCU або Wemos D1 Mini. Наприклад, NodeMCU або Wemos D1 Mini.
