@@ -1,5 +1,29 @@
 # Changelog
 
+## [v3.5.51](https://github.com/andrewjswan/svitlobot/compare/v3.5.49...v3.5.51) - 2026-03-19
+
+### What's Changed
+
+### 🚀 Features
+
+- Increase `tls_buffer_size_rx` to `16384` for `http_request` on `ESP8266` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/159)
+- Add `Debug` and `Dev` versions of SvitloBot @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/155)
+
+### 🧰 Maintenance
+
+- ESP: Bump release-drafter/release-drafter from 6 to 7 @[dependabot[bot]](https://github.com/apps/dependabot) (https://github.com/andrewjswan/svitlobot/pull/157)
+- ESP: Bump geekyeggo/delete-artifact from 5 to 6 @[dependabot[bot]](https://github.com/apps/dependabot) (https://github.com/andrewjswan/svitlobot/pull/158)
+- Cosmetic: Documentation  @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/156)
+- Update `social` cards background @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/154)
+
+### 🤝 Support
+
+If you like the project, you can support it with a star ⭐ on GitHub.
+
+### ✨ Changelog
+
+**Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.49...v3.5.51
+
 ## [v3.5.49](https://github.com/andrewjswan/svitlobot/compare/v3.5.47...v3.5.49) - 2026-03-09
 
 ### What's Changed
