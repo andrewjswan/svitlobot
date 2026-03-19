@@ -13,15 +13,15 @@
 !!! example "Варіанти прошивок"
     | Версія | Опис | Посилання |
     | :--- | :--- | :--- |
-    | **SvitloBot** | Базова версія **(Рекомендовано)** | [SvitloBot - ESP Web Tools](svitlobot-firmware.md) |
-    | **HealthСheck** | Моніторинг зв'язку | [HealthСheck - ESP Web Tools](healthcheck-firmware.md) |
-    | **Custom URL** | Індивідуальний моніторинг  | [Custom URL - ESP Web Tools](custom-url-firmware.md) |
-    | **All-in-One** | Комбінована прошивка | [All-in-One - ESP Web Tools](all-in-one-firmware.md) |
+    | **Svitlo**Bot | Базова версія **(Рекомендовано)** | [SvitloBot - ESP Web Tools](svitlobot-firmware.md) |
+    | **Health**Сheck | Моніторинг зв'язку | [HealthСheck - ESP Web Tools](healthcheck-firmware.md) |
+    | **Custom**URL | Індивідуальний моніторинг  | [Custom URL - ESP Web Tools](custom-url-firmware.md) |
+    | **All**-in-**One** | Комбінована прошивка | [All-in-One - ESP Web Tools](all-in-one-firmware.md) |
 
 !!! info "Період надсилання HeartBeat"
     Період надсилання "сигналу життя" (heartbeat) в поточній прошивці дорівнює 55с.
 
 !!! note "Опис прошивок"
-    [**Опис прошивок**](index.md#варіанти-прошивки)
+    [Опис прошивок](index.md#варіанти-прошивки)
 
 *[heartbeat]: "Сигнал життя" - Регулярний запит від вашої системи, що підтверджує її коректну роботу, або сповіщає про збій у разі відсутності сигналу.
