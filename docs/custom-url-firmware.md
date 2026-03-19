@@ -1,6 +1,6 @@
 ---
 title: CustomURL прошивка
-description: Індивідуальний моніторинг | "Сигнали життя" (pings) на будь-який сервіс
+description: Індивідуальний моніторинг | "Сигнали життя" (heartbeat) на будь-який сервіс
 ---
 
 <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
