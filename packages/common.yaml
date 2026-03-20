@@ -10,6 +10,10 @@ esphome:
   project:
     name: "${project_name}"
     version: "${project_version}"
+  on_boot:
+    priority: -100
+    then:
+      - logger.set_level: INFO
 
 api:
   reboot_timeout: 0s
@@ -19,14 +23,18 @@ ota:
   - platform: web_server
 
 logger:
-  level: INFO
+  level: DEBUG
+
+select:
+  - platform: logger
+    name: "Log Level"
 
 mdns:
   disabled: false
 
 web_server:
   port: 80
-  log: false
+  log: true
   ota: false
   version: 3
 
