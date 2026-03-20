@@ -5,6 +5,7 @@
     * [Мапа моніторингу](https://svitlobot.obbdev.com/Map)
     * [Мапа вимкнень електроенергії](https://vadymklymenko.com/embed/kyiv-electricity/)
     * [Мапа з часовою шкалою](https://power.area.pp.ua/)
+    * [No-Lights Monitor](https://lights-monitor.com/map.html)
 
 !!! question "Визначення номера черги"
     * [YASNO — пошук групи для Києва](https://sergeymaximenko.github.io/SetTimeGenerator/GetGroupForKiev.html)
