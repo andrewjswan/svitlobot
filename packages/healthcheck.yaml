@@ -73,7 +73,7 @@ script:
           }
 
           if (code == 200) {
-            ESP_LOGD("HealthCheck", "Send status - success");
+            ESP_LOGI("HealthCheck", "Send status - success");
             id(healthcheck_status).publish_state(true);
             id(healthcheck_send_errors) = 0;
           } else {
