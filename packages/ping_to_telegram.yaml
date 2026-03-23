@@ -14,6 +14,9 @@ binary_sensor:
       if (!id(ping_host).has_state() || !id(chat_id).has_state() || !id(bot_id).has_state()) {
         return {};
       }
+      if (id(ping_host).state.length() < 3 || id(chat_id).state.length() < 3 || id(bot_id).state.length() < 3) {
+        return {};
+      }
       return id(ping_packet_loss).state < 100;
     filters:
       - delayed_off: 60s
@@ -75,14 +78,22 @@ script:
       message: string
       silent: bool
     then:
-      - http_request.post:
-          url: !lambda |-
-            return "https://api.telegram.org/bot" + id(bot_id).state + "/sendMessage";
-          request_headers:
-            Content-Type: application/json
-          json: |-
-            root["chat_id"] = id(chat_id).state;
-            root["text"] = message;
-            root["disable_notification"] = silent;
-            root["parse_mode"] = "markdown";
+      - if:
+          condition:
+            and:
+              - wifi.connected:
+              - lambda: 'return id(ping_host).has_state() && id(chat_id).has_state() && id(bot_id).has_state();'
+              - lambda: 'return id(ping_host).state.length() > 3 || id(chat_id).state.length() > 3 || id(bot_id).state.length() > 3;'
+              - lambda: 'return message.length() > 3;'
+          then:
+            - http_request.post:
+                url: !lambda |-
+                  return "https://api.telegram.org/bot" + id(bot_id).state + "/sendMessage";
+                request_headers:
+                  Content-Type: application/json
+                json: |-
+                  root["chat_id"] = id(chat_id).state;
+                  root["text"] = message;
+                  root["disable_notification"] = silent;
+                  root["parse_mode"] = "markdown";
     mode: queued
