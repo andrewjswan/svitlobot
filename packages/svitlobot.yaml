@@ -36,6 +36,7 @@ script:
               - lambda: 'return id(svitlobot_key).has_state();'
               - lambda: 'return id(svitlobot_key).state.length() > 3;'
               - lambda: 'return ${lets_ping};'
+              - lambda: 'return ${i_am_master};'
           then:
             - http_request.get:
                 url: !lambda |-
