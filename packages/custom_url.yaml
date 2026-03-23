@@ -73,7 +73,7 @@ script:
           }
 
           if (code == 200) {
-            ESP_LOGD("Custom URL", "Send status - success");
+            ESP_LOGI("Custom URL", "Send status - success");
             id(custom_url_status).publish_state(true);
             id(custom_url_send_errors) = 0;
           } else {
