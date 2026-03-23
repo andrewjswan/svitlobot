@@ -102,7 +102,7 @@ mdns:
 web_server:
   port: 80
   ota: false
-  log: false
+  log: true
   version: 3
   sorting_groups:
     - id: svitlobot_group
@@ -244,7 +244,7 @@ script:
           }
 
           if (code == 200) {
-            ESP_LOGD("SvitloBot", "Send status - success");
+            ESP_LOGI("SvitloBot", "Send status - success");
             id(send_status).publish_state(true);
             id(send_errors) = 0;
           } else {
