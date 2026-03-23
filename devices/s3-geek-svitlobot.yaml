@@ -116,6 +116,7 @@ script:
             and:
               - wifi.connected:
               - lambda: 'return id(my_key).has_state();'
+              - lambda: 'return id(my_key).state.length() > 3;'
           then:
             - http_request.get:
                 url: !lambda |-

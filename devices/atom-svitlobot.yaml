@@ -97,6 +97,7 @@ script:
             and:
               - wifi.connected:
               - lambda: 'return id(my_key).has_state();'
+              - lambda: 'return id(my_key).state.length() > 3;'
           then:
             - light.turn_on:
                 id: status_led
