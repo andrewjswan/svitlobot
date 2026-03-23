@@ -11,7 +11,7 @@ external_components:
 
 espnow_failover:
   id: failover
-  group_id: "svitlobot"
+  group_id: "svitlo"
 
 binary_sensor:
   - platform: espnow_failover
