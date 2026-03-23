@@ -34,6 +34,7 @@ script:
             and:
               - wifi.connected:
               - lambda: 'return id(healthcheck_key).has_state();'
+              - lambda: 'return id(healthcheck_key).state.length() > 3;'
               - lambda: 'return ${lets_ping};'
           then:
             - http_request.get:
