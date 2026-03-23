@@ -1,95 +1,22 @@
 substitutions:
-  group: "450"
+  i_am_master: "id(failover).is_master()"
 
-globals:
-  - id: master_heartbeat
-    type: uint64_t
-    restore_value: no
-    initial_value: '55000'
+external_components:
+  - source:
+      type: git
+      url: https://github.com/dimkalinux/esphome-components
+      ref: main
+    components: [espnow_failover]
+    refresh: 60s
 
-switch:
-  - platform: template
-    name: "Master"
-    id: master_mode
-    icon: mdi:shield-crown-outline
-    optimistic: true
-    restore_mode: RESTORE_DEFAULT_ON
-    entity_category: config
-    disabled_by_default: true
+espnow_failover:
+  id: failover
+  group_id: "svitlobot"
 
-espnow:
-  auto_add_peer: true
-  channel: 1
-  on_broadcast:
-    - logger.log:
-        format: "Broadcast from: %s = '%s'  RSSI: %d"
-        args:
-          - format_mac_address_pretty(info.src_addr).c_str()
-          - format_hex_pretty(data, size).c_str()
-          - info.rx_ctrl->rssi
-    - script.execute:
-        id: receive_state
-        data: !lambda return std::vector<uint8_t>(data, data + size);
-        size: !lambda return size;
-
-script:
-  # Send HeartBeat Event
-  - id: send_state
-    then:
-      - if:
-          condition:
-            switch.is_on: master_mode
-          then:
-            - logger.log: "Send broadcast packet"
-            - espnow.broadcast:
-                data: !lambda |-
-                  struct ESPNowData {
-                    uint8_t id;
-                    uint8_t group;
-                  } PACKED;
-
-                  ESPNowData data = {1, ${group}};
-                  std::vector<uint8_t> buffer(sizeof(ESPNowData));
-                  memcpy(buffer.data(), &data, sizeof(ESPNowData));
-                  return buffer;
-                on_sent:
-                  - logger.log: "ESPNow message sent successfully"
-                on_error:
-                  - logger.log: "ESPNow message failed to send"
-                wait_for_sent: true
-                continue_on_error: true
-            - logger.log: "Done"
-    mode: restart
-
-  # Receive HeartBeat Event
-  - id: receive_state
-    parameters:
-      data: uint8_t[]
-      size: int
-    then:
-      - if:
-          condition:
-            switch.is_off: master_mode
-          then:
-            - logger.log: "Recieve broadcast packet"
-            - lambda: |-
-                struct ESPNowData {
-                  uint8_t id;
-                  uint8_t group;
-                } PACKED;
-
-                if (size < sizeof(ESPNowData)) {
-                  return;
-                }
-
-                ESPNowData data;
-                memcpy(&base_data, data.data(), sizeof(ESPNowData));
-                if (data.group != ${group}) {
-                  return;
-                }
-
-                if (base_data.id == 1) {
-                  id(master_heartbeat) = millis_64();
-                }
-            - logger.log: "Done"
-    mode: restart
+binary_sensor:
+  - platform: espnow_failover
+    is_master:
+      name: "Master"
+      id: master_mode
+      icon: mdi:shield-crown-outline
+      disabled_by_default: true
