@@ -112,6 +112,7 @@ nav:
       - Моніторинг доступності (HealthCheck): healthcheck.md
       - Пінг (Ping Monitor): ping.md
       - Відмовостійкість (ESPNow Failover): espnow-failover.md
+      - Додавання в ESPHome: adopt.md
   - Мапи та сервіси: maps-services.md
   - Альтернативні прошивки: alternative.md
   - Корисні посилання: additionals.md
@@ -123,6 +124,7 @@ nav:
       - All-in-One: all-in-one-firmware.md
       - Debug: debug-firmware.md
       - Прошивка через браузер: esp-web-tools.md
+      - Додавання в ESPHome: adopt.md
   - Співпраця:
       - Підтримка: contributing.md
       - Повідомлення про помилку: https://github.com/andrewjswan/svitlobot/issues
