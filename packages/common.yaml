@@ -1,5 +1,6 @@
 substitutions:
   lets_ping: "true"
+  i_am_master: "true"
 
 esphome:
   name: "${name}"
