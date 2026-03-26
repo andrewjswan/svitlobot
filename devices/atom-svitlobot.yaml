@@ -59,7 +59,7 @@ script:
                         id: svitlobot_set_state
                         code: -1
                         duration: 0
-            - component.update: errors
+            - component.update: svitlobot_errors
             - if:
                 condition:
                   lambda: 'return id(svitlobot_status).state;'
