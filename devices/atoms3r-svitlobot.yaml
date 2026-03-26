@@ -151,27 +151,27 @@ script:
           id(border_timer_start) = millis();
 
           if (code > 0) {
-            id(response_code).publish_state(std::to_string(code));
+            id(svitlobot_response_code).publish_state(std::to_string(code));
           } else {
             ESP_LOGE("SvitloBot", "Request failed!");
-            id(response_code).publish_state("---");
+            id(svitlobot_response_code).publish_state("---");
           }
 
           if (duration > 0) {
-            id(response_duration).publish_state(duration);
+            id(svitlobot_response_duration).publish_state(duration);
           } else {
-            id(response_duration).publish_state(NAN);
+            id(svitlobot_response_duration).publish_state(NAN);
           }
 
           if (code == 200) {
             ESP_LOGD("SvitloBot", "Send status - success");
-            id(send_status).publish_state(true);
+            id(svitlobot_status).publish_state(true);
             id(svitlobot_send_errors) = 0;
           } else {
             if (code > 0) {
               ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
             }
-            id(send_status).publish_state(false);
+            id(svitlobot_status).publish_state(false);
             id(svitlobot_send_errors) = id(svitlobot_send_errors) < 0 ? 1 : std::max(1, ++id(svitlobot_send_errors));
           }
     mode: single
@@ -333,12 +333,12 @@ display:
             if (key_valid) {
               Color color_progress = id(c_green);
 
-              if (id(send_status).state) {
+              if (id(svitlobot_status).state) {
                 if (id(request_in_progress)) {
                   it.print($icon_x_position, $icon_y_position, id(font_mdi_big), id(c_yellow), TextAlign::CENTER, "\U000F051F", id(c_black));
                 } else {
                   it.print($icon_x_position, $icon_y_position + 5, id(font_mdi_big), id(c_green), TextAlign::CENTER, "\U000F01F5", id(c_black));
-                  it.print($text_center_x_position, $text_bottom_y_position, id(font_text_small), id(c_white), TextAlign::CENTER, id(response_code).state.c_str(), id(c_black));
+                  it.print($text_center_x_position, $text_bottom_y_position, id(font_text_small), id(c_white), TextAlign::CENTER, id(svitlobot_response_code).state.c_str(), id(c_black));
                 }
               } else {
                 if (is_before_first_request) {
@@ -351,7 +351,7 @@ display:
                     it.print($icon_x_position, $icon_y_position, id(font_mdi_big), id(c_yellow), TextAlign::CENTER, "\U000F051F", id(c_black));
                   } else {
                     it.print($icon_x_position, $icon_y_position, id(font_mdi_big), id(c_red), TextAlign::CENTER, "\U000F05D6", id(c_black));
-                    it.print($text_center_x_position, $text_bottom_y_position, id(font_text_small), id(c_white), TextAlign::CENTER, id(response_code).state.c_str(), id(c_black));
+                    it.print($text_center_x_position, $text_bottom_y_position, id(font_text_small), id(c_white), TextAlign::CENTER, id(svitlobot_response_code).state.c_str(), id(c_black));
 
                     color_progress = id(c_red);
                   }
@@ -458,8 +458,8 @@ display:
           y += $text_status_value_y_position;
 
           it.print(2, y, id(font_text_small), id(c_white), "DE:", id(c_black));
-          if (id(errors).has_state()) {
-            it.printf($text_status_value_x_position, y, id(font_text_small), id(c_white), "%.0f", id(errors).state);
+          if (id(svitlobot_errors).has_state()) {
+            it.printf($text_status_value_x_position, y, id(font_text_small), id(c_white), "%.0f", id(svitlobot_errors).state);
           } else {
             it.print($text_status_value_x_position, y, id(font_text_small), id(c_yellow), "?", id(c_black));
           }
