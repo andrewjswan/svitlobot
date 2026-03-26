@@ -52,11 +52,11 @@ script:
                 capture_response: false
                 on_response:
                   then:
-                    - lambda: id(set_state)->execute(response->status_code, response->duration_ms);
+                    - lambda: id(svitlobot_set_state)->execute(response->status_code, response->duration_ms);
                 on_error:
                   then:
                     - script.execute:
-                        id: set_state
+                        id: svitlobot_set_state
                         code: -1
                         duration: 0
             - component.update: svitlobot_errors
