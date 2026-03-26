@@ -49,6 +49,7 @@ script:
             wifi.connected:
           timeout: 15s
       - logger.log: "Pinging..."
+    mode: single
 
 sensor:
   - platform: uptime
