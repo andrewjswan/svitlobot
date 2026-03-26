@@ -465,8 +465,8 @@ display:
           }
           y += $text_status_value_y_position;
 
-          if (id(ip_adress).has_state()) {
-            it.print(2, $text_bottom_y_position, id(font_text_small), id(c_white), id(ip_adress).state.c_str(), id(c_black));
+          if (id(ip_address).has_state()) {
+            it.print(2, $text_bottom_y_position, id(font_text_small), id(c_white), id(ip_address).state.c_str(), id(c_black));
           } else {
             it.print(2, $text_bottom_y_position, id(font_text_small), id(c_red), "IP: ---", id(c_black));
           }
