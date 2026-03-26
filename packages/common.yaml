@@ -90,6 +90,7 @@ text_sensor:
   - platform: wifi_info
     ip_address:
       name: "IP Address"
+      id: ip_adress
       disabled_by_default: true
       entity_category: diagnostic
       icon: mdi:ip
