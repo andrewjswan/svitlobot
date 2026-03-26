@@ -13,7 +13,7 @@ shadow:
   id: svitlobot
   script_id: site_ping
   startup_delay: 5s
-  interval: ${heartbeat_interval}
+  interval: ${heartbeat_interval}s
   priority: 3
 
 sensor:
