@@ -1,6 +1,9 @@
 substitutions:
   i_am_master: "id(failover).is_master()"
 
+esphome:
+  name_add_mac_suffix: true
+
 external_components:
   - source:
       type: git
