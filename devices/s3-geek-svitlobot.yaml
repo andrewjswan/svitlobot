@@ -2,83 +2,24 @@ substitutions:
   device: "esp_svitlobot_s3_geek"
   name: "svitlobot-s3-geek"
   friendly_name: "Svitlo Bot"
-  project_name: "ajs.SvitloBot"
-  project_version: "3.5.51"
-  comment: "ESPHome Svitlo Bot | Shadow"
-  ping_interval: "55s"
-
-esphome:
-  name: "${name}"
-  friendly_name: "${friendly_name}"
-  # name_add_mac_suffix: true
-  comment: $comment
-  build_path: ./.build/$device
-  project:
-    name: "${project_name}"
-    version: "${project_version}"
-  on_boot:
-    priority: -100
-    then:
-      - delay: 15s
-      - update.check: new_firmware
-
-external_components:
-  - source:
-      type: git
-      url: https://github.com/andrewjswan/esphome-components
-      ref: main
-    components: [shadow]
-    refresh: 60s
-
-dashboard_import:
-  package_import_url: github://andrewjswan/svitlobot/devices/s3-geek-svitlobot.yaml@main
 
 esp32:
   variant: esp32s3
   framework:
     type: esp-idf
 
-api:
-  reboot_timeout: 0s
+dashboard_import:
+  package_import_url: github://andrewjswan/svitlobot/devices/s3-geek-svitlobot.yaml@main
 
-ota:
-  - platform: esphome
-  - platform: web_server
-  - platform: http_request
-
-logger:
-  level: INFO
-
-mdns:
-  disabled: false
-
-web_server:
-  port: 80
-  ota: false
-  log: false
-  version: 3
-  sorting_groups:
-    - id: svitlobot_group
-      name: "💡 SvitloBot"
-      sorting_weight: 0
-
-wifi:
-  ap: {}  # This spawns an AP with the device name and mac address with no password.
-  id: oled_wifi
-  enable_btm: true
-  enable_rrm: true
-
-captive_portal:
-
-improv_serial:
-
-debug:
-  update_interval: never
-
-http_request:
-  useragent: "esphome/${name} (${project_version})"
-  verify_ssl: false
-  timeout: 15s
+packages:
+  remote_package:
+    url: https://github.com/andrewjswan/svitlobot
+    files:
+      - packages/common.yaml
+      - packages/svitlobot.yaml
+      - packages/esp32.yaml
+      - packages/http_ota.yaml
+    refresh: 1s
 
 time:
   - platform: sntp
@@ -94,77 +35,10 @@ time:
             - logger.log: Time has been set and is valid!
 
 globals:
-  - id: send_errors
-    type: int
-    restore_value: no
-    initial_value: '-1'
-
   - id: state_last_event
     type: time_t
     restore_value: no
     initial_value: '0'
-
-script:
-  - id: send_state
-    then:
-      - wait_until:
-          condition:
-            wifi.connected:
-          timeout: 15s
-      - if:
-          condition:
-            and:
-              - wifi.connected:
-              - lambda: 'return id(my_key).has_state();'
-              - lambda: 'return id(my_key).state.length() > 3;'
-          then:
-            - http_request.get:
-                url: !lambda |-
-                  return ((std::string) "https://api.svitlobot.in.ua/channelPing?channel_key=" + id(my_key).state).c_str();
-                capture_response: false
-                on_response:
-                  then:
-                    - lambda: id(set_state)->execute(response->status_code, response->duration_ms);
-                on_error:
-                  then:
-                    - script.execute:
-                        id: set_state
-                        code: -1
-                        duration: 0
-            - component.update: errors
-    mode: queued
-
-  - id: set_state
-    parameters:
-      code: int
-      duration: int
-    then:
-      - lambda: |-
-          if (code > 0) {
-            id(response_code).publish_state(std::to_string(code));
-          } else {
-            ESP_LOGE("SvitloBot", "Request failed!");
-            id(response_code).publish_state("---");
-          }
-
-          if (duration > 0) {
-            id(response_duration).publish_state(duration);
-          } else {
-            id(response_duration).publish_state(NAN);
-          }
-
-          if (code == 200) {
-            ESP_LOGD("SvitloBot", "Send status - success");
-            id(send_status).publish_state(true);
-            id(send_errors) = 0;
-          } else {
-            if (code > 0) {
-              ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
-            }
-            id(send_status).publish_state(false);
-            id(send_errors) = id(send_errors) < 0 ? 1 : std::max(1, ++id(send_errors));
-          }
-    mode: single
 
 font:
   - file:
@@ -368,7 +242,7 @@ interval:
       - if:
           condition:
             lambda: |-
-              return !id(send_status).state;
+              return !id(svitlobot_status).state;
           then:
             - light.turn_on: display_light
             - display.page.show: state_page
@@ -415,37 +289,8 @@ switch:
     entity_category: config
     disabled_by_default: true
 
-shadow:
-  id: svitlobot
-  script_id: send_state
-  startup_delay: 5s
-  interval: ${ping_interval}
-  priority: 3
-
-text:
-  - platform: template
-    name: "Key"
-    id: my_key
-    optimistic: true
-    min_length: 0
-    max_length: 15
-    mode: text
-    restore_value: true
-    icon: mdi:key-chain-variant
-    entity_category: config
-    disabled_by_default: true
-    web_server:
-      sorting_group_id: svitlobot_group
-      sorting_weight: 5
-
 binary_sensor:
-  - platform: template
-    name: "Status"
-    id: send_status
-    icon: mdi:lan-connect
-    web_server:
-      sorting_group_id: svitlobot_group
-      sorting_weight: 1
+  - id: !extend svitlobot_status
     on_state:
       then:
         - globals.set:
@@ -489,127 +334,3 @@ binary_sensor:
                     }
                     return (time_t)time.timestamp;
               - display.page.show: state_page
-
-sensor:
-  - platform: template
-    name: "Delivery Errors"
-    id: errors
-    lambda: |-
-      if (!id(my_key).has_state() || id(send_errors) < 0) {
-        return NAN;
-      }
-      return id(send_errors);
-    accuracy_decimals: 0
-    icon: mdi:space-invaders
-    unit_of_measurement: "error"
-    web_server:
-      sorting_group_id: svitlobot_group
-      sorting_weight: 3
-    on_value_range:
-      - above: 10.0
-        then:
-          - button.press: Restart
-
-  - platform: uptime
-    name: "Uptime"
-    entity_category: diagnostic
-
-  - platform: wifi_signal
-    name: "WiFi Signal"
-    id: wifi_signal_dbm
-    entity_category: diagnostic
-    icon: mdi:signal
-
-  - platform: internal_temperature
-    name: "Device Temperature"
-    entity_category: diagnostic
-    icon: mdi:coolant-temperature
-    device_class: temperature
-    disabled_by_default: true
-
-  - platform: template
-    name: "Response Duration"
-    id: response_duration
-    icon: mdi:timer-outline
-    entity_category: diagnostic
-    disabled_by_default: true
-    device_class: duration
-    unit_of_measurement: "ms"
-    accuracy_decimals: 0
-    web_server:
-      sorting_group_id: svitlobot_group
-      sorting_weight: 11
-
-button:
-  - platform: restart
-    name: "Restart"
-    id: Restart
-    entity_category: diagnostic
-    icon: mdi:restart
-
-  - platform: factory_reset
-    name: "Restart with Factory Default Settings"
-    id: Reset
-    entity_category: diagnostic
-    disabled_by_default: true
-
-  - platform: template
-    name: "Firmware Update"
-    icon: mdi:progress-upload
-    disabled_by_default: true
-    entity_category: config
-    on_press:
-      - update.perform:
-          id: new_firmware
-
-text_sensor:
-  - platform: template
-    name: "Response Code"
-    id: response_code
-    icon: mdi:web
-    entity_category: diagnostic
-    disabled_by_default: true
-    web_server:
-      sorting_group_id: svitlobot_group
-      sorting_weight: 10
-
-  - platform: template
-    name: ESPHome Version
-    icon: mdi:new-box
-    entity_category: diagnostic
-    lambda: |-
-      return std::string(ESPHOME_VERSION);
-
-  - platform: debug
-    reset_reason:
-      name: "Reset Reason"
-      disabled_by_default: true
-      entity_category: diagnostic
-
-  - platform: wifi_info
-    ip_address:
-      name: "IP Address"
-      id: ip_adress
-      disabled_by_default: true
-      entity_category: diagnostic
-      icon: mdi:ip
-    ssid:
-      name: "Connected SSID"
-      disabled_by_default: true
-      entity_category: diagnostic
-      icon: mdi:access-point-network
-    mac_address:
-      name: "Mac Address"
-      disabled_by_default: true
-      entity_category: diagnostic
-      icon: mdi:console-network
-
-update:
-  - platform: http_request
-    id: new_firmware
-    name: "Firmware Update"
-    source: https://andrewjswan.github.io/svitlobot/devices/${name}-svitlobot-manifest.json
-    icon: mdi:update
-    update_interval: 3h
-    web_server:
-      sorting_weight: 15
