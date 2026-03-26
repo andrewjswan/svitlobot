@@ -21,6 +21,12 @@ packages:
       - packages/http_ota.yaml
     refresh: 1s
 
+wifi:
+  ap: {}
+  id: esp_wifi
+  enable_btm: true
+  enable_rrm: true
+
 time:
   - platform: sntp
     id: esp_time
@@ -165,9 +171,9 @@ display:
           it.printf(20, 20, id(font_mdi_small), color_on, TextAlign::CENTER, "%s", wifi_icon);
 
           // WiFi Text
-          if (id(oled_wifi).is_ap_active()) {
+          if (id(esp_wifi).is_ap_active()) {
             it.printf(88, 20, id(font_text_big), COLOR_RED, TextAlign::CENTER, "AP");
-          } else if (id(oled_wifi).is_connected()) {
+          } else if (id(esp_wifi).is_connected()) {
             it.printf(88, 20, id(font_text_big), COLOR_GREEN, TextAlign::CENTER, "ON");
           } else {
             it.printf(88, 20, id(font_text_big), color_on, TextAlign::CENTER, "OFF");
