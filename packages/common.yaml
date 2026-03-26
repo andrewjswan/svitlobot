@@ -57,6 +57,7 @@ sensor:
 
   - platform: wifi_signal
     name: "WiFi Signal"
+    id: wifi_signal_dbm
     entity_category: diagnostic
     icon: mdi:signal
 
