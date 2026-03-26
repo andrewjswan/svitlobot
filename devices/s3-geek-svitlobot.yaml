@@ -180,8 +180,8 @@ display:
           }
 
           // Code
-          if (id(my_key).has_state()) {
-            auto x = id(response_code).state;
+          if (id(svitlobot_key).has_state()) {
+            auto x = id(svitlobot_response_code).state;
             if (x.empty()) {
               it.printf(21, 61, id(font_mdi_small), color_on, TextAlign::CENTER, "%s", "\U000F1792");
             } else if (x == "---") {
@@ -196,12 +196,12 @@ display:
                 it.printf(21, 61, id(font_mdi_small), color_on, TextAlign::CENTER, "%s", "\U000F124A");
               }
             }
-            it.printf(88, 61, id(font_text_big), color_on, TextAlign::CENTER, "%s", id(response_code).state.c_str());
+            it.printf(88, 61, id(font_text_big), color_on, TextAlign::CENTER, "%s", id(svitlobot_response_code).state.c_str());
           }
 
           // Big Icon
-          if (id(my_key).has_state()) {
-            if (id(send_status).state) {
+          if (id(svitlobot_key).has_state()) {
+            if (id(svitlobot_status).state) {
               it.printf(68, 151, id(font_mdi_big), COLOR_GREEN, TextAlign::CENTER, "%s", "\U000F06E9");
             } else {
               it.printf(68, 151, id(font_mdi_big), COLOR_RED, TextAlign::CENTER, "%s", "\U000F0ECD");
