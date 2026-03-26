@@ -1,5 +1,6 @@
 substitutions:
   lets_ping: "true"
+  heartbeat_interval: "55s"
 
 esphome:
   name: "${name}"
