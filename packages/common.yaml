@@ -1,5 +1,6 @@
 substitutions:
   lets_ping: "true"
+  heartbeat_interval: "55"  # in seconds
 
 esphome:
   name: "${name}"
@@ -56,6 +57,7 @@ sensor:
 
   - platform: wifi_signal
     name: "WiFi Signal"
+    id: wifi_signal_dbm
     entity_category: diagnostic
     icon: mdi:signal
 
@@ -89,6 +91,7 @@ text_sensor:
   - platform: wifi_info
     ip_address:
       name: "IP Address"
+      id: ip_address
       disabled_by_default: true
       entity_category: diagnostic
       icon: mdi:ip

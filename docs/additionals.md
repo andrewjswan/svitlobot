@@ -6,8 +6,9 @@
     * [Matrix Lamp](https://github.com/andrewjswan/matrix-lamp)
 
 !!! note "ESPHome"
-    * [ESPHome Configuration](https://andrewjswan.github.io/esphome-config)
-    * [ESPHome Components](https://andrewjswan.github.io/esphome-components)
+    * [ESPHome Configuration](https://andrewjswan.github.io/esphome-config) by @andrewjswan
+    * [ESPHome Components](https://andrewjswan.github.io/esphome-components) by @andrewjswan
+    * [ESPNow Failover](https://github.com/dimkalinux/esphome-components) by @dimkalinux
 
 !!! note "Home Assisatant Add-ons"
     * [Home Assistant Add-ons](https://github.com/andrewjswan/home-assistant-addons)
