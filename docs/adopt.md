@@ -82,7 +82,7 @@
           - packages/common.yaml
           - packages/esp32.yaml
         refresh: 1s
-    
+
       # Специфічну логіку робимо локальною для власних змін
       svitlobot: !include packages/svitlobot.yaml
       custom_url: !include packages/custom_url.yaml
