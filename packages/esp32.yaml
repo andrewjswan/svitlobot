@@ -18,6 +18,7 @@ shadow:
 
 sensor:
   - platform: internal_temperature
+    id: esp_temperature
     name: Device Temperature
     entity_category: diagnostic
     icon: mdi:coolant-temperature
