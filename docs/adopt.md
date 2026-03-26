@@ -28,5 +28,85 @@
 !!! tip "Пакети SvitloBot?"
     Детальний опис, готові списки пакетів, приклади їх підключення та параметри налаштування доступні на [сторінці опису пакетів **Svitlo**Bot](packages.md).
 
+### 4. Перехід з віддалених пакетів на локальні (Migration to Local Packages)
+
+Після прошивки пристрою (Adopt) ви можете захотіти змінити логіку роботи або додати власні налаштування, не залежачи від оновлень у репозиторії. Ви можете перейти на локальні файли як повністю, так і частково.
+
+#### Завантаження файлів
+
+Скопіюйте необхідні YAML-файли з вихідного [репозиторію](https://github.com/andrewjswan/svitlobot/tree/main/packages) у вашу папку з конфігураціями [ESPHome](https://esphome.io/) (наприклад, у підпапку `packages/`).
+
+#### Варіант 1: Повний перехід
+
+Цей метод повністю розриває зв'язок із [GitHub](https://github.com/). Усі налаштування тепер беруться з ваших локальних копій. Це дозволяє редагувати код «на льоту» без очікування оновлення кешу [GitHub](https://github.com/).
+
+!!! abstract annotate "Було (Remote):"
+
+    ``` { .yaml .copy .annotate }
+    packages:
+      remote_package:
+        url: https://github.com/andrewjswan/svitlobot
+        files:
+          - packages/common.yaml
+          - packages/svitlobot.yaml
+          - packages/esp32.yaml
+          - packages/http_ota.yaml
+        refresh: 1s
+    ```
+
+!!! success annotate "Стало (Local):"
+
+    ``` { .yaml .copy .annotate }
+    packages:
+      common: !include packages/common.yaml
+      svitlobot: !include packages/svitlobot.yaml
+      esp32: !include packages/esp32.yaml
+      http_ota: !include packages/http_ota.yaml
+
+      # Ваші нові локальні пакети
+      some_package: !include packages/some_package.yaml
+    ```
+
+#### Варіант 2: Частковий (гібридний) перехід
+
+Ви можете залишити базові системні налаштування у [репозиторії](https://github.com/andrewjswan/svitlobot/), щоб отримувати критичні оновлення від розробника, але перенести логіку (наприклад, `svitlobot.yaml`) у локальні файли для кастомізації.
+
+!!! example annotate "Приклад гібридної конфігурації:"
+
+    ``` { .yaml .copy .annotate }
+    packages:
+      # Залишаємо базову частину в репозиторії
+      remote_package:
+        url: https://github.com/andrewjswan/svitlobot
+        files:
+          - packages/common.yaml
+          - packages/esp32.yaml
+        refresh: 1s
+
+      # Специфічну логіку робимо локальною для власних змін
+      svitlobot: !include packages/svitlobot.yaml
+      custom_url: !include packages/custom_url.yaml
+
+      # Ваші нові локальні пакети
+      some_package: !include packages/some_package.yaml
+    ```
+
+#### Структура локальних файлів (Рекомендована)
+
+Для стабільної роботи та зручного редагування рекомендується зберігати всі спільні налаштування в підпапці `packages` поруч із файлами конфігурацій ваших пристроїв:
+
+!!! tip
+
+    ```
+    /config/esphome/
+    ├── svitlobot.yaml            <-- Основний файл вашого пристрою
+    ├── packages/                 <-- Папка з модулями (створіть її)
+    │   ├── common.yaml
+    │   ├── svitlobot.yaml
+    │   ├── esp32.yaml
+    │   ├── ping.yaml
+    │   └── http_ota.yaml
+    ```
+
 *[Adopt]: Процес «прив’язки» знайденого в мережі пристрою до вашої панелі керування [ESPHome](https://esphome.io/) для отримання повного доступу до його конфігурації.
 *[OTA]: **Over-the-Air** — це технологія бездротового оновлення, яка дозволяє змінювати прошивку та налаштування пристрою через Wi-Fi без фізичного підключення по USB.
