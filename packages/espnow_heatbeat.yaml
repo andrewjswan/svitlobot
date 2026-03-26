@@ -1,6 +1,5 @@
 substitutions:
   i_am_master: "id(failover).is_master()"
-  lets_ping: "${lets_ping~' && '~i_am_master if lets_ping is defined else i_am_master}"
 
 external_components:
   - source:
