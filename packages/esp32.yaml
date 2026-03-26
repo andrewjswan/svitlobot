@@ -18,7 +18,6 @@ shadow:
 
 sensor:
   - platform: internal_temperature
-    id: esp_temperature
     name: Device Temperature
     id: esp_temperature
     entity_category: diagnostic
