@@ -22,12 +22,6 @@ packages:
       - packages/http_ota.yaml
     refresh: 1s
 
-wifi:
-  ap: {}
-  id: global_wifi
-  enable_btm: true
-  enable_rrm: true
-
 script:
   - id: !extend before_svitlobot_request
     then:

@@ -22,12 +22,6 @@ packages:
       - packages/http_ota.yaml
     refresh: 1s
 
-wifi:
-  ap: {}
-  id: esp_wifi
-  enable_btm: true
-  enable_rrm: true
-
 time:
   - platform: sntp
     id: esp_time
