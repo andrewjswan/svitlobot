@@ -1,5 +1,6 @@
 substitutions:
   lets_ping: "true"
+  i_am_master: "true"
   heartbeat_interval: "55"  # in seconds
 
 esphome:
