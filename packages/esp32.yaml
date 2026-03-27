@@ -1,6 +1,10 @@
 substitutions:
   comment: "ESPHome Svitlo Bot | Shadow"
 
+wifi:
+  enable_btm: true
+  enable_rrm: true
+
 external_components:
   - source:
       type: git
