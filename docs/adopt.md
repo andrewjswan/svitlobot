@@ -1,6 +1,6 @@
 ## ESPHome: Інструкція з налаштування (Adopt)
 
-Цей посібник допоможе вам додати новий пристрій до панелі [ESPHome](https://esphome.io/), вирішити проблеми зі зв'язком та гнучко налаштувати конфігурацію за допомогою пакетів.
+Цей посібник допоможе вам додати новий пристрій до [панелі ESPHome](https://my.home-assistant.io/redirect/supervisor_addon/?addon=5c53de3b_esphome&repository_url=https%3A%2F%2Fgithub.com%2Fesphome%2Fhome-assistant-addon), вирішити проблеми зі зв'язком та гнучко налаштувати конфігурацію за допомогою пакетів.
 
 ### Процедура «Усиновлення» (Adopt)
 
