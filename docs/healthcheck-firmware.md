@@ -56,7 +56,7 @@ description: Моніторинг зв'язку | "Сигнали життя" (h
 
 ## Досвідчені користувачі
 
-- Цей пристрій можна адаптувати (adopt) в [ESPHome dashboard](https://my.home-assistant.io/redirect/supervisor_addon/?addon=5c53de3b_esphome&repository_url=https%3A%2F%2Fgithub.com%2Fesphome%2Fhome-assistant-addon)
+- Цей пристрій можна адаптувати ([Adopt](adopt.md)) в [ESPHome dashboard](https://my.home-assistant.io/redirect/supervisor_addon/?addon=5c53de3b_esphome&repository_url=https%3A%2F%2Fgithub.com%2Fesphome%2Fhome-assistant-addon)
 - Конфігураційний файл YAML доступний на [GitHub](https://github.com/andrewjswan/svitlobot)
 
 ---
