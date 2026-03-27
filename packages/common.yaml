@@ -44,11 +44,16 @@ debug:
 script:
   - id: site_ping
     then:
+      - lambda: id(before_ping)->execute();
       - wait_until:
           condition:
             wifi.connected:
           timeout: 15s
       - logger.log: "Pinging..."
+
+  - id: before_ping
+    then:
+      - logger.log: "Prepare for ping..."
 
 sensor:
   - platform: uptime
