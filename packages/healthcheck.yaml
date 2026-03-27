@@ -29,7 +29,8 @@ script:
 
   - id: healthcheck_ping
     then:
-      - lambda: id(before_healthcheck_ping)->execute();
+      - script.execute: before_healthcheck_ping
+      - script.wait: before_healthcheck_ping
       - if:
           condition:
             and:
@@ -38,7 +39,8 @@ script:
               - lambda: 'return id(healthcheck_key).state.length() > 3;'
               - lambda: 'return ${lets_ping};'
           then:
-            - lambda: id(before_healthcheck_request)->execute();
+            - script.execute: before_healthcheck_request
+            - script.wait: before_healthcheck_request
             - http_request.get:
                 url: !lambda |-
                   return ((std::string) "http://hc-ping.com/" + id(healthcheck_key).state).c_str();
@@ -53,10 +55,13 @@ script:
                         code: -1
                         duration: 0
             - component.update: healthcheck_errors
-            - lambda: id(after_healthcheck_request)->execute();
+            - script.execute: after_healthcheck_request
+            - script.wait: after_healthcheck_request
           else:
-            - lambda: id(without_healthcheck_request)->execute();
-      - lambda: id(after_healthcheck_ping)->execute();
+            - script.execute: without_healthcheck_request
+            - script.wait: without_healthcheck_request
+      - script.execute: after_healthcheck_ping
+      - script.wait: after_healthcheck_ping
     mode: single
 
   - id: healthcheck_set_state
@@ -64,7 +69,8 @@ script:
       code: int
       duration: int
     then:
-      - lambda: id(before_healthcheck_state)->execute();
+      - script.execute: before_healthcheck_state
+      - script.wait: before_healthcheck_state
       - lambda: |-
           if (code > 0) {
             id(healthcheck_response_code).publish_state(std::to_string(code));
@@ -90,7 +96,8 @@ script:
             id(healthcheck_status).publish_state(false);
             id(healthcheck_send_errors) = id(healthcheck_send_errors) < 0 ? 1 : std::max(1, ++id(healthcheck_send_errors));
           }
-      - lambda: id(after_healthcheck_state)->execute();
+      - script.execute: after_healthcheck_state
+      - script.wait: after_healthcheck_state
     mode: single
 
   - id: before_healthcheck_ping
