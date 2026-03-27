@@ -47,4 +47,7 @@
         refresh: 1s
     ```
 
+!!! tip "ESPHome: Adopt"
+    [ESPHome: Інструкція з налаштування](adopt.md)
+
 *[UPS]: Джерело безперебійного живлення
