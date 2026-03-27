@@ -139,73 +139,21 @@ globals:
     initial_value: "false"
 
 script:
-  - id: !remove svitlobot_ping
-  - id: svitlobot_ping
+  - id: !extend before_svitlobot_ping
     then:
       - lambda: |-
           id(request_in_progress) = true;
-      - wait_until:
-          condition:
-            wifi.connected:
-          timeout: 15s
-      - if:
-          condition:
-            and:
-              - wifi.connected:
-              - lambda: "return id(svitlobot_key).has_state();"
-              - lambda: "return id(svitlobot_key).state.length() > 3;"
-              - lambda: 'return ${lets_ping};'
-          then:
-            - http_request.get:
-                url: !lambda |-
-                  return ((std::string) "https://api.svitlobot.in.ua/channelPing?channel_key=" + id(svitlobot_key).state).c_str();
-                capture_response: false
-                on_response:
-                  then:
-                    - lambda: id(svitlobot_set_state)->execute(response->status_code, response->duration_ms);
-                on_error:
-                  then:
-                    - lambda: id(svitlobot_set_state)->execute(-1, 0);
-            - component.update: svitlobot_errors
+
+  - id: !extend after_svitlobot_ping
+    then:
       - lambda: |-
           id(request_in_progress) = false;
-    mode: queued
 
-  - id: !remove svitlobot_set_state
-  - id: svitlobot_set_state
-    parameters:
-      code: int
-      duration: int
+  - id: !extend before_svitlobot_state
     then:
       - lambda: |-
           id(first_request_sent) = true;
           id(border_timer_start) = millis();
-
-          if (code > 0) {
-            id(svitlobot_response_code).publish_state(std::to_string(code));
-          } else {
-            ESP_LOGE("SvitloBot", "Request failed!");
-            id(svitlobot_response_code).publish_state("---");
-          }
-
-          if (duration > 0) {
-            id(svitlobot_response_duration).publish_state(duration);
-          } else {
-            id(svitlobot_response_duration).publish_state(NAN);
-          }
-
-          if (code == 200) {
-            ESP_LOGD("SvitloBot", "Send status - success");
-            id(svitlobot_status).publish_state(true);
-            id(svitlobot_send_errors) = 0;
-          } else {
-            if (code > 0) {
-              ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
-            }
-            id(svitlobot_status).publish_state(false);
-            id(svitlobot_send_errors) = id(svitlobot_send_errors) < 0 ? 1 : std::max(1, ++id(svitlobot_send_errors));
-          }
-    mode: single
 
   - id: wake_display
     then:
