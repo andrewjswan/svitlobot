@@ -2,6 +2,7 @@ substitutions:
   device: "esp_svitlobot_s3_geek"
   name: "svitlobot-s3-geek"
   friendly_name: "Svitlo Bot"
+  path: "devices/"
 
 esp32:
   variant: esp32s3
