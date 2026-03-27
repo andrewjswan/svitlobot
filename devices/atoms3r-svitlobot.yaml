@@ -139,6 +139,38 @@ globals:
     initial_value: "false"
 
 script:
+  - id: !remove svitlobot_ping
+  - id: svitlobot_ping
+    then:
+      - lambda: |-
+          id(request_in_progress) = true;
+      - wait_until:
+          condition:
+            wifi.connected:
+          timeout: 15s
+      - if:
+          condition:
+            and:
+              - wifi.connected:
+              - lambda: "return id(svitlobot_key).has_state();"
+              - lambda: "return id(svitlobot_key).state.length() > 3;"
+              - lambda: 'return ${lets_ping};'
+          then:
+            - http_request.get:
+                url: !lambda |-
+                  return ((std::string) "https://api.svitlobot.in.ua/channelPing?channel_key=" + id(svitlobot_key).state).c_str();
+                capture_response: false
+                on_response:
+                  then:
+                    - lambda: id(svitlobot_set_state)->execute(response->status_code, response->duration_ms);
+                on_error:
+                  then:
+                    - lambda: id(svitlobot_set_state)->execute(-1, 0);
+            - component.update: svitlobot_errors
+      - lambda: |-
+          id(request_in_progress) = false;
+    mode: queued
+
   - id: !remove svitlobot_set_state
   - id: svitlobot_set_state
     parameters:
@@ -147,7 +179,6 @@ script:
     then:
       - lambda: |-
           id(first_request_sent) = true;
-          id(request_in_progress) = false;
           id(border_timer_start) = millis();
 
           if (code > 0) {
