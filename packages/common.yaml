@@ -44,7 +44,8 @@ debug:
 script:
   - id: site_ping
     then:
-      - lambda: id(before_ping)->execute();
+      - script.execute: before_ping
+      - script.wait: before_ping
       - wait_until:
           condition:
             wifi.connected:
