@@ -29,6 +29,8 @@ script:
 
   - id: custom_url_ping
     then:
+      - script.execute: before_custom_url_ping
+      - script.wait: before_custom_url_ping
       - if:
           condition:
             and:
@@ -37,6 +39,8 @@ script:
               - lambda: 'return id(custom_url).state.find("http") != std::string::npos;'
               - lambda: 'return ${lets_ping};'
           then:
+            - script.execute: before_custom_url_request
+            - script.wait: before_custom_url_request
             - http_request.get:
                 url: !lambda |-
                   return ((std::string) id(custom_url).state).c_str();
@@ -51,13 +55,22 @@ script:
                         code: -1
                         duration: 0
             - component.update: custom_url_errors
-    mode: queued
+            - script.execute: after_custom_url_request
+            - script.wait: after_custom_url_request
+          else:
+            - script.execute: without_custom_url_request
+            - script.wait: without_custom_url_request
+      - script.execute: after_custom_url_ping
+      - script.wait: after_custom_url_ping
+    mode: single
 
   - id: custom_url_set_state
     parameters:
       code: int
       duration: int
     then:
+      - script.execute: before_custom_url_state
+      - script.wait: before_custom_url_state
       - lambda: |-
           if (code > 0) {
             id(custom_url_response_code).publish_state(std::to_string(code));
@@ -83,7 +96,37 @@ script:
             id(custom_url_status).publish_state(false);
             id(custom_url_send_errors) = id(custom_url_send_errors) < 0 ? 1 : std::max(1, ++id(custom_url_send_errors));
           }
+      - script.execute: after_custom_url_state
+      - script.wait: after_custom_url_state
     mode: single
+
+  - id: before_custom_url_ping
+    then:
+      - logger.log: "Before ping..."
+
+  - id: after_custom_url_ping
+    then:
+      - logger.log: "After ping..."
+
+  - id: before_custom_url_request
+    then:
+      - logger.log: "Before request..."
+
+  - id: after_custom_url_request
+    then:
+      - logger.log: "After request..."
+
+  - id: without_custom_url_request
+    then:
+      - logger.log: "Without request..."
+
+  - id: before_custom_url_state
+    then:
+      - logger.log: "Before state..."
+
+  - id: after_custom_url_state
+    then:
+      - logger.log: "After state..."
 
 text:
   - platform: template

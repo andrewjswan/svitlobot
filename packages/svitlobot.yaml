@@ -29,6 +29,8 @@ script:
 
   - id: svitlobot_ping
     then:
+      - script.execute: before_svitlobot_ping
+      - script.wait: before_svitlobot_ping
       - if:
           condition:
             and:
@@ -37,6 +39,8 @@ script:
               - lambda: 'return id(svitlobot_key).state.length() > 3;'
               - lambda: 'return ${lets_ping};'
           then:
+            - script.execute: before_svitlobot_request
+            - script.wait: before_svitlobot_request
             - http_request.get:
                 url: !lambda |-
                   #if defined(USE_ESP8266)
@@ -55,6 +59,13 @@ script:
                         code: -1
                         duration: 0
             - component.update: svitlobot_errors
+            - script.execute: after_svitlobot_request
+            - script.wait: after_svitlobot_request
+          else:
+            - script.execute: without_svitlobot_request
+            - script.wait: without_svitlobot_request
+      - script.execute: after_svitlobot_ping
+      - script.wait: after_svitlobot_ping
     mode: single
 
   - id: svitlobot_set_state
@@ -62,6 +73,8 @@ script:
       code: int
       duration: int
     then:
+      - script.execute: before_svitlobot_state
+      - script.wait: before_svitlobot_state
       - lambda: |-
           if (code > 0) {
             id(svitlobot_response_code).publish_state(std::to_string(code));
@@ -87,7 +100,37 @@ script:
             id(svitlobot_status).publish_state(false);
             id(svitlobot_send_errors) = id(svitlobot_send_errors) < 0 ? 1 : std::max(1, ++id(svitlobot_send_errors));
           }
+      - script.execute: after_svitlobot_state
+      - script.wait: after_svitlobot_state
     mode: single
+
+  - id: before_svitlobot_ping
+    then:
+      - logger.log: "Before ping..."
+
+  - id: after_svitlobot_ping
+    then:
+      - logger.log: "After ping..."
+
+  - id: before_svitlobot_request
+    then:
+      - logger.log: "Before request..."
+
+  - id: after_svitlobot_request
+    then:
+      - logger.log: "After request..."
+
+  - id: without_svitlobot_request
+    then:
+      - logger.log: "Without request..."
+
+  - id: before_svitlobot_state
+    then:
+      - logger.log: "Before state..."
+
+  - id: after_svitlobot_state
+    then:
+      - logger.log: "After state..."
 
 text:
   - platform: template
