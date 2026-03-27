@@ -2,6 +2,7 @@ substitutions:
   device: "esp_svitlobot_atoms3r"
   name: "svitlobot-atoms3r"
   friendly_name: "Svitlo Bot"
+  path: "devices/"
 
   icon_x_position: "it.get_width() / 2"
   icon_y_position: "it.get_height() / 2 - 10"
