@@ -13,3 +13,6 @@
     * [Документація](https://docs.m5stack.com/en/core/AtomS3R)
 
 <div style="clear: both;"></div>
+
+!!! tip "ESPHome: Adopt"
+    [ESPHome: Інструкція з налаштування](adopt.md)

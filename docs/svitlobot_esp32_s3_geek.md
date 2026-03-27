@@ -18,3 +18,6 @@
 ![](img/devices/esp32-s3-geek-1.jpg) | ![](img/devices/esp32-s3-geek-2.jpg) | ![](img/devices/esp32-s3-geek-3.jpg) | ![](img/devices/esp32-s3-geek-4.jpg) |
 
 <div style="clear: both;"></div>
+
+!!! tip "ESPHome: Adopt"
+    [ESPHome: Інструкція з налаштування](adopt.md)
