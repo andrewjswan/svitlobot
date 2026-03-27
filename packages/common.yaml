@@ -27,7 +27,7 @@ mdns:
 
 web_server:
   port: 80
-  log: false
+  log: true
   ota: false
   version: 3
 
