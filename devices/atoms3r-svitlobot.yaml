@@ -2,9 +2,7 @@ substitutions:
   device: "esp_svitlobot_atoms3r"
   name: "svitlobot-atoms3r"
   friendly_name: "Svitlo Bot"
-  project_name: "ajs.SvitloBot"
-  project_version: "3.5.51"
-  comment: "ESPHome Svitlo Bot | Shadow"
+  path: "devices/"
 
   icon_x_position: "it.get_width() / 2"
   icon_y_position: "it.get_height() / 2 - 10"
@@ -25,17 +23,35 @@ substitutions:
   display_dim_timeout: "300000"
   display_off_timeout: "360000"
 
-  http_request_interval: "55"  # in seconds
+esp32:
+  variant: esp32s3
+  flash_size: 8MB
+  cpu_frequency: 240MHz
+  framework:
+    type: esp-idf
+    sdkconfig_options:
+      CONFIG_ESP32S3_DEFAULT_CPU_FREQ_240: "y"
+      CONFIG_ESP32S3_DATA_CACHE_64KB: "y"
+      CONFIG_ESP32S3_DATA_CACHE_LINE_64B: "y"
+
+dashboard_import:
+  package_import_url: github://andrewjswan/svitlobot/devices/atoms3r-svitlobot.yaml@main
+
+packages:
+  remote_package:
+    url: https://github.com/andrewjswan/svitlobot
+    files:
+      - packages/common.yaml
+      - packages/svitlobot.yaml
+      - packages/esp32.yaml
+      - packages/http_ota.yaml
+    refresh: 1s
+
+psram:
+  mode: octal
+  speed: 80MHz
 
 esphome:
-  name: "${name}"
-  friendly_name: "${friendly_name}"
-  # name_add_mac_suffix: true
-  comment: $comment
-  build_path: ./.build/$device
-  project:
-    name: "${project_name}"
-    version: "${project_version}"
   on_boot:
     - priority: 600
       then:
@@ -52,79 +68,11 @@ esphome:
             } else if (page == "Status") {
               id(svitlobot_display).show_page(id(status_page));
             }
-    - priority: -100
-      then:
-        - delay: 15s
-        - update.check: new_firmware
 
 external_components:
-  - source:
-      type: git
-      url: https://github.com/andrewjswan/esphome-components
-      ref: main
-    components: [shadow]
-    refresh: 60s
   - source: github://m5stack/esphome-yaml/components@main
     components: [lp5562, es8311]
     refresh: 1d
-
-dashboard_import:
-  package_import_url: github://andrewjswan/svitlobot/devices/atoms3r-svitlobot.yaml@main
-
-esp32:
-  variant: esp32s3
-  flash_size: 8MB
-  cpu_frequency: 240MHz
-  framework:
-    type: esp-idf
-    sdkconfig_options:
-      CONFIG_ESP32S3_DEFAULT_CPU_FREQ_240: "y"
-      CONFIG_ESP32S3_DATA_CACHE_64KB: "y"
-      CONFIG_ESP32S3_DATA_CACHE_LINE_64B: "y"
-
-psram:
-  mode: octal
-  speed: 80MHz
-
-api:
-  reboot_timeout: 0s
-
-ota:
-  - platform: esphome
-  - platform: web_server
-  - platform: http_request
-
-logger:
-
-mdns:
-  disabled: false
-
-web_server:
-  port: 80
-  ota: false
-  log: false
-  version: 3
-  sorting_groups:
-    - id: svitlobot_group
-      name: "💡 SvitloBot"
-      sorting_weight: 0
-
-wifi:
-  id: atom_wifi
-  ap: {}  # This spawns an AP with the device name and mac address with no password.
-  enable_btm: true
-  enable_rrm: true
-
-captive_portal:
-improv_serial:
-
-debug:
-  update_interval: never
-
-http_request:
-  useragent: "esphome/${name} (${project_version})"
-  verify_ssl: false
-  timeout: 15s
 
 time:
   - platform: sntp
@@ -140,11 +88,6 @@ time:
             - logger.log: Time has been set and is valid!
 
 globals:
-  - id: send_errors
-    type: int
-    restore_value: no
-    initial_value: "-1"
-
   - id: state_last_event
     type: time_t
     restore_value: no
@@ -191,70 +134,21 @@ globals:
     initial_value: "false"
 
 script:
-  - id: send_state
+  - id: !extend before_svitlobot_ping
     then:
-      - wait_until:
-          condition:
-            wifi.connected:
-          timeout: 15s
-      - if:
-          condition:
-            and:
-              - wifi.connected:
-              - lambda: "return id(my_key).has_state();"
-              - lambda: "return id(my_key).state.length() > 3;"
-          then:
-            - lambda: |-
-                id(request_in_progress) = true;
-            - http_request.get:
-                url: !lambda |-
-                  return ((std::string) "https://api.svitlobot.in.ua/channelPing?channel_key=" + id(my_key).state).c_str();
-                capture_response: false
-                on_response:
-                  then:
-                    - lambda: id(set_state)->execute(response->status_code, response->duration_ms);
-                on_error:
-                  then:
-                    - lambda: id(set_state)->execute(-1, 0);
-            - component.update: errors
-    mode: queued
+      - lambda: |-
+          id(request_in_progress) = true;
 
-  - id: set_state
-    parameters:
-      code: int
-      duration: int
+  - id: !extend after_svitlobot_ping
+    then:
+      - lambda: |-
+          id(request_in_progress) = false;
+
+  - id: !extend before_svitlobot_state
     then:
       - lambda: |-
           id(first_request_sent) = true;
-          id(request_in_progress) = false;
           id(border_timer_start) = millis();
-
-          if (code > 0) {
-            ESP_LOGD("SvitloBot", "Send status Ok");
-            id(response_code).publish_state(std::to_string(code));
-          } else {
-            ESP_LOGE("SvitloBot", "Request failed!");
-            id(response_code).publish_state("---");
-          }
-
-          if (duration > 0) {
-            id(response_duration).publish_state(duration);
-          } else {
-            id(response_duration).publish_state(NAN);
-          }
-
-          if (code == 200) {
-            ESP_LOGD("SvitloBot", "Send status - success");
-            id(send_status).publish_state(true);
-            id(send_errors) = 0;
-          } else {
-            if (code > 0) {
-              ESP_LOGE("SvitloBot", "Send status - not success with response code: %d", code);
-            }
-            id(send_status).publish_state(false);
-            id(send_errors) = id(send_errors) < 0 ? 1 : std::max(1, ++id(send_errors));
-          }
-    mode: single
 
   - id: wake_display
     then:
@@ -391,9 +285,9 @@ display:
     pages:
       - id: state_page
         lambda: |-
-          bool wifi_connected = id(atom_wifi).is_connected();
-          bool wifi_ap_mode = id(atom_wifi).is_ap_active();
-          bool key_valid = id(my_key).has_state() && id(my_key).state.length() > 0;
+          bool wifi_connected = id(esp_wifi).is_connected();
+          bool wifi_ap_mode = id(esp_wifi).is_ap_active();
+          bool key_valid = id(svitlobot_key).has_state() && id(svitlobot_key).state.length() > 0;
           bool is_loading_stage = millis() < $timeout_for_display_loading;
           bool is_before_first_request = !id(first_request_sent);
 
@@ -413,12 +307,12 @@ display:
             if (key_valid) {
               Color color_progress = id(c_green);
 
-              if (id(send_status).state) {
+              if (id(svitlobot_status).state) {
                 if (id(request_in_progress)) {
                   it.print($icon_x_position, $icon_y_position, id(font_mdi_big), id(c_yellow), TextAlign::CENTER, "\U000F051F", id(c_black));
                 } else {
                   it.print($icon_x_position, $icon_y_position + 5, id(font_mdi_big), id(c_green), TextAlign::CENTER, "\U000F01F5", id(c_black));
-                  it.print($text_center_x_position, $text_bottom_y_position, id(font_text_small), id(c_white), TextAlign::CENTER, id(response_code).state.c_str(), id(c_black));
+                  it.print($text_center_x_position, $text_bottom_y_position, id(font_text_small), id(c_white), TextAlign::CENTER, id(svitlobot_response_code).state.c_str(), id(c_black));
                 }
               } else {
                 if (is_before_first_request) {
@@ -431,7 +325,7 @@ display:
                     it.print($icon_x_position, $icon_y_position, id(font_mdi_big), id(c_yellow), TextAlign::CENTER, "\U000F051F", id(c_black));
                   } else {
                     it.print($icon_x_position, $icon_y_position, id(font_mdi_big), id(c_red), TextAlign::CENTER, "\U000F05D6", id(c_black));
-                    it.print($text_center_x_position, $text_bottom_y_position, id(font_text_small), id(c_white), TextAlign::CENTER, id(response_code).state.c_str(), id(c_black));
+                    it.print($text_center_x_position, $text_bottom_y_position, id(font_text_small), id(c_white), TextAlign::CENTER, id(svitlobot_response_code).state.c_str(), id(c_black));
 
                     color_progress = id(c_red);
                   }
@@ -442,7 +336,7 @@ display:
               if (!id(request_in_progress)) {
                 const int thickness = 2;
                 const int perimeter = ($display_width + $display_height) * 2;
-                const int duration_ms = ${http_request_interval} * 1000;
+                const int duration_ms = ${heartbeat_interval} * 1000;
 
                 uint32_t elapsed = millis() - id(border_timer_start);
                 elapsed = std::min(elapsed, (uint32_t) duration_ms);
@@ -477,6 +371,7 @@ display:
           } else {
             it.print($icon_x_position, $icon_y_position, id(font_mdi_big), id(c_red), TextAlign::CENTER, "\U000F069B", id(c_black));
           }
+
       - id: time_page
         lambda: |-
           it.fill(id(c_black));
@@ -506,13 +401,14 @@ display:
           } else {
             it.print(64, 64, id(font_text_small), id(c_white), TextAlign::CENTER, "No time", id(c_black));
           }
+
       - id: status_page
         lambda: |-
           it.fill(id(c_black));
 
           int y = 1;
           it.print(2, y, id(font_text_small), id(c_white), "WiFi:", id(c_black));
-          if (id(atom_wifi).is_connected()) {
+          if (id(esp_wifi).is_connected()) {
             it.print($text_status_value_x_position, y, id(font_text_small), id(c_green), "OK", id(c_black));
           } else {
             it.print($text_status_value_x_position, y, id(font_text_small), id(c_red), "ERR", id(c_black));
@@ -536,25 +432,18 @@ display:
           y += $text_status_value_y_position;
 
           it.print(2, y, id(font_text_small), id(c_white), "DE:", id(c_black));
-          if (id(errors).has_state()) {
-            it.printf($text_status_value_x_position, y, id(font_text_small), id(c_white), "%.0f", id(errors).state);
+          if (id(svitlobot_errors).has_state()) {
+            it.printf($text_status_value_x_position, y, id(font_text_small), id(c_white), "%.0f", id(svitlobot_errors).state);
           } else {
             it.print($text_status_value_x_position, y, id(font_text_small), id(c_yellow), "?", id(c_black));
           }
           y += $text_status_value_y_position;
 
-          if (id(ip_adress).has_state()) {
-            it.print(2, $text_bottom_y_position, id(font_text_small), id(c_white), id(ip_adress).state.c_str(), id(c_black));
+          if (id(ip_address).has_state()) {
+            it.print(2, $text_bottom_y_position, id(font_text_small), id(c_white), id(ip_address).state.c_str(), id(c_black));
           } else {
             it.print(2, $text_bottom_y_position, id(font_text_small), id(c_red), "IP: ---", id(c_black));
           }
-
-shadow:
-  id: svitlobot
-  script_id: send_state
-  startup_delay: 5s
-  interval: ${http_request_interval}s
-  priority: 3
 
 interval:
   - interval: 10s
@@ -578,31 +467,8 @@ interval:
             call.set_transition_length(300);
             call.perform();
           }
-
-text:
-  - platform: template
-    name: "Key"
-    id: my_key
-    optimistic: true
-    min_length: 0
-    max_length: 15
-    mode: text
-    restore_value: true
-    icon: mdi:key-chain-variant
-    entity_category: config
-    disabled_by_default: true
-    web_server:
-      sorting_group_id: svitlobot_group
-      sorting_weight: 5
-
 binary_sensor:
-  - platform: template
-    name: "Status"
-    id: send_status
-    icon: mdi:lan-connect
-    web_server:
-      sorting_group_id: svitlobot_group
-      sorting_weight: 1
+  - id: !extend svitlobot_status
     on_state:
       then:
         - globals.set:
@@ -664,121 +530,6 @@ binary_sensor:
                   id: display_page_select
                   option: "Status"
 
-sensor:
-  - platform: template
-    name: "Delivery Errors"
-    id: errors
-    lambda: |-
-      if (!id(my_key).has_state() || id(send_errors) < 0) {
-        return NAN;
-      }
-      return id(send_errors);
-    accuracy_decimals: 0
-    icon: mdi:space-invaders
-    unit_of_measurement: "error"
-    web_server:
-      sorting_group_id: svitlobot_group
-      sorting_weight: 3
-    on_value_range:
-      - above: 10.0
-        then:
-          - button.press: Restart
-
-  - platform: uptime
-    name: "Uptime"
-    entity_category: diagnostic
-
-  - platform: wifi_signal
-    name: "WiFi Signal"
-    id: wifi_signal_dbm
-    entity_category: diagnostic
-    icon: mdi:signal
-
-  - platform: internal_temperature
-    id: esp_temperature
-    name: "Device Temperature"
-    entity_category: diagnostic
-    icon: mdi:coolant-temperature
-    device_class: temperature
-    disabled_by_default: true
-
-  - platform: template
-    name: "Response Duration"
-    id: response_duration
-    icon: mdi:timer-outline
-    entity_category: diagnostic
-    disabled_by_default: true
-    device_class: duration
-    unit_of_measurement: "ms"
-    accuracy_decimals: 0
-    web_server:
-      sorting_group_id: svitlobot_group
-      sorting_weight: 11
-
-button:
-  - platform: restart
-    name: "Restart"
-    id: Restart
-    entity_category: diagnostic
-    icon: mdi:restart
-
-  - platform: factory_reset
-    name: "Restart with Factory Default Settings"
-    id: Reset
-    entity_category: diagnostic
-    disabled_by_default: true
-
-  - platform: template
-    name: "Firmware Update"
-    icon: mdi:progress-upload
-    disabled_by_default: true
-    entity_category: config
-    on_press:
-      - update.perform:
-          id: new_firmware
-
-text_sensor:
-  - platform: template
-    name: "Response Code"
-    id: response_code
-    icon: mdi:web
-    entity_category: diagnostic
-    disabled_by_default: true
-    web_server:
-      sorting_group_id: svitlobot_group
-      sorting_weight: 10
-
-  - platform: template
-    name: ESPHome Version
-    icon: mdi:new-box
-    entity_category: diagnostic
-    lambda: |-
-      return std::string(ESPHOME_VERSION);
-
-  - platform: debug
-    reset_reason:
-      name: "Reset Reason"
-      disabled_by_default: true
-      entity_category: diagnostic
-
-  - platform: wifi_info
-    ip_address:
-      name: "IP Address"
-      id: ip_adress
-      disabled_by_default: true
-      entity_category: diagnostic
-      icon: mdi:ip
-    ssid:
-      name: "Connected SSID"
-      disabled_by_default: true
-      entity_category: diagnostic
-      icon: mdi:access-point-network
-    mac_address:
-      name: "Mac Address"
-      disabled_by_default: true
-      entity_category: diagnostic
-      icon: mdi:console-network
-
 select:
   - platform: template
     name: "Display Page"
@@ -804,13 +555,3 @@ select:
             id(display_page_index) = 2;
             id(svitlobot_display).show_page(id(status_page));
           }
-
-update:
-  - platform: http_request
-    id: new_firmware
-    name: "Firmware Update"
-    source: https://andrewjswan.github.io/svitlobot/devices/${name}-svitlobot-manifest.json
-    update_interval: 3h
-    icon: mdi:update
-    web_server:
-      sorting_weight: 15

@@ -52,6 +52,7 @@ script:
             wifi.connected:
           timeout: 15s
       - logger.log: "Pinging..."
+    mode: single
 
   - id: before_ping
     then:

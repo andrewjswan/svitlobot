@@ -5,7 +5,7 @@ http_request:
   tls_buffer_size_rx: 16384
 
 interval:
-  - interval: 55s
+  - interval: ${heartbeat_interval}s
     id: svitlobot
     then:
       - script.execute: site_ping
