@@ -19,3 +19,6 @@
     * [ESPHome Devices](https://devices.esphome.io/devices/m5stack-atoms3-lite/)
 
 <div style="clear: both;"></div>
+
+!!! tip "ESPHome: Adopt"
+    [ESPHome: Інструкція з налаштування](adopt.md)
