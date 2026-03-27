@@ -25,3 +25,6 @@
     * [Посилання на проект корпусу](https://www.thingiverse.com/thing:7208746)
 
 <div style="clear: both;"></div>
+
+!!! tip "ESPHome: Adopt"
+    [ESPHome: Інструкція з налаштування](adopt.md)
