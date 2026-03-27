@@ -45,11 +45,17 @@ debug:
 script:
   - id: site_ping
     then:
+      - script.execute: before_ping
+      - script.wait: before_ping
       - wait_until:
           condition:
             wifi.connected:
           timeout: 15s
       - logger.log: "Pinging..."
+
+  - id: before_ping
+    then:
+      - logger.log: "Prepare for ping..."
 
 sensor:
   - platform: uptime

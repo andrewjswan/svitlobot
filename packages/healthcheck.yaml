@@ -29,6 +29,8 @@ script:
 
   - id: healthcheck_ping
     then:
+      - script.execute: before_healthcheck_ping
+      - script.wait: before_healthcheck_ping
       - if:
           condition:
             and:
@@ -38,6 +40,8 @@ script:
               - lambda: 'return ${lets_ping};'
               - lambda: 'return ${i_am_master};'
           then:
+            - script.execute: before_healthcheck_request
+            - script.wait: before_healthcheck_request
             - http_request.get:
                 url: !lambda |-
                   return ((std::string) "http://hc-ping.com/" + id(healthcheck_key).state).c_str();
@@ -52,13 +56,22 @@ script:
                         code: -1
                         duration: 0
             - component.update: healthcheck_errors
-    mode: queued
+            - script.execute: after_healthcheck_request
+            - script.wait: after_healthcheck_request
+          else:
+            - script.execute: without_healthcheck_request
+            - script.wait: without_healthcheck_request
+      - script.execute: after_healthcheck_ping
+      - script.wait: after_healthcheck_ping
+    mode: single
 
   - id: healthcheck_set_state
     parameters:
       code: int
       duration: int
     then:
+      - script.execute: before_healthcheck_state
+      - script.wait: before_healthcheck_state
       - lambda: |-
           if (code > 0) {
             id(healthcheck_response_code).publish_state(std::to_string(code));
@@ -84,7 +97,37 @@ script:
             id(healthcheck_status).publish_state(false);
             id(healthcheck_send_errors) = id(healthcheck_send_errors) < 0 ? 1 : std::max(1, ++id(healthcheck_send_errors));
           }
+      - script.execute: after_healthcheck_state
+      - script.wait: after_healthcheck_state
     mode: single
+
+  - id: before_healthcheck_ping
+    then:
+      - logger.log: "Before ping..."
+
+  - id: after_healthcheck_ping
+    then:
+      - logger.log: "After ping..."
+
+  - id: before_healthcheck_request
+    then:
+      - logger.log: "Before request..."
+
+  - id: after_healthcheck_request
+    then:
+      - logger.log: "After request..."
+
+  - id: without_healthcheck_request
+    then:
+      - logger.log: "Without request..."
+
+  - id: before_healthcheck_state
+    then:
+      - logger.log: "Before state..."
+
+  - id: after_healthcheck_state
+    then:
+      - logger.log: "After state..."
 
 text:
   - platform: template
