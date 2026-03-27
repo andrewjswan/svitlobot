@@ -45,9 +45,9 @@
 
 > [!TIP]
 > **ESP Web Tools** - [Документація та приклади використання](https://esphome.github.io/esp-web-tools/)
-> 
+>
 > **ESP Web Tools** - [Прошивка ESP через браузер](https://andrewjswan.github.io/svitlobot/esp-web-tools/)
-> 
+>
 > **ESPHome Adopt** - [Інструкція з налаштування](https://andrewjswan.github.io/svitlobot/adopt/)
 
 ## Повна документація проекту
