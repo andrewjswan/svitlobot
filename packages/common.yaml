@@ -13,7 +13,7 @@ esphome:
     name: "${project_name}"
     version: "${project_version}"
   on_boot:
-    - priority: 100
+    - priority: -100
       then:
         - delay: 3s
         - lambda: |-
