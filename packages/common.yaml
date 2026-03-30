@@ -11,6 +11,11 @@ esphome:
   project:
     name: "${project_name}"
     version: "${project_version}"
+  on_boot:
+    - priority: 100
+      then:
+        - delay: 3s
+        - switch.turn_off: show_log
 
 api:
   reboot_timeout: 0s
@@ -41,13 +46,6 @@ improv_serial:
 
 debug:
   update_interval: never
-
-esphome:
-  on_boot:
-    - priority: 100
-      then:
-        - delay: 3s
-        - switch.turn_off: show_log
 
 switch:
   - platform: template
