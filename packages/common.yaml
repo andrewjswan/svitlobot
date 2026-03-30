@@ -18,8 +18,7 @@ esphome:
         - wait_until:
             condition:
               wifi.connected:
-        - switch.turn_on: show_log
-        - delay: 1s
+        - delay: 3s
         - switch.turn_off: show_log
 
 api:
