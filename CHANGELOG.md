@@ -1,5 +1,43 @@
 # Changelog
 
+## [v3.5.53](https://github.com/andrewjswan/svitlobot/compare/v3.5.51...v3.5.53) - 2026-03-30
+
+### What's Changed
+
+### ❗️ Breaking Changes
+
+- Migrate `devices` to `packages` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/167)
+
+### 🚀 Features
+
+- Bump version to `3.5.53` | ESPHome `2026.3.1` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/172)
+- Add `INFO` log to Web server @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/164)
+- Add `ESPNow` `Heartbeat` package @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/165)
+- Migrate `devices` to `packages` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/167)
+- Add `802.11k/v Native Roaming` for ESP32 @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/171)
+- Add `id` to sensors @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/168)
+- The content of the input fields must not be empty @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/163)
+
+### 📱 Devices
+
+- Migrate `devices` to `packages` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/167)
+
+### 🧰 Maintenance
+
+- ESP: Bump actions/deploy-pages from 4 to 5 @[dependabot[bot]](https://github.com/apps/dependabot) (https://github.com/andrewjswan/svitlobot/pull/173)
+- ESP: Bump actions/configure-pages from 5 to 6 @[dependabot[bot]](https://github.com/apps/dependabot) (https://github.com/andrewjswan/svitlobot/pull/174)
+- Add `ESPNow` `Heartbeat` package @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/165)
+- Add `Adopt` Link to Documentation @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/170)
+- Add ESPHome `Adopt` documentation @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/166)
+
+### 🤝 Support
+
+If you like the project, you can support it with a star ⭐ on GitHub.
+
+### ✨ Changelog
+
+**Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.51...v3.5.53
+
 ## [v3.5.51](https://github.com/andrewjswan/svitlobot/compare/v3.5.49...v3.5.51) - 2026-03-19
 
 ### What's Changed
