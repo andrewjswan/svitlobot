@@ -13,9 +13,9 @@ esphome:
     name: "${project_name}"
     version: "${project_version}"
   on_boot:
-    priority: 600
-    then:
-      - script.execute: turn_off_log
+    - priority: 600
+      then:
+        - script.execute: turn_off_log
 
 api:
   reboot_timeout: 0s
