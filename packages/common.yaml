@@ -1,5 +1,6 @@
 substitutions:
   lets_ping: "true"
+  i_am_master: "true"
   heartbeat_interval: "55"  # in seconds
 
 esphome:
@@ -38,6 +39,7 @@ web_server:
   version: 3
 
 wifi:
+  id: esp_wifi
   ap: {}
 
 captive_portal:
@@ -70,6 +72,7 @@ script:
             wifi.connected:
           timeout: 15s
       - logger.log: "Pinging..."
+    mode: single
 
   - id: before_ping
     then:

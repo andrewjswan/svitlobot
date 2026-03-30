@@ -38,6 +38,7 @@ script:
               - lambda: 'return id(custom_url).has_state();'
               - lambda: 'return id(custom_url).state.find("http") != std::string::npos;'
               - lambda: 'return ${lets_ping};'
+              - lambda: 'return ${i_am_master};'
           then:
             - script.execute: before_custom_url_request
             - script.wait: before_custom_url_request

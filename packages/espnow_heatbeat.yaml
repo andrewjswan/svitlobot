@@ -1,0 +1,25 @@
+substitutions:
+  i_am_master: "id(failover).is_master()"
+
+esphome:
+  name_add_mac_suffix: true
+
+external_components:
+  - source:
+      type: git
+      url: https://github.com/dimkalinux/esphome-components
+      ref: main
+    components: [espnow_failover]
+    refresh: 60s
+
+espnow_failover:
+  id: failover
+  group_id: "svitlo"
+
+binary_sensor:
+  - platform: espnow_failover
+    is_master:
+      name: "Master"
+      id: master_mode
+      icon: mdi:shield-crown-outline
+      disabled_by_default: true

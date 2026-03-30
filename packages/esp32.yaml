@@ -1,6 +1,10 @@
 substitutions:
   comment: "ESPHome Svitlo Bot | Shadow"
 
+wifi:
+  enable_btm: true
+  enable_rrm: true
+
 external_components:
   - source:
       type: git
@@ -13,7 +17,7 @@ shadow:
   id: svitlobot
   script_id: site_ping
   startup_delay: 5s
-  interval: 55s
+  interval: ${heartbeat_interval}s
   priority: 3
 
 sensor:
