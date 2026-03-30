@@ -30,6 +30,9 @@
         refresh: 1s
     ```
 
+!!! tip "Корисне"
+    [ESPNow Failover Component](https://github.com/dimkalinux/esphome-components)
+
 !!! tip "ESPHome: Adopt"
     [ESPHome: Інструкція з налаштування](adopt.md)
 
