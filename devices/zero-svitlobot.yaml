@@ -66,8 +66,8 @@ script:
           id: status_led
           brightness: 50%
           red: 100%
-          green: 100%
-          blue: 0%
+          green: 0%
+          blue: 100%
           transition_length: 1s
 
 light:
