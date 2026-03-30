@@ -59,7 +59,7 @@ switch:
     id: show_log
     icon: mdi:math-log
     optimistic: true
-    restore_mode: DISABLED
+    restore_mode: ALWAYS_ON
     entity_category: config
     disabled_by_default: true
     on_state:
