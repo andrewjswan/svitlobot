@@ -26,7 +26,7 @@ update:
 
 esphome:
   on_boot:
-    priority: -100
-    then:
-      - delay: 15s
-      - update.check: new_firmware
+    - priority: -100
+      then:
+        - delay: 15s
+        - update.check: new_firmware
