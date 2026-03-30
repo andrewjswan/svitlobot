@@ -13,13 +13,9 @@ esphome:
     name: "${project_name}"
     version: "${project_version}"
   on_boot:
-    - priority: 500
-      then:
-        - wait_until:
-            condition:
-              wifi.connected:
-        - delay: 3s
-        - switch.turn_off: show_log
+    priority: 600
+    then:
+      - script.execute: turn_off_log
 
 api:
   reboot_timeout: 0s
@@ -80,6 +76,15 @@ script:
   - id: before_ping
     then:
       - logger.log: "Prepare for ping..."
+
+  - id: turn_off_log
+    then:
+      - wait_until:
+          condition:
+            wifi.connected:
+      - delay: 3s
+      - logger.log: "Turn off log after start..."
+      - switch.turn_off: show_log
 
 sensor:
   - platform: uptime
