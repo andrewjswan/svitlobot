@@ -26,6 +26,7 @@ mdns:
   disabled: false
 
 web_server:
+  id: esp_web
   port: 80
   log: true
   ota: false
@@ -40,6 +41,26 @@ improv_serial:
 
 debug:
   update_interval: never
+
+esphome:
+  on_boot:
+    - priority: 100
+      then:
+        - delay: 3s
+        - switch.turn_off: show_log
+
+switch:
+  - platform: template
+    name: "Show Log"
+    id: show_log
+    icon: mdi:math-log
+    optimistic: true
+    restore_mode: DISABLED
+    entity_category: config
+    disabled_by_default: true
+    on_state:
+      - lambda: |-
+          id(esp_web)->set_expose_log(x);
 
 script:
   - id: site_ping
