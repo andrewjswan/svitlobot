@@ -7,7 +7,7 @@ number:
     step: 5
     optimistic: true
     id: ping_interval
-    initial_value: 55
+    initial_value: ${heartbeat_interval}
     mode: slider
     unit_of_measurement: "s"
     entity_category: config
