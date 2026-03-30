@@ -18,9 +18,8 @@ esphome:
         - wait_until:
             condition:
               wifi.connected:
+        - switch.turn_on: show_log
         - switch.turn_off: show_log
-        - lambda: |-
-            id(esp_web)->set_expose_log(false);
 
 api:
   reboot_timeout: 0s
