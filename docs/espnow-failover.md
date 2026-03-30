@@ -31,7 +31,9 @@
     ```
 
 !!! tip "Корисне"
-    [ESPNow Failover Component](https://github.com/dimkalinux/esphome-components)
+    * [ESPNow Failover Component](https://github.com/dimkalinux/esphome-components)
+    * [ESPNow Communication Component](https://esphome.io/components/espnow/)
+    * [ESPNow Documentation](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/network/esp_now.html)
 
 !!! tip "ESPHome: Adopt"
     [ESPHome: Інструкція з налаштування](adopt.md)
