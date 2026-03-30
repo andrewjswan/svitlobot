@@ -20,4 +20,5 @@ packages:
   ping: !include ../packages/ping.yaml
   esp32: !include ../packages/esp32.yaml
   interval: !include ../packages/interval_esp32.yaml
+  failover: !include ../packages/espnow_heatbeat.yaml
   http_ota: !include ../packages/http_ota.yaml
