@@ -38,7 +38,7 @@ script:
               - lambda: 'return id(custom_url).has_state();'
               - lambda: 'return id(custom_url).state.find("http") != std::string::npos;'
               - lambda: |-
-                  return true 
+                  return true
                          ${"&& "~lets_ping if lets_ping is defined}
                          ${"&& "~i_am_master if i_am_master is defined};
           then:
