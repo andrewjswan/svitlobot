@@ -37,8 +37,10 @@ script:
               - wifi.connected:
               - lambda: 'return id(custom_url).has_state();'
               - lambda: 'return id(custom_url).state.find("http") != std::string::npos;'
-              - lambda: 'return ${lets_ping};'
-              - lambda: 'return ${i_am_master};'
+              - lambda: |-
+                  return true 
+                         ${"&& "~lets_ping if lets_ping is defined}
+                         ${"&& "~i_am_master if i_am_master is defined};
           then:
             - script.execute: before_custom_url_request
             - script.wait: before_custom_url_request
