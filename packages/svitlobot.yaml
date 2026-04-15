@@ -37,8 +37,10 @@ script:
               - wifi.connected:
               - lambda: 'return id(svitlobot_key).has_state();'
               - lambda: 'return id(svitlobot_key).state.length() > 3;'
-              - lambda: 'return ${lets_ping};'
-              - lambda: 'return ${i_am_master};'
+              - lambda: |-
+                  return true
+                         ${"&& "~lets_ping if lets_ping is defined}
+                         ${"&& "~i_am_master if i_am_master is defined};
           then:
             - script.execute: before_svitlobot_request
             - script.wait: before_svitlobot_request
