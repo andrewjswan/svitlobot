@@ -1,6 +1,9 @@
 substitutions:
   comment: "ESPHome Svitlo Bot | ESP 8266"
 
+wifi:
+  min_auth_mode: WPA2 
+
 http_request:
   tls_buffer_size_rx: 16384
 
