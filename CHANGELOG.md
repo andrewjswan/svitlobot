@@ -1,5 +1,36 @@
 # Changelog
 
+## [v3.5.55](https://github.com/andrewjswan/svitlobot/compare/v3.5.53...v3.5.55) - 2026-04-19
+
+### What's Changed
+
+### ❗️ Breaking Changes
+
+- Set minimum WiFi authentication mode for `8266` to `WPA2` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/179)
+
+### 🚀 Features
+
+- ESPHome `2026.4` | Standardization of conditions for attachable packages @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/177)
+- Set minimum WiFi authentication mode for `8266` to `WPA2` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/179)
+
+### 🐛 Bug Fixes
+
+- Fix `on_boot` collision @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/176)
+
+### 🧰 Maintenance
+
+- Bump version to `3.5.55` | ESPHome `2026.4.0` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/180)
+- ESPHome `2026.4` | Standardization of conditions for attachable packages @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/177)
+- ESP: Bump softprops/action-gh-release from 2 to 3 @[dependabot[bot]](https://github.com/apps/dependabot) (https://github.com/andrewjswan/svitlobot/pull/178)
+
+### 🤝 Support
+
+If you like the project, you can support it with a star ⭐ on GitHub.
+
+### ✨ Changelog
+
+**Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.53...v3.5.55
+
 ## [v3.5.53](https://github.com/andrewjswan/svitlobot/compare/v3.5.51...v3.5.53) - 2026-03-30
 
 ### What's Changed
