@@ -181,6 +181,7 @@ sensor:
     entity_category: diagnostic
     disabled_by_default: true
     device_class: duration
+    state_class: measurement
     unit_of_measurement: "ms"
     accuracy_decimals: 0
     web_server:
