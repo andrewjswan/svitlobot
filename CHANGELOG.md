@@ -1,5 +1,31 @@
 # Changelog
 
+## [v3.5.57](https://github.com/andrewjswan/svitlobot/compare/v3.5.55...v3.5.57) - 2026-05-31
+
+### What's Changed
+
+### ❗️ Breaking Changes
+
+- Add `state_class: measurement` to `Response Duration` sensors @dimkalinux (https://github.com/andrewjswan/svitlobot/pull/183)
+
+### 🚀 Features
+
+- Add `state_class: measurement` to `Response Duration` sensors @dimkalinux (https://github.com/andrewjswan/svitlobot/pull/183)
+
+### 🧰 Maintenance
+
+- Bump version to `3.5.57` | ESPHome `2026.5.1` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/185)
+- ESP: Bump strumwolf/delete-deployment-environment from 3 to 4 @[dependabot[bot]](https://github.com/apps/dependabot) (https://github.com/andrewjswan/svitlobot/pull/184)
+- ESP: Bump actions/upload-pages-artifact from 4 to 5 @[dependabot[bot]](https://github.com/apps/dependabot) (https://github.com/andrewjswan/svitlobot/pull/182)
+
+### 🤝 Support
+
+If you like the project, you can support it with a star ⭐ on GitHub.
+
+### ✨ Changelog
+
+**Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.55...v3.5.56
+
 ## [v3.5.55](https://github.com/andrewjswan/svitlobot/compare/v3.5.53...v3.5.55) - 2026-04-19
 
 ### What's Changed
