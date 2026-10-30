@@ -1,4 +1,4 @@
-!!! example "ESP8266 Based"
+!!! example "ESP32 / ESP8266 Based"
     * [SvitloBoard](https://github.com/baskerville42/svitloboard) by @baskerville42
 
 !!! example "ESP32 C3 Based"
