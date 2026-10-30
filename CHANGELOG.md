@@ -1,5 +1,32 @@
 # Changelog
 
+## [v3.5.59](https://github.com/andrewjswan/svitlobot/compare/v3.5.57...v3.5.59) - 2026-10-30
+
+### What's Changed
+
+### 🚀 Features
+
+- WEB: Enable local assets for web server @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/191)
+
+### 📱 Devices
+
+- WEB: Enable local assets for web server @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/191)
+
+### 🧰 Maintenance
+
+- Bump version to `3.5.59` | ESPHome `2026.10.1` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/190)
+- ESP: Bump github/issue-labeler from 3.4 to 3.5 @[dependabot[bot]](https://github.com/apps/dependabot) (https://github.com/andrewjswan/svitlobot/pull/189)
+- ESP: Bump actions/setup-python from 6 to 7 @[dependabot[bot]](https://github.com/apps/dependabot) (https://github.com/andrewjswan/svitlobot/pull/188)
+- ESP: Bump actions/checkout from 6 to 7 @[dependabot[bot]](https://github.com/apps/dependabot) (https://github.com/andrewjswan/svitlobot/pull/187)
+
+### 🤝 Support
+
+If you like the project, you can support it with a star ⭐ on GitHub.
+
+### ✨ Changelog
+
+**Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.57...v3.5.59
+
 ## [v3.5.57](https://github.com/andrewjswan/svitlobot/compare/v3.5.55...v3.5.57) - 2026-05-31
 
 ### What's Changed
