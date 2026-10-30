@@ -93,6 +93,8 @@ markdown_extensions:
   - pymdownx.smartsymbols
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true  
   - pymdownx.tasklist
   - toc:
       slugify: !!python/object/apply:pymdownx.slugs.slugify
