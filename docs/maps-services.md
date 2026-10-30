@@ -10,8 +10,12 @@
 !!! question "Визначення номера черги"
     * [YASNO — пошук групи для Києва](https://sergeymaximenko.github.io/SetTimeGenerator/GetGroupForKiev.html)
     * [Мій детектор групи](https://banditbyte.github.io/light-monitor-kyiv/group_detector.html)
+    * [Знайдіть свою групу відключень](https://lights-monitor.spatki.xyz/group.html)
+    * [Усі вулиці Києва з їхніми групами](https://mustbe.pp.ua/svitlo/groups/)
 
 !!! info "Інші сервіси"
     * [«Без світла» — графік відключень електроенергії в Україні](https://bezsvitla.com.ua/)
     * [Графік відключень електроенергії у форматі ICS для календарів (iOS, Google Calendar, Outlook)](https://elout-ck.vercel.app/)
     * [Календар відключень електроенергії у Києві](https://outages-calendar.aisaiev.net/)
+    * [Набір корисних сервісів та ботів](https://mustbe.pp.ua/svitlo/)
+    * [Простий монітор електроенергії](https://lights-monitor.spatki.xyz/)
