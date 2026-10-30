@@ -144,6 +144,8 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/andrewjswan
+    - icon: fontawesome/brands/telegram
+      link: https://t.me/svitlobot_api/1021
 
 extra_css:
   - stylesheets/table.css
@@ -154,6 +156,9 @@ extra_javascript:
   - https://cdnjs.cloudflare.com
 
 plugins:
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: datetime
   - mkdocs-video
   - social:
       cards_layout: default/variant
