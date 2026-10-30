@@ -5,8 +5,10 @@ esphome:
   devices:
     - id: healthcheck_device
       name: "HealthCheck"
+      relation: child
     - id: custom_url_device
       name: "Custom URL"
+      relation: child
 
 text:
   - id: !extend healthcheck_key
