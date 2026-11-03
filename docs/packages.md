@@ -19,6 +19,7 @@
 * **[common.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/common.yaml)** — Загальні налаштування системи (Wi-Fi, API, Logger).
 * **[esp32.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/esp32.yaml)** — Конфігурація для мікроконтролера **ESP32**.
 * **[esp8266.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/esp8266.yaml)** — Конфігурація для мікроконтролера **ESP8266**.
+* **[factory_reset_power_cycling.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/factory_reset_power_cycling.yaml)** — Пакет для автоматичного скидання до заводських налаштувань через 5 швидких перезапусків живлення.
 * **[web_server_auth.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/web_server_auth.yaml)** — Веб-інтерфейс із авторизацією.
 * **[wifi_multi_networks.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/wifi_multi_networks.yaml)** - Приклад конфігурації **Wi-Fi** для автоматичного підключення до кількох мереж.
 
