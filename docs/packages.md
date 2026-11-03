@@ -20,6 +20,7 @@
 * **[esp32.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/esp32.yaml)** — Конфігурація для мікроконтролера **ESP32**.
 * **[esp8266.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/esp8266.yaml)** — Конфігурація для мікроконтролера **ESP8266**.
 * **[web_server_auth.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/web_server_auth.yaml)** — Веб-інтерфейс із авторизацією.
+* **[wifi_multi_networks.yaml](https://github.com/andrewjswan/svitlobot/blob/main/packages/wifi_multi_networks.yaml)** - Приклад конфігурації **Wi-Fi** для автоматичного підключення до кількох мереж.
 
 !!! danger "Важливо: Оберіть правильний пакет!"
     Конфігурація містить два окремих пакети залежно від вашого заліза. Використовуйте лише той, що відповідає вашому контролеру:
@@ -28,6 +29,18 @@
     * **`esp8266.yaml`** — якщо у вас плата на базі **ESP8266**.
 
     **Не підключайте обидва пакети одночасно!** Це призведе до помилок при компіляції.
+
+!!! tip "Налаштування конфіденційних даних"
+
+    Для коректної роботи пакета **wifi_multi_networks.yaml** необхідно обов'язково прописати назви (`ssid`) та паролі (`password`) для обох мереж у вашому загальному файлі секретів **secrets.yaml**.
+
+    Наприклад, додайте до нього такі рядки:
+    ```yaml
+    wifi_ssid_first: "FirstNetworkToConnectTo"
+    wifi_password_first: "VerySafePassword"
+    wifi_ssid_second: "SecondNetworkToConnectTo"
+    wifi_password_second: "VerySafePassword"
+    ```
 
 ### Моніторинг та сервіси
 
@@ -102,3 +115,5 @@
 *[ESP8266]: Мікроконтролер китайського виробника Espressif з інтерфейсом Wi-Fi. Наприклад, NodeMCU або Wemos D1 Mini. Наприклад, NodeMCU або Wemos D1 Mini.
 *[heartbeat]: "Сигнал життя" - Регулярний запит від вашої системи, що підтверджує її коректну роботу, або сповіщає про збій у разі відсутності сигналу.
 *[ESPNow]: Протокол бездротового зв'язку з низьким енергоспоживанням, розроблений компанією Espressif для чипів ESP8266 та ESP32.
+*[SSID]: Публічна назва вашої **Wi-Fi** мережі, яку ви бачите під час пошуку на телефоні чи ноутбуці.
+*[Password]: Пароль (ключ безпеки) для підключення до цієї **Wi-Fi** мережі.
