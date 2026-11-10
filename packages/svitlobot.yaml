@@ -47,10 +47,19 @@ script:
             - http_request.get:
                 url: !lambda |-
                   #if defined(USE_ESP8266)
-                    return ((std::string) "http://api.svitlobot.in.ua/channelPing?channel_key=" + id(svitlobot_key).state).c_str();
+                    const std::string protocol = "http://";
                   #else
-                    return ((std::string) "https://api.svitlobot.in.ua/channelPing?channel_key=" + id(svitlobot_key).state).c_str();
+                    const std::string protocol = "https://";
                   #endif
+                  static char mac_buf[esphome::MAC_ADDRESS_BUFFER_SIZE];
+                  esphome::get_mac_address_into_buffer(mac_buf);
+                  static std::string url;
+                  url = protocol 
+                      + "api.svitlobot.in.ua/channelPing?channel_key=" 
+                      + id(svitlobot_key).state 
+                      + "&device=esp-" 
+                      + mac_buf;
+                  return url.c_str();
                 capture_response: false
                 on_response:
                   then:
