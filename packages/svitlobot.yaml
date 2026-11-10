@@ -62,7 +62,7 @@ script:
                       + "&model="
                       + ESPHOME_VARIANT
                       + "&app="
-                      + "SvitloBot ${project_version}";
+                      + "${friendly_name} ${project_version}";
                   return url.c_str();
                 capture_response: false
                 on_response:
