@@ -46,6 +46,21 @@ script:
             - script.wait: before_svitlobot_request
             - http_request.get:
                 url: !lambda |-
+                    auto url_encode = [](const std::string &str) -> std::string {
+                      std::string result;
+                      result.reserve(str.size());
+                      for (char c : str) {
+                        if (std::isalnum(static_cast<unsigned char>(c)) || c == '-' || c == '_' || c == '.' || c == '~') {
+                          result += c;
+                        } else {
+                          result += '%';
+                          result += esphome::format_hex_pretty_char((static_cast<uint8_t>(c) >> 4) & 0x0F);
+                          result += esphome::format_hex_pretty_char(static_cast<uint8_t>(c) & 0x0F);
+                        }
+                      }
+                      return result;
+                    };
+
                   #if defined(USE_ESP8266)
                     const std::string protocol = "http://";
                   #else
@@ -53,6 +68,9 @@ script:
                   #endif
                   static char mac_buf[esphome::MAC_ADDRESS_BUFFER_SIZE];
                   esphome::get_mac_address_into_buffer(mac_buf);
+                  
+                  std::string app_encoded = url_encode("${friendly_name} ${project_version}");                  
+ 
                   static std::string url;
                   url = protocol
                       + "api.svitlobot.in.ua/channelPing?channel_key="
@@ -62,7 +80,7 @@ script:
                       + "&model="
                       + ESPHOME_VARIANT
                       + "&app="
-                      + "${friendly_name} ${project_version}";
+                      + app_encoded;
                   return url.c_str();
                 capture_response: false
                 on_response:
