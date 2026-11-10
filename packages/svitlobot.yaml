@@ -69,18 +69,10 @@ script:
                   static char mac_buf[esphome::MAC_ADDRESS_BUFFER_SIZE];
                   esphome::get_mac_address_into_buffer(mac_buf);
 
-                  std::string app_encoded = url_encode("${friendly_name} ${project_version}");
-
-                  static std::string url;
-                  url = protocol
-                      + "api.svitlobot.in.ua/channelPing?channel_key="
-                      + id(svitlobot_key).state
-                      + "&device=esp-"
-                      + mac_buf
-                      + "&model="
-                      + ESPHOME_VARIANT
-                      + "&app="
-                      + app_encoded;
+                  std::string url = protocol + "api.svitlobot.in.ua/channelPing?channel_key=" + id(svitlobot_key).state + 
+                                    "&device=esp-" + mac_buf + 
+                                    "&model=" + ESPHOME_VARIANT + 
+                                    "&app=" + url_encode("${friendly_name} ${project_version}");
                   return url.c_str();
                 capture_response: false
                 on_response:
