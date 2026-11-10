@@ -58,7 +58,11 @@ script:
                       + "api.svitlobot.in.ua/channelPing?channel_key="
                       + id(svitlobot_key).state
                       + "&device=esp-"
-                      + mac_buf;
+                      + mac_buf
+                      + "&model="
+                      + ESPHOME_VARIANT
+                      + "&app="
+                      + "SvitloBot ${project_version}";
                   return url.c_str();
                 capture_response: false
                 on_response:
