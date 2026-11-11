@@ -70,7 +70,7 @@ script:
                   esphome::get_mac_address_into_buffer(mac_buf);
                   char device_id[9];
                   snprintf(device_id, sizeof(device_id), "%08" PRIx32, esphome::fnv1_hash(mac_buf));
-        
+
                   std::string url = protocol + "api.svitlobot.in.ua/channelPing?channel_key=" + id(svitlobot_key).state +
                                     "&device=esp-" + device_id +
                                     "&model=" + ESPHOME_VARIANT +
