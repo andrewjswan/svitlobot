@@ -2,11 +2,14 @@ substitutions:
   project_name: "ajs.SvitloBot|Custom_URL"
 
 esphome:
+  min_version: "2026.11.0"
   devices:
     - id: svitlobot_device
       name: "SvitloBot"
+      relation: child
     - id: custom_url_device
       name: "Custom URL"
+      relation: child
 
 text:
   - id: !extend svitlobot_key
