@@ -48,7 +48,7 @@
     endon
 
     on Rules#Timer=1 do
-      SendToHTTP https://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ (1)
+      SendToHTTP https://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ // (1)!
       // Schedule next ping in 35 seconds
       timerSet,1,35
     endon
@@ -69,7 +69,7 @@
     endon
 
     on Rules#Timer=1 do
-      SendToHTTP https://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ (1)
+      SendToHTTP https://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ // (1)!
       // Schedule next ping in 70 seconds
       timerSet,1,70
     endon
@@ -86,7 +86,7 @@
     endon
 
     on Rules#Timer=1 do
-      SendToHTTP https://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ (1)
+      SendToHTTP https://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ // (1)!
       // Schedule next ping in 70 seconds
       timerSet,1,70
     endon
