@@ -7,8 +7,10 @@
 1. Підключіть плату ESP8266 або ESP32 до комп'ютера через USB.
 2. Перейдіть на сторінку веб-інсталятора [ESPEasy Web Flasher](https://td-er.nl/ESPEasy/).
 3. У списку прошивок оберіть варіант для вашої плати (для більшості стандартних модулів на 4 МБ підходить збірка):
+
    `*** Normal 4M [ESP8266,ESP32,ESP32-S2/S3/C2/C3/C6]`
-4. Натисніть кнопку **Install** та дочекайтеся завершення процесу.
+
+5. Натисніть кнопку **Install** та дочекайтеся завершення процесу.
 
 ### 2. Первинне підключення
 
@@ -39,18 +41,20 @@
 
     Стандартний інтервал відправки запитів становить **35 секунд**.
 
-    ```text title="Rules Set 1"
+    ``` { .text .copy .annotate title="Rules Set 1" }
     on WiFi#Connected do
       // Start timer immediately after WiFi connection
       timerSet,1,1
     endon
 
     on Rules#Timer=1 do
-      SendToHTTP https://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ
+      SendToHTTP https://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ (1)
       // Schedule next ping in 35 seconds
       timerSet,1,35
     endon
     ```
+    
+    1.  Замініть `ВАШ_КЛЮЧ` на ключ вашого другого каналу.
 
 === "Дві плати на одному IP"
 
@@ -58,33 +62,37 @@
 
     **Плата №1:**
 
-    ```text title="Rules Set 1 (Device 1)"
+    ``` { .text .copy .annotate title="Rules Set 1 (Device 1)" }
     on WiFi#Connected do
       // Start timer immediately after WiFi connection
       timerSet,1,1
     endon
 
     on Rules#Timer=1 do
-      SendToHTTP https://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ
+      SendToHTTP https://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ (1)
       // Schedule next ping in 70 seconds
       timerSet,1,70
     endon
     ```
+    
+    1.  Замініть `ВАШ_КЛЮЧ` на ключ вашого другого каналу.
 
     **Плата №2:**
 
-    ```text title="Rules Set 1 (Device 2)"
+    ``` { .text .copy .annotate title="Rules Set 1 (Device 2)" }
     on WiFi#Connected do
       // Delay first request by 35 seconds to avoid IP collision
       timerSet,1,35
     endon
 
     on Rules#Timer=1 do
-      SendToHTTP https://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ
+      SendToHTTP https://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ (1)
       // Schedule next ping in 70 seconds
       timerSet,1,70
     endon
     ```
+
+    1.  Замініть `ВАШ_КЛЮЧ` на ключ вашого другого каналу.
 
 Після вставки коду натисніть **Submit** для збереження правил.
 
