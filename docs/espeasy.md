@@ -47,7 +47,7 @@
 
     !!! example "Rules Set 1"
 
-        ``` { .yaml .copy .annotate }
+        ``` { .js .copy .annotate }
         on WiFi#Connected do
           // Start timer immediately after WiFi connection
           timerSet,1,1
@@ -71,7 +71,7 @@
 
     !!! example "Rules Set 1 (Device 1)"
 
-        ``` { .yaml .copy .annotate }
+        ``` { .js .copy .annotate }
         on WiFi#Connected do
           // Start timer immediately after WiFi connection
           timerSet,1,1
@@ -88,7 +88,7 @@
 
     !!! example "Rules Set 1 (Device 2)"
 
-        ``` { .yaml .copy .annotate }
+        ``` { .js .copy .annotate }
         on WiFi#Connected do
           // Delay first request by 35 seconds to avoid IP collision
           timerSet,1,35
