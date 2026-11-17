@@ -24,7 +24,7 @@
 
 ### 3. Активація правил (Rules)
 
-За замовчуванням Rules правил в ESPEasy вимкнений. Щоб його активувати:
+За замовчуванням правила ESPEasy вимкнені. Щоб їх активувати:
 
 * У веб-інтерфейсі пристрою перейдіть до розділу **Tools** -> **Advanced**.
 * Встановіть прапорець навпроти пункту **Rules**.
@@ -32,7 +32,7 @@
 
 !!! tip "ESPEasy Rules"
 
-    [Документація](https://espeasy.readthedocs.io/en/latest/Rules/Rules.html) з ESPEasy Rules
+    [Документація](https://espeasy.readthedocs.io/en/latest/Rules/Rules.html) по ESPEasy правилам.
 
 ### 4. Налаштування відправки пінгів
 
