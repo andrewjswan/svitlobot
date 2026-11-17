@@ -24,7 +24,7 @@
     ``` { .yaml .copy .annotate }
     rest_command:
       svitlobot_heartbeat:
-        url: "https://api.svitlobot.in.ua/channelPing?channel_key=КЛЮЧ" (1)
+        url: "https://api.svitlobot.in.ua/channelPing?channel_key=КЛЮЧ"
 
     automation:
       - id: svitlobot_heartbeat
@@ -43,7 +43,9 @@
         max_exceeded: silent
         mode: single
     ```
-1.  Замініть `КЛЮЧ` на ключ вашого другого каналу.
+
+    !!! tip
+        Замініть `КЛЮЧ` на ключ вашого каналу.
 
     Детальніше про базові запити до API читайте в [офіційному FAQ **Svitlo**Bot (питання №20)](https://svitlobot.in.ua/faq#faq-20).
 
@@ -84,7 +86,7 @@
     rest_command:
       svitlobot_heartbeat:
         url: >-
-          https://api.svitlobot.in.ua/channelPing?channel_key=КЛЮЧ&device=ha-{{ md5(states('sensor.local_ip')) }}&model={{ states('sensor.ha_system') }}&app=HA%20{{ states('sensor.installed_version') }} (1)
+          https://api.svitlobot.in.ua/channelPing?channel_key=КЛЮЧ&device=ha-{{ md5(states('sensor.local_ip')) }}&model={{ states('sensor.ha_system') }}&app=HA%20{{ states('sensor.installed_version') }}
 
     automation:
       - id: svitlobot_heartbeat
@@ -103,7 +105,9 @@
         max_exceeded: silent
         mode: single
     ```
-    1. Замініть `КЛЮЧ` на ключ вашого другого каналу.
+
+    !!! tip
+        Замініть `КЛЮЧ` на ключ вашого каналу.
 
     #### 3. Опис параметрів запиту
 
