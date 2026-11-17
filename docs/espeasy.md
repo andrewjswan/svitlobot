@@ -54,7 +54,7 @@
         endon
 
         on Rules#Timer=1 do
-          SendToHTTP http://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ (1)
+          SendToHTTP http://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ
           // Schedule next ping in 35 seconds
           timerSet,1,35
         endon
