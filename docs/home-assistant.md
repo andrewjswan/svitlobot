@@ -17,14 +17,14 @@
 
 Оберіть потрібний варіант конфігурації та додайте код у ваш пакет (наприклад, `packages/svitlobot.yaml`), замінивши `КЛЮЧ` на ваш реальний ключ каналу.
 
-=== "Простий варіант"
+=== "Простий варіант" { .annotate }
 
     Базова конфігурація для швидкого запуску. У розгорнутому статусі бота пристрій відображатиметься як анонімний клієнт (`👻 HomeAssistant/...`).
 
     ``` { .yaml .copy .annotate }
     rest_command:
       svitlobot_heartbeat:
-        url: "https://api.svitlobot.in.ua/channelPing?channel_key=КЛЮЧ" # (1)!
+        url: "https://api.svitlobot.in.ua/channelPing?channel_key=КЛЮЧ" (1)
 
     automation:
       - id: svitlobot_heartbeat
@@ -43,11 +43,11 @@
         max_exceeded: silent
         mode: single
     ```
-    1.  Замініть `КЛЮЧ` на ключ вашого другого каналу.
+1.  Замініть `КЛЮЧ` на ключ вашого другого каналу.
 
     Детальніше про базові запити до API читайте в [офіційному FAQ **Svitlo**Bot (питання №20)](https://svitlobot.in.ua/faq#faq-20).
 
-=== "Розширений варіант"
+=== "Розширений варіант" { .annotate }
 
     Конфігурація з передачею метаданих про сервер. Дозволяє бачити конкретний пристрій, його модель та версію Home Assistant у розділі **«📱 Пінгують»** розгорнутого статусу бота.
 
@@ -84,7 +84,7 @@
     rest_command:
       svitlobot_heartbeat:
         url: >-
-          https://api.svitlobot.in.ua/channelPing?channel_key=КЛЮЧ&device=ha-{{ md5(states('sensor.local_ip')) }}&model={{ states('sensor.ha_system') }}&app=HA%20{{ states('sensor.installed_version') }} # (1)!
+          https://api.svitlobot.in.ua/channelPing?channel_key=КЛЮЧ&device=ha-{{ md5(states('sensor.local_ip')) }}&model={{ states('sensor.ha_system') }}&app=HA%20{{ states('sensor.installed_version') }} (1)
 
     automation:
       - id: svitlobot_heartbeat
@@ -103,7 +103,7 @@
         max_exceeded: silent
         mode: single
     ```
-    1.  Замініть `КЛЮЧ` на ключ вашого другого каналу.
+    1. Замініть `КЛЮЧ` на ключ вашого другого каналу.
 
     #### 3. Опис параметрів запиту
 
