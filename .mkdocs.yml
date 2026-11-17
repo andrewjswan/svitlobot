@@ -116,7 +116,9 @@ nav:
       - Відмовостійкість (ESPNow Failover): espnow-failover.md
       - Додавання в ESPHome: adopt.md
   - Мапи та сервіси: maps-services.md
-  - Альтернативні варіанти: alternative.md
+  - Альтернативні варіанти:
+      - Альтернативні прошивки: alternative.md
+      - Home Assistant: home-assistant.md
   - Корисні посилання: additionals.md
   - Прошивка:
       - Варіанти прошивки: firmware.md
