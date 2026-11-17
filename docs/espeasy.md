@@ -59,7 +59,9 @@
           timerSet,1,35
         endon
         ```
-    1. Замініть `ВАШ_КЛЮЧ` на ключ вашого другого каналу.
+
+    !!! tip
+        Замініть `ВАШ_КЛЮЧ` на ключ вашого каналу.
 
 === "Дві плати на одному IP"
 
@@ -76,12 +78,11 @@
         endon
 
         on Rules#Timer=1 do
-          SendToHTTP http://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ # (1)!
+          SendToHTTP http://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ
           // Schedule next ping in 70 seconds
           timerSet,1,70
         endon
         ```
-1. Замініть `ВАШ_КЛЮЧ` на ключ вашого другого каналу.
 
     **Плата №2:**
 
@@ -94,12 +95,14 @@
         endon
 
         on Rules#Timer=1 do
-          SendToHTTP http://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ (1)
+          SendToHTTP http://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ
           // Schedule next ping in 70 seconds
           timerSet,1,70
         endon
         ```
-        1. Замініть `ВАШ_КЛЮЧ` на ключ вашого другого каналу.
+
+    !!! tip
+        Замініть `ВАШ_КЛЮЧ` на ключ вашого каналу.
 
 Після вставки коду натисніть **Submit** для збереження правил.
 
