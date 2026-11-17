@@ -47,14 +47,14 @@
 
     !!! example "Rules Set 1"
 
-        ``` { .lua .copy .annotate }
+        ``` { .yaml .copy .annotate }
         on WiFi#Connected do
           // Start timer immediately after WiFi connection
           timerSet,1,1
         endon
    
         on Rules#Timer=1 do
-          SendToHTTP http://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ -- (1)!
+          SendToHTTP http://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ # (1)!
           // Schedule next ping in 35 seconds
           timerSet,1,35
         endon
@@ -69,14 +69,14 @@
 
     !!! example "Rules Set 1 (Device 1)"
 
-        ``` { .lua .copy .annotate }
+        ``` { .yaml .copy .annotate }
         on WiFi#Connected do
           // Start timer immediately after WiFi connection
           timerSet,1,1
         endon
 
         on Rules#Timer=1 do
-          SendToHTTP http://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ -- (1)!
+          SendToHTTP http://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ # (1)!
           // Schedule next ping in 70 seconds
           timerSet,1,70
         endon
@@ -87,14 +87,14 @@
 
     !!! example "Rules Set 1 (Device 2)"
 
-        ``` { .lua .copy .annotate }
+        ``` { .yaml .copy .annotate }
         on WiFi#Connected do
           // Delay first request by 35 seconds to avoid IP collision
           timerSet,1,35
         endon
    
         on Rules#Timer=1 do
-          SendToHTTP http://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ -- (1)!
+          SendToHTTP http://api.svitlobot.in.ua/channelPing?channel_key=ВАШ_КЛЮЧ # (1)!
           // Schedule next ping in 70 seconds
           timerSet,1,70
         endon
