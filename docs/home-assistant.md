@@ -21,7 +21,7 @@
 
     Базова конфігурація для швидкого запуску. У розгорнутому статусі бота пристрій відображатиметься як анонімний клієнт (`👻 HomeAssistant/...`).
 
-    ```yaml
+    ``` { .yaml .copy .annotate }
     rest_command:
       svitlobot_heartbeat:
         url: "https://api.svitlobot.in.ua/channelPing?channel_key=КЛЮЧ"
@@ -60,7 +60,7 @@
     * **Інтеграція Local IP Address** — використовується для отримання локальної IP-адреси сервера (на її основі генерується унікальний хеш пристрою `device`). Встановіть її через **Налаштування → Пристрої та сервіси → Додати інтеграцію → Local IP Address** та переконайтеся, що створився сенсор `sensor.local_ip`.
     * **Сенсори Command Line** — використовуються для отримання назви материнської плати (моделі сервера) та поточної версії Home Assistant. Додайте їх до `configuration.yaml`:
 
-    ```yaml
+    ``` { .yaml .copy .annotate }
     command_line:
       - sensor:
           name: HA System
@@ -79,7 +79,7 @@
 
     Після перевірки наявності сенсорів `sensor.local_ip`, `sensor.ha_system` та `sensor.installed_version`, додайте основний код пакета:
 
-    ```yaml
+    ``` { .yaml .copy .annotate }
     rest_command:
       svitlobot_heartbeat:
         url: >-
