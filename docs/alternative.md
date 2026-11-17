@@ -10,4 +10,3 @@
     * [SvitloPulse](https://github.com/SvitloPulse/esp32-firmware) by @SvitloPulse
 
 ### Home Assistant
-
