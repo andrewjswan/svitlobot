@@ -119,6 +119,7 @@ nav:
   - Альтернативні варіанти:
       - Альтернативні прошивки: alternative.md
       - Home Assistant: home-assistant.md
+      - ESPEasy: espeasy.md
   - Корисні посилання: additionals.md
   - Прошивка:
       - Варіанти прошивки: firmware.md
