@@ -162,6 +162,8 @@ plugins:
   - git-revision-date-localized:
       enable_creation_date: true
       type: datetime
+      locale: uk
+      timezone: Europe/Kyiv
   - mkdocs-video
   - social:
       cards_layout: default/variant
