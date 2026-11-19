@@ -39,6 +39,7 @@ jobs:
         run: |
           pip install mkdocs-video
           pip install "mkdocs-material[imaging]"
+          pip install mkdocs-git-revision-date-localized-plugin
 
       - name: 💅 Build the Documentation
         run: mkdocs build --config-file .mkdocs.yml

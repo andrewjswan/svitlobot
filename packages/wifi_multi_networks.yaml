@@ -1,0 +1,6 @@
+wifi:
+  networks:
+    - ssid: !secret wifi_ssid_first
+      password: !secret wifi_password_first
+    - ssid: !secret wifi_ssid_second
+      password: !secret wifi_password_second
