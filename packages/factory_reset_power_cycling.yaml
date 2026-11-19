@@ -1,0 +1,7 @@
+factory_reset:
+  resets_required: 5
+  max_delay: 10s
+  on_increment:
+    - logger.log:
+        format: "Fast power cycle count now %u, target %u"
+        args: [x, target]

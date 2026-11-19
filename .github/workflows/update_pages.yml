@@ -138,6 +138,11 @@ jobs:
     steps:
       - name: ⬇️ Checkout website files
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          sparse-checkout: |
+            .mkdocs.yml
+            docs
 
       - name: ⬇️ Checkout Changelog
         uses: actions/checkout@v7
@@ -164,6 +169,7 @@ jobs:
         run: |
           pip install mkdocs-video
           pip install "mkdocs-material[imaging]"
+          pip install mkdocs-git-revision-date-localized-plugin
 
       - name: 💅 Build the docs site
         run: mkdocs build --config-file .mkdocs.yml
