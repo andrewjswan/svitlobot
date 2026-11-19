@@ -1,42 +1,5 @@
 # Changelog
 
-## [v3.5.61](https://github.com/andrewjswan/svitlobot/compare/v3.5.59...v3.5.61) - 2026-11-19
-
-### What's Changed
-
-### ❗️ Breaking Changes
-
-- Add relation to `sub-devices` and require ESPHome 2026.11.0 @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/192)
-
-### 🚀 Features
-
-- SvitloBot: Add `device` identification @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/201)
-- You can read about device identification in the **Svitlo**Bot [FAQ](https://svitlobot.in.ua/faq#faq-44)
-
-### 📱 Devices
-
-- SvitloBot: Add `device` identification @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/201)
-- Add relation to `sub-devices` and require ESPHome 2026.11.0 @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/192)
-
-### 🧰 Maintenance
-
-- Bump version to `3.5.61` | ESPHome `2026.11.0` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/193)
-- Add ESPEasy Tips @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/203)
-- Add `Home Assistant` Tips @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/202)
-- Add `Factory Reset by Power Cycling` as `Package` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/199)
-- Add `WiFi Multiple Networks` example as `Package` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/198)
-- Add `mkdocs-git-revision-date-localized-plugin` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/197)
-- Update Documentation @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/196)
-- Doc: Add emergency-update @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/195)
-
-### 🤝 Support
-
-If you like the project, you can support it with a star ⭐ on GitHub.
-
-### ✨ Changelog
-
-**Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.59...v3.5.61
-
 ## [v3.5.59](https://github.com/andrewjswan/svitlobot/compare/v3.5.57...v3.5.59) - 2026-10-30
 
 ### What's Changed
