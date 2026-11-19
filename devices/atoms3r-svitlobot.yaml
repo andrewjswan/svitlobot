@@ -70,9 +70,12 @@ esphome:
             }
 
 external_components:
-  - source: github://m5stack/esphome-yaml/components@main
+  - source:
+      type: git
+      url: https://github.com/m5stack/esphome-yaml
+      ref: main
     components: [lp5562, es8311]
-    refresh: 1d
+    refresh: 60s
 
 time:
   - platform: sntp
