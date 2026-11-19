@@ -116,7 +116,10 @@ nav:
       - Відмовостійкість (ESPNow Failover): espnow-failover.md
       - Додавання в ESPHome: adopt.md
   - Мапи та сервіси: maps-services.md
-  - Альтернативні прошивки: alternative.md
+  - Альтернативні варіанти:
+      - Альтернативні прошивки: alternative.md
+      - Home Assistant: home-assistant.md
+      - ESPEasy: espeasy.md
   - Корисні посилання: additionals.md
   - Прошивка:
       - Варіанти прошивки: firmware.md
@@ -159,6 +162,8 @@ plugins:
   - git-revision-date-localized:
       enable_creation_date: true
       type: datetime
+      locale: uk
+      timezone: Europe/Kyiv
   - mkdocs-video
   - social:
       cards_layout: default/variant
