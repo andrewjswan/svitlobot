@@ -1,6 +1,11 @@
 substitutions:
   comment: "ESPHome Svitlo Bot | ESP32"
 
+esphome:
+  # Without shadow, http_request must be non-blocking (ESP-IDF, 2026.11+);
+  # on older versions a request blocks the main loop for up to the 15 s timeout.
+  min_version: "2026.11.0"
+
 wifi:
   enable_btm: true
   enable_rrm: true
