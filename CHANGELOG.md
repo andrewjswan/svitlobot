@@ -1,5 +1,30 @@
 # Changelog
 
+## [v3.5.63](https://github.com/andrewjswan/svitlobot/compare/v3.5.61...v3.5.63) - 2026-11-22
+
+### What's Changed
+
+### 🚀 Features
+
+- Bump version to `3.5.63` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/208)
+- Common: Remove `on_boot` actions and Show Log switch @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/207)
+
+### 🐛 Bug Fixes
+
+- ESP32 Refactor: Removing `shadow` and external components @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/205)
+
+### 🧰 Maintenance
+
+- ESP32 Refactor: Removing `shadow` and external components @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/205)
+
+### 🤝 Support
+
+If you like the project, you can support it with a star ⭐ on GitHub.
+
+### ✨ Changelog
+
+**Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.61...v3.5.63
+
 ## [v3.5.61](https://github.com/andrewjswan/svitlobot/compare/v3.5.59...v3.5.61) - 2026-11-19
 
 ### What's Changed
