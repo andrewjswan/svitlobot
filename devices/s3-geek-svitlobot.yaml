@@ -25,7 +25,7 @@ packages:
 time:
   - platform: sntp
     id: esp_time
-    timezone: "Europe/Kiev"
+    timezone: "Europe/Kyiv"
     update_interval: 1h
     on_time_sync:
       then:
