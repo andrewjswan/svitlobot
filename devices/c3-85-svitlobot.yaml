@@ -1,0 +1,26 @@
+substitutions:
+  device: "esp_svitlobot_c3_85"
+  name: "svitlobot-c3-85"
+  friendly_name: "Svitlo Bot"
+  path: "devices/"
+
+esp32:
+  variant: esp32c3
+  framework:
+    type: esp-idf
+
+wifi:
+  output_power: 8.5dB
+
+dashboard_import:
+  package_import_url: github://andrewjswan/svitlobot/devices/c3-85-svitlobot.yaml@main
+
+packages:
+  remote_package:
+    url: https://github.com/andrewjswan/svitlobot
+    files:
+      - packages/common.yaml
+      - packages/svitlobot.yaml
+      - packages/esp32.yaml
+      - packages/http_ota.yaml
+    refresh: 1s
