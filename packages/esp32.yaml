@@ -1,24 +1,16 @@
 substitutions:
-  comment: "ESPHome Svitlo Bot | Shadow"
+  comment: "ESPHome Svitlo Bot | ESP32"
 
 wifi:
   enable_btm: true
   enable_rrm: true
 
-external_components:
-  - source:
-      type: git
-      url: https://github.com/andrewjswan/esphome-components
-      ref: main
-    components: [shadow]
-    refresh: 60s
-
-shadow:
-  id: svitlobot
-  script_id: site_ping
-  startup_delay: 5s
-  interval: ${heartbeat_interval}s
-  priority: 3
+interval:
+  - interval: ${heartbeat_interval}s
+    id: svitlobot
+    startup_delay: 5s
+    then:
+      - script.execute: site_ping
 
 sensor:
   - platform: internal_temperature
