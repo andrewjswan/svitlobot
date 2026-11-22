@@ -17,4 +17,5 @@ number:
     on_value:
       then:
         - lambda: |-
-            id(svitlobot).set_shadow_interval(x);
+            id(svitlobot).set_update_interval(x * 1000);
+            id(svitlobot).call_setup();
