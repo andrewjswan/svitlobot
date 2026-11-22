@@ -90,6 +90,17 @@ description: Сповіщення в телеграм-канал від сист
     <img src="../img/devices/esp32-s3-geek.png" alt="WaveShare ESP32 S3 GEEK" />
     <span>WaveShare ESP32 S3 GEEK</span>
   </label>
+  <label>
+    <input
+      type="radio"
+      name="svitlobot-device"
+      class="device"
+      id="svitlobot"
+      value="svitlobot-c3-85"
+    />
+    <img src="../img/devices/esp32-c3-85.png" alt="ESP32 C3 (8.5dB)" />
+    <span>ESP32 C3 (8.5dB)</span>
+  </label>
 </div>
 
 <div class="button-row">
