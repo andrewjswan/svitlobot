@@ -1,5 +1,5 @@
 substitutions:
-  comment: "ESPHome Svitlo Bot | Shadow"
+  comment: "ESPHome Svitlo Bot | ESP32"
 
 wifi:
   enable_btm: true
