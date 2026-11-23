@@ -1,5 +1,37 @@
 # Changelog
 
+## [v3.5.65](https://github.com/andrewjswan/svitlobot/compare/v3.5.63...v3.5.65) - 2026-11-23
+
+### What's Changed
+
+### 🚀 Features
+
+- Bump version to `3.5.65` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/215)
+- S3 GEEK: часовий пояс `Europe/Kyiv` @dimkalinux (https://github.com/andrewjswan/svitlobot/pull/213)
+- Devices: `rgb_order` → `channel_colors` для LED Atom і Zero @dimkalinux (https://github.com/andrewjswan/svitlobot/pull/212)
+
+### 📱 Devices
+
+- Add ESP32-C3 (8.5dB) Documentation @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/214)
+- S3 GEEK: часовий пояс `Europe/Kyiv` @dimkalinux (https://github.com/andrewjswan/svitlobot/pull/213)
+- Devices: `rgb_order` → `channel_colors` для LED Atom і Zero @dimkalinux (https://github.com/andrewjswan/svitlobot/pull/212)
+- Devices: Add `ESP32-C3` with `8.5dB` output power @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/210)
+
+### 🧰 Maintenance
+
+- Add ESP32-C3 (8.5dB) Documentation @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/214)
+- S3 GEEK: часовий пояс `Europe/Kyiv` @dimkalinux (https://github.com/andrewjswan/svitlobot/pull/213)
+- Devices: `rgb_order` → `channel_colors` для LED Atom і Zero @dimkalinux (https://github.com/andrewjswan/svitlobot/pull/212)
+- ESP32: вимагати ESPHome `2026.11.0` @dimkalinux (https://github.com/andrewjswan/svitlobot/pull/211)
+
+### 🤝 Support
+
+If you like the project, you can support it with a star ⭐ on GitHub.
+
+### ✨ Changelog
+
+**Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.63...v3.5.65
+
 ## [v3.5.63](https://github.com/andrewjswan/svitlobot/compare/v3.5.61...v3.5.63) - 2026-11-22
 
 ### What's Changed
