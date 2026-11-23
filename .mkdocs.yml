@@ -109,6 +109,7 @@ nav:
       - M5Stack Atom S3R: svitlobot_m5stack_atom_s3r.md
       - WaveShare ESP32-S3 Zero: svitlobot_esp32_s3_zero_with_rgb.md
       - WaveShare ESP32-S3 GEEK: svitlobot_esp32_s3_geek.md
+      - ESP32-C3 SuperMini (8.5dB): svitlobot_esp32_c3_85.md
   - Пакети:
       - Пакети: packages.md
       - Моніторинг доступності (HealthCheck): healthcheck.md
