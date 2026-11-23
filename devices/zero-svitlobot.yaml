@@ -75,7 +75,7 @@ light:
     id: status_led
     icon: mdi:lighthouse
     platform: esp32_rmt_led_strip
-    rgb_order: GRB
+    channel_colors: GRB
     pin: 21
     num_leds: 1
     chipset: WS2812
