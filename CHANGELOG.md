@@ -1,5 +1,22 @@
 # Changelog
 
+## [v3.5.67](https://github.com/andrewjswan/svitlobot/compare/v3.5.65...v3.5.67) - 2026-11-24
+
+### What's Changed
+
+### 🚀 Features
+
+- Bump version to `3.5.67` @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/218)
+- SvitloBot: Fix dangling pointer and optimize ping URL construction @andrewjswan (https://github.com/andrewjswan/svitlobot/pull/217)
+
+### 🤝 Support
+
+If you like the project, you can support it with a star ⭐ on GitHub.
+
+### ✨ Changelog
+
+**Full Changelog**: https://github.com/andrewjswan/svitlobot/compare/v3.5.65...v3.5.67
+
 ## [v3.5.65](https://github.com/andrewjswan/svitlobot/compare/v3.5.63...v3.5.65) - 2026-11-23
 
 ### What's Changed
