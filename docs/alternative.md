@@ -1,5 +1,5 @@
 !!! example "ESP32 / ESP8266 Based"
-    * [SvitloBoard](https://github.com/baskerville42/svitloboard) by @baskerville42
+    * [SvitloBoard](https://uapowerguardkit.github.io/svitloboard/) by @uapowerguardkit
 
 !!! example "ESP32 Based"
     * [LivePowerNotice ESP32 Firmware](https://gitlab.com/serg.ex/livepowernotice_1_esp32_releases) by @serg.ex
